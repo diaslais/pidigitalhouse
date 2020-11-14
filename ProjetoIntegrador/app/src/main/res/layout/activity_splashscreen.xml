@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBlack1"
+    android:gravity="center"
+    android:orientation="horizontal"
+    tools:context=".SplashscreenActivity">
+
+    <TextView
+        android:id="@+id/tvDigitalSplashscreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rajdhani_medium"
+        android:text="Digital"
+        android:textColor="#E53030"
+        android:textSize="@dimen/dim40sp" />
+
+    <TextView
+        android:id="@+id/tvSpaceSplashscreen"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/rajdhani_medium"
+        android:text="Space"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/dim40sp" />
+
+    <ImageView
+        android:layout_width="@dimen/dim36dp"
+        android:layout_height="@dimen/dim46dp"
+        android:layout_marginStart="@dimen/dim10dp"
+        android:src="@drawable/ic_rocket_15"
+        app:tint="@color/colorWhite" />
+
+</LinearLayout>
