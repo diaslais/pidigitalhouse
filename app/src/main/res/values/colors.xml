@@ -6,4 +6,5 @@
     <color name="colorBlack">#000</color>
     <color name="colorWhite">#fff</color>
     <color name="colorBlack1">#202225</color>
+    <color name="colorBackgroundApod">#262626</color>
 </resources>
