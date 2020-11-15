@@ -9,7 +9,7 @@ class NetworkUtilsApod {
 
 
         private lateinit var retrofit: Retrofit
-        private val baseUrl = "https://api.nasa.gov/planetary/apod/"
+        private val baseUrl = "https://api.nasa.gov/"
 
        private fun getRetroFitInstance(): Retrofit {
 
