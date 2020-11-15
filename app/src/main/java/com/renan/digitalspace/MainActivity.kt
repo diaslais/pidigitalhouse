@@ -1,4 +1,4 @@
-package com.renan.digitalspace.apod.view
+package com.renan.digitalspace
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
