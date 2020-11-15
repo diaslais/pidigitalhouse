@@ -7,14 +7,14 @@
     android:background="@color/colorBlack1"
     android:gravity="center"
     android:orientation="horizontal"
-    tools:context=".SplashscreenActivity">
+    tools:context=".view.SplashscreenActivity">
 
     <TextView
         android:id="@+id/tvDigitalSplashscreen"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/rajdhani_medium"
-        android:text="Digital"
+        android:text="@string/digital"
         android:textColor="#E53030"
         android:textSize="@dimen/dim40sp" />
 
@@ -23,7 +23,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/rajdhani_medium"
-        android:text="Space"
+        android:text="@string/space"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/dim40sp" />
 
