@@ -1,15 +1,14 @@
-package com.renan.digitalspace.view
+package com.renan.digitalspace.apod.view
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import com.renan.digitalspace.NetworkUtils
 import com.renan.digitalspace.R
-import com.renan.digitalspace.model.ApiResponseModelAPOD
-import com.renan.digitalspace.repository.EndPoint
+import com.renan.digitalspace.apod.model.ApiResponseModelAPOD
+import com.renan.digitalspace.apod.repository.EndPoint
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

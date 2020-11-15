@@ -1,4 +1,4 @@
-package com.renan.digitalspace.view
+package com.renan.digitalspace.apod.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment

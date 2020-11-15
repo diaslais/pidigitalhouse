@@ -1,6 +1,6 @@
-package com.renan.digitalspace.repository
+package com.renan.digitalspace.apod.repository
 
-import com.renan.digitalspace.model.ApiResponseModelAPOD
+import com.renan.digitalspace.apod.model.ApiResponseModelAPOD
 import retrofit2.Call
 import retrofit2.http.GET
 import retrofit2.http.Query

@@ -5,7 +5,7 @@
     android:layout_height="match_parent"
     android:background="@color/colorBackgroundApod"
     android:orientation="vertical"
-    tools:context=".view.FatoAstronomicoFragment">
+    tools:context=".apod.view.FatoAstronomicoFragment">
 
     <ImageView
         android:id="@+id/imgApod"

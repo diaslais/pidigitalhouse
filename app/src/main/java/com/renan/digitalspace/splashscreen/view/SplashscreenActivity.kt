@@ -6,7 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.renan.digitalspace.R
-import com.renan.digitalspace.view.MainActivity
+import com.renan.digitalspace.apod.view.MainActivity
 
 class SplashscreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

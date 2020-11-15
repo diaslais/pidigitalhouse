@@ -22,7 +22,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".view.MainActivity">
+        <activity android:name="com.renan.digitalspace.apod.view.MainActivity">
 
         </activity>
 

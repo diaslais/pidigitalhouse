@@ -1,4 +1,4 @@
-package com.renan.digitalspace.model
+package com.renan.digitalspace.apod.model
 
 data class ApiResponseModelAPOD(
     val copyright: String?,
