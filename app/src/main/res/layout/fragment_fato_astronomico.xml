@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/colorBackgroundApod"
+    android:orientation="vertical"
+    tools:context=".view.FatoAstronomicoFragment">
+
+    <ImageView
+        android:id="@+id/imgApod"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/apod_image_dimen"
+        tools:srcCompat="@tools:sample/avatars[3]" />
+
+    <TextView
+        android:id="@+id/txtApod"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_margin="@dimen/dim20sp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:textColor="@color/colorWhite" />
+
+
+</LinearLayout>
