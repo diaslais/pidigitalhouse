@@ -24,10 +24,11 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val navController = Navigation.findNavController(view)
 
         view.findViewById<Button>(R.id.button).setOnClickListener {
-            navController.navigate(R.id.fatoAstronomicoFragment2)
+            navController.navigate(R.id.epicFragment)
         }
 
     }

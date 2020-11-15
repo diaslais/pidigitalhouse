@@ -10,12 +10,12 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
-            android:id="@+id/action_loginFragment_to_fatoAstronomicoFragment2"
-            app:destination="@id/fatoAstronomicoFragment2" />
+            android:id="@+id/action_loginFragment_to_epicFragment"
+            app:destination="@id/epicFragment" />
     </fragment>
     <fragment
-        android:id="@+id/fatoAstronomicoFragment2"
-        android:name="com.renan.digitalspace.apod.view.FatoAstronomicoFragment"
-        android:label="fragment_fato_astronomico"
-        tools:layout="@layout/fragment_fato_astronomico" />
+        android:id="@+id/epicFragment"
+        android:name="com.renan.digitalspace.epic.view.EpicFragment"
+        android:label="fragment_epic"
+        tools:layout="@layout/fragment_epic" />
 </navigation>
