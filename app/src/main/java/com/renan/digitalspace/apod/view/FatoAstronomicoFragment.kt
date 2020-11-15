@@ -5,7 +5,17 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
+import android.widget.TextView
+import com.renan.digitalspace.NetworkUtils
 import com.renan.digitalspace.R
+import com.renan.digitalspace.apod.model.ApiResponseModelAPOD
+import com.renan.digitalspace.apod.repository.EndPoint
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_fato_astronomico.*
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 
 class FatoAstronomicoFragment : Fragment() {
@@ -20,6 +30,33 @@ class FatoAstronomicoFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        val picasso = Picasso.get()
 
+        val imgload = view.findViewById<ImageView>(R.id.imgApod)
+        val txtExplanation =  view.findViewById<TextView>(R.id.txtExplanationApod)
+        val txtTitle = view.findViewById<TextView>(R.id.txtTitle)
+
+
+        val remote = NetworkUtils.createService(EndPoint::class.java)
+        val call: Call<ApiResponseModelAPOD> = remote.getAstronomicalFact()
+
+        val response = call.enqueue(object : Callback<ApiResponseModelAPOD> {
+            override fun onResponse(
+                call: Call<ApiResponseModelAPOD>,
+                response: Response<ApiResponseModelAPOD>
+            ) {
+
+                picasso.load(response.body()?.url).into(imgload)
+                txtTitle.text = response.body()?.title
+                txtExplanation.text = response.body()?.explanation
+
+            }
+
+            override fun onFailure(call: Call<ApiResponseModelAPOD>, t: Throwable) {
+
+                val s = t.message
+            }
+
+        })
     }
 }
