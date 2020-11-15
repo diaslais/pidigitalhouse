@@ -1,4 +1,4 @@
-package com.renan.digitalspace.view
+package com.renan.digitalspace.splashscreen.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import com.renan.digitalspace.R
+import com.renan.digitalspace.view.MainActivity
 
 class SplashscreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

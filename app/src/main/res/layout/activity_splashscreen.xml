@@ -7,7 +7,7 @@
     android:background="@color/colorBlack1"
     android:gravity="center"
     android:orientation="horizontal"
-    tools:context=".view.SplashscreenActivity">
+    tools:context=".splashscreen.view.SplashscreenActivity">
 
     <TextView
         android:id="@+id/tvDigitalSplashscreen"
