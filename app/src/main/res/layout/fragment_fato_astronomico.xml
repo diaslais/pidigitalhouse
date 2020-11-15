@@ -10,16 +10,32 @@
     <ImageView
         android:id="@+id/imgApod"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/apod_image_dimen"
+        android:layout_height="@dimen/dim300dp"
         tools:srcCompat="@tools:sample/avatars[3]" />
-
     <TextView
-        android:id="@+id/txtApod"
+        android:id="@+id/txtTitle"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="@dimen/dim20sp"
+        android:layout_height="@dimen/dim20dp"
+        android:layout_margin="@dimen/dim20dp"
         android:fontFamily="@font/ubuntu_bold"
-        android:textColor="@color/colorWhite" />
+        android:textColor="@color/colorWhite"
+        android:textStyle="bold"
+        />
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/txtExplanationApod"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/dim20sp"
+            android:scrollbars="vertical"
+            android:fontFamily="@font/ubuntu_bold"
+            android:textColor="@color/colorWhite" />
+
+    </ScrollView>
+
 
 
 </LinearLayout>
