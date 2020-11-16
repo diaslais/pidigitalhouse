@@ -17,4 +17,7 @@
     <string name="vamos_nessa">Vamos nessa!</string>
     <string name="nome">Nome</string>
     <string name="cadastrar">Cadastrar</string>
+    <string name="preencha_campos">Preencha todos os campos</string>
+    <string name="error_vazio">Existe um campo vazio</string>
+
 </resources>
