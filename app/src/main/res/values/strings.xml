@@ -6,4 +6,15 @@
     <string name="space">Space</string>
     <string name="splashscreen_rocket_icon">SplashScreen rocket Icon</string>
     <string name="entre_com_seu_email_e_senha">Entre com seu email e senha</string>
+    <string name="password">Password</string>
+    <string name="email">Email</string>
+    <string name="brasil_visto_do_espa_o">Brasil visto do espaço</string>
+    <string name="facebook">Facebook</string>
+    <string name="gmail">Gmail</string>
+    <string name="entrar">Entrar</string>
+    <string name="ou_inscreva_se_para_participar">Ou inscreva-se para participar</string>
+    <string name="das_nossas_atividades">das nossas atividades</string>
+    <string name="vamos_nessa">Vamos nessa!</string>
+    <string name="nome">Nome</string>
+    <string name="cadastrar">Cadastrar</string>
 </resources>
