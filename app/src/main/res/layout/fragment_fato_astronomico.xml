@@ -9,6 +9,9 @@
 
     <ImageView
         android:id="@+id/imgApod"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="@dimen/dim10dp"
+        android:padding="@dimen/dim20dp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dim300dp"
         tools:srcCompat="@tools:sample/avatars[3]" />

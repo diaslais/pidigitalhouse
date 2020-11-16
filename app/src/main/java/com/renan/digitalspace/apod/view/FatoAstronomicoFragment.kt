@@ -7,12 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.renan.digitalspace.NetworkUtils
+import com.renan.digitalspace.apod.NetworkUtilsApod
 import com.renan.digitalspace.R
 import com.renan.digitalspace.apod.model.ApiResponseModelAPOD
-import com.renan.digitalspace.apod.repository.EndPoint
+import com.renan.digitalspace.apod.repository.EndPointApod
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_fato_astronomico.*
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -37,7 +36,7 @@ class FatoAstronomicoFragment : Fragment() {
         val txtTitle = view.findViewById<TextView>(R.id.txtTitle)
 
 
-        val remote = NetworkUtils.createService(EndPoint::class.java)
+        val remote = NetworkUtilsApod.createService(EndPointApod::class.java)
         val call: Call<ApiResponseModelAPOD> = remote.getAstronomicalFact()
 
         val response = call.enqueue(object : Callback<ApiResponseModelAPOD> {
