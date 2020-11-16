@@ -1,20 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".apod.view.LoginFragment">
+    tools:context=".login.view.LoginFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_bglogin" />
 
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dim10dp"
+            app:cardBackgroundColor="@color/colorBlack35pct"
+            app:cardCornerRadius="@dimen/dim16dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim20dp"
+                    android:gravity="center_horizontal"
+                    android:text="@string/entre_com_seu_email_e_senha"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/dim24sp" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dim10dp"
+                    android:layout_marginTop="@dimen/dim20dp"
+                    app:boxBackgroundColor="@color/colorTransparent"
+                    app:boxStrokeColor="@color/colorWhite">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Email"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/colorWhite" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/dim10dp"
+                    android:layout_marginTop="@dimen/dim20dp"
+                    app:boxBackgroundColor="@color/colorTransparent"
+                    app:boxStrokeColor="@color/colorWhite"
+                    app:endIconMode="password_toggle">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:hint="Password"
+                        android:inputType="textEmailAddress"
+                        android:textColor="@color/colorWhite"
+                        android:textColorHint="#fff"
+                        app:hintTextColor="@color/colorWhite" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mbLoginLogin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim20dp"
+                    android:backgroundTint="@color/colorWhite"
+                    android:paddingHorizontal="@dimen/dim40dp"
+                    android:paddingVertical="@dimen/dim10dp"
+                    android:text="Entrar"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorBlack"
+                    android:textSize="@dimen/dim20dp"
+                    app:cornerRadius="@dimen/dim10dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim20sp"
+                    android:gravity="center_horizontal"
+                    android:text="Ou inscreva-se para participar"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/dim20sp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="das nossas atividades"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/dim20sp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="@dimen/dim20dp"
+                    android:gravity="center_horizontal">
+
+                    <ImageButton
+                        android:layout_width="@dimen/dim60dp"
+                        android:layout_height="@dimen/dim60dp"
+                        android:background="@color/colorTransparent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_googleicon" />
+
+                    <ImageButton
+                        android:layout_width="@dimen/dim60dp"
+                        android:layout_height="@dimen/dim60dp"
+                        android:layout_marginHorizontal="@dimen/dim30dp"
+                        android:background="@color/colorTransparent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_facebookicon" />
+
+                    <ImageButton
+                        android:layout_width="@dimen/dim60dp"
+                        android:layout_height="@dimen/dim60dp"
+                        android:background="@color/colorTransparent"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_email"
+                        android:tint="@color/colorWhite" />
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+        </com.google.android.material.card.MaterialCardView>
+    </LinearLayout>
 
 </FrameLayout>

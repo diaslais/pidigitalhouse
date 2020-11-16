@@ -4,4 +4,6 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="digital">Digital</string>
     <string name="space">Space</string>
+    <string name="splashscreen_rocket_icon">SplashScreen rocket Icon</string>
+    <string name="entre_com_seu_email_e_senha">Entre com seu email e senha</string>
 </resources>

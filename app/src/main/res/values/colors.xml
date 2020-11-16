@@ -7,4 +7,7 @@
     <color name="colorWhite">#fff</color>
     <color name="colorBlack1">#202225</color>
     <color name="colorBackgroundApod">#262626</color>
+    <color name="colorBlack35pct">#59000000</color>
+    <color name="colorTransparent">#00000000</color>
+    <color name="mtrl_textinput_default_box_stroke_color">#fff</color>
 </resources>
