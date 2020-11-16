@@ -81,7 +81,7 @@ class EpicFragment : Fragment() {
                 val imgEpic = view?.findViewById<ImageView>(R.id.imgEpic)
                 val picasso = Picasso.get()
                 picasso.load("https://epic.gsfc.nasa.gov/archive/natural/${yearId}/${monthId}/${dayId}/png/${imageId}")
-                    .into(imgEpic)
+                   git
 
             }
 

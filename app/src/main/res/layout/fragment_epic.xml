@@ -14,10 +14,5 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dim300dp"
         tools:srcCompat="@tools:sample/avatars[3]" />
-    <TextView
-        android:id="@+id/txtTeste"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
 
 </FrameLayout>
