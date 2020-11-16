@@ -138,7 +138,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dim20dp"
-                    android:layout_marginBottom="@dimen/dim30sp"
+                    android:layout_marginBottom="@dimen/dim12dp"
                     android:paddingHorizontal="@dimen/dim40dp"
                     android:paddingVertical="@dimen/dim10dp"
                     android:text="@string/cadastrar"
@@ -148,9 +148,26 @@
                     app:cornerRadius="@dimen/dim6dp"
                     app:strokeColor="@color/colorWhite" />
 
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_horizontal"
+                    android:text="ou"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/dim24sp" />
 
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mbLoginSignup"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dim20dp"
+                    android:paddingHorizontal="@dimen/dim40dp"
+                    android:text="Fazer login"
+                    android:textAllCaps="false"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/dim20sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>
