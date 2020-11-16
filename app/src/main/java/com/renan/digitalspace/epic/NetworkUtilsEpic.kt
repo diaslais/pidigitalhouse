@@ -9,7 +9,7 @@ class NetworkUtilsEpic {
     companion object {
 
         private lateinit var retrofit: Retrofit
-        private val baseUrl = "https://api.nasa.gov/EPIC/api/"
+        private val baseUrl = "https://epic.gsfc.nasa.gov/api/"
 
         private fun getRetroFitInstance(): Retrofit {
 
