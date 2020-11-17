@@ -18,6 +18,11 @@ import retrofit2.Response
 
 
 class EpicFragment : Fragment() {
+    lateinit var imageId: String
+
+    lateinit var yearId: String
+    lateinit var monthId: String
+    lateinit var dayId: String
 
 
     override fun onCreateView(
@@ -31,12 +36,6 @@ class EpicFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val picasso = Picasso.get()
-        val imgEpic = view.findViewById<ImageView>(R.id.imgEpic)
-
-        lateinit var dateId: String
-        lateinit var imageId: String
-
         val remote =
             NetworkUtilsEpic.createService(EndPointEpic::class.java)
         val call: Call<List<ApiResponseModelEPIC>> = remote.getImageDay()
@@ -46,7 +45,9 @@ class EpicFragment : Fragment() {
                 call: Call<List<ApiResponseModelEPIC>>,
                 response: Response<List<ApiResponseModelEPIC>>
             ) {
-                imageId = response.body()?.get(0)?.image.toString()
+                imageId = response.body()?.get(0)?.image.toString() + ".png"
+
+                responseDate()
             }
 
             override fun onFailure(call: Call<List<ApiResponseModelEPIC>>, t: Throwable) {
@@ -56,6 +57,10 @@ class EpicFragment : Fragment() {
 
         })
 
+
+    }
+
+    private fun responseDate() {
         val remoteDate = NetworkUtilsEpic.createService(EndPointEpic::class.java)
         val callDate: Call<List<String>> = remoteDate.getLastDAy()
 
@@ -67,8 +72,16 @@ class EpicFragment : Fragment() {
             ) {
                 val respost = responseDate.body()
                 val respostSpecific = respost?.get(index = respost.size - 1)
-                dateId = respostSpecific?.replace("-", "/").toString()
+                // dateId = respostSpecific?.replace("-", "/").toString()
+                val dateList = respostSpecific?.split('-')
+                yearId = dateList?.get(0).toString()
+                monthId = dateList?.get(1).toString()
+                dayId = dateList?.get(2).toString()
 
+                val imgEpic = view?.findViewById<ImageView>(R.id.imgEpic)
+                val picasso = Picasso.get()
+                picasso.load("https://epic.gsfc.nasa.gov/archive/natural/${yearId}/${monthId}/${dayId}/png/${imageId}")
+                    .into(imgEpic)
 
             }
 
@@ -77,20 +90,6 @@ class EpicFragment : Fragment() {
             }
 
         })
-
-        val remoteImage = NetworkUtilsEpic.createService(EndPointEpic::class.java)
-        val callImage: Call<String> = remoteImage.getImageDay(dateId,imageId)
-
-        val responseImageDay = callImage.enqueue(object : Callback<String>{
-            override fun onResponse(call: Call<String>, response: Response<String>) {
-                picasso.load(response.body()).into(imgEpic)
-            }
-
-            override fun onFailure(call: Call<String>, t: Throwable) {
-                val s = t.message
-            }
-
-        })
-
     }
+
 }
