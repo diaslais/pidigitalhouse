@@ -7,7 +7,6 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.view.ContextThemeWrapper
@@ -18,7 +17,6 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.renan.digitalspace.R
-import kotlinx.android.synthetic.main.fragment_login.*
 
 
 class LoginFragment : Fragment() {
@@ -63,11 +61,11 @@ class LoginFragment : Fragment() {
         }
     }
 
-    private fun errorHandler(view: View?) {
-        val emailText = view?.findViewById<TextInputEditText>(R.id.tietEmailLogin)
-        val emailLayout = view?.findViewById<TextInputLayout>(R.id.tilEmailLogin)
-        val passwordText = view?.findViewById<TextInputEditText>(R.id.tietPasswordLogin)
-        val passwordLayout = view?.findViewById<TextInputLayout>(R.id.tilPasswordLogin)
+    private fun errorHandler(view: View) {
+        val emailText = view.findViewById<TextInputEditText>(R.id.tietEmailLogin)
+        val emailLayout = view.findViewById<TextInputLayout>(R.id.tilEmailLogin)
+        val passwordText = view.findViewById<TextInputEditText>(R.id.tietPasswordLogin)
+        val passwordLayout = view.findViewById<TextInputLayout>(R.id.tilPasswordLogin)
 
         putError(emailText, emailLayout)
         clearError(emailText, emailLayout)
@@ -75,15 +73,15 @@ class LoginFragment : Fragment() {
         clearError(passwordText, passwordLayout)
     }
 
-    private fun putError(text: TextInputEditText?, layout: TextInputLayout?) {
-        if (text?.text.toString().isEmpty()) {
-            layout?.isErrorEnabled = true
-            layout?.error = getString(R.string.error_vazio)
+    private fun putError(text: TextInputEditText, layout: TextInputLayout) {
+        if (text.text.toString().isEmpty()) {
+            layout.isErrorEnabled = true
+            layout.error = getString(R.string.error_vazio)
         }
     }
 
-    private fun clearError(text: TextInputEditText?, layout: TextInputLayout?) {
-        text?.addTextChangedListener(object : TextWatcher {
+    private fun clearError(text: TextInputEditText, layout: TextInputLayout) {
+        text.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {
             }
 
@@ -91,7 +89,7 @@ class LoginFragment : Fragment() {
             }
 
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
-                layout!!.isErrorEnabled = false
+                layout.isErrorEnabled = false
                 layout.error = ""
             }
         })
