@@ -1,11 +1,12 @@
 package com.renan.digitalspace.epic.view
 
+
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import androidx.fragment.app.Fragment
 import com.renan.digitalspace.R
 import com.renan.digitalspace.epic.NetworkUtilsEpic
 import com.renan.digitalspace.epic.model.ApiResponseModelEPIC
@@ -15,7 +16,13 @@ import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 
+
 class EpicFragment : Fragment() {
+    lateinit var imageId: String
+
+    lateinit var yearId: String
+    lateinit var monthId: String
+    lateinit var dayId: String
 
 
     override fun onCreateView(
@@ -29,19 +36,18 @@ class EpicFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val picasso = Picasso.get()
-        val imgEpic = view.findViewById<ImageView>(R.id.imgEpic)
-
         val remote =
             NetworkUtilsEpic.createService(EndPointEpic::class.java)
         val call: Call<List<ApiResponseModelEPIC>> = remote.getImageDay()
 
-        val response = call.enqueue(object : Callback<List<ApiResponseModelEPIC>>{
+        val response = call.enqueue(object : Callback<List<ApiResponseModelEPIC>> {
             override fun onResponse(
                 call: Call<List<ApiResponseModelEPIC>>,
                 response: Response<List<ApiResponseModelEPIC>>
             ) {
-                val s = response.body()
+                imageId = response.body()?.get(0)?.image.toString() + ".png"
+
+                responseDate()
             }
 
             override fun onFailure(call: Call<List<ApiResponseModelEPIC>>, t: Throwable) {
@@ -53,4 +59,35 @@ class EpicFragment : Fragment() {
 
 
     }
+
+    private fun responseDate() {
+        val remoteDate = NetworkUtilsEpic.createService(EndPointEpic::class.java)
+        val callDate: Call<List<String>> = remoteDate.getLastDAy()
+
+        val responseDate = callDate.enqueue(object : Callback<List<String>> {
+
+            override fun onResponse(
+                call: Call<List<String>>,
+                responseDate: Response<List<String>>
+            ) {
+                val respost = responseDate.body()
+                val respostSpecific = respost?.get(index = respost.size - 1)
+                // dateId = respostSpecific?.replace("-", "/").toString()
+                val dateList = respostSpecific?.split('-')
+                yearId = dateList?.get(0).toString()
+                monthId = dateList?.get(1).toString()
+                dayId = dateList?.get(2).toString()
+
+                val imgEpic = view?.findViewById<ImageView>(R.id.imgEpic)
+                val picasso = Picasso.get()
+                picasso.load("https://epic.gsfc.nasa.gov/archive/natural/${yearId}/${monthId}/${dayId}/png/${imageId}")
+            }
+
+            override fun onFailure(call: Call<List<String>>, t: Throwable) {
+                val s = t.message
+            }
+
+        })
+    }
+
 }
