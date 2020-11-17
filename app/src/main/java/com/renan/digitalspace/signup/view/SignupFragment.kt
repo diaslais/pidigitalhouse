@@ -66,7 +66,7 @@ class SignupFragment : Fragment() {
             password.text.toString().isEmpty()
         ) {
             val toast =
-                Toast.makeText(context, getString(R.string.preencha_campos), Toast.LENGTH_LONG)
+                Toast.makeText(context, getString(R.string.error_confirmacao), Toast.LENGTH_LONG)
             toast.show()
         } else if (password.text.toString() != passwordConfirmation.text.toString()) {
             val toast =

@@ -17,9 +17,9 @@
     <string name="vamos_nessa">Vamos nessa!</string>
     <string name="nome">Nome</string>
     <string name="cadastrar">Cadastrar</string>
-    <string name="preencha_campos">Preencha todos os campos</string>
-    <string name="error_vazio">Existe um campo vazio</string>
-    <string name="error_confirmacao">Password diferente da confirmação</string>
+    <string name="toast_campo_vazio">Preencha todos os campos</string>
+    <string name="error_vazio">Campo vazio</string>
+    <string name="error_confirmacao">Confirmação diferente do Password</string>
     <string name="confirmacao">Conta criada com sucesso</string>
 
 </resources>

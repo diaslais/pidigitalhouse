@@ -54,7 +54,7 @@ class LoginFragment : Fragment() {
 
         if (email.text.toString().isEmpty() || password.text.toString().isEmpty()) {
             val toast =
-                Toast.makeText(context, getString(R.string.preencha_campos), Toast.LENGTH_LONG)
+                Toast.makeText(context, getString(R.string.toast_campo_vazio), Toast.LENGTH_LONG)
             toast.show()
         } else {
             navController.navigate(R.id.fatoAstronomicoFragment2)
