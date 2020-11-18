@@ -21,5 +21,17 @@
     <string name="error_vazio">Existe um campo vazio</string>
     <string name="error_confirmacao">Password diferente da confirmação</string>
     <string name="confirmacao">Conta criada com sucesso</string>
-
+    <string name="sair">SAIR</string>
+    <string name="explorando_o_dia_em_imagens">EXPLORANDO O DIA EM IMAGENS</string>
+    <string name="explorar">EXPLORAR</string>
+    <string name="explora_o_espacial">Exploração Espacial</string>
+    <string name="fato_astron_mico">FATO ASTRONÔMICO</string>
+    <string name="terra">TERRA</string>
+    <string name="conhe_a_nosso_sistema_solar">CONHEÇA NOSSO SISTEMA SOLAR</string>
+    <string name="via_l_ctea">VIA LÁCTEA!</string>
+    <string name="um_pontinho_nessa_linda_gal_xia_espiral_chamada">Um pontinho nessa linda galáxia espiral chamada:</string>
+    <string name="nosso_lugar_no_cosmos">Nosso Lugar no cosmos</string>
+    <string name="iniciar_explora_o">INICIAR EXPLORAÇÂO</string>
+    <string name="sistema_solar">SISTEMA SOLAR</string>
+    <string name="as_gal_xias_s_o_categorizadas_de_acordo_com_sua_morfologia_visual_como_el_ptica_espiral_ou_irregular_acredita_se_que_muitas_gal_xias_tenham_buracos_negros_supermassivos_em_seus_centros">As galáxias são categorizadas de acordo com sua morfologia visual como elíptica, espiral ou irregular.\n\ Acredita-se que muitas galáxias tenham buracos negros supermassivos em seus centros.</string>
 </resources>

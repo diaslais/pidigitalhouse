@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    tools:context=".SistemaSolarFragment">
+
+
+    <ImageView
+        android:id="@+id/imgSistemaSolar"
+        android:layout_width="423dp"
+        android:layout_height="760dp"
+        android:src="@drawable/background_sistema_solar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/btnIniciarExploracao"
+        style="?attr/materialButtonOutlinedStyle"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/ubuntu"
+        android:text="@string/iniciar_explora_o"
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/dim20sp"
+        android:textStyle="bold"
+        app:cornerRadius="@dimen/dim10dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="1.0"
+        app:strokeColor="@color/colorWhite"
+        app:strokeWidth="1dp" />
+
+    <TextView
+        android:id="@+id/txtSistemaSolar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="150dp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:text="@string/sistema_solar"
+        android:textColor="@color/colorWhite"
+        android:textSize="28sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnIniciarExploracao"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/txtIntroSistemaSolar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu"
+        android:text="@string/as_gal_xias_s_o_categorizadas_de_acordo_com_sua_morfologia_visual_como_el_ptica_espiral_ou_irregular_acredita_se_que_muitas_gal_xias_tenham_buracos_negros_supermassivos_em_seus_centros"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/dim24sp"
+        app:layout_constraintBottom_toTopOf="@+id/btnIniciarExploracao"
+        app:layout_constraintEnd_toEndOf="@+id/txtSistemaSolar"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/txtSistemaSolar"
+        app:layout_constraintTop_toBottomOf="@+id/txtSistemaSolar" />
+</androidx.constraintlayout.widget.ConstraintLayout>
