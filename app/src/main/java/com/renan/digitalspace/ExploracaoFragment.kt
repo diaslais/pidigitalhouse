@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 
@@ -29,23 +30,21 @@ class ExploracaoFragment : Fragment() {
         val navController = findNavController()
 
 //        view.findViewById<MaterialButton>(R.id.btnSair).setOnClickListener {
-//            navController.navigate(R.id.actio)
+//            navController.navigate(R.id.action)
 //        }
-//        view.findViewById<MaterialButton>(R.id.btnExplorar).setOnClickListener {
-//            navController.navigate(R.id.actio)
-//        }
+        view.findViewById<MaterialButton>(R.id.btnExplorar).setOnClickListener {
+            navController.navigate(R.id.action_exploracaoFragment2_to_viaLacteaFragment)
+        }
 //        view.findViewById<MaterialButton>(R.id.btnFatoAstronomico).setOnClickListener {
 //            navController.navigate(R.id.actio)
 //        }
 //        view.findViewById<MaterialButton>(R.id.btnTerra).setOnClickListener {
 //            navController.navigate(R.id.actio)
 //        }
-//        view.findViewById<Button>(
-//            R.id.btnBibliografia
-//        ).setOnClickListener {
-//            navController.navigate(R.id.actio)
-//
-//        }
+        view.findViewById<ImageButton>(R.id.btnBibliografia).setOnClickListener {
+            navController.navigate(R.id.action_exploracaoFragment2_to_bibliografiaFragment)
+
+        }
     }
 }
 

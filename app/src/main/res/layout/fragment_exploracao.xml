@@ -28,8 +28,6 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/ubuntu"
-        android:paddingHorizontal="@dimen/dim10dp"
-        android:paddingVertical="@dimen/dim10dp"
         android:text="@string/sair"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/dim20sp"
@@ -70,7 +68,7 @@
         android:layout_marginTop="44dp"
         android:layout_marginEnd="16dp"
         android:fontFamily="@font/ubuntu"
-        android:text="@string/as_gal_xias_s_o_categorizadas_de_acordo_com_sua_morfologia_visual_como_el_ptica_espiral_ou_irregular_acredita_se_que_muitas_gal_xias_tenham_buracos_negros_supermassivos_em_seus_centros"
+        android:text="@string/info_galaxias"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textSize="24sp"
@@ -86,8 +84,6 @@
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/colorTransparent"
         android:fontFamily="@font/ubuntu"
-        android:paddingHorizontal="@dimen/dim10dp"
-        android:paddingVertical="@dimen/dim10dp"
         android:text="@string/explorar"
         android:textColor="@color/colorWhite"
         android:textSize="20sp"
@@ -125,8 +121,6 @@
         android:layout_marginTop="24dp"
         android:backgroundTint="@color/colorTransparent"
         android:fontFamily="@font/ubuntu"
-        android:paddingHorizontal="@dimen/dim10dp"
-        android:paddingVertical="@dimen/dim10dp"
         android:text="@string/fato_astron_mico"
         android:textColor="@color/colorWhite"
         android:textSize="20sp"
@@ -149,8 +143,6 @@
         android:layout_marginTop="16dp"
         android:backgroundTint="@color/colorTransparent"
         android:fontFamily="@font/ubuntu"
-        android:paddingHorizontal="@dimen/dim10dp"
-        android:paddingVertical="@dimen/dim10dp"
         android:text="@string/terra"
         android:textColor="@color/colorWhite"
         android:textSize="20sp"
@@ -179,6 +171,5 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnTerra"
         app:layout_constraintVertical_bias="1.0" />
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>
