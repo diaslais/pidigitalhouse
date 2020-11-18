@@ -28,8 +28,8 @@ class ViaLacteaFragment : Fragment() {
 
         val navController = findNavController()
 
-        view.findViewById<MaterialButton>(R.id.btnConhecaSistemaSolar).setOnClickListener {
-            navController.navigate(R.id.actio)
-
+//        view.findViewById<MaterialButton>(R.id.btnConhecaSistemaSolar).setOnClickListener {
+//            navController.navigate(R.id.actio)
+//        }
     }
 }

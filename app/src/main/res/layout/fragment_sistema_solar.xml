@@ -2,20 +2,11 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="wrap_content"
+    android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SistemaSolarFragment">
+    tools:context=".SistemaSolarFragment"
+    android:background="@drawable/background_sistema_solar">
 
-
-    <ImageView
-        android:id="@+id/imgSistemaSolar"
-        android:layout_width="423dp"
-        android:layout_height="760dp"
-        android:src="@drawable/background_sistema_solar"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/btnIniciarExploracao"
@@ -39,14 +30,16 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="1.0"
         app:strokeColor="@color/colorWhite"
-        app:strokeWidth="1dp" />
+        app:strokeWidth="1dp"
+        android:paddingHorizontal="@dimen/dim10dp"
+        android:paddingVertical="@dimen/dim10dp"/>
 
     <TextView
         android:id="@+id/txtSistemaSolar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="150dp"
+        android:layout_marginTop="180dp"
         android:fontFamily="@font/ubuntu_bold"
         android:text="@string/sistema_solar"
         android:textColor="@color/colorWhite"
@@ -70,5 +63,6 @@
         app:layout_constraintEnd_toEndOf="@+id/txtSistemaSolar"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/txtSistemaSolar"
-        app:layout_constraintTop_toBottomOf="@+id/txtSistemaSolar" />
+        app:layout_constraintTop_toBottomOf="@+id/txtSistemaSolar"
+        app:layout_constraintVertical_bias="0.41000003" />
 </androidx.constraintlayout.widget.ConstraintLayout>

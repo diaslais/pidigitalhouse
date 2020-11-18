@@ -4,26 +4,14 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViaLacteaFragment">
+    tools:context=".ViaLacteaFragment"
+    android:background="@drawable/background_vialactea">
 
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="408dp"
-        android:layout_height="742dp"
-        android:src="@drawable/background_vialactea"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/txtNossoLugar"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="60dp"
-        android:layout_marginEnd="16dp"
         android:fontFamily="@font/ubuntu"
         android:text="@string/nosso_lugar_no_cosmos"
         android:textAlignment="center"
@@ -32,8 +20,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/imageView"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.060000002" />
 
     <TextView
         android:id="@+id/txtUmPontinho"
@@ -86,7 +74,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViaLactea"
         app:strokeColor="@color/colorWhite"
-        app:strokeWidth="1dp" />
+        app:strokeWidth="1dp"
+        android:paddingHorizontal="@dimen/dim10dp"
+        android:paddingVertical="@dimen/dim10dp"/>
 
     <ImageView
         android:id="@+id/imageView2"
@@ -99,7 +89,7 @@
         app:layout_constraintHorizontal_bias="0.55"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtNossoLugar"
-        app:layout_constraintVertical_bias="0.956" />
+        app:layout_constraintVertical_bias="0.92" />
 
     <TextView
         android:id="@+id/txtAqui"
