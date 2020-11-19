@@ -29,20 +29,20 @@ class ExploracaoFragment : Fragment() {
 
         val navController = findNavController()
 
-//        view.findViewById<MaterialButton>(R.id.btnSair).setOnClickListener {
-//            navController.navigate(R.id.action)
-//        }
-        view.findViewById<MaterialButton>(R.id.btnExplorar).setOnClickListener {
-            navController.navigate(R.id.action_exploracaoFragment2_to_viaLacteaFragment)
+        view.findViewById<MaterialButton>(R.id.btnSair).setOnClickListener {
+            navController.navigate(R.id.action_exploracaoFragment_to_loginFragment)
         }
-//        view.findViewById<MaterialButton>(R.id.btnFatoAstronomico).setOnClickListener {
-//            navController.navigate(R.id.actio)
-//        }
-//        view.findViewById<MaterialButton>(R.id.btnTerra).setOnClickListener {
-//            navController.navigate(R.id.actio)
-//        }
+        view.findViewById<MaterialButton>(R.id.btnExplorar).setOnClickListener {
+            navController.navigate(R.id.action_exploracaoFragment_to_viaLacteaFragment)
+        }
+        view.findViewById<MaterialButton>(R.id.btnFatoAstronomico).setOnClickListener {
+            navController.navigate(R.id.action_exploracaoFragment_to_fatoAstronomicoFragment2)
+        }
+        view.findViewById<MaterialButton>(R.id.btnTerra).setOnClickListener {
+            navController.navigate(R.id.action_exploracaoFragment_to_epicFragment)
+        }
         view.findViewById<ImageButton>(R.id.btnBibliografia).setOnClickListener {
-            navController.navigate(R.id.action_exploracaoFragment2_to_bibliografiaFragment)
+            navController.navigate(R.id.action_exploracaoFragment_to_bibliografiaFragment)
 
         }
     }
