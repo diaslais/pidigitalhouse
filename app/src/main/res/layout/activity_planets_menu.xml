@@ -1,0 +1,97 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_planetas"
+    android:orientation="vertical"
+    tools:context=".planetsmenu.view.PlanetsMenuActivity">
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/planetsRecyclerview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal"/>
+
+    <ImageView
+        android:id="@+id/imgPlanet"
+        android:layout_width="wrap_content"
+        android:layout_height="200dp"
+        android:layout_marginTop="10dp"
+        android:src="@drawable/sol"/>
+
+    <TextView
+        android:id="@+id/txtPlanetName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:textSize="20sp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:text="Sol"
+        android:layout_gravity="center"
+        android:layout_marginTop="10dp"/>
+
+    <TextView
+        android:layout_weight="1"
+        android:id="@+id/txtPlanetDescription"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@color/colorWhite"
+        android:textSize="16sp"
+        android:fontFamily="@font/ubuntu"
+        android:text="Vênus é o segundo planeta mais próximo ao Sol e o segundo objeto mais brilhante no céu noturno, atrás apenas da lua. Devido às muitas semelhanças com nosso planeta, Vênus também é considerado um planeta irmão da Terra, por conta de sua massa densidade e volume, mas apesar disso, ele tem características únicas e impressionantes."
+        android:layout_gravity="center"
+        android:layout_marginTop="20dp"
+        android:paddingHorizontal="20dp"
+        android:justificationMode="inter_word"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_marginTop="20dp">
+        <Button
+            android:id="@+id/btnTechnicalInformation"
+            android:drawableTop="@drawable/ic_outline_info_24"
+            android:layout_weight="1"
+            android:background="@color/colorTransparent"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/ubuntu_bold"
+            android:textAllCaps="false"
+            android:text="Informações \nTécnicas"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            />
+        <Button
+            android:id="@+id/btnCuriosities"
+            android:drawableTop="@drawable/ic_outline_language_24"
+            android:layout_weight="1"
+            android:background="@color/colorTransparent"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/ubuntu_bold"
+            android:textAllCaps="false"
+            android:text="Curiosidades"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            />
+        <Button
+            android:id="@+id/btnNews"
+            android:drawableTop="@drawable/ic_article_white_24dp"
+            android:layout_weight="1"
+            android:background="@color/colorTransparent"
+            android:textColor="@color/colorWhite"
+            android:fontFamily="@font/ubuntu_bold"
+            android:textAllCaps="false"
+            android:text="Atualidades"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+            />
+    </LinearLayout>
+
+</LinearLayout>
