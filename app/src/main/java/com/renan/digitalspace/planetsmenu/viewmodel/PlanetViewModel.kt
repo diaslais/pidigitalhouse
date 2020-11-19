@@ -1,0 +1,25 @@
+package com.renan.digitalspace.planetsmenu.viewmodel
+
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
+import com.renan.digitalspace.planetsmenu.model.Planet
+import com.renan.digitalspace.planetsmenu.repository.PlanetRepository
+
+class PlanetViewModel (private val repository: PlanetRepository): ViewModel() {
+    val planetsData = MutableLiveData<List<Planet>>()
+
+    fun getPlanets() {
+        repository.getPlanets {
+            planetsData.value = it
+        }
+    }
+
+    class PlanetViewModelFactory (private val repository: PlanetRepository): ViewModelProvider.Factory {
+        @Suppress("UNCHECKED_CAST")
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            return PlanetViewModel(repository) as T
+        }
+    }
+}
