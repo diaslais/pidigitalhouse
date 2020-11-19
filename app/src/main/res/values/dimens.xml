@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="dim2dp">10dp</dimen>
+    <dimen name="dim6dp">6dp</dimen>
     <dimen name="dim10dp">10dp</dimen>
     <dimen name="dim12dp">12dp</dimen>
     <dimen name="dim14dp">14dp</dimen>
@@ -8,19 +9,27 @@
     <dimen name="dim18dp">18dp</dimen>
     <dimen name="dim20dp">20dp</dimen>
     <dimen name="dim22dp">22dp</dimen>
+    <dimen name="dim24dp">24dp</dimen>
     <dimen name="dim30dp">30dp</dimen>
     <dimen name="dim36dp">36dp</dimen>
+    <dimen name="dim40dp">40dp</dimen>
     <dimen name="dim46dp">46dp</dimen>
+    <dimen name="dim50dp">50dp</dimen>
+    <dimen name="dim60dp">60dp</dimen>
+    <dimen name="dim150dp">150dp</dimen>
+    <dimen name="dim170dp">170dp</dimen>
+    <dimen name="dim260dp">260dp</dimen>
+    <dimen name="dim270dp">270dp</dimen>
+    <dimen name="dim300dp">300dp</dimen>
     <dimen name="dim16sp">16sp</dimen>
     <dimen name="dim18sp">18sp</dimen>
     <dimen name="dim20sp">20sp</dimen>
     <dimen name="dim22sp">22sp</dimen>
-    <dimen name="dim30sp">30sp</dimen>
-    <dimen name="dim40sp">40sp</dimen>
-    <dimen name="dim300dp">300dp</dimen>
-    <dimen name="dim40dp">40dp</dimen>
-    <dimen name="dim60dp">60dp</dimen>
     <dimen name="dim24sp">24sp</dimen>
-    <dimen name="dim6dp">6dp</dimen>
+    <dimen name="dim26sp">26sp</dimen>
+    <dimen name="dim30sp">30sp</dimen>
+    <dimen name="dim32sp">32sp</dimen>
+    <dimen name="dim40sp">40sp</dimen>
+    <dimen name="dim42sp">42sp</dimen>
 
 </resources>

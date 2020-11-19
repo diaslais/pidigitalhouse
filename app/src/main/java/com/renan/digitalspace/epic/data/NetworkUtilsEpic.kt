@@ -1,4 +1,4 @@
-package com.renan.digitalspace.epic
+package com.renan.digitalspace.epic.data
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

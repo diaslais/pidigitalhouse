@@ -15,15 +15,19 @@
         android:layout_marginStart="@dimen/dim24dp"
         android:layout_marginEnd="@dimen/dim24dp"
         android:fontFamily="@font/ubuntu"
+        android:justificationMode="inter_word"
         android:text="@string/nosso_lugar_no_cosmos"
+
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/dim32sp"
+    android:textStyle="bold"
+
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.060000002" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/txtUmPontinho"
@@ -36,7 +40,7 @@
         android:text="@string/galaxia_espiral"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim24sp"
+        android:textSize="@dimen/dim20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"

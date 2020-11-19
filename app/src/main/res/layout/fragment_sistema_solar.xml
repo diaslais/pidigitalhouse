@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".SistemaSolarFragment"
-    android:background="@drawable/background_sistema_solar">
+    android:background="@drawable/background_sistema_solar"
+    tools:context=".SistemaSolarFragment">
 
 
     <Button
@@ -15,8 +15,8 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="@dimen/dim24dp"
         android:layout_marginBottom="@dimen/dim16dp"
-        android:paddingVertical="@dimen/dim14dp"
         android:fontFamily="@font/ubuntu"
+        android:paddingVertical="@dimen/dim14dp"
         android:text="@string/iniciar_explora_o"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
@@ -33,7 +33,7 @@
 
     <TextView
         android:id="@+id/txtSistemaSolar"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dim24dp"
         android:layout_marginTop="@dimen/dim150dp"
@@ -55,9 +55,11 @@
         android:layout_marginTop="@dimen/dim60dp"
         android:layout_marginEnd="@dimen/dim170dp"
         android:fontFamily="@font/ubuntu"
+        android:justificationMode="inter_word"
+        android:lineSpacingExtra="2sp"
         android:text="@string/info_galaxias"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim24sp"
+        android:textSize="@dimen/dim18sp"
         app:layout_constraintBottom_toTopOf="@+id/btnIniciarExploracao"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
