@@ -28,8 +28,8 @@ class SistemaSolarFragment : Fragment() {
 
         val navController = findNavController()
 
-//        view.findViewById<MaterialButton>(R.id.btnIniciarExploracao).setOnClickListener {
-//            navController.navigate(R.id.actio)
-//        }
+        view.findViewById<MaterialButton>(R.id.btnIniciarExploracao).setOnClickListener {
+            navController.navigate(R.id.action_sistemaSolarFragment_to_planetsMenuActivity)
+        }
     }
 }
