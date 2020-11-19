@@ -8,7 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.renan.digitalspace.R
-import com.renan.digitalspace.epic.NetworkUtilsEpic
+import com.renan.digitalspace.epic.data.NetworkUtilsEpic
 import com.renan.digitalspace.epic.model.ApiResponseModelEPIC
 import com.renan.digitalspace.epic.repository.EndPointEpic
 import com.squareup.picasso.Picasso
@@ -80,7 +80,7 @@ class EpicFragment : Fragment() {
 
                 val imgEpic = view?.findViewById<ImageView>(R.id.imgEpic)
                 val picasso = Picasso.get()
-                picasso.load("https://epic.gsfc.nasa.gov/archive/natural/${yearId}/${monthId}/${dayId}/png/${imageId}")
+                picasso.load("https://epic.gsfc.nasa.gov/archive/natural/${yearId}/${monthId}/${dayId}/png/${imageId}").into(imgEpic)
             }
 
             override fun onFailure(call: Call<List<String>>, t: Throwable) {

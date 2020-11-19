@@ -1,4 +1,4 @@
-package com.renan.digitalspace.apod
+package com.renan.digitalspace.apod.data
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
