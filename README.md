@@ -26,6 +26,6 @@ Opção 1 - Clonar a aplicação e abrir pelo android studio.
 
 Opção 2 - Baixar o Apk presente no último release e fazer a instalação no seu aparelho.
 
-# :closed_book: Licensa
+# :closed_book: Licença
 
-Esse projeto faz uso da [MIT license](https://github.com/paulo4fs/pidigitalhouse/blob/develop/LICENSE).
+Esse projeto faz uso da [licença MIT](https://github.com/paulo4fs/pidigitalhouse/blob/develop/LICENSE).
