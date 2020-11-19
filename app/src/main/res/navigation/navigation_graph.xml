@@ -10,11 +10,11 @@
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
-            android:id="@+id/action_loginFragment_to_fatoAstronomicoFragment2"
-            app:destination="@id/fatoAstronomicoFragment2" />
-        <action
             android:id="@+id/action_loginFragment_to_signupFragment"
             app:destination="@id/signupFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_exploracaoFragment"
+            app:destination="@id/exploracaoFragment" />
     </fragment>
     <fragment
         android:id="@+id/fatoAstronomicoFragment2"
@@ -30,5 +30,49 @@
             android:id="@+id/action_signupFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
     </fragment>
-
+    <fragment
+        android:id="@+id/bibliografiaFragment"
+        android:name="com.renan.digitalspace.BibliografiaFragment"
+        android:label="fragment_bibliografia"
+        tools:layout="@layout/fragment_bibliografia" />
+    <fragment
+        android:id="@+id/exploracaoFragment"
+        android:name="com.renan.digitalspace.ExploracaoFragment"
+        android:label="fragment_exploracao"
+        tools:layout="@layout/fragment_exploracao" >
+        <action
+            android:id="@+id/action_exploracaoFragment_to_viaLacteaFragment"
+            app:destination="@id/viaLacteaFragment" />
+        <action
+            android:id="@+id/action_exploracaoFragment_to_bibliografiaFragment"
+            app:destination="@id/bibliografiaFragment" />
+        <action
+            android:id="@+id/action_exploracaoFragment_to_fatoAstronomicoFragment2"
+            app:destination="@id/fatoAstronomicoFragment2" />
+        <action
+            android:id="@+id/action_exploracaoFragment_to_epicFragment"
+            app:destination="@id/epicFragment" />
+        <action
+            android:id="@+id/action_exploracaoFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/sistemaSolarFragment"
+        android:name="com.renan.digitalspace.SistemaSolarFragment"
+        android:label="fragment_sistema_solar"
+        tools:layout="@layout/fragment_sistema_solar" />
+    <fragment
+        android:id="@+id/viaLacteaFragment"
+        android:name="com.renan.digitalspace.ViaLacteaFragment"
+        android:label="fragment_via_lactea"
+        tools:layout="@layout/fragment_via_lactea" >
+        <action
+            android:id="@+id/action_viaLacteaFragment_to_sistemaSolarFragment"
+            app:destination="@id/sistemaSolarFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/epicFragment"
+        android:name="com.renan.digitalspace.epic.view.EpicFragment"
+        android:label="fragment_epic"
+        tools:layout="@layout/fragment_epic" />
 </navigation>

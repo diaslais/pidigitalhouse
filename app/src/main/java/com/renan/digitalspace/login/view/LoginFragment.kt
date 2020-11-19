@@ -57,7 +57,7 @@ class LoginFragment : Fragment() {
                 Toast.makeText(context, getString(R.string.toast_campo_vazio), Toast.LENGTH_LONG)
             toast.show()
         } else {
-            navController.navigate(R.id.fatoAstronomicoFragment2)
+            navController.navigate(R.id.action_loginFragment_to_exploracaoFragment)
         }
     }
 
@@ -97,7 +97,7 @@ class LoginFragment : Fragment() {
 
     private fun navigateSignup(view: View, navController: NavController, button: Int) {
         view.findViewById<ImageButton>(button).setOnClickListener {
-            navController.navigate(R.id.signupFragment)
+            navController.navigate(R.id.action_loginFragment_to_signupFragment)
         }
     }
 }
