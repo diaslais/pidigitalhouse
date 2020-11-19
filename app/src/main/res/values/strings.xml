@@ -34,4 +34,9 @@
     <string name="sistema_solar">SISTEMA SOLAR</string>
     <string name="info_galaxias">As galáxias são categorizadas de acordo com sua morfologia visual como elíptica, espiral ou irregular.\n\Acredita-se que muitas galáxias tenham buracos negros supermassivos em seus centros.</string>
     <string name="bibliografia">BIBLIOGRAFIA</string>
+    <string name="informa_es_nt_cnicas">Informações \nTécnicas</string>
+    <string name="curiosidades">Curiosidades</string>
+    <string name="atualidades">Atualidades</string>
+    <string name="sol">Sol</string>
+    <string name="sol_description">Vênus é o segundo planeta mais próximo ao Sol e o segundo objeto mais brilhante no céu noturno, atrás apenas da lua. Devido às muitas semelhanças com nosso planeta, Vênus também é considerado um planeta irmão da Terra, por conta de sua massa densidade e volume, mas apesar disso, ele tem características únicas e impressionantes.</string>
 </resources>
