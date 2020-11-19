@@ -7,7 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
-import com.renan.digitalspace.apod.NetworkUtilsApod
+import com.renan.digitalspace.apod.data.NetworkUtilsApod
 import com.renan.digitalspace.R
 import com.renan.digitalspace.apod.model.ApiResponseModelAPOD
 import com.renan.digitalspace.apod.repository.EndPointApod
