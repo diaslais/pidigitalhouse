@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Digital Space</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="digital">Digital</string>
     <string name="space">Space</string>
@@ -21,5 +20,18 @@
     <string name="error_vazio">Existe um campo vazio</string>
     <string name="error_confirmacao">Password diferente da confirmação</string>
     <string name="confirmacao">Conta criada com sucesso</string>
-
+    <string name="sair">SAIR</string>
+    <string name="explorando_o_dia_em_imagens">EXPLORANDO O DIA EM IMAGENS</string>
+    <string name="explorar">EXPLORAR</string>
+    <string name="explora_o_espacial">Exploração Espacial</string>
+    <string name="fato_astron_mico">FATO ASTRONÔMICO</string>
+    <string name="terra">TERRA</string>
+    <string name="conhe_a_nosso_sistema_solar">CONHEÇA O SISTEMA SOLAR</string>
+    <string name="via_l_ctea">VIA LÁCTEA!</string>
+    <string name="galaxia_espiral">Um pontinho nessa linda galáxia espiral chamada:</string>
+    <string name="nosso_lugar_no_cosmos">Nosso Lugar no cosmos</string>
+    <string name="iniciar_explora_o">INICIAR EXPLORAÇÃO</string>
+    <string name="sistema_solar">SISTEMA SOLAR</string>
+    <string name="info_galaxias">As galáxias são categorizadas de acordo com sua morfologia visual como elíptica, espiral ou irregular.\n\Acredita-se que muitas galáxias tenham buracos negros supermassivos em seus centros.</string>
+    <string name="bibliografia">BIBLIOGRAFIA</string>
 </resources>
