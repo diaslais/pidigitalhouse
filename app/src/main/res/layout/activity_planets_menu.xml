@@ -1,97 +1,161 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_planetas"
-    android:orientation="vertical"
     tools:context=".planetsmenu.view.PlanetsMenuActivity">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/planetsRecyclerview"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dim10dp"
-        android:orientation="horizontal"/>
-
-    <ImageView
-        android:id="@+id/imgPlanet"
-        android:layout_width="wrap_content"
-        android:layout_height="@dimen/dim200dp"
-        android:layout_marginTop="@dimen/dim10dp"
-        android:src="@drawable/sol"/>
-
-    <TextView
-        android:id="@+id/txtPlanetName"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim20sp"
-        android:fontFamily="@font/ubuntu_bold"
-        android:text="@string/sol"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dim10dp"/>
-
-    <TextView
-        android:layout_weight="1"
-        android:id="@+id/txtPlanetDescription"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim16sp"
-        android:fontFamily="@font/ubuntu"
-        android:text="@string/sol_description"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dim20dp"
-        android:paddingHorizontal="@dimen/dim20dp"
-        android:justificationMode="inter_word"/>
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:layout_marginBottom="@dimen/dim10dp"
-        android:layout_marginTop="@dimen/dim20dp">
-        <Button
-            android:id="@+id/btnTechnicalInformation"
-            android:drawableTop="@drawable/ic_outline_info_24"
-            android:layout_weight="1"
-            android:background="@color/colorTransparent"
-            android:textColor="@color/colorWhite"
-            android:fontFamily="@font/ubuntu_bold"
-            android:textAllCaps="false"
-            android:text="@string/informa_es_nt_cnicas"
+        android:layout_height="match_parent"
+        android:background="@drawable/bg_planetas"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/planetsRecyclerview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dim10dp"
+            android:orientation="horizontal" />
+
+        <ImageView
+            android:id="@+id/imgPlanet"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dim200dp"
+            android:layout_marginTop="@dimen/dim10dp"
+            android:src="@drawable/sol" />
+
+        <TextView
+            android:id="@+id/txtPlanetName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            />
-        <Button
-            android:id="@+id/btnCuriosities"
-            android:drawableTop="@drawable/ic_outline_language_24"
-            android:layout_weight="1"
-            android:background="@color/colorTransparent"
-            android:textColor="@color/colorWhite"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dim10dp"
             android:fontFamily="@font/ubuntu_bold"
-            android:textAllCaps="false"
-            android:text="@string/curiosidades"
+            android:text="@string/sol"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dim20sp" />
+
+        <TextView
+            android:id="@+id/txtPlanetDescription"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            />
-        <Button
-            android:id="@+id/btnNews"
-            android:drawableTop="@drawable/ic_article_white_24dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="@dimen/dim20dp"
             android:layout_weight="1"
-            android:background="@color/colorTransparent"
+            android:fontFamily="@font/ubuntu"
+            android:justificationMode="inter_word"
+            android:paddingHorizontal="@dimen/dim20dp"
+            android:text="@string/sol_description"
             android:textColor="@color/colorWhite"
-            android:fontFamily="@font/ubuntu_bold"
-            android:textAllCaps="false"
-            android:text="@string/atualidades"
-            android:layout_width="wrap_content"
+            android:textSize="@dimen/dim16sp" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            />
+            android:layout_marginTop="@dimen/dim20dp"
+            android:layout_marginBottom="@dimen/dim10dp"
+            android:orientation="horizontal">
+
+            <Button
+                android:id="@+id/btnTechnicalInformation"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorTransparent"
+                android:drawableTop="@drawable/ic_outline_info_24"
+                android:fontFamily="@font/ubuntu_bold"
+                android:text="@string/informa_es_nt_cnicas"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite" />
+
+            <Button
+                android:id="@+id/btnCuriosities"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorTransparent"
+                android:drawableTop="@drawable/ic_outline_language_24"
+                android:fontFamily="@font/ubuntu_bold"
+                android:text="@string/curiosidades"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite" />
+
+            <Button
+                android:id="@+id/btnNews"
+                style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@color/colorTransparent"
+                android:drawableTop="@drawable/ic_article_white_24dp"
+                android:fontFamily="@font/ubuntu_bold"
+                android:text="@string/atualidades"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite" />
+        </LinearLayout>
+
     </LinearLayout>
 
-</LinearLayout>
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/mcvBottomsheet"
+        style="@style/Widget.Design.BottomSheet.Modal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:behavior_peekHeight="@dimen/dim0dp"
+        app:cardBackgroundColor="@color/colorBlack35pct"
+        app:cardElevation="@dimen/dim120dp"
+        app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/shape_roundtop"
+            android:backgroundTint="@color/colorWhite"
+            android:orientation="vertical"
+            android:paddingHorizontal="@dimen/dim18dp">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:padding="@dimen/dim5dp"
+                android:src="@drawable/ic_baseline_drag_handle_24"
+                app:tint="@color/colorBlack" />
+
+            <TextView
+                android:id="@+id/tvTitleBottomsheet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dim10dp"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dim20sp"
+                tools:text="@tools:sample/lorem" />
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvTextBottomsheet"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dim20dp"
+                android:textColor="@color/colorBlack"
+                android:textSize="@dimen/dim18sp"
+                />
+</ScrollView>
+
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>

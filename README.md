@@ -5,7 +5,7 @@
 [![GitHub last commit (develop)](https://img.shields.io/github/last-commit/paulo4fs/pidigitalhouse/develop?color=%23DDDDDD&style=for-the-badge)](#)
 [![License](https://img.shields.io/github/license/paulo4fs/pidigitalhouse?color=%23DDDDDD&style=for-the-badge)](https://github.com/paulo4fs/pidigitalhouse/blob/develop/LICENSE)
 
-> Aplicativo Android criado no projeto integrador do curso corders Mobile Android da DigitalHouse by Santender, que tem como objetivo permitir o estudo e exploração dos mais novos fatos astronômicos presentes no sistema solar utilizando APIs da NASA como base. 🚀
+> Aplicativo Android criado no projeto integrador do Santander Coders Mobile Android by Digital House, que tem como objetivo permitir o estudo e exploração dos mais novos fatos astronômicos presentes no sistema solar utilizando APIs da NASA como base. 🚀
 
 <div>
 <img width="250" src="https://i.ibb.co/GCLJZy4/Screenshot-1605798951.png" alt="Exploracao_Espacial" border="0"> <img width="250" src="https://i.ibb.co/HHqJgth/Screenshot-1605798976.png" alt="Web-Signin" border="0"> <img width="250" src="https://i.ibb.co/vCWvxQn/Screenshot-1605798987.png" alt="Sistema_Solar" border="0">
