@@ -6,7 +6,10 @@ import androidx.recyclerview.widget.RecyclerView
 import com.renan.digitalspace.R
 import com.renan.digitalspace.planetsmenu.model.Planet
 
-class PlanetsMenuAdapter (private val dataSet: List<Planet>, val clickListener: IPlanetClick): RecyclerView.Adapter<PlanetsMenuViewHolder>() {
+class PlanetsMenuAdapter (
+    private val dataSet: List<Planet>,
+    val clickListener: IPlanetClick
+): RecyclerView.Adapter<PlanetsMenuViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlanetsMenuViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_planets_menu, parent, false)
         return PlanetsMenuViewHolder(view)
