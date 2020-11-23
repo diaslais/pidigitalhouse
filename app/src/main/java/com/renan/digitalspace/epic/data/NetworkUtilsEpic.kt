@@ -11,7 +11,7 @@ class NetworkUtilsEpic {
         private lateinit var retrofit: Retrofit
         private val baseUrl = "https://epic.gsfc.nasa.gov/"
 
-        private fun getRetroFitInstance(): Retrofit {
+        fun getRetroFitInstance(): Retrofit {
 
             var httpClient = OkHttpClient.Builder()
 
