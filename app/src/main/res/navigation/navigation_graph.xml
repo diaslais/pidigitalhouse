@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/fatoAstronomicoFragment2"
-        android:name="com.renan.digitalspace.apod.view.FatoAstronomicoFragment"
+        android:name="com.renan.digitalspace.apod.view.ApodFragment"
         android:label="fragment_fato_astronomico"
         tools:layout="@layout/fragment_fato_astronomico" />
     <fragment

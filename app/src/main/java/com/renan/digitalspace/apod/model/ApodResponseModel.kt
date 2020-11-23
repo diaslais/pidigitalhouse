@@ -1,6 +1,6 @@
 package com.renan.digitalspace.apod.model
 
-data class ApiResponseModelAPOD(
+data class ApodResponseModel(
     val copyright: String?,
     val date: String,
     val explanation:String,
