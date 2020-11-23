@@ -50,11 +50,25 @@ class PlanetsMenuActivity : AppCompatActivity(), IPlanetClick {
     }
 
     override fun onPlanetClick(planet: Planet, position: Int) {
+        _planetViewModel.setPlanet(planet)
+
         val planetName = findViewById<TextView>(R.id.txtPlanetName)
         val planetDescription = findViewById<TextView>(R.id.txtPlanetDescription)
         val planetImg = findViewById<ImageView>(R.id.imgPlanet)
 
-        _planetViewModel.setPlanet(planet)
+        val bottomSheet = findViewById<MaterialCardView>(R.id.mcvBottomsheet)
+        val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+
+        if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
+            val titleBottomSheet = findViewById<TextView>(R.id.tvTitleBottomsheet)
+            val textBottomSheet = findViewById<TextView>(R.id.tvTextBottomsheet)
+
+            when (titleBottomSheet.text.toString()) {
+                getString(R.string.curiosidades) -> textBottomSheet.text = planet.curiosities
+                getString(R.string.atualidades) -> textBottomSheet.text = planet.news
+                getString(R.string.informa_es_nt_cnicas) -> textBottomSheet.text = planet.technicalInformation
+            }
+        }
 
         val selectedPlanet = _planetViewModel.selectedPlanet
 
@@ -65,7 +79,6 @@ class PlanetsMenuActivity : AppCompatActivity(), IPlanetClick {
     }
 
     private fun descriptionCard(planet: Planet) {
-
         val bottomSheet = findViewById<MaterialCardView>(R.id.mcvBottomsheet)
         val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
 
@@ -111,7 +124,7 @@ class PlanetsMenuActivity : AppCompatActivity(), IPlanetClick {
         titleBottomSheet.text = titleString
         textBottomSheet.text = textString
 
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
-        bottomSheetBehavior.skipCollapsed = true
+        bottomSheetBehavior.peekHeight = 700
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
     }
 }
