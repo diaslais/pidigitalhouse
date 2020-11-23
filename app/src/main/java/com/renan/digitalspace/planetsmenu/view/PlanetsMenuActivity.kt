@@ -68,21 +68,36 @@ class PlanetsMenuActivity : AppCompatActivity(), IPlanetClick {
 
         val bottomSheet = findViewById<MaterialCardView>(R.id.mcvBottomsheet)
         val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+
+        val description = findViewById<TextView>(R.id.txtPlanetDescription)
+
         val btnTechnical = findViewById<Button>(R.id.btnTechnicalInformation)
         val btnCuriosities = findViewById<Button>(R.id.btnCuriosities)
         val btnNews = findViewById<Button>(R.id.btnNews)
-        val description = findViewById<TextView>(R.id.txtPlanetDescription)
+
+        description.text = planet.description
 
         btnTechnical.setOnClickListener {
-            changeTextBottomSheet("Informações Técnicas", planet.technicalInformation,bottomSheetBehavior)
+            changeTextBottomSheet(
+                getString(R.string.informa_es_nt_cnicas),
+                planet.technicalInformation,
+                bottomSheetBehavior
+            )
         }
         btnCuriosities.setOnClickListener {
-            changeTextBottomSheet("Curiosidades", planet.curiosities, bottomSheetBehavior)
+            changeTextBottomSheet(
+                getString(R.string.curiosidades),
+                planet.curiosities,
+                bottomSheetBehavior
+            )
         }
         btnNews.setOnClickListener {
-            changeTextBottomSheet("Atualidades", planet.news, bottomSheetBehavior)
+            changeTextBottomSheet(
+                getString(R.string.atualidades),
+                planet.news,
+                bottomSheetBehavior
+            )
         }
-        description.text = planet.description
     }
 
     private fun changeTextBottomSheet(
@@ -96,7 +111,7 @@ class PlanetsMenuActivity : AppCompatActivity(), IPlanetClick {
         titleBottomSheet.text = titleString
         textBottomSheet.text = textString
 
-        bottomSheetBehavior.peekHeight = 600
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+        bottomSheetBehavior.state = BottomSheetBehavior.STATE_EXPANDED
+        bottomSheetBehavior.skipCollapsed = true
     }
 }

@@ -111,17 +111,14 @@
         android:id="@+id/mcvBottomsheet"
         style="@style/Widget.Design.BottomSheet.Modal"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         app:behavior_peekHeight="@dimen/dim0dp"
-        app:cardBackgroundColor="@color/colorBlack35pct"
-        app:cardElevation="@dimen/dim120dp"
+        app:cardBackgroundColor="@color/colorBlack80pct"
         app:layout_behavior="com.google.android.material.bottomsheet.BottomSheetBehavior">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@drawable/shape_roundtop"
-            android:backgroundTint="@color/colorWhite"
+            android:layout_height="wrap_content"
             android:orientation="vertical"
             android:paddingHorizontal="@dimen/dim18dp">
 
@@ -131,31 +128,31 @@
                 android:layout_gravity="center"
                 android:padding="@dimen/dim5dp"
                 android:src="@drawable/ic_baseline_drag_handle_24"
-                app:tint="@color/colorBlack" />
+                app:tint="@color/colorWhite" />
 
             <TextView
                 android:id="@+id/tvTitleBottomsheet"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dim10dp"
-                android:textColor="@color/colorBlack"
+                android:textColor="@color/colorWhite"
                 android:textSize="@dimen/dim20sp"
+                android:textStyle="bold"
                 tools:text="@tools:sample/lorem" />
-<ScrollView
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
 
-            <TextView
-                android:id="@+id/tvTextBottomsheet"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dim20dp"
-                android:textColor="@color/colorBlack"
-                android:textSize="@dimen/dim18sp"
-                />
-</ScrollView>
+                android:layout_height="match_parent">
 
+                <TextView
+                    android:id="@+id/tvTextBottomsheet"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="@dimen/dim20dp"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/dim18sp"
+                    tools:text="@tools:sample/lorem/random" />
+            </ScrollView>
         </LinearLayout>
-
     </com.google.android.material.card.MaterialCardView>
 </androidx.coordinatorlayout.widget.CoordinatorLayout>
