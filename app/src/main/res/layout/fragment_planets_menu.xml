@@ -4,8 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".planetsmenu.view.PlanetsMenuActivity">
-
+    tools:context=".planetsmenu.view.PlanetsMenuFragment">
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -17,7 +16,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
-
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/planetsRecyclerview"
