@@ -11,7 +11,7 @@ class NetworkUtilsApod {
         private lateinit var retrofit: Retrofit
         private val baseUrl = "https://api.nasa.gov/"
 
-       private fun getRetroFitInstance(): Retrofit {
+       fun getRetroFitInstance(): Retrofit {
 
             var httpClient = OkHttpClient.Builder()
 
@@ -27,8 +27,6 @@ class NetworkUtilsApod {
             return retrofit
         }
 
-        fun <T> createService(serviceClass: Class<T>):T{
-            return getRetroFitInstance().create(serviceClass)
-        }
+
     }
 }

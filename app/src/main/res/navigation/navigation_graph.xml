@@ -18,7 +18,7 @@
     </fragment>
     <fragment
         android:id="@+id/fatoAstronomicoFragment2"
-        android:name="com.renan.digitalspace.apod.view.FatoAstronomicoFragment"
+        android:name="com.renan.digitalspace.apod.view.ApodFragment"
         android:label="fragment_fato_astronomico"
         tools:layout="@layout/fragment_fato_astronomico" />
     <fragment
@@ -62,8 +62,8 @@
         android:label="fragment_sistema_solar"
         tools:layout="@layout/fragment_sistema_solar" >
         <action
-            android:id="@+id/action_sistemaSolarFragment_to_planetsMenuActivity"
-            app:destination="@id/planetsMenuActivity" />
+            android:id="@+id/action_sistemaSolarFragment_to_planetsMenuFragment"
+            app:destination="@id/planetsMenuFragment" />
     </fragment>
     <fragment
         android:id="@+id/viaLacteaFragment"
@@ -79,9 +79,13 @@
         android:name="com.renan.digitalspace.epic.view.EpicFragment"
         android:label="fragment_epic"
         tools:layout="@layout/fragment_epic" />
-    <activity
-        android:id="@+id/planetsMenuActivity"
-        android:name="com.renan.digitalspace.planetsmenu.view.PlanetsMenuActivity"
-        android:label="activity_planets_menu"
-        tools:layout="@layout/activity_planets_menu" />
+    <fragment
+        android:id="@+id/planetsMenuFragment"
+        android:name="com.renan.digitalspace.planetsmenu.view.PlanetsMenuFragment"
+        android:label="fragment_planets_menu"
+        tools:layout="@layout/fragment_planets_menu" >
+        <action
+            android:id="@+id/action_planetsMenuFragment_to_sistemaSolarFragment"
+            app:destination="@id/sistemaSolarFragment" />
+    </fragment>
 </navigation>
