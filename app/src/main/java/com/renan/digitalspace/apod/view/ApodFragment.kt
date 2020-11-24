@@ -13,6 +13,7 @@ import com.renan.digitalspace.apod.model.ApodResponseModel
 import com.renan.digitalspace.apod.repository.ApodRepository
 import com.renan.digitalspace.apod.viewmodel.ApodViewModel
 import com.squareup.picasso.Picasso
+import java.text.SimpleDateFormat
 
 
 class ApodFragment : Fragment() {
@@ -54,7 +55,6 @@ class ApodFragment : Fragment() {
         Picasso.get()
             .load(it.url)
             .into(imgLoad)
-
     }
 
 
