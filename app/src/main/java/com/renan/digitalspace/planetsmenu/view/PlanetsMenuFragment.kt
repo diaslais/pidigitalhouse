@@ -20,7 +20,6 @@ import com.renan.digitalspace.R
 import com.renan.digitalspace.planetsmenu.model.Planet
 import com.renan.digitalspace.planetsmenu.repository.PlanetRepository
 import com.renan.digitalspace.planetsmenu.viewmodel.PlanetViewModel
-import com.squareup.picasso.Picasso
 
 class PlanetsMenuFragment : Fragment(), IPlanetClick {
     private lateinit var _planetsView: View
@@ -89,6 +88,9 @@ class PlanetsMenuFragment : Fragment(), IPlanetClick {
     }
 
     private fun descriptionCard(planet: Planet) {
+        val planetDescription = _planetsView.findViewById<TextView>(R.id.txtPlanetDescription)
+        planetDescription.text = _selectedPlanet.description
+
         navigateToBottomSheet(
             R.id.btnTechnicalInformation,
             planet.technicalInformation,
@@ -111,14 +113,13 @@ class PlanetsMenuFragment : Fragment(), IPlanetClick {
         text: String,
         title: String
     ) {
-        _planetsView.findViewById<MaterialButton>(btnId)
-            .setOnClickListener {
-                val bundle = bundleOf("text" to text, "title" to title)
+        _planetsView.findViewById<MaterialButton>(btnId).setOnClickListener {
+            val bundle = bundleOf("text" to text, "title" to title)
 
-                _navController.navigate(
-                    R.id.action_planetsMenuFragment_to_bottomsheetFragment,
-                    bundle
-                )
-            }
+            _navController.navigate(
+                R.id.action_planetsMenuFragment_to_bottomsheetFragment,
+                bundle
+            )
+        }
     }
 }
