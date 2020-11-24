@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/loginFragment">
+    app:startDestination="@id/planetsMenuFragment">
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.renan.digitalspace.login.view.LoginFragment"
@@ -87,5 +87,20 @@
         <action
             android:id="@+id/action_planetsMenuFragment_to_sistemaSolarFragment"
             app:destination="@id/sistemaSolarFragment" />
+        <action
+            android:id="@+id/action_planetsMenuFragment_to_bottomsheetFragment"
+            app:destination="@id/bottomsheetFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/bottomsheetFragment"
+        android:name="com.renan.digitalspace.planetsmenu.view.BottomsheetFragment"
+        android:label="fragment_bottomsheet"
+        tools:layout="@layout/fragment_bottomsheet" >
+        <action
+            android:id="@+id/action_bottomsheetFragment_to_planetsMenuFragment"
+            app:destination="@id/planetsMenuFragment" />
+        <argument
+            android:name="text"
+            app:argType="string" />
+    </dialog>
 </navigation>

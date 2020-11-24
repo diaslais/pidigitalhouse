@@ -12,7 +12,6 @@ class PlanetRepository {
 
     private fun setPlanetsList(): List<Planet> {
         return listOf(
-
             Planet(
                 R.drawable.sol,
                 "Sol",
