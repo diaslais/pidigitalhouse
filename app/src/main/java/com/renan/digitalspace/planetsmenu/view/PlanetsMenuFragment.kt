@@ -81,7 +81,7 @@ class PlanetsMenuFragment : Fragment(), IPlanetClick {
         val planetDescription = _planetsView.findViewById<TextView>(R.id.txtPlanetDescription)
         val planetImg = _planetsView.findViewById<ImageView>(R.id.imgPlanet)
 
-        Picasso.get().load(_selectedPlanet.image).into(planetImg)
+        planetImg.setImageResource(_selectedPlanet.image)
         planetName.text = _selectedPlanet.name
         planetDescription.text = _selectedPlanet.description
 

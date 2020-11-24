@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/navigation_graph"
-    app:startDestination="@id/planetsMenuFragment">
+    app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/loginFragment"
         android:name="com.renan.digitalspace.login.view.LoginFragment"
@@ -99,8 +99,5 @@
         <action
             android:id="@+id/action_bottomsheetFragment_to_planetsMenuFragment"
             app:destination="@id/planetsMenuFragment" />
-        <argument
-            android:name="text"
-            app:argType="string" />
     </dialog>
 </navigation>

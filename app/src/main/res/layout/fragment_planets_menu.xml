@@ -28,10 +28,10 @@
             android:id="@+id/btnBackPlanetsMenu"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dim20dp"
             android:layout_marginStart="@dimen/dim20dp"
-            android:src="@drawable/ic_baseline_keyboard_backspace_24"
-            android:background="@color/colorTransparent"/>
+            android:layout_marginTop="@dimen/dim20dp"
+            android:background="@color/colorTransparent"
+            android:src="@drawable/ic_baseline_keyboard_backspace_24" />
 
         <ImageView
             android:id="@+id/imgPlanet"
@@ -50,19 +50,24 @@
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/dim20sp" />
 
-        <TextView
-            android:id="@+id/txtPlanetDescription"
+        <ScrollView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dim20dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/ubuntu"
-            android:justificationMode="inter_word"
-            android:paddingHorizontal="@dimen/dim20dp"
-            android:text="@string/sol_description"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dim16sp" />
+            android:layout_marginTop="@dimen/dim20dp">
+
+            <TextView
+                android:id="@+id/txtPlanetDescription"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_weight="1"
+                android:fontFamily="@font/ubuntu"
+                android:justificationMode="inter_word"
+                android:paddingHorizontal="@dimen/dim20dp"
+                android:text="@string/sol_description"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dim16sp" />
+        </ScrollView>
 
         <LinearLayout
             android:layout_width="match_parent"
