@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.renan.digitalspace.R
@@ -64,6 +65,9 @@ class EpicFragment : Fragment() {
         yearId = dateList?.get(0).toString()
         monthId = dateList?.get(1).toString()
         dayId = dateList?.get(2).toString()
+
+        val txtEpic = view?.findViewById<TextView>(R.id.txtDate)
+        txtEpic.text = "Última atualização de imagem: " + lastday.toString()
 
         val imgEpic = view?.findViewById<ImageView>(R.id.imgEpic)
         val picasso = Picasso.get()

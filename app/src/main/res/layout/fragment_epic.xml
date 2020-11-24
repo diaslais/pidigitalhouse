@@ -4,16 +4,26 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/colorBackgroundApod"
+    android:background="@color/colorBlackEpic"
     tools:context=".epic.view.EpicFragment">
+
+    <TextView
+        android:id="@+id/txtDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu_bold"
+        android:layout_margin="@dimen/dim10dp"
+        android:textSize="@dimen/dim16sp"
+        tools:text="Última atualização da imagem: 16/11/2000"
+        />
 
     <ImageView
         android:id="@+id/imgEpic"
         android:scaleType="centerCrop"
-        android:layout_marginTop="@dimen/dim10dp"
         android:padding="@dimen/dim20dp"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dim300dp"
+        android:layout_gravity="center"
         tools:srcCompat="@tools:sample/avatars[3]" />
 
 </FrameLayout>
