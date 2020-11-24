@@ -59,6 +59,7 @@ class LoginFragment : Fragment() {
         } else {
             navController.navigate(R.id.action_loginFragment_to_exploracaoFragment)
         }
+        
     }
 
     private fun errorHandler(view: View) {

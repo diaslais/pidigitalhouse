@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ExploracaoFragment">
+    tools:context=".exploration.view.ExploracaoFragment">
 
 
     <ImageView
@@ -31,7 +31,7 @@
         android:paddingVertical="@dimen/dim10dp"
         android:text="@string/sair"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim20sp"
+        android:textSize="@dimen/dim16sp"
         android:textStyle="bold"
         app:cornerRadius="@dimen/dim10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -55,9 +55,10 @@
         android:textAlignment="center"
         android:textAllCaps="true"
         android:textColor="@color/colorWhite"
-        android:textSize="28sp"
+        android:textSize="@dimen/dim26sp"
         app:layout_constraintBottom_toBottomOf="@id/imgBackgroundExploracao"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btnSair"
         app:layout_constraintVertical_bias="0.0" />
@@ -94,7 +95,7 @@
         android:paddingVertical="@dimen/dim10dp"
         android:text="@string/explorar"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim20sp"
+        android:textSize="@dimen/dim16sp"
         android:textStyle="bold"
         app:cornerRadius="@dimen/dim10dp"
         app:icon="@drawable/ic_telescope"
@@ -112,9 +113,7 @@
         android:id="@+id/txtExplorandoODia"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim16dp"
         android:layout_marginTop="@dimen/dim24dp"
-        android:layout_marginEnd="@dimen/dim16dp"
         android:fontFamily="@font/ubuntu"
         android:justificationMode="inter_word"
         android:text="@string/explorando_o_dia_em_imagens"
@@ -122,8 +121,8 @@
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/dim22sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/btnExplorar"
+        app:layout_constraintStart_toStartOf="@+id/btnExplorar"
         app:layout_constraintTop_toBottomOf="@+id/btnExplorar" />
 
     <Button
@@ -164,7 +163,7 @@
         android:paddingVertical="@dimen/dim10dp"
         android:text="@string/terra"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim20sp"
+        android:textSize="@dimen/dim16sp"
         android:textStyle="bold"
         app:cornerRadius="@dimen/dim10dp"
         app:icon="@drawable/ic_terra"
