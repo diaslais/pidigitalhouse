@@ -20,6 +20,7 @@ import com.renan.digitalspace.R
 import com.renan.digitalspace.planetsmenu.model.Planet
 import com.renan.digitalspace.planetsmenu.repository.PlanetRepository
 import com.renan.digitalspace.planetsmenu.viewmodel.PlanetViewModel
+import com.squareup.picasso.Picasso
 
 class PlanetsMenuFragment : Fragment(), IPlanetClick {
     private lateinit var _planetsView: View
@@ -43,11 +44,11 @@ class PlanetsMenuFragment : Fragment(), IPlanetClick {
             PlanetViewModel.PlanetViewModelFactory(PlanetRepository())
         ).get(PlanetViewModel::class.java)
 
+        _planetViewModel = viewModel
+
         viewModel.planetsData.observe(viewLifecycleOwner, Observer {
             makePlanetsRecyclerview(it)
         })
-
-        _planetViewModel = viewModel
 
         viewModel.getPlanets()
 
@@ -59,7 +60,6 @@ class PlanetsMenuFragment : Fragment(), IPlanetClick {
         }
 
         _selectedPlanet = _planetViewModel.selectedPlanet
-
         descriptionCard(_selectedPlanet)
     }
 
@@ -81,9 +81,10 @@ class PlanetsMenuFragment : Fragment(), IPlanetClick {
         val planetDescription = _planetsView.findViewById<TextView>(R.id.txtPlanetDescription)
         val planetImg = _planetsView.findViewById<ImageView>(R.id.imgPlanet)
 
-        planetImg.setImageResource(_selectedPlanet.image)
+        Picasso.get().load(_selectedPlanet.image).into(planetImg)
         planetName.text = _selectedPlanet.name
         planetDescription.text = _selectedPlanet.description
+
         descriptionCard(_selectedPlanet)
     }
 

@@ -9,7 +9,6 @@ import com.renan.digitalspace.planetsmenu.repository.PlanetRepository
 class PlanetViewModel(private val repository: PlanetRepository) : ViewModel() {
     val planetsData = MutableLiveData<List<Planet>>()
 
-    //    var selectedPlanet = repository.getPlanets { planetsData.value = it }
     lateinit var selectedPlanet: Planet
 
     fun getPlanets() {
