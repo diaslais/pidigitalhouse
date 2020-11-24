@@ -14,14 +14,9 @@ class ApodViewModel(
     fun getDataApod() =
         liveData(Dispatchers.IO) {
             val explanation = repository.getData()
-//            val url = repository.getData().url
-//            val date = repository.getData().date
-//            val title = repository.getData().title
 
             emit(explanation)
-//            emit(title)
-//            emit(url)
-//            emit(date)
+
         }
 
     class ApodViewModelFactory(
