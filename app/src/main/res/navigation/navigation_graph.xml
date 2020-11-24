@@ -39,7 +39,7 @@
         android:id="@+id/exploracaoFragment"
         android:name="com.renan.digitalspace.ExploracaoFragment"
         android:label="fragment_exploracao"
-        tools:layout="@layout/fragment_exploracao" >
+        tools:layout="@layout/fragment_exploracao">
         <action
             android:id="@+id/action_exploracaoFragment_to_viaLacteaFragment"
             app:destination="@id/viaLacteaFragment" />
@@ -60,7 +60,7 @@
         android:id="@+id/sistemaSolarFragment"
         android:name="com.renan.digitalspace.SistemaSolarFragment"
         android:label="fragment_sistema_solar"
-        tools:layout="@layout/fragment_sistema_solar" >
+        tools:layout="@layout/fragment_sistema_solar">
         <action
             android:id="@+id/action_sistemaSolarFragment_to_planetsMenuFragment"
             app:destination="@id/planetsMenuFragment" />
@@ -69,7 +69,7 @@
         android:id="@+id/viaLacteaFragment"
         android:name="com.renan.digitalspace.ViaLacteaFragment"
         android:label="fragment_via_lactea"
-        tools:layout="@layout/fragment_via_lactea" >
+        tools:layout="@layout/fragment_via_lactea">
         <action
             android:id="@+id/action_viaLacteaFragment_to_sistemaSolarFragment"
             app:destination="@id/sistemaSolarFragment" />
@@ -83,7 +83,7 @@
         android:id="@+id/planetsMenuFragment"
         android:name="com.renan.digitalspace.planetsmenu.view.PlanetsMenuFragment"
         android:label="fragment_planets_menu"
-        tools:layout="@layout/fragment_planets_menu" >
+        tools:layout="@layout/fragment_planets_menu">
         <action
             android:id="@+id/action_planetsMenuFragment_to_sistemaSolarFragment"
             app:destination="@id/sistemaSolarFragment" />
@@ -95,7 +95,7 @@
         android:id="@+id/bottomsheetFragment"
         android:name="com.renan.digitalspace.planetsmenu.view.BottomsheetFragment"
         android:label="fragment_bottomsheet"
-        tools:layout="@layout/fragment_bottomsheet" >
+        tools:layout="@layout/fragment_bottomsheet">
         <action
             android:id="@+id/action_bottomsheetFragment_to_planetsMenuFragment"
             app:destination="@id/planetsMenuFragment" />
