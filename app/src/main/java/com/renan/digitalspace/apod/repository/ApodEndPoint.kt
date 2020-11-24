@@ -9,16 +9,6 @@ import java.util.*
 
 interface ApodEndPoint {
 
-//    val date = Calendar.getInstance().time
-//
-//    val dateTimeFormatter = SimpleDateFormat("yyyy-dd-MM", Locale.getDefault())
-//
-//    return dateTimeFormatter.format(date)
-
-
-
-
-
     @GET("planetary/apod")
     suspend fun getAstronomicalFact(
         @Query("api_key") api_key: String = "gAFkqlGusIgjAzp0UrMhjbkqYfzlyq5jRL8BeBjv",
