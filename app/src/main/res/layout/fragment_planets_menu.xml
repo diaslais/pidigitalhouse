@@ -24,11 +24,19 @@
             android:layout_marginTop="@dimen/dim10dp"
             android:orientation="horizontal" />
 
+        <ImageButton
+            android:id="@+id/btnBackPlanetsMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dim20dp"
+            android:layout_marginStart="@dimen/dim20dp"
+            android:src="@drawable/ic_baseline_keyboard_backspace_24"
+            android:background="@color/colorTransparent"/>
+
         <ImageView
             android:id="@+id/imgPlanet"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dim200dp"
-            android:layout_marginTop="@dimen/dim10dp"
             android:src="@drawable/sol" />
 
         <TextView
