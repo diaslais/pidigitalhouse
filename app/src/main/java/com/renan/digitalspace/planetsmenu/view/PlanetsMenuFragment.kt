@@ -89,18 +89,31 @@ class PlanetsMenuFragment : Fragment(), IPlanetClick {
     }
 
     private fun descriptionCard(planet: Planet) {
-        navigateToBottomSheet(R.id.btnTechnicalInformation, planet.technicalInformation)
-        navigateToBottomSheet(R.id.btnCuriosities, planet.curiosities)
-        navigateToBottomSheet(R.id.btnNews, planet.news)
+        navigateToBottomSheet(
+            R.id.btnTechnicalInformation,
+            planet.technicalInformation,
+            getString(R.string.informacoes_tecnicas)
+        )
+        navigateToBottomSheet(
+            R.id.btnCuriosities,
+            planet.curiosities,
+            getString(R.string.curiosidades)
+        )
+        navigateToBottomSheet(
+            R.id.btnNews,
+            planet.news,
+            getString(R.string.atualidades)
+        )
     }
 
     private fun navigateToBottomSheet(
         btnId: Int,
         text: String,
+        title: String
     ) {
         _planetsView.findViewById<MaterialButton>(btnId)
             .setOnClickListener {
-                val bundle = bundleOf("planet" to text)
+                val bundle = bundleOf("text" to text, "title" to title)
 
                 _navController.navigate(
                     R.id.action_planetsMenuFragment_to_bottomsheetFragment,

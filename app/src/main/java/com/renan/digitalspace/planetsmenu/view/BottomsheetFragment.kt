@@ -25,9 +25,13 @@ class BottomsheetFragment : BottomSheetDialogFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val planet = arguments?.getString("planet")
+        val textBottomString = arguments?.getString("text")
+        val titleBottomString = arguments?.getString("title")
 
         val textBottomSheet = view.findViewById<TextView>(R.id.tvTextBottomsheet)
-        textBottomSheet.text = planet
+        val titleBottomSheet = view.findViewById<TextView>(R.id.tvTitleBottomsheet)
+
+        textBottomSheet.text = textBottomString
+        titleBottomSheet.text = titleBottomString
     }
 }
