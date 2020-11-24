@@ -83,5 +83,9 @@
         android:id="@+id/planetsMenuFragment"
         android:name="com.renan.digitalspace.planetsmenu.view.PlanetsMenuFragment"
         android:label="fragment_planets_menu"
-        tools:layout="@layout/fragment_planets_menu" />
+        tools:layout="@layout/fragment_planets_menu" >
+        <action
+            android:id="@+id/action_planetsMenuFragment_to_sistemaSolarFragment"
+            app:destination="@id/sistemaSolarFragment" />
+    </fragment>
 </navigation>

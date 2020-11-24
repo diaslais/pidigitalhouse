@@ -6,12 +6,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
@@ -46,6 +48,13 @@ class PlanetsMenuFragment : Fragment(), IPlanetClick {
         })
         _planetViewModel = viewModel
         viewModel.getPlanets()
+
+        val navController = Navigation.findNavController(view)
+
+        val backButton = view.findViewById<ImageButton>(R.id.btnBackPlanetsMenu)
+        backButton.setOnClickListener {
+            navController.navigate(R.id.action_planetsMenuFragment_to_sistemaSolarFragment)
+        }
     }
 
     private fun makePlanetsRecyclerview(planets: List<Planet>) {
