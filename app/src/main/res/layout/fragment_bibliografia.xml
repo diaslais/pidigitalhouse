@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/background_planetas"
     android:padding="@dimen/dim24dp"
-    tools:context=".BibliografiaFragment">
+    tools:context=".exploration.view.BibliografiaFragment">
 
     <com.google.android.material.card.MaterialCardView
         android:layout_width="match_parent"
@@ -30,11 +30,10 @@
                 android:fontFamily="@font/ubuntu_bold"
                 android:text="@string/bibliografia"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/dim32sp"
+                android:textSize="@dimen/dim26sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.0" />
+                app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
                 android:id="@+id/txtDadosBibliografia"
@@ -45,7 +44,7 @@
                 android:lineSpacingExtra="2sp"
                 android:text="@string/info_galaxias"
                 android:textColor="@color/colorWhite"
-                android:textSize="@dimen/dim20sp"
+                android:textSize="@dimen/dim18sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
