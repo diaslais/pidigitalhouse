@@ -67,6 +67,7 @@ class LoginFragment : Fragment() {
         passwordText.requestFocus()
     }
 
+
     private fun errorHandler() {
         val emailText = _view.findViewById<TextInputEditText>(R.id.tietEmailLogin)
         val emailLayout = _view.findViewById<TextInputLayout>(R.id.tilEmailLogin)
