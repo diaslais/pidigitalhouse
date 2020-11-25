@@ -5,6 +5,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.renan.digitalspace.R
@@ -31,6 +32,9 @@ class SistemaSolarFragment : Fragment() {
 
         view.findViewById<MaterialButton>(R.id.btnIniciarExploracao).setOnClickListener {
             navController.navigate(R.id.action_sistemaSolarFragment_to_planetsMenuFragment)
+        }
+        view.findViewById<ImageButton>(R.id.btnBackSolarSystem).setOnClickListener {
+            navController.navigate(R.id.action_sistemaSolarFragment_to_viaLacteaFragment)
         }
     }
 }
