@@ -51,7 +51,7 @@
     </LinearLayout>
 
     <ScrollView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginTop="@dimen/dim20dp"
         app:layout_constraintBottom_toTopOf="@id/lnBottombar"
@@ -62,14 +62,14 @@
         <TextView
             android:id="@+id/txtPlanetDescription"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
+            android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/ubuntu"
-            android:justificationMode="inter_word"
             android:paddingHorizontal="@dimen/dim20dp"
-            tools:text="@tools:sample/lorem/random"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dim16sp" />
+            android:textSize="@dimen/dim16sp"
+            tools:text="@tools:sample/lorem/random"
+            />
     </ScrollView>
 
     <LinearLayout
@@ -121,6 +121,4 @@
             android:textAllCaps="false"
             android:textColor="@color/colorWhite" />
     </LinearLayout>
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
