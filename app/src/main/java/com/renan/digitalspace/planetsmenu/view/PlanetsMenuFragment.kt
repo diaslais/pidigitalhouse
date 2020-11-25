@@ -58,7 +58,7 @@ class PlanetsMenuFragment : Fragment(), IPlanetClick {
 
         val backButton = view.findViewById<ImageButton>(R.id.btnBackPlanetsMenu)
         backButton.setOnClickListener {
-            _navController.navigate(R.id.action_planetsMenuFragment_to_sistemaSolarFragment)
+            _navController.navigate(R.id.action_planetsMenuFragment_to_exploracaoFragment)
         }
 
         _selectedPlanet = _planetViewModel.selectedPlanet
