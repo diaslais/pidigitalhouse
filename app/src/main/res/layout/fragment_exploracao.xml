@@ -56,12 +56,10 @@
         android:textAllCaps="true"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/dim26sp"
-        app:layout_constraintBottom_toBottomOf="@id/imgBackgroundExploracao"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btnSair"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintTop_toBottomOf="@+id/btnSair" />
 
     <TextView
         android:id="@+id/txtInfoExploracao"
@@ -73,10 +71,10 @@
         android:fontFamily="@font/ubuntu"
         android:justificationMode="inter_word"
         android:lineSpacingExtra="2sp"
-        android:text="@string/info_galaxias"
+        android:text="@string/bem_vindos_exploradores"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim20sp"
+        android:textSize="@dimen/dim18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -98,7 +96,7 @@
         android:textSize="@dimen/dim16sp"
         android:textStyle="bold"
         app:cornerRadius="@dimen/dim10dp"
-        app:icon="@drawable/ic_telescope"
+        app:icon="@drawable/ic_astronaut_1"
         app:iconGravity="textStart"
         app:iconPadding="@dimen/dim10dp"
         app:iconTint="@color/colorWhite"
