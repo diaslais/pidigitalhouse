@@ -1,5 +1,6 @@
 package com.renan.digitalspace.login.view
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -7,6 +8,7 @@ import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.view.ContextThemeWrapper
@@ -20,6 +22,9 @@ import com.renan.digitalspace.R
 
 
 class LoginFragment : Fragment() {
+
+    private lateinit var _view: View
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -31,41 +36,42 @@ class LoginFragment : Fragment() {
         val localInflater = inflater.cloneInContext(contextThemeWrapper)
 
         // inflate the layout using the cloned inflater, not default inflater
-        var view = localInflater.inflate(R.layout.fragment_login, container, false)
-
-        return view
+        return localInflater.inflate(R.layout.fragment_login, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        _view = view
+
+        val argEmail = arguments?.getString("email")
+
+        if (argEmail != null) {
+            setEmail(argEmail)
+        }
+
         val navController = Navigation.findNavController(view)
         view.findViewById<MaterialButton>(R.id.mbLoginLogin).setOnClickListener {
-            errorHandler(view)
-            navigateLogin(view, navController)
+            errorHandler()
+            navigateLogin(navController)
         }
-        navigateSignup(view, navController, R.id.imEmailLogin)
-        navigateSignup(view, navController, R.id.imFacebookLogin)
-        navigateSignup(view, navController, R.id.imGoogleLogin)
+        navigateSignup(navController, R.id.imEmailLogin)
+        navigateSignup(navController, R.id.imFacebookLogin)
+        navigateSignup(navController, R.id.imGoogleLogin)
     }
 
-    private fun navigateLogin(view: View, navController: NavController) {
-        val email = view.findViewById<TextInputEditText>(R.id.tietEmailLogin)
-        val password = view.findViewById<TextInputEditText>(R.id.tietPasswordLogin)
-
-        if (email.text.toString().isEmpty() || password.text.toString().isEmpty()) {
-            val toast =
-                Toast.makeText(context, getString(R.string.toast_campo_vazio), Toast.LENGTH_LONG)
-            toast.show()
-        } else {
-            navController.navigate(R.id.action_loginFragment_to_exploracaoFragment)
-        }
+    private fun setEmail(emailString: String) {
+        val emailText = _view.findViewById<TextInputEditText>(R.id.tietEmailLogin)
+        emailText.setText(emailString)
+        val passwordText = _view.findViewById<TextInputEditText>(R.id.tietPasswordLogin)
+        passwordText.requestFocus()
     }
 
-    private fun errorHandler(view: View) {
-        val emailText = view.findViewById<TextInputEditText>(R.id.tietEmailLogin)
-        val emailLayout = view.findViewById<TextInputLayout>(R.id.tilEmailLogin)
-        val passwordText = view.findViewById<TextInputEditText>(R.id.tietPasswordLogin)
-        val passwordLayout = view.findViewById<TextInputLayout>(R.id.tilPasswordLogin)
+    private fun errorHandler() {
+        val emailText = _view.findViewById<TextInputEditText>(R.id.tietEmailLogin)
+        val emailLayout = _view.findViewById<TextInputLayout>(R.id.tilEmailLogin)
+        val passwordText = _view.findViewById<TextInputEditText>(R.id.tietPasswordLogin)
+        val passwordLayout = _view.findViewById<TextInputLayout>(R.id.tilPasswordLogin)
 
         putError(emailText, emailLayout)
         clearError(emailText, emailLayout)
@@ -95,8 +101,30 @@ class LoginFragment : Fragment() {
         })
     }
 
-    private fun navigateSignup(view: View, navController: NavController, button: Int) {
-        view.findViewById<ImageButton>(button).setOnClickListener {
+    private fun navigateLogin(navController: NavController) {
+        val email = _view.findViewById<TextInputEditText>(R.id.tietEmailLogin)
+        val password = _view.findViewById<TextInputEditText>(R.id.tietPasswordLogin)
+
+        if (email.text.toString().isEmpty() || password.text.toString().isEmpty()) {
+            hideKeyboard()
+            val toast =
+                Toast.makeText(context, getString(R.string.toast_campo_vazio), Toast.LENGTH_LONG)
+            toast.show()
+        } else {
+            hideKeyboard()
+            navController.navigate(R.id.action_loginFragment_to_exploracaoFragment)
+        }
+    }
+
+
+    private fun hideKeyboard() {
+        val imm: InputMethodManager =
+            _view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(_view.windowToken, 0)
+    }
+
+    private fun navigateSignup(navController: NavController, button: Int) {
+        _view.findViewById<ImageButton>(button).setOnClickListener {
             navController.navigate(R.id.action_loginFragment_to_signupFragment)
         }
     }
