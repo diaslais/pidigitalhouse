@@ -13,26 +13,29 @@ import androidx.core.os.bundleOf
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.bottomsheet.BottomSheetBehavior
+import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.renan.digitalspace.R
 import com.renan.digitalspace.planetsmenu.model.Planet
 import com.renan.digitalspace.planetsmenu.repository.PlanetRepository
 import com.renan.digitalspace.planetsmenu.viewmodel.PlanetViewModel
-
 class PlanetsMenuFragment : Fragment(), IPlanetClick {
-    private lateinit var planetsView: View
+    private lateinit var _planetsView: View
     private lateinit var _planetViewModel: PlanetViewModel
+    private lateinit var _navController: NavController
+    private lateinit var _selectedPlanet: Planet
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        planetsView = inflater.inflate(R.layout.fragment_planets_menu, container, false)
-        return planetsView
+        _planetsView = inflater.inflate(R.layout.fragment_planets_menu, container, false)
+        return _planetsView
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -43,104 +46,83 @@ class PlanetsMenuFragment : Fragment(), IPlanetClick {
             PlanetViewModel.PlanetViewModelFactory(PlanetRepository())
         ).get(PlanetViewModel::class.java)
 
+        _planetViewModel = viewModel
+
         viewModel.planetsData.observe(viewLifecycleOwner, Observer {
             makePlanetsRecyclerview(it)
         })
-        _planetViewModel = viewModel
+
         viewModel.getPlanets()
 
-        val navController = Navigation.findNavController(view)
+        _navController = Navigation.findNavController(view)
 
         val backButton = view.findViewById<ImageButton>(R.id.btnBackPlanetsMenu)
         backButton.setOnClickListener {
-            navController.navigate(R.id.action_planetsMenuFragment_to_sistemaSolarFragment)
+            _navController.navigate(R.id.action_planetsMenuFragment_to_sistemaSolarFragment)
         }
+
+        _selectedPlanet = _planetViewModel.selectedPlanet
+        descriptionCard(_selectedPlanet)
     }
 
     private fun makePlanetsRecyclerview(planets: List<Planet>) {
-        val planetsRecyclerView = planetsView.findViewById<RecyclerView>(R.id.planetsRecyclerview)
+        val planetsRecyclerView = _planetsView.findViewById<RecyclerView>(R.id.planetsRecyclerview)
 
         planetsRecyclerView.adapter = PlanetsMenuAdapter(planets, this)
+
         planetsRecyclerView.setHasFixedSize(true)
-        planetsRecyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        planetsRecyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
     }
 
     override fun onPlanetClick(planet: Planet, position: Int) {
         _planetViewModel.setPlanet(planet)
+        _selectedPlanet = _planetViewModel.selectedPlanet
 
-        val planetName = planetsView.findViewById<TextView>(R.id.txtPlanetName)
-        val planetDescription = planetsView.findViewById<TextView>(R.id.txtPlanetDescription)
-        val planetImg = planetsView.findViewById<ImageView>(R.id.imgPlanet)
+        val planetName = _planetsView.findViewById<TextView>(R.id.txtPlanetName)
+        val planetDescription = _planetsView.findViewById<TextView>(R.id.txtPlanetDescription)
+        val planetImg = _planetsView.findViewById<ImageView>(R.id.imgPlanet)
 
-        val bottomSheet = planetsView.findViewById<MaterialCardView>(R.id.mcvBottomsheet)
-        val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        planetImg.setImageResource(_selectedPlanet.image)
+        planetName.text = _selectedPlanet.name
+        planetDescription.text = _selectedPlanet.description
 
-        if (bottomSheetBehavior.state != BottomSheetBehavior.STATE_HIDDEN) {
-            val titleBottomSheet = planetsView.findViewById<TextView>(R.id.tvTitleBottomsheet)
-            val textBottomSheet = planetsView.findViewById<TextView>(R.id.tvTextBottomsheet)
-
-            when (titleBottomSheet.text.toString()) {
-                getString(R.string.curiosidades) -> textBottomSheet.text = planet.curiosities
-                getString(R.string.atualidades) -> textBottomSheet.text = planet.news
-                getString(R.string.informa_es_nt_cnicas) -> textBottomSheet.text = planet.technicalInformation
-            }
-        }
-
-        val selectedPlanet = _planetViewModel.selectedPlanet
-
-        planetImg.setImageResource(selectedPlanet.image)
-        planetName.text = selectedPlanet.name
-        planetDescription.text = selectedPlanet.description
-        descriptionCard(selectedPlanet)
+        descriptionCard(_selectedPlanet)
     }
 
     private fun descriptionCard(planet: Planet) {
-        val bottomSheet = planetsView.findViewById<MaterialCardView>(R.id.mcvBottomsheet)
-        val bottomSheetBehavior = BottomSheetBehavior.from(bottomSheet)
+        val planetDescription = _planetsView.findViewById<TextView>(R.id.txtPlanetDescription)
+        planetDescription.text = _selectedPlanet.description
 
-        val description = planetsView.findViewById<TextView>(R.id.txtPlanetDescription)
-
-        val btnTechnical = planetsView.findViewById<Button>(R.id.btnTechnicalInformation)
-        val btnCuriosities = planetsView.findViewById<Button>(R.id.btnCuriosities)
-        val btnNews = planetsView.findViewById<Button>(R.id.btnNews)
-
-        description.text = planet.description
-
-        btnTechnical.setOnClickListener {
-            changeTextBottomSheet(
-                getString(R.string.informa_es_nt_cnicas),
-                planet.technicalInformation,
-                bottomSheetBehavior
-            )
-        }
-        btnCuriosities.setOnClickListener {
-            changeTextBottomSheet(
-                getString(R.string.curiosidades),
-                planet.curiosities,
-                bottomSheetBehavior
-            )
-        }
-        btnNews.setOnClickListener {
-            changeTextBottomSheet(
-                getString(R.string.atualidades),
-                planet.news,
-                bottomSheetBehavior
-            )
-        }
+        navigateToBottomSheet(
+            R.id.btnTechnicalInformation,
+            planet.technicalInformation,
+            getString(R.string.informacoes_tecnicas)
+        )
+        navigateToBottomSheet(
+            R.id.btnCuriosities,
+            planet.curiosities,
+            getString(R.string.curiosidades)
+        )
+        navigateToBottomSheet(
+            R.id.btnNews,
+            planet.news,
+            getString(R.string.atualidades)
+        )
     }
 
-    private fun changeTextBottomSheet(
-        titleString: String,
-        textString: String,
-        bottomSheetBehavior: BottomSheetBehavior<MaterialCardView>,
+    private fun navigateToBottomSheet(
+        btnId: Int,
+        text: String,
+        title: String
     ) {
-        val titleBottomSheet = planetsView.findViewById<TextView>(R.id.tvTitleBottomsheet)
-        val textBottomSheet = planetsView.findViewById<TextView>(R.id.tvTextBottomsheet)
+        _planetsView.findViewById<MaterialButton>(btnId).setOnClickListener {
+            val bundle = bundleOf("text" to text, "title" to title)
 
-        titleBottomSheet.text = titleString
-        textBottomSheet.text = textString
-
-        bottomSheetBehavior.peekHeight = 700
-        bottomSheetBehavior.state = BottomSheetBehavior.STATE_COLLAPSED
+            _navController.navigate(
+                R.id.action_planetsMenuFragment_to_bottomsheetFragment,
+                bundle
+            )
+        }
     }
 }
