@@ -88,11 +88,11 @@
         android:label="fragment_planets_menu"
         tools:layout="@layout/fragment_planets_menu">
         <action
-            android:id="@+id/action_planetsMenuFragment_to_sistemaSolarFragment"
-            app:destination="@id/sistemaSolarFragment" />
-        <action
             android:id="@+id/action_planetsMenuFragment_to_bottomsheetFragment"
             app:destination="@id/bottomsheetFragment" />
+        <action
+            android:id="@+id/action_planetsMenuFragment_to_exploracaoFragment"
+            app:destination="@id/exploracaoFragment" />
     </fragment>
     <dialog
         android:id="@+id/bottomsheetFragment"
