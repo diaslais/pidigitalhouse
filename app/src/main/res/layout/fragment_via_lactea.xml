@@ -4,8 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViaLacteaFragment"
-    android:background="@drawable/backkground_vialactea_text">
+    android:background="@drawable/backkground_vialactea_text"
+    tools:context=".exploration.view.ViaLacteaFragment">
 
 
     <TextView
@@ -13,16 +13,17 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dim24dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="@dimen/dim24dp"
         android:fontFamily="@font/ubuntu"
         android:justificationMode="inter_word"
         android:text="@string/nosso_lugar_no_cosmos"
-
         android:textAlignment="center"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim32sp"
-    android:textStyle="bold"
 
+        android:textAllCaps="true"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/dim26sp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,8 +56,8 @@
         android:fontFamily="@font/ubuntu"
         android:text="@string/via_l_ctea"
         android:textAlignment="center"
-        android:textColor="#FFD185"
-        android:textSize="@dimen/dim42sp"
+        android:textColor="@color/viaLactea"
+        android:textSize="@dimen/dim32sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtUmPontinho" />
@@ -70,8 +71,8 @@
         android:layout_marginTop="@dimen/dim30dp"
         android:layout_marginEnd="@dimen/dim24dp"
         android:layout_marginBottom="@dimen/dim16dp"
-        android:paddingVertical="@dimen/dim14dp"
         android:fontFamily="@font/ubuntu"
+        android:paddingVertical="@dimen/dim14dp"
         android:text="@string/conhe_a_nosso_sistema_solar"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
@@ -84,6 +85,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtViaLactea"
         app:layout_constraintVertical_bias="1.0"
-        app:strokeColor="@color/colorWhite"/>
+        app:strokeColor="@color/colorWhite" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

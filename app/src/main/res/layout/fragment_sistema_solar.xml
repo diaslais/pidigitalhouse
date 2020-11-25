@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/background_sistema_solar"
-    tools:context=".SistemaSolarFragment">
+    tools:context=".exploration.view.SistemaSolarFragment">
 
 
     <Button
@@ -20,7 +20,7 @@
         android:text="@string/iniciar_explora_o"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim20sp"
+        android:textSize="@dimen/dim18sp"
         android:textStyle="bold"
         app:cornerRadius="@dimen/dim10dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -57,7 +57,7 @@
         android:fontFamily="@font/ubuntu"
         android:justificationMode="inter_word"
         android:lineSpacingExtra="2sp"
-        android:text="@string/info_galaxias"
+        android:text="@string/info_sistema_solar"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/dim18sp"
         app:layout_constraintBottom_toTopOf="@+id/btnIniciarExploracao"

@@ -29,7 +29,7 @@
     <string name="conhe_a_nosso_sistema_solar">CONHEÇA O SISTEMA SOLAR</string>
     <string name="via_l_ctea">VIA LÁCTEA!</string>
     <string name="galaxia_espiral">Um pontinho nessa linda galáxia espiral chamada:</string>
-    <string name="nosso_lugar_no_cosmos">Nosso Lugar no cosmos</string>
+    <string name="nosso_lugar_no_cosmos">Nosso Lugar No Cosmos</string>
     <string name="iniciar_explora_o">INICIAR EXPLORAÇÃO</string>
     <string name="sistema_solar">SISTEMA SOLAR</string>
     <string name="info_galaxias">As galáxias são categorizadas de acordo com sua morfologia visual como elíptica, espiral ou irregular.\n\Acredita-se que muitas galáxias tenham buracos negros supermassivos em seus centros.</string>
@@ -40,4 +40,5 @@
     <string name="informacoes_tecnicas">Informações Técnicas</string>
     <string name="curiosidades">Curiosidades</string>
     <string name="atualidades">Atualidades</string>
+    <string name="info_sistema_solar">O Sistema Solar é formado pelo Sol, sua estrela, e por tudo que orbita ao seu redor atraído por sua gravidade, como os planetas (Mercúrio, Vênus, Terra , Marte, Júpiter, Saturno, Urano e Netuno) e seus satélites, planetas anões como Plutão e milhões de asteróides, cometas e meteróides.</string>
 </resources>
