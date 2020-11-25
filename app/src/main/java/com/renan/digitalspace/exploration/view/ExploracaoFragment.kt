@@ -20,7 +20,6 @@ class ExploracaoFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_exploracao, container, false)
     }
 
@@ -41,7 +40,7 @@ class ExploracaoFragment : Fragment() {
         view.findViewById<MaterialButton>(R.id.btnTerra).setOnClickListener {
             navController.navigate(R.id.action_exploracaoFragment_to_epicFragment)
         }
-        view.findViewById<ImageButton>(R.id.btnBibliografia).setOnClickListener {
+        view.findViewById<ImageButton>(R.id.btnBibliography).setOnClickListener {
             navController.navigate(R.id.action_exploracaoFragment_to_bibliografiaFragment)
 
         }

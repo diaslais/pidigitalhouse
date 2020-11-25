@@ -7,15 +7,26 @@
     android:background="@color/colorBlack"
     tools:context=".epic.view.EpicFragment">
 
+    <ImageButton
+        android:id="@+id/btnBackEpic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dim20dp"
+        android:layout_marginTop="@dimen/dim20dp"
+        android:background="@color/colorTransparent"
+        android:src="@drawable/ic_baseline_keyboard_backspace_24"
+        />
+
     <TextView
         android:id="@+id/txtDate"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginEnd="@dimen/dim20dp"
+        android:layout_marginTop="@dimen/dim20dp"
         android:fontFamily="@font/ubuntu_bold"
-        android:layout_margin="@dimen/dim10dp"
         android:textSize="@dimen/dim16sp"
-        tools:text="Última atualização da imagem: 16/11/2000"
-        />
+        tools:text="Última atualização da imagem: 16/11/2000" />
 
     <ImageView
         android:id="@+id/imgEpic"

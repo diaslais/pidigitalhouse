@@ -5,9 +5,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import com.google.android.material.button.MaterialButton
 import com.renan.digitalspace.R
 import com.renan.digitalspace.apod.model.ApodResponseModel
 import com.renan.digitalspace.apod.repository.ApodRepository
@@ -42,6 +45,11 @@ class ApodFragment : Fragment() {
 
         })
 
+        val navController = findNavController()
+
+        view.findViewById<ImageButton>(R.id.btnBackApod).setOnClickListener {
+            navController.navigate(R.id.action_fatoAstronomicoFragment2_to_exploracaoFragment)
+        }
     }
 
     fun mostrarResultados(it:ApodResponseModel, view:View){
