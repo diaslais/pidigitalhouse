@@ -1,5 +1,6 @@
 package com.renan.digitalspace.signup.view
 
+import android.app.Activity
 import android.content.Context
 import android.os.Bundle
 import android.text.Editable
@@ -8,9 +9,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.view.ContextThemeWrapper
+import androidx.core.os.bundleOf
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import com.google.android.material.button.MaterialButton
@@ -20,6 +23,8 @@ import com.renan.digitalspace.R
 import org.w3c.dom.Text
 
 class SignupFragment : Fragment() {
+
+    private lateinit var _view: View
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,13 +45,17 @@ class SignupFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        _view = view
+
         val navController = Navigation.findNavController(view)
+
         view.findViewById<MaterialButton>(R.id.mbSignupSignup).setOnClickListener {
             errorHandler(view)
             navigateSignup(view, navController)
         }
         view.findViewById<MaterialButton>(R.id.mbLoginSignup).setOnClickListener {
-            navController.navigate(R.id.loginFragment)
+            navController.navigate(R.id.action_signupFragment_to_loginFragment)
         }
     }
 
@@ -73,10 +82,12 @@ class SignupFragment : Fragment() {
                 Toast.makeText(context, getString(R.string.error_confirmacao), Toast.LENGTH_LONG)
             toast.show()
         } else {
-            navController.navigate(R.id.loginFragment)
+            var bundle = bundleOf("name" to name.text.toString(), "email" to email.text.toString())
+            navController.navigate(R.id.action_signupFragment_to_loginFragment, bundle)
             val toast =
                 Toast.makeText(context, getString(R.string.confirmacao), Toast.LENGTH_LONG)
             toast.show()
+            hideKeyboard()
         }
     }
 
@@ -153,10 +164,9 @@ class SignupFragment : Fragment() {
         })
     }
 
-    private fun navigateSignup(view: View, navController: NavController, button: Int) {
-        view.findViewById<ImageButton>(button).setOnClickListener {
-            navController.navigate(R.id.signupFragment)
-        }
+    private fun hideKeyboard() {
+        val imm: InputMethodManager =
+            _view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(_view.windowToken, 0)
     }
-
 }
