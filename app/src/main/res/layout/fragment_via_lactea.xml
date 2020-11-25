@@ -1,90 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/backkground_vialactea_text"
     tools:context=".exploration.view.ViaLacteaFragment">
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/backkground_vialactea_text"
+        android:fillViewport="true">
 
-    <TextView
-        android:id="@+id/txtNossoLugar"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim24dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="@dimen/dim24dp"
-        android:fontFamily="@font/ubuntu"
-        android:justificationMode="inter_word"
-        android:text="@string/nosso_lugar_no_cosmos"
-        android:textAlignment="center"
 
-        android:textAllCaps="true"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim26sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/txtUmPontinho"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim24dp"
-        android:layout_marginEnd="@dimen/dim24dp"
-        android:layout_marginBottom="@dimen/dim170dp"
-        android:fontFamily="@font/ubuntu"
-        android:text="@string/galaxia_espiral"
-        android:textAlignment="center"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtNossoLugar"
-        app:layout_constraintVertical_bias="1.0" />
+            <TextView
+                android:id="@+id/txtNossoLugar"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim24dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginEnd="@dimen/dim24dp"
+                android:fontFamily="@font/ubuntu"
+                android:justificationMode="inter_word"
+                android:text="@string/nosso_lugar_no_cosmos"
+                android:textAlignment="center"
 
-    <TextView
-        android:id="@+id/txtViaLactea"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/dim16dp"
-        android:fontFamily="@font/ubuntu"
-        android:text="@string/via_l_ctea"
-        android:textAlignment="center"
-        android:textColor="@color/viaLactea"
-        android:textSize="@dimen/dim32sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtUmPontinho" />
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dim26sp"
+                android:textStyle="bold"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.0" />
 
-    <Button
-        android:id="@+id/btnConhecaSistemaSolar"
-        style="?attr/materialButtonOutlinedStyle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim24dp"
-        android:layout_marginTop="@dimen/dim30dp"
-        android:layout_marginEnd="@dimen/dim24dp"
-        android:layout_marginBottom="@dimen/dim16dp"
-        android:fontFamily="@font/ubuntu"
-        android:paddingVertical="@dimen/dim14dp"
-        android:text="@string/conhe_a_nosso_sistema_solar"
-        android:textAlignment="center"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim18sp"
-        android:textStyle="bold"
-        app:cornerRadius="@dimen/dim10dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtViaLactea"
-        app:layout_constraintVertical_bias="1.0"
-        app:strokeColor="@color/colorWhite" />
+            <TextView
+                android:id="@+id/txtUmPontinho"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim24dp"
+                android:layout_marginEnd="@dimen/dim24dp"
+                android:layout_marginBottom="@dimen/dim170dp"
+                android:fontFamily="@font/ubuntu"
+                android:text="@string/galaxia_espiral"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dim20sp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtNossoLugar"
+                app:layout_constraintVertical_bias="1.0" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/txtViaLactea"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/dim16dp"
+                android:fontFamily="@font/ubuntu"
+                android:text="@string/via_l_ctea"
+                android:textAlignment="center"
+                android:textColor="@color/viaLactea"
+                android:textSize="@dimen/dim32sp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtUmPontinho" />
+
+            <Button
+                android:id="@+id/btnConhecaSistemaSolar"
+                style="?attr/materialButtonOutlinedStyle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ubuntu"
+                android:paddingVertical="@dimen/dim14dp"
+                android:text="@string/conhe_a_nosso_sistema_solar"
+                android:textAlignment="center"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dim18sp"
+                android:textStyle="bold"
+                app:cornerRadius="@dimen/dim10dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtViaLactea"
+                app:layout_constraintVertical_bias="1.0"
+                app:strokeColor="@color/colorWhite" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
+</LinearLayout>
