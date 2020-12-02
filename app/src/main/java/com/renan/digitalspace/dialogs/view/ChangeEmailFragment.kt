@@ -9,7 +9,7 @@ import android.widget.ImageButton
 import androidx.fragment.app.DialogFragment
 import com.renan.digitalspace.R
 
-class ChangeNameFragment : DialogFragment() {
+class ChangeEmailFragment : DialogFragment() {
     private lateinit var _view: View
 
     override fun onCreateView(
@@ -17,7 +17,7 @@ class ChangeNameFragment : DialogFragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_change_name, container, false)
+        return inflater.inflate(R.layout.fragment_change_email, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -27,7 +27,7 @@ class ChangeNameFragment : DialogFragment() {
     }
 
     private fun closeBtn() {
-        val btnClose = _view.findViewById<ImageButton>(R.id.ibCloseDialogName)
+        val btnClose = _view.findViewById<ImageButton>(R.id.ibCloseDialogEmail)
         btnClose.setOnClickListener {
             dismiss()
         }

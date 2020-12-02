@@ -30,8 +30,8 @@ class MainActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.itemChangeNameMenu -> _navController.navigate(R.id.action_exploracaoFragment_to_changeNameFragment)
-                R.id.itemChangeEmailMenu -> _navController.navigate(R.id.action_exploracaoFragment_to_changeNameFragment)
-                R.id.itemChangePasswordMenu -> _navController.navigate(R.id.action_exploracaoFragment_to_changeNameFragment)
+                R.id.itemChangeEmailMenu -> _navController.navigate(R.id.action_exploracaoFragment_to_changeEmailFragment)
+                R.id.itemChangePasswordMenu -> _navController.navigate(R.id.action_exploracaoFragment_to_changePasswordFragment)
                 R.id.itemFavoritosMenu -> Toast.makeText(this, "Favoritos", Toast.LENGTH_LONG)
                     .show()
                 R.id.itemPontuacaoMenu -> Toast.makeText(this, "Pontuacao", Toast.LENGTH_LONG)

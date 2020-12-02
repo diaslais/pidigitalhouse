@@ -20,7 +20,7 @@
     <string name="error_vazio">Campo vazio</string>
     <string name="error_confirmacao">Confirmação diferente do Password</string>
     <string name="confirmacao">Conta criada com sucesso</string>
-    <string name="sair">SAIR</string>
+    <string name="sair">Sair</string>
     <string name="explorando_o_dia_em_imagens">EXPLORANDO O DIA EM IMAGENS</string>
     <string name="explorar">EXPLORAR</string>
     <string name="explora_o_espacial">Exploração Espacial</string>
@@ -50,8 +50,12 @@
     <string name="avatar">Avatar</string>
     <string name="explorador_espacial">Explorador Espacial</string>
     <string name="explorador_espacial_com">Explorador@Espacial.com</string>
-    <string name="sair2">Sair</string>
     <string name="novo_nome">Novo nome</string>
     <string name="confirmar">confirmar</string>
     <string name="close_dialog_button">Close Dialog Button</string>
+    <string name="novo_email">Novo Email</string>
+    <string name="senha">Senha</string>
+    <string name="senha_nova">Senha Nova</string>
+    <string name="senha_antiga">Senha Antiga</string>
+    <string name="confirmar_senha_nova">Confirmar Senha Nova</string>
 </resources>

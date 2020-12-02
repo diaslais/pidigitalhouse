@@ -31,6 +31,6 @@
     <group>
         <item android:id="@+id/itemSairMenu"
             android:icon="@drawable/ic_outline_exit_to_app_24"
-            android:title="@string/sair2"/>
+            android:title="@string/sair"/>
     </group>
 </menu>

@@ -30,7 +30,7 @@ class ExploracaoFragment : Fragment() {
 
         val navController = findNavController()
 
-        view.findViewById<MaterialButton>(R.id.ibNavigationExploracao).setOnClickListener {
+        view.findViewById<ImageButton>(R.id.ibNavigationExploracao).setOnClickListener {
             val drawerLayout = activity?.findViewById<DrawerLayout>(R.id.drawer_layout)
             drawerLayout?.openDrawer(Gravity.LEFT)
         }
