@@ -41,5 +41,17 @@
     <string name="curiosidades">Curiosidades</string>
     <string name="atualidades">Atualidades</string>
     <string name="info_sistema_solar">O Sistema Solar é formado pelo Sol, sua estrela, e por tudo que orbita ao seu redor atraído por sua gravidade, como os planetas (Mercúrio, Vênus, Terra , Marte, Júpiter, Saturno, Urano e Netuno) e seus satélites, planetas anões como Plutão e milhões de asteróides, cometas e meteróides.</string>
-    <string name="bem_vindos_exploradores">Bem vindos exploradores! Vistam seus trajes e preparem-se para a decolagem. Iniciaremos uma missão de exploração pelo Sistema Solar. Acomodem-se em seus assentos, apertem os cintos e preparem-se para ir, audaciosamente, onde ninguém jamais esteve. Partimos em 3, 2, 1...</string>
+    <string name="meus_favoritos">Meus favoritos</string>
+    <string name="maior_pontuacao">Maior Pontuação</string>
+    <string name="bibliografia2">Bibliografia</string>
+    <string name="alterar_nome">Alterar nome</string>
+    <string name="alterar_email">Alterar email</string>
+    <string name="alterar_senha">Alterar senha</string>
+    <string name="avatar">Avatar</string>
+    <string name="explorador_espacial">Explorador Espacial</string>
+    <string name="explorador_espacial_com">Explorador@Espacial.com</string>
+    <string name="sair2">Sair</string>
+    <string name="novo_nome">Novo nome</string>
+    <string name="confirmar">confirmar</string>
+    <string name="close_dialog_button">Close Dialog Button</string>
 </resources>

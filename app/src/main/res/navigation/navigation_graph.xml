@@ -66,6 +66,9 @@
         <action
             android:id="@+id/action_exploracaoFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_exploracaoFragment_to_changeNameFragment"
+            app:destination="@id/changeNameFragment" />
     </fragment>
     <fragment
         android:id="@+id/sistemaSolarFragment"
@@ -120,5 +123,14 @@
         <action
             android:id="@+id/action_bottomsheetFragment_to_planetsMenuFragment"
             app:destination="@id/planetsMenuFragment" />
+    </dialog>
+    <dialog
+        android:id="@+id/changeNameFragment"
+        android:name="com.renan.digitalspace.dialogs.view.ChangeNameFragment"
+        android:label="fragment_change_name"
+        tools:layout="@layout/fragment_change_name" >
+        <action
+            android:id="@+id/action_changeNameFragment_to_exploracaoFragment"
+            app:destination="@id/exploracaoFragment" />
     </dialog>
 </navigation>
