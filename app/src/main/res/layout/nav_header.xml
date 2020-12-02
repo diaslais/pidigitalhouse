@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim200dp"
+            android:scaleType="centerCrop"
+            android:src="@drawable/bg_navigation" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/colorWhite" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <com.google.android.material.card.MaterialCardView
+            android:layout_width="@dimen/dim100dp"
+            android:layout_height="@dimen/dim100dp"
+            android:layout_marginTop="@dimen/dim20dp"
+            android:gravity="center"
+            app:cardCornerRadius="@dimen/dim50dp">
+
+            <ImageView
+                android:id="@+id/ivAvatarNavHeader"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/colorWhite"
+                android:contentDescription="@string/avatar"
+                android:scaleType="centerCrop"
+                tools:src="@tools:sample/avatars" />
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/tvNameNavHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dim14dp"
+            android:layout_marginTop="@dimen/dim14dp"
+            android:fontFamily="@font/ubuntu"
+            android:text="@string/explorador_espacial"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dim16sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/tvEmailNavHeader"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dim14dp"
+            android:layout_marginTop="@dimen/dim10dp"
+            android:layout_marginBottom="@dimen/dim10dp"
+            android:fontFamily="@font/ubuntu"
+            android:text="@string/explorador_espacial_com"
+            android:textAlignment="textStart"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dim16sp"
+            android:textStyle="bold" />
+
+    </LinearLayout>
+</FrameLayout>

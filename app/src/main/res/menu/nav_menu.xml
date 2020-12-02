@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <group android:id="@+id/group1">
+        <item
+            android:id="@+id/itemFavoritosMenu"
+            android:icon="@drawable/ic_outline_star_border_24"
+            android:title="@string/meus_favoritos" />
+        <item
+            android:id="@+id/itemPontuacaoMenu"
+            android:icon="@drawable/ic_outline_videogame_asset_24"
+            android:title="@string/maior_pontuacao" />
+        <item
+            android:id="@+id/itemBibliografiaMenu"
+            android:icon="@drawable/ic_outline_book_24"
+            android:title="@string/bibliografia2" />
+    </group>
+    <group android:id="@+id/group2">
+        <item
+            android:id="@+id/itemChangeNameMenu"
+            android:icon="@drawable/ic_outline_person_outline_24"
+            android:title="@string/alterar_nome" />
+        <item
+            android:id="@+id/itemChangeEmailMenu"
+            android:icon="@drawable/ic_outline_email_24"
+            android:title="@string/alterar_email" />
+        <item
+            android:id="@+id/itemChangePasswordMenu"
+            android:icon="@drawable/ic_outline_lock_24"
+            android:title="@string/alterar_senha" />
+    </group>
+    <group>
+        <item android:id="@+id/itemSairMenu"
+            android:icon="@drawable/ic_outline_exit_to_app_24"
+            android:title="@string/sair"/>
+    </group>
+</menu>

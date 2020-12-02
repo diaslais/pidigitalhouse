@@ -66,6 +66,15 @@
         <action
             android:id="@+id/action_exploracaoFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_exploracaoFragment_to_changeNameFragment"
+            app:destination="@id/changeNameFragment" />
+        <action
+            android:id="@+id/action_exploracaoFragment_to_changeEmailFragment"
+            app:destination="@id/changeEmailFragment" />
+        <action
+            android:id="@+id/action_exploracaoFragment_to_changePasswordFragment"
+            app:destination="@id/changePasswordFragment" />
     </fragment>
     <fragment
         android:id="@+id/sistemaSolarFragment"
@@ -121,4 +130,19 @@
             android:id="@+id/action_bottomsheetFragment_to_planetsMenuFragment"
             app:destination="@id/planetsMenuFragment" />
     </dialog>
+    <dialog
+        android:id="@+id/changeNameFragment"
+        android:name="com.renan.digitalspace.dialogs.view.ChangeNameFragment"
+        android:label="fragment_change_name"
+        tools:layout="@layout/fragment_change_name" />
+    <dialog
+        android:id="@+id/changePasswordFragment"
+        android:name="com.renan.digitalspace.dialogs.view.ChangePasswordFragment"
+        android:label="fragment_change_password"
+        tools:layout="@layout/fragment_change_password" />
+    <dialog
+        android:id="@+id/changeEmailFragment"
+        android:name="com.renan.digitalspace.dialogs.view.ChangeEmailFragment"
+        android:label="fragment_change_email"
+        tools:layout="@layout/fragment_change_email" />
 </navigation>

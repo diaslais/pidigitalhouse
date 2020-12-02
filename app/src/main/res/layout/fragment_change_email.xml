@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".dialogs.view.ChangeEmailFragment">
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="350dp"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        app:cardBackgroundColor="@color/colorBlack"
+        app:cardCornerRadius="@dimen/dim10dp"
+        app:strokeColor="@color/colorWhite"
+        app:strokeWidth="1dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dim20dp"
+                android:orientation="horizontal"
+                android:padding="@dimen/dim10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="start"
+                    android:layout_marginStart="@dimen/dim10dp"
+                    android:fontFamily="@font/ubuntu"
+                    android:paddingVertical="@dimen/dim10dp"
+                    android:text="@string/alterar_email"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/dim18sp"
+                    android:textStyle="bold" />
+
+                <ImageButton
+                    android:id="@+id/ibCloseDialogEmail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="@color/colorTransparent"
+                    android:contentDescription="@string/close_dialog_button"
+                    android:padding="@dimen/dim10dp"
+                    android:src="@drawable/ic_outline_close_24" />
+            </FrameLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilNomeDialogEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dim20dp"
+                android:hint="@string/novo_email"
+                app:boxBackgroundColor="@color/colorTransparent">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tietNomeDialogEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textEmailAddress"
+                    tools:text="@string/explorador_espacial_com" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/tilPasswordDialogEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/dim20dp"
+                android:layout_marginTop="@dimen/dim10dp"
+                android:hint="@string/senha"
+                app:boxBackgroundColor="@color/colorTransparent"
+                app:endIconMode="password_toggle">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tietPasswordDialogEmail"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="textPassword"
+                    tools:text="@string/explorador_espacial" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dim20dp"
+                android:paddingVertical="@dimen/dim14dp"
+                android:text="@string/confirmar"
+                android:textColor="@color/colorWhite"
+                app:backgroundTint="@color/colorTransparent"
+                app:strokeColor="@color/colorWhite"
+                app:strokeWidth="1dp" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</FrameLayout>
