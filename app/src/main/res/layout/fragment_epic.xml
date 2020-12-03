@@ -35,6 +35,6 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dim300dp"
         android:layout_gravity="center"
-        tools:srcCompat="@tools:sample/avatars[3]" />
+        tools:src = "@drawable/epic_gatinho" />
 
 </FrameLayout>
