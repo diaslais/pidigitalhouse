@@ -57,7 +57,7 @@ class EpicFragment : Fragment() {
         val navController = findNavController()
 
         view.findViewById<ImageButton>(R.id.btnBackEpic).setOnClickListener {
-            navController.navigate(R.id.action_epicFragment_to_exploracaoFragment)
+            activity?.onBackPressed()
         }
     }
 
