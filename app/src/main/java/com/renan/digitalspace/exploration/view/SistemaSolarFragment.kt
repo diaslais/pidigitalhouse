@@ -34,7 +34,7 @@ class SistemaSolarFragment : Fragment() {
             navController.navigate(R.id.action_sistemaSolarFragment_to_planetsMenuFragment)
         }
         view.findViewById<ImageButton>(R.id.btnBackSolarSystem).setOnClickListener {
-            navController.navigate(R.id.action_sistemaSolarFragment_to_viaLacteaFragment)
+            activity?.onBackPressed()
         }
     }
 }

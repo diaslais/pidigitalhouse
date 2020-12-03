@@ -26,9 +26,8 @@ class BibliografiaFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        val navController = findNavController()
         view.findViewById<ImageButton>(R.id.btnBackBibliography).setOnClickListener {
-            navController.navigate(R.id.action_bibliografiaFragment_to_exploracaoFragment)
+            activity?.onBackPressed()
         }
     }
 }

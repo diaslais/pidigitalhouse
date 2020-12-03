@@ -16,6 +16,8 @@ import com.renan.digitalspace.apod.model.ApodResponseModel
 import com.renan.digitalspace.apod.repository.ApodRepository
 import com.renan.digitalspace.apod.viewmodel.ApodViewModel
 import com.squareup.picasso.Picasso
+import java.lang.Exception
+import java.lang.RuntimeException
 import java.text.SimpleDateFormat
 
 
@@ -39,7 +41,7 @@ class ApodFragment : Fragment() {
             )
         ).get(ApodViewModel::class.java)
 
-        viewModel.getDataApod().observe(viewLifecycleOwner,{
+        viewModel.getDataApod().observe(viewLifecycleOwner, {
 
             mostrarResultados(it, view)
 
@@ -48,21 +50,39 @@ class ApodFragment : Fragment() {
         val navController = findNavController()
 
         view.findViewById<ImageButton>(R.id.btnBackApod).setOnClickListener {
-            navController.navigate(R.id.action_fatoAstronomicoFragment2_to_exploracaoFragment)
+            activity?.onBackPressed()
         }
     }
 
-    fun mostrarResultados(it:ApodResponseModel, view:View){
+    fun mostrarResultados(it: ApodResponseModel, view: View) {
         val imgLoad = view.findViewById<ImageView>(R.id.imgApod)
         val txtExplanation = view.findViewById<TextView>(R.id.txtExplanationApod)
         val txtTitle = view.findViewById<TextView>(R.id.txtTitle)
+        val string = ""
+        try {
 
-        txtTitle.text = it.title
-        txtExplanation.text = it.explanation
+            if (it.explanation.isNotEmpty() == true) {
+                txtTitle.text = it.title
+                txtExplanation.text = it.explanation
 
-        Picasso.get()
-            .load(it.url)
-            .into(imgLoad)
+                Picasso.get()
+                    .load(it.url)
+                    .into(imgLoad)
+
+            } else {
+                throw RuntimeException()
+            }
+
+
+        } catch (exception: RuntimeException) {
+            Picasso.get()
+                .load(R.drawable.gatinho)
+                .into(imgLoad)
+            txtTitle.text = "Opss, temos um problema!"
+            txtExplanation.text =
+                "Provavelmente a NASA não liberou as informações do dia de hoje ainda, em breve voltaremos."
+        }
+
     }
 
 

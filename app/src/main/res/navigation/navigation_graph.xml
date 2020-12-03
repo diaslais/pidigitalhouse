@@ -22,11 +22,7 @@
         android:id="@+id/fatoAstronomicoFragment2"
         android:name="com.renan.digitalspace.apod.view.ApodFragment"
         android:label="fragment_fato_astronomico"
-        tools:layout="@layout/fragment_fato_astronomico" >
-        <action
-            android:id="@+id/action_fatoAstronomicoFragment2_to_exploracaoFragment"
-            app:destination="@id/exploracaoFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_fato_astronomico" />
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.renan.digitalspace.signup.view.SignupFragment"
@@ -41,11 +37,7 @@
         android:id="@+id/bibliografiaFragment"
         android:name="com.renan.digitalspace.exploration.view.BibliografiaFragment"
         android:label="fragment_bibliografia"
-        tools:layout="@layout/fragment_bibliografia" >
-        <action
-            android:id="@+id/action_bibliografiaFragment_to_exploracaoFragment"
-            app:destination="@id/exploracaoFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_bibliografia" />
     <fragment
         android:id="@+id/exploracaoFragment"
         android:name="com.renan.digitalspace.exploration.view.ExploracaoFragment"
@@ -87,9 +79,6 @@
         <action
             android:id="@+id/action_sistemaSolarFragment_to_planetsMenuFragment"
             app:destination="@id/planetsMenuFragment" />
-        <action
-            android:id="@+id/action_sistemaSolarFragment_to_viaLacteaFragment"
-            app:destination="@id/viaLacteaFragment" />
     </fragment>
     <fragment
         android:id="@+id/viaLacteaFragment"
@@ -99,19 +88,12 @@
         <action
             android:id="@+id/action_viaLacteaFragment_to_sistemaSolarFragment"
             app:destination="@id/sistemaSolarFragment" />
-        <action
-            android:id="@+id/action_viaLacteaFragment_to_exploracaoFragment"
-            app:destination="@id/exploracaoFragment" />
     </fragment>
     <fragment
         android:id="@+id/epicFragment"
         android:name="com.renan.digitalspace.epic.view.EpicFragment"
         android:label="fragment_epic"
-        tools:layout="@layout/fragment_epic" >
-        <action
-            android:id="@+id/action_epicFragment_to_exploracaoFragment"
-            app:destination="@id/exploracaoFragment" />
-    </fragment>
+        tools:layout="@layout/fragment_epic" />
     <fragment
         android:id="@+id/planetsMenuFragment"
         android:name="com.renan.digitalspace.planetsmenu.view.PlanetsMenuFragment"
@@ -120,9 +102,6 @@
         <action
             android:id="@+id/action_planetsMenuFragment_to_bottomsheetFragment"
             app:destination="@id/bottomsheetFragment" />
-        <action
-            android:id="@+id/action_planetsMenuFragment_to_exploracaoFragment"
-            app:destination="@id/exploracaoFragment" />
     </fragment>
     <dialog
         android:id="@+id/bottomsheetFragment"

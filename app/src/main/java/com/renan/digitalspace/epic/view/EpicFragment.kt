@@ -17,6 +17,8 @@ import com.renan.digitalspace.epic.model.EpicResponseModel
 import com.renan.digitalspace.epic.repository.EpicRepository
 import com.renan.digitalspace.epic.viewmodel.EpicViewModel
 import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.fragment_epic.*
+import java.lang.RuntimeException
 
 
 class EpicFragment : Fragment() {
@@ -55,7 +57,7 @@ class EpicFragment : Fragment() {
         val navController = findNavController()
 
         view.findViewById<ImageButton>(R.id.btnBackEpic).setOnClickListener {
-            navController.navigate(R.id.action_epicFragment_to_exploracaoFragment)
+            activity?.onBackPressed()
         }
     }
 
@@ -74,13 +76,32 @@ class EpicFragment : Fragment() {
         monthId = dateList?.get(1).toString()
         dayId = dateList?.get(2).toString()
 
-        val txtEpic = view?.findViewById<TextView>(R.id.txtDate)
-        txtEpic.text = "Última atualização de imagem: " + lastday.toString()
-
         val imgEpic = view?.findViewById<ImageView>(R.id.imgEpic)
+        val txtEpic = view?.findViewById<TextView>(R.id.txtDate)
         val picasso = Picasso.get()
-        picasso.load("https://epic.gsfc.nasa.gov/archive/natural/${yearId}/${monthId}/${dayId}/png/${imageId}")
-            .into(imgEpic)
+
+        try {
+            if (it != null) {
+                if(it.get(0).isNotEmpty() == true){
+
+                    txtEpic.text = "Última atualização de imagem: " + lastday.toString()
+
+
+                    picasso.load("https://epic.gsfc.nasa.gov/archive/natural/${yearId}/${monthId}/${dayId}/png/${imageId}")
+                        .into(imgEpic)
+
+                }
+            }else {
+                throw RuntimeException()
+            }
+
+        }catch (exception: RuntimeException){
+            txtEpic.text = "Estamos enfrentando problemas, em breve retornaremos!"
+            picasso.load(R.drawable.epic_gatinho).into(imgEpic)
+
+        }
+
+
 
     }
 
