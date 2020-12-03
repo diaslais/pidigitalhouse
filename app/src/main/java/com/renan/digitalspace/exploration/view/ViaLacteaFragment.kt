@@ -34,7 +34,7 @@ class ViaLacteaFragment : Fragment() {
             navController.navigate(R.id.action_viaLacteaFragment_to_sistemaSolarFragment)
         }
         view.findViewById<ImageButton>(R.id.btnBackMilkyWay).setOnClickListener {
-            navController.navigate(R.id.action_viaLacteaFragment_to_exploracaoFragment)
+            activity?.onBackPressed()
         }
     }
 }

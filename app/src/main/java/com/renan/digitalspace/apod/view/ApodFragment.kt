@@ -50,7 +50,7 @@ class ApodFragment : Fragment() {
         val navController = findNavController()
 
         view.findViewById<ImageButton>(R.id.btnBackApod).setOnClickListener {
-            navController.navigate(R.id.action_fatoAstronomicoFragment2_to_exploracaoFragment)
+            activity?.onBackPressed()
         }
     }
 
