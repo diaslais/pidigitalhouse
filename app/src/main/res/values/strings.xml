@@ -58,4 +58,7 @@
     <string name="senha_nova">Senha Nova</string>
     <string name="senha_antiga">Senha Antiga</string>
     <string name="confirmar_senha_nova">Confirmar Senha Nova</string>
+    <string name="favoritos">Favoritos</string>
+    <string name="thumbnail">Thumbnail</string>
+    <string name="icon_favorite">icon favorite</string>
 </resources>
