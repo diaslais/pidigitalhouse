@@ -5,8 +5,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.core.os.bundleOf
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -21,6 +23,7 @@ class FavoriteFragment : Fragment() {
     private lateinit var _view: View
     private lateinit var _favoriteViewModel: FavoriteViewModel
     private lateinit var _list: RecyclerView
+    private lateinit var _navController: NavController
 
     private lateinit var _favoriteAdapter: FavoriteAdapter
 
@@ -37,7 +40,12 @@ class FavoriteFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _view = view
-        _list = view.findViewById(R.id.favoriteRecyclerView)
+
+        _navController = findNavController()
+
+        backBtn()
+
+        _list = view.findViewById(R.id.recyclerViewFavorite)
 
         val manager = LinearLayoutManager(view.context)
 
@@ -51,8 +59,6 @@ class FavoriteFragment : Fragment() {
             )
         }
 
-//        val navController = findNavController()
-//        navController.navigate(R.id.)
         _list.apply {
             setHasFixedSize(true)
 
@@ -68,6 +74,14 @@ class FavoriteFragment : Fragment() {
         _favoriteViewModel.getDataFavorite().observe(viewLifecycleOwner, {
             showList(it)
         })
+    }
+
+    private fun backBtn() {
+        val btnBackView = _view.findViewById<ImageButton>(R.id.ibBackFavorite)
+
+        btnBackView.setOnClickListener {
+            _navController.navigate(R.id.action_favoriteFragment_to_exploracaoFragment)
+        }
     }
 
     private fun showList(lista: MutableList<FavoriteModel>) {
