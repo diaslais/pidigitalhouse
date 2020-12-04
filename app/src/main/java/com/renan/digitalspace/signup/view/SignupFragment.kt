@@ -10,7 +10,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
-import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.core.os.bundleOf
@@ -20,7 +19,6 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.renan.digitalspace.R
-import org.w3c.dom.Text
 
 class SignupFragment : Fragment() {
 
@@ -37,10 +35,9 @@ class SignupFragment : Fragment() {
         val localInflater = inflater.cloneInContext(contextThemeWrapper)
 
         // inflate the layout using the cloned inflater, not default inflater
-        var view = localInflater.inflate(R.layout.fragment_signup, container, false)
 
         // Inflate the layout for this fragment
-        return view
+        return localInflater.inflate(R.layout.fragment_signup, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -82,7 +79,7 @@ class SignupFragment : Fragment() {
                 Toast.makeText(context, getString(R.string.error_confirmacao), Toast.LENGTH_LONG)
             toast.show()
         } else {
-            var bundle = bundleOf("name" to name.text.toString(), "email" to email.text.toString())
+            val bundle = bundleOf("name" to name.text.toString(), "email" to email.text.toString())
             navController.navigate(R.id.action_signupFragment_to_loginFragment, bundle)
             val toast =
                 Toast.makeText(context, getString(R.string.confirmacao), Toast.LENGTH_LONG)

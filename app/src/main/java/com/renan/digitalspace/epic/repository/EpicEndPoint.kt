@@ -1,10 +1,7 @@
 package com.renan.digitalspace.epic.repository
 
-import com.renan.digitalspace.apod.data.NetworkUtilsApod
-import com.renan.digitalspace.apod.repository.ApodEndPoint
 import com.renan.digitalspace.epic.data.NetworkUtilsEpic
 import com.renan.digitalspace.epic.model.EpicResponseModel
-import retrofit2.Call
 import retrofit2.http.GET
 
 interface EpicEndPoint {

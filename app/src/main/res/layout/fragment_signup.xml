@@ -119,7 +119,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/dim10dp"
                     android:layout_marginTop="@dimen/dim20dp"
-                    android:hint="Confirmar Password"
+                    android:hint="@string/confirmar_password"
                     android:textColorHint="@color/colorWhite"
                     app:boxBackgroundColor="@color/colorTransparent"
                     app:boxStrokeColor="@color/colorWhite">
@@ -152,7 +152,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
-                    android:text="ou"
+                    android:text="@string/ou"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/dim24sp" />
 
@@ -163,7 +163,7 @@
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="@dimen/dim20dp"
                     android:paddingHorizontal="@dimen/dim40dp"
-                    android:text="Fazer login"
+                    android:text="@string/fazer_login"
                     android:textAllCaps="false"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/dim20sp" />

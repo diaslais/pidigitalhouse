@@ -1,5 +1,6 @@
 package com.renan.digitalspace.exploration.view
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.Gravity
 import androidx.fragment.app.Fragment
@@ -14,10 +15,6 @@ import com.renan.digitalspace.R
 
 class ExploracaoFragment : Fragment() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -25,6 +22,7 @@ class ExploracaoFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_exploracao, container, false)
     }
 
+    @SuppressLint("RtlHardcoded")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 

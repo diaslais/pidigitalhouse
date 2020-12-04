@@ -3,7 +3,6 @@ package com.renan.digitalspace.apod.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
-import com.renan.digitalspace.apod.model.ApodResponseModel
 import com.renan.digitalspace.apod.repository.ApodRepository
 import kotlinx.coroutines.Dispatchers
 
