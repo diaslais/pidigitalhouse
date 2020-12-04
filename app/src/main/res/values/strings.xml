@@ -61,4 +61,11 @@
     <string name="favoritos">Favoritos</string>
     <string name="thumbnail">Thumbnail</string>
     <string name="icon_favorite">icon favorite</string>
+    <string name="confirmar_password">Confirmar Password</string>
+    <string name="ou">ou</string>
+    <string name="fazer_login">Fazer login</string>
+    <string name="apod_error">Opss, temos um problema!</string>
+    <string name="apod_message">Provavelmente a NASA não liberou as informações do dia de hoje ainda, em breve voltaremos.</string>
+    <string name="epic_message">Estamos enfrentando problemas, em breve retornaremos!</string>
+    <string name="updateMessage"> Última atualização de imagem: </string>
 </resources>

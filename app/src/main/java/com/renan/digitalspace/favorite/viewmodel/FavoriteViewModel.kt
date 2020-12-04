@@ -10,7 +10,7 @@ class FavoriteViewModel(
     private val repository: FavoriteRepository
 ) : ViewModel() {
 
-    lateinit var selectedFavorite: MutableList<FavoriteModel>
+    private lateinit var selectedFavorite: MutableList<FavoriteModel>
 
     fun getDataFavorite() = liveData(Dispatchers.IO) {
         repository.getFavorites {

@@ -8,7 +8,7 @@ import com.renan.digitalspace.planetsmenu.model.Planet
 
 class PlanetsMenuAdapter (
     private val dataSet: List<Planet>,
-    val clickListener: IPlanetClick
+    private val clickListener: IPlanetClick
 ): RecyclerView.Adapter<PlanetsMenuViewHolder>() {
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlanetsMenuViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.item_planets_menu, parent, false)

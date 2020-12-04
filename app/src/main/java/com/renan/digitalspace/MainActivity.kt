@@ -1,5 +1,6 @@
 package com.renan.digitalspace
 
+import android.annotation.SuppressLint
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
@@ -24,6 +25,7 @@ class MainActivity : AppCompatActivity() {
         navClickListener()
     }
 
+    @SuppressLint("RtlHardcoded")
     private fun navClickListener() {
         val navigationView = findViewById<NavigationView>(R.id.navigationView)
 

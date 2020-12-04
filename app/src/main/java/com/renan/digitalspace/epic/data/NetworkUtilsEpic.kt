@@ -9,11 +9,11 @@ class NetworkUtilsEpic {
     companion object {
 
         private lateinit var retrofit: Retrofit
-        private val baseUrl = "https://epic.gsfc.nasa.gov/"
+        private const val baseUrl = "https://epic.gsfc.nasa.gov/"
 
         fun getRetroFitInstance(): Retrofit {
 
-            var httpClient = OkHttpClient.Builder()
+            val httpClient = OkHttpClient.Builder()
 
             if (!Companion::retrofit.isInitialized) {
                 retrofit = Retrofit.Builder()
@@ -27,8 +27,5 @@ class NetworkUtilsEpic {
             return retrofit
         }
 
-        fun <T> createService(serviceClass: Class<T>):T{
-            return getRetroFitInstance().create(serviceClass)
-        }
     }
 }

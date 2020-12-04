@@ -1,6 +1,7 @@
 package com.renan.digitalspace.epic.view
 
 
+import android.annotation.SuppressLint
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -11,22 +12,19 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.button.MaterialButton
 import com.renan.digitalspace.R
 import com.renan.digitalspace.epic.model.EpicResponseModel
 import com.renan.digitalspace.epic.repository.EpicRepository
 import com.renan.digitalspace.epic.viewmodel.EpicViewModel
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.fragment_epic.*
-import java.lang.RuntimeException
 
 
 class EpicFragment : Fragment() {
-    lateinit var imageId: String
+    private lateinit var imageId: String
 
-    lateinit var yearId: String
-    lateinit var monthId: String
-    lateinit var dayId: String
+    private lateinit var yearId: String
+    private lateinit var monthId: String
+    private lateinit var dayId: String
 
 
     override fun onCreateView(
@@ -46,7 +44,7 @@ class EpicFragment : Fragment() {
             )
         ).get(EpicViewModel::class.java)
 
-        viewModel.getImageDay().observe(viewLifecycleOwner, {
+        viewModel.getImageDay().observe(viewLifecycleOwner, { it ->
             getImage(it, view)
 
             viewModel.getlastDay().observe(viewLifecycleOwner, {
@@ -62,29 +60,30 @@ class EpicFragment : Fragment() {
     }
 
 
-    fun getImage(it: List<EpicResponseModel>?, view: View) {
+    private fun getImage(it: List<EpicResponseModel>?, view: View) {
         imageId = it?.get(0)?.image.toString() + ".png"
 
     }
 
-    fun getLastDay(it: List<String>?, view: View) {
+    @SuppressLint("SetTextI18n")
+    private fun getLastDay(it: List<String>?, view: View) {
         val respost = it?.size
 
-        val lastday = respost?.minus(1)?.let { it1 -> it?.get(it1) }
+        val lastday = respost?.minus(1)?.let { it1 -> it[it1] }
         val dateList = lastday?.split('-')
         yearId = dateList?.get(0).toString()
         monthId = dateList?.get(1).toString()
         dayId = dateList?.get(2).toString()
 
-        val imgEpic = view?.findViewById<ImageView>(R.id.imgEpic)
-        val txtEpic = view?.findViewById<TextView>(R.id.txtDate)
+        val imgEpic = view.findViewById<ImageView>(R.id.imgEpic)
+        val txtEpic = view.findViewById<TextView>(R.id.txtDate)
         val picasso = Picasso.get()
 
         try {
             if (it != null) {
-                if(it.get(0).isNotEmpty() == true){
+                if(it[0].isNotEmpty()){
 
-                    txtEpic.text = "Última atualização de imagem: " + lastday.toString()
+                    txtEpic.text = getString(R.string.updateMessage) + lastday.toString()
 
 
                     picasso.load("https://epic.gsfc.nasa.gov/archive/natural/${yearId}/${monthId}/${dayId}/png/${imageId}")
@@ -96,7 +95,7 @@ class EpicFragment : Fragment() {
             }
 
         }catch (exception: RuntimeException){
-            txtEpic.text = "Estamos enfrentando problemas, em breve retornaremos!"
+            txtEpic.text = getString(R.string.epic_message)
             picasso.load(R.drawable.epic_gatinho).into(imgEpic)
 
         }

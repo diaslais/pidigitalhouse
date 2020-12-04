@@ -1,7 +1,6 @@
 package com.renan.digitalspace.planetsmenu.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,7 +8,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.os.bundleOf
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -20,6 +19,7 @@ import com.renan.digitalspace.R
 import com.renan.digitalspace.planetsmenu.model.Planet
 import com.renan.digitalspace.planetsmenu.repository.PlanetRepository
 import com.renan.digitalspace.planetsmenu.viewmodel.PlanetViewModel
+
 class PlanetsMenuFragment : Fragment(), IPlanetClick {
     private lateinit var _planetsView: View
     private lateinit var _planetViewModel: PlanetViewModel
@@ -44,7 +44,7 @@ class PlanetsMenuFragment : Fragment(), IPlanetClick {
 
         _planetViewModel = viewModel
 
-        viewModel.planetsData.observe(viewLifecycleOwner, Observer {
+        viewModel.planetsData.observe(viewLifecycleOwner, {
             makePlanetsRecyclerview(it)
         })
 
