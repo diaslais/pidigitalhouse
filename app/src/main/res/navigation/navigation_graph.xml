@@ -67,6 +67,9 @@
         <action
             android:id="@+id/action_exploracaoFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
+        <action
+            android:id="@+id/action_exploracaoFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
     </fragment>
     <fragment
         android:id="@+id/sistemaSolarFragment"
@@ -124,4 +127,13 @@
         android:name="com.renan.digitalspace.dialogs.view.ChangeEmailFragment"
         android:label="fragment_change_email"
         tools:layout="@layout/fragment_change_email" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.renan.digitalspace.favorite.view.FavoriteFragment"
+        android:label="fragment_favorite"
+        tools:layout="@layout/fragment_favorite" >
+        <action
+            android:id="@+id/action_favoriteFragment_to_exploracaoFragment"
+            app:destination="@id/exploracaoFragment" />
+    </fragment>
 </navigation>
