@@ -7,8 +7,10 @@
     android:layout_margin="@dimen/dim10dp"
     android:orientation="vertical"
     android:padding="@dimen/dim10dp"
-    app:cardBackgroundColor="@color/colorGray"
+    app:cardBackgroundColor="@color/colorBlack"
     app:cardCornerRadius="@dimen/dim10dp"
+    app:strokeColor="@color/colorWhite"
+    app:strokeWidth="2dp"
     tools:showIn="@layout/fragment_favorite">
 
     <LinearLayout
@@ -45,11 +47,10 @@
             <TextView
                 android:id="@+id/tvDateFavoriteList"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
+                android:textAlignment="center"
                 android:layout_marginStart="@dimen/dim10dp"
-                android:ellipsize="end"
-                android:maxLines="2"
-                android:padding="@dimen/dim10dp"
+                android:layout_marginBottom="@dimen/dim10dp"
                 android:textColor="@color/colorWhite"
                 tools:text="@tools:sample/date/mmddyy" />
         </LinearLayout>
