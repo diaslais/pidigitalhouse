@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@drawable/bg_planetas"
+    tools:context=".quiz.QuizQuestionsFragment">
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/frameLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <ImageView
+            android:id="@+id/imageQuizQuestion"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/dim192dp"
+            android:layout_marginStart="@dimen/dim8dp"
+            android:layout_marginTop="@dimen/dim16dp"
+            android:layout_marginEnd="@dimen/dim8dp"
+            android:layout_marginBottom="@dimen/dim16dp"
+            android:scaleType="fitCenter"
+            app:layout_constraintBottom_toTopOf="@+id/txtQuestion"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/sol" />
+
+        <TextView
+            android:id="@+id/txtQuestion"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="@dimen/dim16dp"
+            android:layout_marginEnd="32dp"
+            android:layout_marginBottom="@dimen/dim16dp"
+            android:fontFamily="@font/ubuntu"
+            android:text=""
+            android:textSize="@dimen/dim30sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageQuizQuestion"
+            tools:text="Pergunta aqui" />
+
+        <RadioGroup
+            android:id="@+id/questionRadioGroup"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="@dimen/dim8dp"
+            android:layout_marginEnd="32dp"
+            android:animateLayoutChanges="true"
+            android:orientation="vertical"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/txtQuestion">
+
+            <RadioButton
+                android:id="@+id/firstAnswerRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dim8dp"
+                android:checked="true"
+                android:text=""
+                android:textSize="@dimen/dim18sp"
+                android:textColor="@color/colorWhite"
+                tools:text="resposta 1" />
+
+            <RadioButton
+                android:id="@+id/secondAnswerRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dim8dp"
+                android:text=""
+                android:textSize="@dimen/dim18sp"
+                android:textColor="@color/colorWhite"
+                tools:text="resposta 2" />
+
+            <RadioButton
+                android:id="@+id/thirdAnswerRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dim8dp"
+                android:text=""
+                android:textSize="@dimen/dim18sp"
+                android:textColor="@color/colorWhite"
+                tools:text="resposta 3" />
+
+            <RadioButton
+                android:id="@+id/fourthAnswerRadioButton"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text=""
+                android:textSize="@dimen/dim18sp"
+                android:textColor="@color/colorWhite"
+                tools:text="resposta 4" />
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/btnNextQuestion"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="@dimen/dim8dp"
+            android:layout_marginEnd="32dp"
+            android:text="próxima"
+            android:textSize="@dimen/dim18sp"
+            android:textColor="@color/colorWhite"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/questionRadioGroup" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
