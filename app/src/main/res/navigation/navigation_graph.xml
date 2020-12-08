@@ -70,7 +70,11 @@
         <action
             android:id="@+id/action_exploracaoFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
-    </fragment>
+        <action
+            android:id="@+id/action_exploracaoFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
+
+       </fragment>
     <fragment
         android:id="@+id/sistemaSolarFragment"
         android:name="com.renan.digitalspace.exploration.view.SistemaSolarFragment"
@@ -136,4 +140,9 @@
             android:id="@+id/action_favoriteFragment_to_exploracaoFragment"
             app:destination="@id/exploracaoFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/quizFragment"
+        android:name="com.renan.digitalspace.quiz.view.QuizFragment"
+        android:label="QuizFragment" />
+
 </navigation>

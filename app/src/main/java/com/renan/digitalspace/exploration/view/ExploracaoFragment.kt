@@ -41,9 +41,14 @@ class ExploracaoFragment : Fragment() {
         view.findViewById<MaterialButton>(R.id.btnTerra).setOnClickListener {
             navController.navigate(R.id.action_exploracaoFragment_to_epicFragment)
         }
-        view.findViewById<ImageButton>(R.id.btnBibliography).setOnClickListener {
+        view.findViewById<MaterialButton>(R.id.btnBibliography).setOnClickListener {
             navController.navigate(R.id.action_exploracaoFragment_to_bibliografiaFragment)
-
+        }
+        view.findViewById<MaterialButton>(R.id.btnFavoritos).setOnClickListener {
+            navController.navigate(R.id.action_exploracaoFragment_to_bibliografiaFragment)
+        }
+        view.findViewById<MaterialButton>(R.id.btnQuiz).setOnClickListener {
+            navController.navigate(R.id.action_exploracaoFragment_to_quizFragment)
         }
     }
 }
