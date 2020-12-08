@@ -55,7 +55,8 @@ class FavoriteFragment : Fragment() {
                 "id" to it.id,
                 "image" to it.image,
                 "title" to it.title,
-                "date" to it.date
+                "date" to it.date,
+                "active" to it.active
             )
         }
 

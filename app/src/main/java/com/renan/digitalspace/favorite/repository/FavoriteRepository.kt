@@ -14,19 +14,21 @@ class FavoriteRepository {
                 1,
                 "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/iss064e007861.jpg",
                 "Relaxing Inside the Space Station's Window to the World",
-                "Dec. 3, 2020"
+                "Dec. 3, 2020",
+                true
             ),
             FavoriteModel(
                 2,
                 "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/herbig-haro-jet.jpg",
                 "Awakening Newborn Stars",
-                "Dec. 2, 2020"
-
+                "Dec. 2, 2020",
+                true
             ), FavoriteModel(
                 3,
                 "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/pia20176_main.jpg",
                 "Earth May Be Surrounded by Hairy Dark Matter",
-                "Dec. 1, 2020"
+                "Dec. 1, 2020",
+                true
             )
         )
     }
