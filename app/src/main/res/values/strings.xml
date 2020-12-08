@@ -55,9 +55,9 @@
     <string name="close_dialog_button">Close Dialog Button</string>
     <string name="novo_email">Novo Email</string>
     <string name="senha">Senha</string>
-    <string name="senha_nova">Senha Nova</string>
+    <string name="nova_senha">Nova Senha</string>
     <string name="senha_antiga">Senha Antiga</string>
-    <string name="confirmar_senha_nova">Confirmar Senha Nova</string>
+    <string name="confirmar_nova_senha">Confirmar Nova Senha</string>
     <string name="favoritos">Favoritos</string>
     <string name="thumbnail">Thumbnail</string>
     <string name="icon_favorite">icon favorite</string>
@@ -68,4 +68,5 @@
     <string name="apod_message">Provavelmente a NASA não liberou as informações do dia de hoje ainda, em breve voltaremos.</string>
     <string name="epic_message">Estamos enfrentando problemas, em breve retornaremos!</string>
     <string name="updateMessage"> Última atualização de imagem: </string>
+    <string name="esqueci_minha_senha">Esqueci minha senha</string>
 </resources>
