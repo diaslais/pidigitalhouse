@@ -22,12 +22,12 @@
             android:layout_marginTop="@dimen/dim16dp"
             android:layout_marginEnd="@dimen/dim8dp"
             android:layout_marginBottom="@dimen/dim16dp"
-            android:scaleType="fitCenter"
+            android:scaleType="fitXY"
             app:layout_constraintBottom_toTopOf="@+id/txtQuestion"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:srcCompat="@drawable/sol" />
+            app:srcCompat="@drawable/sistema_solar_quiz" />
 
         <TextView
             android:id="@+id/txtQuestion"

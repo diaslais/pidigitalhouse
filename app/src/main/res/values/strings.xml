@@ -40,6 +40,7 @@
     <string name="informacoes_tecnicas">Informações Técnicas</string>
     <string name="curiosidades">Curiosidades</string>
     <string name="atualidades">Atualidades</string>
+    <string name="interrogacao">?</string>
     <string name="info_sistema_solar">O Sistema Solar é formado pelo Sol, sua estrela, e por tudo que orbita ao seu redor atraído por sua gravidade, como os planetas (Mercúrio, Vênus, Terra , Marte, Júpiter, Saturno, Urano e Netuno) e seus satélites, planetas anões como Plutão e milhões de asteróides, cometas e meteróides.</string>
     <string name="meus_favoritos">Meus favoritos</string>
     <string name="maior_pontuacao">Maior Pontuação</string>
@@ -68,4 +69,7 @@
     <string name="apod_message">Provavelmente a NASA não liberou as informações do dia de hoje ainda, em breve voltaremos.</string>
     <string name="epic_message">Estamos enfrentando problemas, em breve retornaremos!</string>
     <string name="updateMessage"> Última atualização de imagem: </string>
+    <string name="bem_vindos_exploradores">Bem vindos exploradores! Vistam seus trajes e preparem-se para a decolagem. Iniciaremos uma missão de exploração pelo Sistema Solar. Acomodem-se em seus assentos, apertem os cintos e preparem-se para ir, audaciosamente, onde ninguém jamais esteve. Partimos em 3, 2, 1...</string>
+    <string name="quiz">Quiz</string>
+
 </resources>
