@@ -40,6 +40,15 @@
     <dimen name="dim100dp">100dp</dimen>
     <dimen name="dim192dp">192dp</dimen>
     <dimen name="dim120sp">120sp</dimen>
+    <dimen name="dim15dp">15dp</dimen>
+    <dimen name="dim2sp">2sp</dimen>
+    <dimen name="dim90dp">90dp</dimen>
+    <dimen name="dim1dp">1dp</dimen>
+    <dimen name="dim13sp">13sp</dimen>
+    <dimen name="dim7dp">7dp</dimen>
+    <dimen name="dim4dp">4dp</dimen>
+    <dimen name="dim12sp">12sp</dimen>
+    <dimen name="dim180dp">180dp</dimen>
 
 
 </resources>
