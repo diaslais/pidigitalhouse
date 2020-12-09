@@ -113,7 +113,7 @@ class LoginFragment : Fragment() {
             toast.show()
         } else {
             hideKeyboard()
-            navController.navigate(R.id.action_loginFragment_to_exploracaoFragment)
+            navController.navigate(R.id.action_loginFragment_to_explorationFragment)
         }
     }
 

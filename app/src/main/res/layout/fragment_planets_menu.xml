@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_planetas"
+    android:background="@drawable/bg_planetas2"
     tools:context=".planetsmenu.view.PlanetsMenuFragment">
 
     <LinearLayout
@@ -17,13 +17,13 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageButton
-        android:id="@+id/btnBackPlanetsMenu"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim20dp"
-        android:layout_marginTop="@dimen/dim20dp"
-        android:background="@color/colorTransparent"
-        android:src="@drawable/ic_baseline_arrow_back_24" />
+            android:id="@+id/btnBackPlanetsMenu"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dim15dp"
+            android:layout_marginTop="@dimen/dim15dp"
+            android:background="@color/colorTransparent"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/planetsRecyclerview"
@@ -34,16 +34,13 @@
         <ImageView
             android:id="@+id/imgPlanet"
             android:layout_width="wrap_content"
-            android:layout_marginTop="@dimen/dim10dp"
-            android:layout_height="@dimen/dim200dp"
+            android:layout_height="@dimen/dim180dp"
             android:src="@drawable/sol" />
-
         <TextView
             android:id="@+id/txtPlanetName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginTop="@dimen/dim10dp"
             android:fontFamily="@font/ubuntu_bold"
             android:text="@string/sol"
             android:textColor="@color/colorWhite"
@@ -52,8 +49,9 @@
 
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/dim20dp"
+        android:layout_height="@dimen/dim0dp"
+        android:layout_marginTop="@dimen/dim10dp"
+        android:layout_marginBottom="@dimen/dim15dp"
         app:layout_constraintBottom_toTopOf="@id/lnBottombar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +63,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_horizontal"
             android:fontFamily="@font/ubuntu"
-            android:paddingHorizontal="@dimen/dim20dp"
+            android:paddingHorizontal="@dimen/dim15dp"
+            android:lineSpacingExtra="@dimen/dim2sp"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/dim16sp"
             tools:text="@tools:sample/lorem/random"
@@ -77,48 +76,72 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/dim20dp"
+        android:paddingHorizontal="@dimen/dim10dp"
         android:orientation="horizontal"
+        android:layout_marginBottom="@dimen/dim10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
             android:id="@+id/btnTechnicalInformation"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/colorTransparent"
-            android:drawableTop="@drawable/ic_outline_info_24"
-            android:fontFamily="@font/ubuntu_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dim90dp"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:text="@string/informa_es_nt_cnicas"
+            android:textSize="@dimen/dim12sp"
+            android:lineSpacingExtra="@dimen/dim2sp"
+            android:paddingVertical="@dimen/dim10dp"
+            android:paddingHorizontal="@dimen/dim4dp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:drawableTop="@drawable/ic_outline_info_24"
             android:textAllCaps="false"
-            android:textColor="@color/colorWhite" />
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            app:strokeColor="@color/colorWhite"
+            android:layout_marginHorizontal="@dimen/dim5dp"
+            />
 
         <Button
             android:id="@+id/btnCuriosities"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/colorTransparent"
-            android:drawableTop="@drawable/ic_outline_language_24"
-            android:fontFamily="@font/ubuntu_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dim90dp"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:text="@string/curiosidades"
+            android:textSize="@dimen/dim12sp"
+            android:lineSpacingExtra="@dimen/dim2sp"
+            android:paddingVertical="@dimen/dim10dp"
+            android:paddingHorizontal="@dimen/dim4dp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:drawableTop="@drawable/ic_outline_language_24"
             android:textAllCaps="false"
-            android:textColor="@color/colorWhite" />
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            app:strokeColor="@color/colorWhite"
+            android:layout_marginHorizontal="@dimen/dim5dp"
+            />
 
         <Button
             android:id="@+id/btnNews"
-            style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:background="@color/colorTransparent"
-            android:drawableTop="@drawable/ic_article_white_24dp"
-            android:fontFamily="@font/ubuntu_bold"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/dim90dp"
+            android:gravity="center"
+            android:layout_gravity="center"
             android:text="@string/atualidades"
+            android:textSize="@dimen/dim12sp"
+            android:lineSpacingExtra="@dimen/dim2sp"
+            android:paddingVertical="@dimen/dim10dp"
+            android:paddingHorizontal="@dimen/dim4dp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:drawableTop="@drawable/ic_article_white_24dp"
             android:textAllCaps="false"
-            android:textColor="@color/colorWhite" />
+            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
+            app:strokeColor="@color/colorWhite"
+            android:layout_marginHorizontal="@dimen/dim5dp"
+            />
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

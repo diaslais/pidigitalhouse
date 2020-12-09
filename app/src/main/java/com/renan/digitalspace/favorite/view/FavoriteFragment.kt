@@ -109,7 +109,7 @@ class FavoriteFragment : Fragment(), IFavorite {
         val btnBackView = _view.findViewById<ImageButton>(R.id.ibBackFavorite)
 
         btnBackView.setOnClickListener {
-            _navController.navigate(R.id.action_favoriteFragment_to_exploracaoFragment)
+            _navController.navigate(R.id.action_favoriteFragment_to_explorationFragment)
         }
     }
 

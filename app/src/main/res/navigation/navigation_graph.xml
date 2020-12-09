@@ -14,8 +14,8 @@
             app:destination="@id/signupFragment"
             app:enterAnim="@android:anim/slide_in_left" />
         <action
-            android:id="@+id/action_loginFragment_to_exploracaoFragment"
-            app:destination="@id/exploracaoFragment"
+            android:id="@+id/action_loginFragment_to_explorationFragment"
+            app:destination="@id/explorationFragment"
             app:enterAnim="@android:anim/slide_in_left" />
     </fragment>
     <fragment
@@ -39,39 +39,39 @@
         android:label="fragment_bibliografia"
         tools:layout="@layout/fragment_bibliografia" />
     <fragment
-        android:id="@+id/exploracaoFragment"
-        android:name="com.renan.digitalspace.exploration.view.ExploracaoFragment"
-        android:label="fragment_exploracao"
-        tools:layout="@layout/fragment_exploracao">
+        android:id="@+id/explorationFragment"
+        android:name="com.renan.digitalspace.exploration.view.ExplorationFragment"
+        android:label="fragment_exploration"
+        tools:layout="@layout/fragment_exploration">
         <action
-            android:id="@+id/action_exploracaoFragment_to_viaLacteaFragment"
+            android:id="@+id/action_explorationFragment_to_viaLacteaFragment"
             app:destination="@id/viaLacteaFragment" />
         <action
-            android:id="@+id/action_exploracaoFragment_to_bibliografiaFragment"
+            android:id="@+id/action_explorationFragment_to_bibliografiaFragment"
             app:destination="@id/bibliografiaFragment" />
         <action
-            android:id="@+id/action_exploracaoFragment_to_fatoAstronomicoFragment2"
+            android:id="@+id/action_explorationFragment_to_fatoAstronomicoFragment2"
             app:destination="@id/fatoAstronomicoFragment2" />
         <action
-            android:id="@+id/action_exploracaoFragment_to_epicFragment"
+            android:id="@+id/action_explorationFragment_to_epicFragment"
             app:destination="@id/epicFragment" />
         <action
-            android:id="@+id/action_exploracaoFragment_to_loginFragment"
+            android:id="@+id/action_explorationFragment_to_loginFragment"
             app:destination="@id/loginFragment" />
         <action
-            android:id="@+id/action_exploracaoFragment_to_changeNameFragment"
+            android:id="@+id/action_explorationFragment_to_changeNameFragment"
             app:destination="@id/changeNameFragment" />
         <action
-            android:id="@+id/action_exploracaoFragment_to_changeEmailFragment"
+            android:id="@+id/action_explorationFragment_to_changeEmailFragment"
             app:destination="@id/changeEmailFragment" />
         <action
-            android:id="@+id/action_exploracaoFragment_to_changePasswordFragment"
+            android:id="@+id/action_explorationFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
         <action
-            android:id="@+id/action_exploracaoFragment_to_favoriteFragment"
+            android:id="@+id/action_explorationFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
         <action
-            android:id="@+id/action_exploracaoFragment_to_quizFragment"
+            android:id="@+id/action_explorationFragment_to_quizFragment"
             app:destination="@id/quizFragment" />
 
        </fragment>
@@ -137,8 +137,8 @@
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" >
         <action
-            android:id="@+id/action_favoriteFragment_to_exploracaoFragment"
-            app:destination="@id/exploracaoFragment" />
+            android:id="@+id/action_favoriteFragment_to_explorationFragment"
+            app:destination="@id/explorationFragment" />
     </fragment>
     <fragment
         android:id="@+id/quizFragment"
