@@ -25,4 +25,14 @@
         <item name="android:textColorHint">@color/colorWhite</item>
         <item name="android:statusBarColor">@color/colorBlack</item>
     </style>
+
+    <style name="Widget.App.Toolbar" parent="Widget.MaterialComponents.Toolbar.Primary">
+        <item name="titleTextAppearance">@style/TextAppearance.App.Headline6</item>
+    </style>
+
+    <style name="TextAppearance.App.Headline6" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="fontFamily">@font/ubuntu_bold</item>
+        <item name="android:fontFamily">@font/ubuntu_bold</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
 </resources>
