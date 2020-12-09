@@ -5,10 +5,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_planetas"
-    tools:context=".quiz.QuizFragment">
+    tools:context=".quiz.view.QuizFragment">
 
     <Button
-        android:id="@+id/playButton"
+        android:id="@+id/btnPlay"
         style="?attr/materialButtonOutlinedStyle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -18,13 +18,28 @@
         android:fontFamily="@font/ubuntu"
         android:paddingStart="@dimen/dim16dp"
         android:paddingEnd="@dimen/dim16dp"
-        android:text="Jogar"
+        android:text="@string/jogar"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/dim24sp"
         android:textStyle="bold"
+        app:cornerRadius="@dimen/dim6dp"
+        app:strokeColor="@color/colorWhite"
+        android:paddingHorizontal="@dimen/dim40dp"
+        android:paddingVertical="@dimen/dim10dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
+
+    <ImageButton
+        android:id="@+id/btnBackQuiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="@dimen/dim20dp"
+        android:background="@color/colorTransparent"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <ImageView
         android:id="@+id/imageTitleQuiz"
@@ -34,7 +49,7 @@
         android:layout_marginEnd="@dimen/dim8dp"
         android:scaleType="fitCenter"
         app:tint="@color/colorWhite"
-        app:layout_constraintBottom_toTopOf="@+id/playButton"
+        app:layout_constraintBottom_toTopOf="@+id/btnPlay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -49,12 +64,12 @@
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:fontFamily="@font/ubuntu"
-        android:text="Teste aqui seus conhecimentos sobre o Sistema Solar!"
+        android:text="@string/teste_seus_conhecimentos"
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/dim24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/playButton"
+        app:layout_constraintBottom_toTopOf="@+id/btnPlay"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageTitleQuiz" />
