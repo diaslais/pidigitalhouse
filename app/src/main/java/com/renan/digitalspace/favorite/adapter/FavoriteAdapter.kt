@@ -5,10 +5,10 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.renan.digitalspace.R
 import com.renan.digitalspace.favorite.entity.FavoriteEntity
-import com.renan.digitalspace.favorite.model.FavoriteModel
 
 class FavoriteAdapter(
     private val _favorites: MutableList<FavoriteEntity>,
+    var iFavorite: IFavorite,
     private val listener: (FavoriteEntity) -> Unit
 ) : RecyclerView.Adapter<FavoriteViewHolder>() {
 
@@ -19,6 +19,16 @@ class FavoriteAdapter(
 
     fun addFavorites(favorites: List<FavoriteEntity>) {
         _favorites.addAll(favorites)
+        notifyDataSetChanged()
+    }
+
+    fun updateOne(position: Int) {
+        _favorites.removeAt(position)
+        notifyDataSetChanged()
+    }
+
+    fun deleteAll() {
+        _favorites.clear()
         notifyDataSetChanged()
     }
 
@@ -38,11 +48,10 @@ class FavoriteAdapter(
 
         holder.bind(image, title, date)
         holder.itemView.setOnClickListener { listener(item) }
+        holder.favoriteBtn.setOnClickListener {
+            iFavorite.changedFavorite(position, _favorites[position])
+        }
     }
 
     override fun getItemCount() = _favorites.size
-    fun deleteAll() {
-        _favorites.clear()
-        notifyDataSetChanged()
-    }
 }

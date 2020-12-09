@@ -35,7 +35,7 @@
         android:id="@+id/recyclerViewFavorite"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/dim10dp"
+        android:paddingHorizontal="@dimen/dim10dp"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
         tools:listitem="@layout/favorite_list_item" />
 </LinearLayout>
