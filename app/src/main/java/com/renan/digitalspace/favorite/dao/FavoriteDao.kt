@@ -1,9 +1,6 @@
 package com.renan.digitalspace.favorite.dao
 
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.Query
-import androidx.room.Update
+import androidx.room.*
 import com.renan.digitalspace.favorite.entity.FavoriteEntity
 
 @Dao
@@ -22,6 +19,9 @@ interface FavoriteDao {
         active: Boolean = true,
         activeStatus: Boolean = false
     )
+
+    @Delete
+    suspend fun deleteOne(favorite: FavoriteEntity)
 
     @Query("DELETE FROM Favorite")
     suspend fun deleteAll()

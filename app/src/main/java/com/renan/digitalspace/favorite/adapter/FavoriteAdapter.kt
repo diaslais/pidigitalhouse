@@ -1,6 +1,8 @@
 package com.renan.digitalspace.favorite.adapter
 
+import android.util.Log
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.renan.digitalspace.R
@@ -22,13 +24,18 @@ class FavoriteAdapter(
         notifyDataSetChanged()
     }
 
-    fun updateOne(position: Int) {
+    fun deleteOne(position: Int) {
         _favorites.removeAt(position)
         notifyDataSetChanged()
     }
 
     fun deleteAll() {
         _favorites.clear()
+        notifyDataSetChanged()
+    }
+
+    fun addFavoriteAt(favorite: FavoriteEntity, position: Int) {
+        _favorites.add(position, favorite)
         notifyDataSetChanged()
     }
 
@@ -46,10 +53,16 @@ class FavoriteAdapter(
         val title = item.title
         val date = item.date
 
+
         holder.bind(image, title, date)
         holder.itemView.setOnClickListener { listener(item) }
         holder.favoriteBtn.setOnClickListener {
-            iFavorite.changedFavorite(position, _favorites[position])
+            Log.d("teste", position.toString() + " " + holder.adapterPosition)
+            holder.cardView.visibility = View.GONE
+            iFavorite.changedFavorite(
+                holder.adapterPosition,
+                _favorites[holder.adapterPosition]
+            )
         }
     }
 
