@@ -1,12 +1,12 @@
 package com.renan.digitalspace.favorite.view
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import androidx.core.os.bundleOf
+import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
@@ -14,20 +14,27 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.renan.digitalspace.R
 import com.renan.digitalspace.favorite.adapter.FavoriteAdapter
-import com.renan.digitalspace.favorite.model.FavoriteModel
+import com.renan.digitalspace.favorite.adapter.IFavorite
+import com.renan.digitalspace.favorite.db.AppDatabase
+import com.renan.digitalspace.favorite.entity.FavoriteEntity
 import com.renan.digitalspace.favorite.repository.FavoriteRepository
 import com.renan.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.renan.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
 
-class FavoriteFragment : Fragment() {
+class FavoriteFragment : Fragment(), IFavorite {
     private lateinit var _view: View
     private lateinit var _favoriteViewModel: FavoriteViewModel
     private lateinit var _list: RecyclerView
     private lateinit var _navController: NavController
-
     private lateinit var _favoriteAdapter: FavoriteAdapter
+    private lateinit var iFavorite: IFavorite
 
-    private var _favoriteList = mutableListOf<FavoriteModel>()
+    private var _favoriteList = mutableListOf<FavoriteEntity>()
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        iFavorite = this
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -45,20 +52,26 @@ class FavoriteFragment : Fragment() {
 
         backBtn()
 
-        _list = view.findViewById(R.id.recyclerViewFavorite)
+//        criado view model
+        _favoriteViewModel = ViewModelProvider(
+            this,
+            FavoriteViewModelFactory(
+                FavoriteRepository(
+                    AppDatabase.getDatabase(view.context).favoriteDao()
+                )
+            )
+        ).get(FavoriteViewModel::class.java)
 
+//        criado recycler view
+        _list = view.findViewById(R.id.recyclerViewFavorite)
         val manager = LinearLayoutManager(view.context)
 
-        _favoriteList = mutableListOf()
-        _favoriteAdapter = FavoriteAdapter(_favoriteList) {
-            val bundle = bundleOf(
-                "id" to it.id,
-                "image" to it.image,
-                "title" to it.title,
-                "date" to it.date
-            )
+//        passagem da lista de favoritos pro adapter
+        _favoriteAdapter = FavoriteAdapter(_favoriteList, iFavorite) {
+            Toast.makeText(this.context, it.date, Toast.LENGTH_LONG).show()
         }
 
+//        passagem de informações pro recyclerview
         _list.apply {
             setHasFixedSize(true)
 
@@ -66,15 +79,28 @@ class FavoriteFragment : Fragment() {
             adapter = _favoriteAdapter
         }
 
-        _favoriteViewModel = ViewModelProvider(
-            this,
-            FavoriteViewModelFactory(FavoriteRepository())
-        ).get(FavoriteViewModel::class.java)
+//        activeAll()
+        initalize()
+//        addFavoriteInitializer()
+//        deleteAll()
+    }
 
-        _favoriteViewModel.getDataFavorite().observe(viewLifecycleOwner, {
-            showList(it)
+    private fun initalize() {
+        _favoriteViewModel.getAllFavorite().observe(viewLifecycleOwner, {
+            _favoriteAdapter.addFavorites(it)
         })
     }
+
+    private fun addFavorite(favorite: FavoriteEntity) {
+        _favoriteViewModel.addFavorite(favorite).observe(viewLifecycleOwner, {
+            _favoriteAdapter.addFavorite(it)
+        })
+    }
+
+    private fun activeAll() {
+        _favoriteViewModel.updateActiveAll(true, false).observe(viewLifecycleOwner, {})
+    }
+
 
     private fun backBtn() {
         val btnBackView = _view.findViewById<ImageButton>(R.id.ibBackFavorite)
@@ -84,11 +110,46 @@ class FavoriteFragment : Fragment() {
         }
     }
 
-    private fun showList(lista: MutableList<FavoriteModel>) {
-        lista.let {
-            _favoriteList.addAll(it)
-        }
-        _favoriteAdapter.notifyDataSetChanged()
+    private fun addFavoriteInitializer() {
+        addFavorite(
+            FavoriteEntity(
+                0,
+                "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/iss064e007861.jpg",
+                "Relaxing Inside the Space Station's Window to the World",
+                "2020-12-03",
+                true
+            )
+        )
+        addFavorite(
+            FavoriteEntity(
+                0,
+                "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/herbig-haro-jet.jpg",
+                "Awakening Newborn Stars",
+                "2020-12-02",
+                true
+            )
+        )
+        addFavorite(
+            FavoriteEntity(
+                0,
+                "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/pia20176_main.jpg",
+                "Earth May Be Surrounded by Hairy Dark Matter",
+                "2020-12-01",
+                true
+            )
+        )
+    }
 
+    private fun deleteAll() {
+        _favoriteViewModel.deleteAll().observe(viewLifecycleOwner, {
+            _favoriteAdapter.deleteAll()
+        })
+    }
+
+    override fun changedFavorite(position: Int, favorite: FavoriteEntity) {
+
+        _favoriteViewModel.updateOneFavorite(favorite).observe(viewLifecycleOwner, {
+            _favoriteAdapter.updateOne(position)
+        })
     }
 }

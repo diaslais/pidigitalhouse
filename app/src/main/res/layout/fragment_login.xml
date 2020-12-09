@@ -94,11 +94,21 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.button.MaterialButton
+                    android:id="@+id/mbForgotPasswordLogin"
+                    style="@style/Widget.MaterialComponents.Button.TextButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginEnd="@dimen/dim10dp"
+                    android:gravity="top"
+                    android:text="@string/esqueci_minha_senha"
+                    android:textAllCaps="false" />
+
+                <com.google.android.material.button.MaterialButton
                     android:id="@+id/mbLoginLogin"
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dim20dp"
                     android:paddingHorizontal="@dimen/dim40dp"
                     android:paddingVertical="@dimen/dim10dp"
                     android:text="@string/entrar"

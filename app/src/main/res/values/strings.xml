@@ -56,9 +56,9 @@
     <string name="close_dialog_button">Close Dialog Button</string>
     <string name="novo_email">Novo Email</string>
     <string name="senha">Senha</string>
-    <string name="senha_nova">Senha Nova</string>
+    <string name="nova_senha">Nova Senha</string>
     <string name="senha_antiga">Senha Antiga</string>
-    <string name="confirmar_senha_nova">Confirmar Senha Nova</string>
+    <string name="confirmar_nova_senha">Confirmar Nova Senha</string>
     <string name="favoritos">Favoritos</string>
     <string name="thumbnail">Thumbnail</string>
     <string name="icon_favorite">icon favorite</string>
@@ -69,10 +69,10 @@
     <string name="apod_message">Provavelmente a NASA não liberou as informações do dia de hoje ainda, em breve voltaremos.</string>
     <string name="epic_message">Estamos enfrentando problemas, em breve retornaremos!</string>
     <string name="updateMessage"> Última atualização de imagem: </string>
+    <string name="esqueci_minha_senha">Esqueci minha senha</string>
     <string name="bem_vindos_exploradores">Bem vindos exploradores! Vistam seus trajes e preparem-se para a decolagem. Iniciaremos uma missão de exploração pelo Sistema Solar. Acomodem-se em seus assentos, apertem os cintos e preparem-se para ir, audaciosamente, onde ninguém jamais esteve. Partimos em 3, 2, 1...</string>
     <string name="quiz">Quiz</string>
     <string name="jogar">Jogar</string>
     <string name="pr_xima">Próxima</string>
     <string name="teste_seus_conhecimentos">Teste aqui seus conhecimentos sobre o Sistema Solar!</string>
-
 </resources>
