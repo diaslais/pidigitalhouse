@@ -12,8 +12,8 @@ class FavoriteViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val _titleView = view.findViewById<TextView>(R.id.tvTitleFavoriteList)
     private val _dateView = view.findViewById<TextView>(R.id.tvDateFavoriteList)
 
-    fun bind(thumbnail: String, title: String, date: String) {
-        _titleView.text = title
+    fun bind(thumbnail: String, title: String?, date: String) {
+        _titleView.text = if (title.isNullOrEmpty()) "" else title
         _dateView.text = date
 
         Picasso.get().load(thumbnail).into(_imageView)

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg_planetas"
-    tools:context=".quiz.QuizFragment">
+    tools:context=".quiz.view.QuizFragment">
 
     <Button
         android:id="@+id/playButton"

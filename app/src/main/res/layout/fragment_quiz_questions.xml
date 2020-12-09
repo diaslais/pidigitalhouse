@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:fillViewport="true"
     android:background="@drawable/bg_planetas"
-    tools:context=".quiz.QuizQuestionsFragment">
+    tools:context=".quiz.view.QuizQuestionsFragment">
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
