@@ -70,7 +70,6 @@
     <string name="epic_message">Estamos enfrentando problemas, em breve retornaremos!</string>
     <string name="updateMessage"> Última atualização de imagem: </string>
     <string name="esqueci_minha_senha">Esqueci minha senha</string>
-    <string name="bem_vindos_exploradores">Bem vindos exploradores! Vistam seus trajes e preparem-se para a decolagem. Iniciaremos uma missão de exploração pelo Sistema Solar. Acomodem-se em seus assentos, apertem os cintos e preparem-se para ir, audaciosamente, onde ninguém jamais esteve. Partimos em 3, 2, 1...</string>
     <string name="exploration_text">Bem vindo, explorador!\nVista seu traje, aperte o cinto e prepare-se para a decolagem.
         Iniciaremos uma missão de exploração pelo Sistema Solar.\nPartimos em 3, 2, 1...</string>
     <string name="quiz">Quiz</string>
@@ -84,5 +83,7 @@
     <string name="item_removido">Item removido dos favoritos.</string>
     <string name="desfazer">Desfazer</string>
     <string name="botao_de_favoritos">Botao de favoritos</string>
-    <string name="lembrar_senha">Lembrar senha</string>
+    <string name="todo">TODO</string>
+    <string name="quebra_linha">\n\n</string>
+    <string name="lembrar_senha">Lembrar Senha</string>
 </resources>

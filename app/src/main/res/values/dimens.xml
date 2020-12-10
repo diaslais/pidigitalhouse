@@ -6,7 +6,6 @@
     <dimen name="dim10dp">10dp</dimen>
     <dimen name="dim12dp">12dp</dimen>
     <dimen name="dim14dp">14dp</dimen>
-    <dimen name="dim16dp">16dp</dimen>
     <dimen name="dim18dp">18dp</dimen>
     <dimen name="dim20dp">20dp</dimen>
     <dimen name="dim22dp">22dp</dimen>
@@ -50,6 +49,11 @@
     <dimen name="dim12sp">12sp</dimen>
     <dimen name="dim180dp">180dp</dimen>
     <dimen name="dim32dp">32dp</dimen>
+    <dimen name="dim9dp">9dp</dimen>
+    <dimen name="dim25dp">25dp</dimen>
+    <dimen name="dim52dp">52dp</dimen>
+    <dimen name="dim53dp">53dp</dimen>
+    <dimen name="dim16dp">16dp</dimen>
 
 
 </resources>

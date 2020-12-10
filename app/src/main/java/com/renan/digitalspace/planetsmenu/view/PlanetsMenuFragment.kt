@@ -29,7 +29,7 @@ class PlanetsMenuFragment : Fragment(), IPlanetClick {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         _planetsView = inflater.inflate(R.layout.fragment_planets_menu, container, false)
         return _planetsView
     }
