@@ -85,4 +85,5 @@
     <string name="botao_de_favoritos">Botao de favoritos</string>
     <string name="todo">TODO</string>
     <string name="quebra_linha">\n\n</string>
+    <string name="lembrar_senha">Lembrar Senha</string>
 </resources>
