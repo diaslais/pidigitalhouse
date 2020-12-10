@@ -55,16 +55,9 @@ class LoginFragment : Fragment() {
             setEmail(argEmail)
         }
 
-        val navController = Navigation.findNavController(view)
-
-        view.findViewById<MaterialButton>(R.id.mbLoginLogin).setOnClickListener {
-            errorHandler()
-            navigateLogin(navController)
-        }
-        navigateSignup(navController, R.id.imEmailLogin)
-        navigateSignup(navController, R.id.imFacebookLogin)
-        navigateSignup(navController, R.id.imGoogleLogin)
+        navigationHandler()
     }
+
 
     private fun checkBoxHandler() {
         val checkBox = _view.findViewById<CheckBox>(R.id.checkBoxLogin)
@@ -85,13 +78,25 @@ class LoginFragment : Fragment() {
         }
     }
 
+
+    private fun navigationHandler() {
+        val navController = Navigation.findNavController(_view)
+
+        _view.findViewById<MaterialButton>(R.id.mbLoginLogin).setOnClickListener {
+            errorHandler()
+            navigateLogin(navController)
+        }
+        navigateSignup(navController, R.id.imEmailLogin)
+        navigateSignup(navController, R.id.imFacebookLogin)
+        navigateSignup(navController, R.id.imGoogleLogin)
+    }
+
     private fun setEmail(emailString: String) {
         val emailText = _view.findViewById<TextInputEditText>(R.id.tietEmailLogin)
         emailText.setText(emailString)
         val passwordText = _view.findViewById<TextInputEditText>(R.id.tietPasswordLogin)
         passwordText.requestFocus()
     }
-
 
     private fun errorHandler() {
         val emailText = _view.findViewById<TextInputEditText>(R.id.tietEmailLogin)
@@ -141,7 +146,6 @@ class LoginFragment : Fragment() {
             navController.navigate(R.id.action_loginFragment_to_explorationFragment)
         }
     }
-
 
     private fun hideKeyboard() {
         val imm: InputMethodManager =
