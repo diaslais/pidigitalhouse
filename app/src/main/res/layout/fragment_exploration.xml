@@ -76,7 +76,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/milkyway_imgdescription"
                     android:scaleType="centerCrop"
-                    android:src="@drawable/explorar" />
+                    android:src="@drawable/exploreimg" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -116,7 +116,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/solareclipse_imgdescription"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/explorationapod" />
+                    app:srcCompat="@drawable/exploreapodimg" />
 
                 <TextView
                     android:layout_width="wrap_content"
@@ -155,7 +155,7 @@
                     android:layout_height="match_parent"
                     android:contentDescription="@string/earth_imgdescription"
                     android:scaleType="centerCrop"
-                    app:srcCompat="@drawable/explorationearth" />
+                    app:srcCompat="@drawable/exploreearthimg" />
 
                 <TextView
                     android:layout_width="wrap_content"
