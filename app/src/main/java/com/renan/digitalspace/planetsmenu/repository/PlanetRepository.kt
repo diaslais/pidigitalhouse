@@ -127,15 +127,16 @@ class PlanetRepository {
                         "•\tPrimeiro registro:  Já era conhecido pelos antigos. Registros egípcios já citavam Marte, há mais de 4.000 anos.\n"+
                         "•\tIdade: 4,6 bilhôes de anos\n",
 
-                "•\tVênus é o planeta mais próximo da Terra.\n" +
-                        "•\tA rotação de Vênus ocorre de leste para oeste, contrária a todos os planetas do Sistema Solar.\n" +
-                        "•\tO planeta recebeu esse nome em homenagem à Vênus, a deusa romana da beleza e do amor.\n" +
-                        "•\tVênus pode ser visto da Terra sem o auxílio de equipamentos.\n" +
-                        "•\tÉ o planeta mais quente, apesar de não ser o mais próximo do Sol.\n" +
-                        "•\tUm dia em Vênus dura mais que um ano no planeta\n" +
-                        "•\tCientistas acreditam na possibilidade da existência de água\n" +
-                        "•\tVênus tem a maior concentração de vulcões do Sistema Solar\n" +
-                        "•\tEle poderia ser mais fácil de colonizar do que Marte\n",
+                "•\tO planeta recebeu esse nome em homenagem a Marte, deus romano da guerra.\n" +
+                        "•\tMarte é conhecido como o Planeta Vermelho porque os minerais de ferro do solo marciano se oxidam, ou enferrujam, fazendo com que o solo e a atmosfera pareçam vermelhos.\n" +
+                        "•\tMarte possui estações, calotas polares, cânions e vulcões extintos, além de evidências de que foi muito mais ativo no passado.\n" +
+                        "•\tMarte possui a maior montanha do Sistema Solar, chamada de Monte Olimpo.\n" +
+                        "•\tMarte é um planeta facilmente visível a olho nu.\n" +
+                        "•\tUm dia em Marte leva pouco mais de 24 horas (24 horas e 39 minutos).\n" +
+                        "•\tMarte tem uma atmosfera fina composta principalmente de dióxido de carbono (CO2), argônio (Ar), nitrogênio (N2) e uma pequena quantidade de oxigênio e vapor de água.\n" +
+                        "•\tVárias missões visitaram este planeta, desde sondas “flybys” (sondas que passam próximo a um astro e o analisam sem entrar em órbita)  e orbitadores a rovers na superfície. O primeiro verdadeiro sucesso da missão a Marte foi o da sonda Mariner 4 em 1965.\n" +
+                        "•\tNeste momento, a superfície de Marte não pode suportar a vida como a conhecemos. As missões atuais estão determinando o potencial passado e futuro de Marte para a vida.\n" +
+                "•\tMarte é um dos corpos mais explorados em nosso sistema solar e é o único planeta para onde enviamos rovers para percorrer a paisagem alienígena ( Sojourner(1997), Spirit e Opportunity(2003), Curiosity(2011), Perseverance(2020)).\n",
                 "Vênus é um planeta da Rússia (segundo os russos)\n" +
                         "Vida na Terra pode ter ido até Vênus 'de carona' em asteroide"
             ),
