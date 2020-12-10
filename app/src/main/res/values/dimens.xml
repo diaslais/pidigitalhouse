@@ -49,6 +49,7 @@
     <dimen name="dim4dp">4dp</dimen>
     <dimen name="dim12sp">12sp</dimen>
     <dimen name="dim180dp">180dp</dimen>
+    <dimen name="dim32dp">32dp</dimen>
 
 
 </resources>

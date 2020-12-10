@@ -143,6 +143,33 @@
     <fragment
         android:id="@+id/quizFragment"
         android:name="com.renan.digitalspace.quiz.view.QuizFragment"
-        android:label="QuizFragment" />
+        android:label="fragment_quiz"
+        tools:layout="@layout/fragment_quiz" >
+        <action
+            android:id="@+id/action_quizFragment_to_quizQuestionsFragment"
+            app:destination="@id/quizQuestionsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizScoreFragment"
+        android:name="com.renan.digitalspace.quiz.view.QuizScoreFragment"
+        android:label="fragment_quiz_score"
+        tools:layout="@layout/fragment_quiz_score" >
+        <action
+            android:id="@+id/action_quizScoreFragment_to_explorationFragment"
+            app:destination="@id/explorationFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizQuestionsFragment"
+        android:name="com.renan.digitalspace.quiz.view.QuizQuestionsFragment"
+        android:label="fragment_quiz_questions"
+        tools:layout="@layout/fragment_quiz_questions" >
+        <action
+            android:id="@+id/action_quizQuestionsFragment_to_quizScoreFragment"
+            app:destination="@id/quizScoreFragment" />
+    </fragment>
+
 
 </navigation>
+
+
+

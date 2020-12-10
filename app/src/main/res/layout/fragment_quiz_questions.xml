@@ -49,68 +49,51 @@
             android:layout_marginEnd="32dp"
             android:layout_marginBottom="@dimen/dim16dp"
             android:fontFamily="@font/ubuntu"
-            android:text="Quantos Planetas tem o Sistema Solar?"
+            android:text="Quantos Planetas possui o Sistema Solar?"
             android:textSize="@dimen/dim30sp"
             android:textStyle="bold"
             android:textColor="@color/colorWhite"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imageQuizQuestion"
-            tools:text="Pergunta aqui" />
+            />
 
         <RadioGroup
             android:id="@+id/questionRadioGroup"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/dim0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
+            android:layout_marginStart="@dimen/dim32dp"
             android:layout_marginTop="@dimen/dim8dp"
-            android:layout_marginEnd="32dp"
-            android:animateLayoutChanges="true"
+            android:layout_marginEnd="@dimen/dim32dp"
             android:orientation="vertical"
+            android:checkedButton="@+id/radio_button_1"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/txtQuestion">
 
-            <RadioButton
-                android:id="@+id/firstAnswerRadioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dim8dp"
-                android:checked="true"
-                android:text="5"
-                android:textSize="@dimen/dim18sp"
-                android:textColor="@color/colorWhite"
-                tools:text="resposta 1" />
+        <RadioButton
+            android:id="@+id/radio_button_1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="5"/>
+        <RadioButton
+            android:id="@+id/radio_button_2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="7"/>
+        <RadioButton
+            android:id="@+id/radio_button_3"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="8"/>
+        <RadioButton
+            android:id="@+id/radio_button_4"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="9"/>
 
-            <RadioButton
-                android:id="@+id/secondAnswerRadioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dim8dp"
-                android:text="7"
-                android:textSize="@dimen/dim18sp"
-                android:textColor="@color/colorWhite"
-                tools:text="resposta 2" />
-
-            <RadioButton
-                android:id="@+id/thirdAnswerRadioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="@dimen/dim8dp"
-                android:text="9"
-                android:textSize="@dimen/dim18sp"
-                android:textColor="@color/colorWhite"
-                tools:text="resposta 3" />
-
-            <RadioButton
-                android:id="@+id/fourthAnswerRadioButton"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="8"
-                android:textSize="@dimen/dim18sp"
-                android:textColor="@color/colorWhite"
-                tools:text="resposta 4" />
         </RadioGroup>
+
 
         <Button
             android:id="@+id/btnNextQuestion"
