@@ -26,6 +26,8 @@ class FavoriteAdapter(
 
     fun deleteOne(position: Int) {
         _favorites.removeAt(position)
+        notifyItemRemoved(position)
+        notifyItemRangeChanged(position, _favorites.size)
         notifyDataSetChanged()
     }
 
@@ -56,12 +58,14 @@ class FavoriteAdapter(
 
         holder.bind(image, title, date)
         holder.itemView.setOnClickListener { listener(item) }
+
         holder.favoriteBtn.setOnClickListener {
-            Log.d("teste", position.toString() + " " + holder.adapterPosition)
+
             holder.cardView.visibility = View.GONE
             iFavorite.changedFavorite(
                 holder.adapterPosition,
-                _favorites[holder.adapterPosition]
+                _favorites[holder.adapterPosition],
+                holder.cardView
             )
         }
     }
