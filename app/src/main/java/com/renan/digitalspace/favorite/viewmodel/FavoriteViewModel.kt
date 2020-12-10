@@ -35,6 +35,11 @@ class FavoriteViewModel(
         emit(repository.updateActiveAll(active, activeStatus))
     }
 
+    fun deleteOne(favorite: FavoriteEntity) = liveData(Dispatchers.IO) {
+        repository.deleteOne(favorite)
+        emit(true)
+    }
+
     fun deleteAll() = liveData(Dispatchers.IO) {
         repository.deleteAll()
         emit(true)

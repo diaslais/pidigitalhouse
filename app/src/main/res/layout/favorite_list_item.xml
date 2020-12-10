@@ -11,6 +11,7 @@
     app:cardCornerRadius="@dimen/dim10dp"
     app:strokeColor="@color/colorWhite"
     app:strokeWidth="2dp"
+    android:id="@+id/mcvCardLayoutFavoriteList"
     tools:showIn="@layout/fragment_favorite">
 
     <LinearLayout

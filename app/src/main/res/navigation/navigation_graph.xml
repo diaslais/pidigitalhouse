@@ -143,15 +143,6 @@
     <fragment
         android:id="@+id/quizFragment"
         android:name="com.renan.digitalspace.quiz.view.QuizFragment"
-        android:label="QuizFragment" >
-        <action
-            android:id="@+id/action_quizFragment_to_quizQuestionsFragment"
-            app:destination="@id/quizQuestionsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/quizQuestionsFragment"
-        android:name="com.renan.digitalspace.quiz.view.QuizQuestionsFragment"
-        android:label="fragment_quiz_questions"
-        tools:layout="@layout/fragment_quiz_questions" />
+        android:label="QuizFragment" />
 
 </navigation>

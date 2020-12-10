@@ -1,6 +1,7 @@
 package com.renan.digitalspace.favorite.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,8 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.BaseTransientBottomBar
+import com.google.android.material.snackbar.Snackbar
 import com.renan.digitalspace.R
 import com.renan.digitalspace.favorite.adapter.FavoriteAdapter
 import com.renan.digitalspace.favorite.adapter.IFavorite
@@ -138,6 +141,33 @@ class FavoriteFragment : Fragment(), IFavorite {
                 true
             )
         )
+        addFavorite(
+            FavoriteEntity(
+                0,
+                "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/iss064e007861.jpg",
+                "Relaxing Inside the Space Station's Window to the World",
+                "2020-12-03",
+                true
+            )
+        )
+        addFavorite(
+            FavoriteEntity(
+                0,
+                "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/herbig-haro-jet.jpg",
+                "Awakening Newborn Stars",
+                "2020-12-02",
+                true
+            )
+        )
+        addFavorite(
+            FavoriteEntity(
+                0,
+                "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/pia20176_main.jpg",
+                "Earth May Be Surrounded by Hairy Dark Matter",
+                "2020-12-01",
+                true
+            )
+        )
     }
 
     private fun deleteAll() {
@@ -146,10 +176,27 @@ class FavoriteFragment : Fragment(), IFavorite {
         })
     }
 
-    override fun changedFavorite(position: Int, favorite: FavoriteEntity) {
-
-        _favoriteViewModel.updateOneFavorite(favorite).observe(viewLifecycleOwner, {
-            _favoriteAdapter.updateOne(position)
+    override fun changedFavorite(
+        position: Int,
+        favorite: FavoriteEntity
+    ) {
+        _favoriteViewModel.deleteOne(favorite).observe(viewLifecycleOwner, {
+            _favoriteAdapter.deleteOne(position)
         })
+//        var undoIs = false
+//
+//        val snackbar = Snackbar.make(_view, "Item removido dos favoritos.", Snackbar.LENGTH_SHORT)
+//            .setAction("Desfazer") {
+//                undoIs = true
+//                _favoriteAdapter.addFavoriteAt(favorite, position)
+//            }.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+//                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+//                    super.onDismissed(transientBottomBar, event)
+//                    if (!undoIs) {
+//                    }
+//
+//                }
+//            })
+//        snackbar.show()
     }
 }
