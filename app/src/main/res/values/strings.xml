@@ -84,4 +84,5 @@
     <string name="item_removido">Item removido dos favoritos.</string>
     <string name="desfazer">Desfazer</string>
     <string name="botao_de_favoritos">Botao de favoritos</string>
+    <string name="lembrar_senha">Lembrar senha</string>
 </resources>
