@@ -1,8 +1,6 @@
 package com.renan.digitalspace.favorite.adapter
 
-import android.util.Log
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.renan.digitalspace.R
@@ -10,7 +8,7 @@ import com.renan.digitalspace.favorite.entity.FavoriteEntity
 
 class FavoriteAdapter(
     private val _favorites: MutableList<FavoriteEntity>,
-    var iFavorite: IFavorite,
+    private var _iFavorite: IFavorite,
     private val listener: (FavoriteEntity) -> Unit
 ) : RecyclerView.Adapter<FavoriteViewHolder>() {
 
@@ -62,7 +60,7 @@ class FavoriteAdapter(
         holder.favoriteBtn.setOnClickListener {
 
 //            holder.cardView.visibility = View.GONE
-            iFavorite.changedFavorite(
+            _iFavorite.changedFavorite(
                 holder.adapterPosition,
                 _favorites[holder.adapterPosition],
                 holder.cardView
