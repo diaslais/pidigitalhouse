@@ -80,5 +80,6 @@
     <string name="milkyway_imgdescription">Foto da via láctea</string>
     <string name="solareclipse_imgdescription">Foto de um eclipse solar</string>
     <string name="earth_imgdescription">Foto do planeta Terra</string>
+    <string name="parab_ns">Parabéns!!!</string>
 
 </resources>
