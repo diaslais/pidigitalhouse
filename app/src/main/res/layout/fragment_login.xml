@@ -93,22 +93,38 @@
                         android:textColor="@color/colorWhite" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/mbForgotPasswordLogin"
-                    style="@style/Widget.MaterialComponents.Button.TextButton"
-                    android:layout_width="wrap_content"
+                <FrameLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="end"
-                    android:layout_marginEnd="@dimen/dim10dp"
-                    android:gravity="top"
-                    android:text="@string/esqueci_minha_senha"
-                    android:textAllCaps="false" />
+                    android:paddingHorizontal="@dimen/dim10dp">
+
+                    <CheckBox
+                        android:id="@+id/checkBoxLogin"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:text="@string/lembrar_senha"
+                        android:textColor="@color/colorWhite"
+                        app:buttonTint="@color/colorWhite" />
+
+                    <com.google.android.material.button.MaterialButton
+                        android:id="@+id/mbForgotPasswordLogin"
+                        style="@style/Widget.MaterialComponents.Button.TextButton"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="end"
+                        android:gravity="top"
+                        android:text="@string/esqueci_minha_senha"
+                        android:textAllCaps="false" />
+
+                </FrameLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/mbLoginLogin"
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim10dp"
                     android:paddingHorizontal="@dimen/dim40dp"
                     android:paddingVertical="@dimen/dim10dp"
                     android:text="@string/entrar"

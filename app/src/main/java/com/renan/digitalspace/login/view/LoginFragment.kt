@@ -2,6 +2,7 @@ package com.renan.digitalspace.login.view
 
 import android.app.Activity
 import android.content.Context
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -9,12 +10,14 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
@@ -44,14 +47,42 @@ class LoginFragment : Fragment() {
 
         _view = view
 
+        checkBoxHandler()
+
         val argEmail = arguments?.getString("email")
 
         if (argEmail != null) {
             setEmail(argEmail)
         }
 
-        val navController = Navigation.findNavController(view)
-        view.findViewById<MaterialButton>(R.id.mbLoginLogin).setOnClickListener {
+        navigationHandler()
+    }
+
+
+    private fun checkBoxHandler() {
+        val checkBox = _view.findViewById<CheckBox>(R.id.checkBoxLogin)
+
+        val prefs = _view.context.getSharedPreferences(APP_NAME, MODE_PRIVATE)
+
+        val prefsChecked = prefs.getBoolean(SAVED_PREFS, false)
+
+        checkBox.isChecked = prefsChecked
+
+        if (checkBox.isChecked) {
+            val navController = findNavController()
+            navController.navigate(R.id.action_loginFragment_to_explorationFragment)
+        }
+
+        checkBox.setOnCheckedChangeListener { _, isChecked ->
+            prefs.edit().putBoolean(SAVED_PREFS, isChecked).apply()
+        }
+    }
+
+
+    private fun navigationHandler() {
+        val navController = Navigation.findNavController(_view)
+
+        _view.findViewById<MaterialButton>(R.id.mbLoginLogin).setOnClickListener {
             errorHandler()
             navigateLogin(navController)
         }
@@ -66,7 +97,6 @@ class LoginFragment : Fragment() {
         val passwordText = _view.findViewById<TextInputEditText>(R.id.tietPasswordLogin)
         passwordText.requestFocus()
     }
-
 
     private fun errorHandler() {
         val emailText = _view.findViewById<TextInputEditText>(R.id.tietEmailLogin)
@@ -117,7 +147,6 @@ class LoginFragment : Fragment() {
         }
     }
 
-
     private fun hideKeyboard() {
         val imm: InputMethodManager =
             _view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
@@ -128,5 +157,10 @@ class LoginFragment : Fragment() {
         _view.findViewById<ImageButton>(button).setOnClickListener {
             navController.navigate(R.id.action_loginFragment_to_signupFragment)
         }
+    }
+
+    companion object {
+        const val APP_NAME = "DigitalSpace"
+        const val SAVED_PREFS = "SAVED_PREFS"
     }
 }

@@ -1,6 +1,7 @@
 package com.renan.digitalspace.apod.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -21,6 +22,7 @@ import com.renan.digitalspace.apod.viewmodel.ApodViewModel
 import com.renan.digitalspace.favorite.db.AppDatabase
 import com.renan.digitalspace.favorite.entity.FavoriteEntity
 import com.renan.digitalspace.favorite.repository.FavoriteRepository
+import com.renan.digitalspace.favorite.view.FavoriteFragment
 import com.renan.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.renan.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
 import com.squareup.picasso.Picasso
@@ -33,7 +35,10 @@ import java.util.OptionalInt.of
 class ApodFragment : Fragment() {
     private lateinit var _view: View
     private lateinit var _apodResponse: ApodResponseModel
-    private val _favoriteViewModel by activityViewModels<FavoriteViewModel>()
+
+    private val _favoriteViewModel: FavoriteViewModel by activityViewModels()
+//    private lateinit var _favoriteViewModel: FavoriteViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -46,6 +51,15 @@ class ApodFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         _view = view
+
+/*        _favoriteViewModel = ViewModelProvider(
+            this,
+            FavoriteViewModelFactory(
+                FavoriteRepository(
+                    AppDatabase.getDatabase(view.context).favoriteDao()
+                )
+            )
+        ).get(FavoriteViewModel::class.java)*/
 
         val viewModel = ViewModelProvider(
             this, ApodViewModel.ApodViewModelFactory(
@@ -112,6 +126,8 @@ class ApodFragment : Fragment() {
                     true
                 )
                 _favoriteViewModel.addFavorite(favorite)
+                var list = _favoriteViewModel.getAllFavorite().value
+                Log.d("teste", list.toString())
             }
         }
     }
