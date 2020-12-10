@@ -4,20 +4,36 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.ViewModelProviders
 import androidx.navigation.fragment.findNavController
 import com.renan.digitalspace.R
 import com.renan.digitalspace.apod.model.ApodResponseModel
 import com.renan.digitalspace.apod.repository.ApodRepository
 import com.renan.digitalspace.apod.viewmodel.ApodViewModel
+import com.renan.digitalspace.favorite.db.AppDatabase
+import com.renan.digitalspace.favorite.entity.FavoriteEntity
+import com.renan.digitalspace.favorite.repository.FavoriteRepository
+import com.renan.digitalspace.favorite.viewmodel.FavoriteViewModel
+import com.renan.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
 import com.squareup.picasso.Picasso
+import java.util.EnumSet.of
+import java.util.List.of
+import java.util.Map.of
+import java.util.OptionalInt.of
 
 
 class ApodFragment : Fragment() {
+    private lateinit var _view: View
+    private lateinit var _apodResponse: ApodResponseModel
+    private val _favoriteViewModel by activityViewModels<FavoriteViewModel>()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -29,7 +45,7 @@ class ApodFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        _view = view
 
         val viewModel = ViewModelProvider(
             this, ApodViewModel.ApodViewModelFactory(
@@ -55,6 +71,8 @@ class ApodFragment : Fragment() {
         val txtExplanation = view.findViewById<TextView>(R.id.txtExplanationApod)
         val txtTitle = view.findViewById<TextView>(R.id.txtTitle)
         val string = ""
+        _apodResponse = it
+        btnFavorite()
         try {
 
             if (it.explanation.isNotEmpty()) {
@@ -81,5 +99,21 @@ class ApodFragment : Fragment() {
 
     }
 
+
+    private fun btnFavorite() {
+        val btnAddFavorite = _view.findViewById<CheckBox>(R.id.ibFavoriteButtonFato)
+        btnAddFavorite.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                val favorite = FavoriteEntity(
+                    0,
+                    _apodResponse.url,
+                    _apodResponse.title,
+                    _apodResponse.date,
+                    true
+                )
+                _favoriteViewModel.addFavorite(favorite)
+            }
+        }
+    }
 
 }
