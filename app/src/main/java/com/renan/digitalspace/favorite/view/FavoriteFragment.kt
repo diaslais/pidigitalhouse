@@ -1,7 +1,6 @@
 package com.renan.digitalspace.favorite.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -90,13 +89,7 @@ class FavoriteFragment : Fragment(), IFavorite {
 
     private fun initalize() {
         _favoriteViewModel.getAllFavorite().observe(viewLifecycleOwner, {
-            _favoriteAdapter.addFavorites(it)
-        })
-    }
-
-    private fun addFavorite(favorite: FavoriteEntity) {
-        _favoriteViewModel.addFavorite(favorite).observe(viewLifecycleOwner, {
-            _favoriteAdapter.addFavorite(it)
+            addAll(it)
         })
     }
 
@@ -112,6 +105,7 @@ class FavoriteFragment : Fragment(), IFavorite {
             _navController.navigate(R.id.action_favoriteFragment_to_explorationFragment)
         }
     }
+
 
     private fun addFavoriteInitializer() {
         addFavorite(
@@ -170,13 +164,34 @@ class FavoriteFragment : Fragment(), IFavorite {
         )
     }
 
+//    modificadores do adapter
+
+    private fun addAll(list: List<FavoriteEntity>) {
+        _favoriteList.addAll(list)
+        _favoriteAdapter.notifyDataSetChanged()
+    }
+
     private fun deleteAll() {
         _favoriteViewModel.deleteAll().observe(viewLifecycleOwner, {
-            _favoriteAdapter.deleteAll()
+            _favoriteList.clear()
+            _favoriteAdapter.notifyDataSetChanged()
         })
     }
 
-    fun deleteOne(view: View, position: Int) {
+    private fun addFavorite(favorite: FavoriteEntity) {
+        _favoriteViewModel.addFavorite(favorite).observe(viewLifecycleOwner, {
+//            _favoriteAdapter.addFavorite(it)
+            _favoriteList.add(favorite)
+            _favoriteAdapter.notifyDataSetChanged()
+        })
+    }
+
+    private fun addAtFavorite(position: Int, favorite: FavoriteEntity) {
+        _favoriteList.add(position, favorite)
+        _favoriteAdapter.notifyDataSetChanged()
+    }
+
+    fun deleteOneFavorite(position: Int) {
         _favoriteList.removeAt(position)
         _favoriteAdapter.notifyItemRemoved(position)
     }
@@ -188,18 +203,22 @@ class FavoriteFragment : Fragment(), IFavorite {
     ) {
         var undoIs = false
 
+        cardView.findViewById<ImageButton>(R.id.ibFavoriteButton)
+            .setImageResource(R.drawable.ic_outline_star_border_24)
+
         val snackbar = Snackbar.make(_view, "Item removido dos favoritos.", Snackbar.LENGTH_SHORT)
             .setAction("Desfazer") {
                 undoIs = true
-//                _favoriteAdapter.addFavoriteAt(favorite, position)
-                cardView.visibility = View.VISIBLE
+
+                cardView.findViewById<ImageButton>(R.id.ibFavoriteButton)
+                    .setImageResource(R.drawable.ic_baseline_star_24)
 
             }.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
                 override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
                     super.onDismissed(transientBottomBar, event)
                     if (!undoIs) {
                         _favoriteViewModel.deleteOne(favorite).observe(viewLifecycleOwner, {
-                            deleteOne(_view, position)
+                            deleteOneFavorite(position)
                         })
                     }
                 }

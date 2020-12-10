@@ -14,7 +14,7 @@ class FavoriteAdapter(
     private val listener: (FavoriteEntity) -> Unit
 ) : RecyclerView.Adapter<FavoriteViewHolder>() {
 
-    fun addFavorite(favorite: FavoriteEntity) {
+/*    fun addFavorite(favorite: FavoriteEntity) {
         _favorites.add(favorite)
         notifyDataSetChanged()
     }
@@ -39,7 +39,7 @@ class FavoriteAdapter(
     fun addFavoriteAt(favorite: FavoriteEntity, position: Int) {
         _favorites.add(position, favorite)
         notifyDataSetChanged()
-    }
+    }*/
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         val view =
@@ -61,7 +61,7 @@ class FavoriteAdapter(
 
         holder.favoriteBtn.setOnClickListener {
 
-            holder.cardView.visibility = View.GONE
+//            holder.cardView.visibility = View.GONE
             iFavorite.changedFavorite(
                 holder.adapterPosition,
                 _favorites[holder.adapterPosition],
