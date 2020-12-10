@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
                     .show()
                 R.id.itemBibliografiaMenu -> {
                     _drawerLayout.closeDrawer(Gravity.LEFT, false)
-                    _navController.navigate(R.id.action_exploracaoFragment_to_bibliografiaFragment)
+                    _navController.navigate(R.id.action_explorationFragment_to_bibliografiaFragment)
                 }
                 R.id.itemSairMenu -> {
                     _drawerLayout.closeDrawer(Gravity.LEFT, false)
