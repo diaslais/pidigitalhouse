@@ -1,7 +1,6 @@
 package com.renan.digitalspace.favorite.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -13,6 +12,7 @@ import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.card.MaterialCardView
 import com.google.android.material.snackbar.BaseTransientBottomBar
 import com.google.android.material.snackbar.Snackbar
 import com.renan.digitalspace.R
@@ -77,7 +77,6 @@ class FavoriteFragment : Fragment(), IFavorite {
 //        passagem de informações pro recyclerview
         _list.apply {
             setHasFixedSize(true)
-
             layoutManager = manager
             adapter = _favoriteAdapter
         }
@@ -90,13 +89,7 @@ class FavoriteFragment : Fragment(), IFavorite {
 
     private fun initalize() {
         _favoriteViewModel.getAllFavorite().observe(viewLifecycleOwner, {
-            _favoriteAdapter.addFavorites(it)
-        })
-    }
-
-    private fun addFavorite(favorite: FavoriteEntity) {
-        _favoriteViewModel.addFavorite(favorite).observe(viewLifecycleOwner, {
-            _favoriteAdapter.addFavorite(it)
+            addAll(it)
         })
     }
 
@@ -113,6 +106,7 @@ class FavoriteFragment : Fragment(), IFavorite {
         }
     }
 
+// lista de dados mocados para teste
     private fun addFavoriteInitializer() {
         addFavorite(
             FavoriteEntity(
@@ -170,33 +164,61 @@ class FavoriteFragment : Fragment(), IFavorite {
         )
     }
 
+//    modificadores do adapter
+
+    private fun addAll(list: List<FavoriteEntity>) {
+        _favoriteList.addAll(list)
+        _favoriteAdapter.notifyDataSetChanged()
+    }
+
     private fun deleteAll() {
         _favoriteViewModel.deleteAll().observe(viewLifecycleOwner, {
-            _favoriteAdapter.deleteAll()
+            _favoriteList.clear()
+            _favoriteAdapter.notifyDataSetChanged()
         })
+    }
+
+    private fun addFavorite(favorite: FavoriteEntity) {
+        _favoriteViewModel.addFavorite(favorite).observe(viewLifecycleOwner, {
+//            _favoriteAdapter.addFavorite(it)
+            _favoriteList.add(favorite)
+            _favoriteAdapter.notifyDataSetChanged()
+        })
+    }
+
+    fun deleteOneFavorite(position: Int) {
+        _favoriteList.removeAt(position)
+        _favoriteAdapter.notifyItemRemoved(position)
     }
 
     override fun changedFavorite(
         position: Int,
-        favorite: FavoriteEntity
+        favorite: FavoriteEntity,
+        cardView: MaterialCardView
     ) {
-        _favoriteViewModel.deleteOne(favorite).observe(viewLifecycleOwner, {
-            _favoriteAdapter.deleteOne(position)
-        })
-//        var undoIs = false
-//
-//        val snackbar = Snackbar.make(_view, "Item removido dos favoritos.", Snackbar.LENGTH_SHORT)
-//            .setAction("Desfazer") {
-//                undoIs = true
-//                _favoriteAdapter.addFavoriteAt(favorite, position)
-//            }.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
-//                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-//                    super.onDismissed(transientBottomBar, event)
-//                    if (!undoIs) {
-//                    }
-//
-//                }
-//            })
-//        snackbar.show()
+        var undoIs = false
+
+        cardView.findViewById<ImageButton>(R.id.ibFavoriteButton)
+            .setImageResource(R.drawable.ic_outline_star_border_24)
+
+        val snackbar = Snackbar.make(_view, getString(R.string.item_removido), Snackbar.LENGTH_SHORT)
+            .setAction(getString(R.string.desfazer)) {
+
+                undoIs = true
+
+                cardView.findViewById<ImageButton>(R.id.ibFavoriteButton)
+                    .setImageResource(R.drawable.ic_baseline_star_24)
+
+            }.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                    super.onDismissed(transientBottomBar, event)
+                    if (!undoIs) {
+                        _favoriteViewModel.deleteOne(favorite).observe(viewLifecycleOwner, {
+                            deleteOneFavorite(position)
+                        })
+                    }
+                }
+            })
+        snackbar.show()
     }
 }
