@@ -16,7 +16,6 @@ class FavoriteViewModel(
     }
 
     fun getAllFavorite() = liveData(Dispatchers.IO) {
-//        emit(repository.getAll().filter { it.active })
         emit(repository.getAll().filter { it.active })
     }
 

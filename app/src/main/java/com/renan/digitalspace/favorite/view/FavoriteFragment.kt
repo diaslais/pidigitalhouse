@@ -106,7 +106,7 @@ class FavoriteFragment : Fragment(), IFavorite {
         }
     }
 
-
+// lista de dados mocados para teste
     private fun addFavoriteInitializer() {
         addFavorite(
             FavoriteEntity(
@@ -186,11 +186,6 @@ class FavoriteFragment : Fragment(), IFavorite {
         })
     }
 
-    private fun addAtFavorite(position: Int, favorite: FavoriteEntity) {
-        _favoriteList.add(position, favorite)
-        _favoriteAdapter.notifyDataSetChanged()
-    }
-
     fun deleteOneFavorite(position: Int) {
         _favoriteList.removeAt(position)
         _favoriteAdapter.notifyItemRemoved(position)
@@ -206,8 +201,9 @@ class FavoriteFragment : Fragment(), IFavorite {
         cardView.findViewById<ImageButton>(R.id.ibFavoriteButton)
             .setImageResource(R.drawable.ic_outline_star_border_24)
 
-        val snackbar = Snackbar.make(_view, "Item removido dos favoritos.", Snackbar.LENGTH_SHORT)
-            .setAction("Desfazer") {
+        val snackbar = Snackbar.make(_view, getString(R.string.item_removido), Snackbar.LENGTH_SHORT)
+            .setAction(getString(R.string.desfazer)) {
+
                 undoIs = true
 
                 cardView.findViewById<ImageButton>(R.id.ibFavoriteButton)
