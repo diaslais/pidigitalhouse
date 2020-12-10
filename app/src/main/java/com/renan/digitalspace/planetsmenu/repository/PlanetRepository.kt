@@ -117,14 +117,16 @@ class PlanetRepository {
                 "Marte",
 
                 "Marte é o quarto planeta a partir do Sol, o segundo menor do Sistema Solar. Batizado em homenagem ao deus romano da guerra, muitas vezes é descrito como o \"Planeta Vermelho\", porque o óxido de ferro predominante em sua superfície lhe dá uma aparência avermelhada.",
-                "•\tDiâmetro: 12,104 km;\n" +
-                        "•\tMassa: 4,87 x 10 ^ 24 kg (81,5% do tamanho da Terra);\n" +
-                        "•\tLuas: nenhuma;\n" +
-                        "•\tDistância Órbita: 108.209.475 km;\n" +
-                        "•\tPeríodo de órbita: 225 dias;\n" +
-                        "•\tTemperatura de superfície: 462 ° C;\n" +
-                        "•\tPrimeiro registro: século XVII a.C.\n" +
-                        "•\t. Tem cerca de 800 milhões de anos\n",
+                "•\tDistância do Sol/ Distância da órbita:  1.52 AU, o equivalente a 228 milhões de quilômetros.\n" +
+                        "•\tDuração do ano/Período de órbita: 687 dias terrestres\n" +
+                        "•\tTempo para incidência da luz solar: aproximadamente 12 minutos.\n" +
+                        "•\tLuas: Marte possui 2 luas, Fobos e Deimos.\n\n" +
+                        "•\tDiâmetro:  6.792 km\n" +
+                        "•\tMassa: 6,417 x 1023 kg (10,7% da massa da Terra)\n" +
+                        "•\tTemperatura da superfície:  20°C a -153°C\n" +
+                        "•\tPrimeiro registro:  Já era conhecido pelos antigos. Registros egípcios já citavam Marte, há mais de 4.000 anos.\n"+
+                        "•\tIdade: 4,6 bilhôes de anos\n",
+
                 "•\tVênus é o planeta mais próximo da Terra.\n" +
                         "•\tA rotação de Vênus ocorre de leste para oeste, contrária a todos os planetas do Sistema Solar.\n" +
                         "•\tO planeta recebeu esse nome em homenagem à Vênus, a deusa romana da beleza e do amor.\n" +
