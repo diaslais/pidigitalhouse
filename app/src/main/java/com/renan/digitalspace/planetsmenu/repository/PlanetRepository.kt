@@ -5,6 +5,7 @@ import com.renan.digitalspace.planetsmenu.model.Planet
 
 class PlanetRepository {
 
+
     fun getPlanets(callback: (planets: List<Planet>) -> Unit) {
         val planetsDataSet = setPlanetsList()
         callback.invoke(planetsDataSet)
@@ -31,7 +32,8 @@ class PlanetRepository {
                         "•\tA cada segundo de brilho, o Sol libera uma quantidade de energia equivalente a 1 milhão de bombas de hidrogênio.\n\n" +
                         "•\tSe o Sol tivesse apenas um centímetro de diâmetro, a estrela mais próxima estaria a 285 quilômetros de distância.\n\n",
 
-                "Atualmente a raça humana estuda o sol por meio da sonda Parker, uma sonda  com revestimento de carbono de 11 centímetros de grossura que envolve a máquina. Por causa dele, a sonda é capaz de enfrentar temperaturas de quase 1,4 mil graus Celsius — muito inferiores  às da superfície solar, mas suficientes para orbitar o astro. O maior avanço obtido pela sonda até agora foi relativo ao vento solar, nome dado a uma corrente de partículas energizadas que são emitidas pelo Sol e flutuam pelo espaço. A Parker Probe capturou a melhor visão que se tem até o momento do local de nascimento do vento solar, na superfície do astro.\n Consulte na íntegra: "
+                "•\tAtualmente a raça humana estuda o sol por meio da sonda Parker, uma sonda  com revestimento de carbono de 11 centímetros de grossura que envolve a máquina. Por causa dele, a sonda é capaz de enfrentar temperaturas de quase 1,4 mil graus Celsius — muito inferiores  às da superfície solar, mas suficientes para orbitar o astro. O maior avanço obtido pela sonda até agora foi relativo ao vento solar, nome dado a uma corrente de partículas energizadas que são emitidas pelo Sol e flutuam pelo espaço. A Parker Probe capturou a melhor visão que se tem até o momento do local de nascimento do vento solar, na superfície do astro.\n\n Consulte na íntegra: "
+                        + "https://veja.abril.com.br/ciencia/humanidade-comeca-a-explorar-o-sol/",
             ),
             Planet(
                 R.drawable.mercurio,
@@ -56,7 +58,8 @@ class PlanetRepository {
                         "•\tA fina atmosfera de mercúrio, ou exosfera, é composta principalmente de oxigênio (O2), sódio (Na), hidrogênio (H2), hélio (He) e potássio (K).\n\n" +
                         "•\tMercúrio possui água em forma de gelo em crateras polares.\n\n",
 
-                "•\tDuas naves espaciais da missão BepiColombo da ESA-JAXA (missão conjunta entre a Agência Espacial Europeia e a Agência Japonesa de Exploração Aeroespacial) estão a caminho de Mercúrio para estudá-lo.\n\n",
+                "•\tDuas naves espaciais da missão BepiColombo da ESA-JAXA (missão conjunta entre a Agência Espacial Europeia e a Agência Japonesa de Exploração Aeroespacial) estão a caminho de Mercúrio para estudá-lo.\n\n"
+                        + "Consulte na íntegra: https://gizmodo.uol.com.br/mercurio-bepicolombo-primeira-foto-espaco/",
             ),
 
             Planet(
@@ -82,7 +85,8 @@ class PlanetRepository {
                         "•\tVênus tem a maior concentração de vulcões do Sistema Solar\n\n" +
                         "•\tEle poderia ser mais fácil de colonizar do que Marte\n\n",
 
-                "Cientistas acreditam na descoberta de vida em Vênus\n",
+                "•\tCientistas acreditam na descoberta de vida em Vênus\n\n" +
+                        "Consulte na íntegra: " + "https://www.bbc.com/portuguese/geral-54153219",
             ),
             Planet(
                 R.drawable.terra,
@@ -103,7 +107,8 @@ class PlanetRepository {
                         "•\tA rotação da Terra diminui gradualmente, contudo, de maneira praticamente imperceptível aos seres humanos. Essa diminuição é de aproximadamente 17 milissegundos a cada 100 anos e provoca o aumento da duração do dia.\n\n" +
                         "•\tA Terra não foi nomeada segundo o método romano de designação, ao contrário dos outros sete planetas do Sistema Solar.\n\n",
 
-                "Asteroide do tamanho de um carro passou perto da Terra\n"
+                "•\tAsteroide do tamanho de um carro passou perto da Terra\n\n" +
+                        "Consulte na íntegra: https://www.terra.com.br/noticias/ciencia/espaco/asteroide-do-tamanho-de-um-carro-passou-perto-da-terra,2eacbcb5dc3838db960f632729da08bev1kiyjac.html",
             ),
             Planet(
                 R.drawable.marte,
@@ -130,7 +135,8 @@ class PlanetRepository {
                         "•\tVárias missões visitaram este planeta, desde sondas “flybys” (sondas que passam próximo a um astro e o analisam sem entrar em órbita)  e orbitadores a rovers na superfície. O primeiro verdadeiro sucesso da missão a Marte foi o da sonda Mariner 4 em 1965.\n\n" +
                         "•\tNeste momento, a superfície de Marte não pode suportar a vida como a conhecemos. As missões atuais estão determinando o potencial passado e futuro de Marte para a vida.\n\n" +
                         "•\tMarte é um dos corpos mais explorados em nosso sistema solar e é o único planeta para onde enviamos rovers para percorrer a paisagem alienígena ( Sojourner(1997), Spirit e Opportunity(2003), Curiosity(2011), Perseverance(2020)).\n\n",
-                "•\tA NASA lançou a próxima geração de rovers, o Perseverance  para Marte em 30 de julho de 2020.\n\n",
+                "•\tA NASA lançou a próxima geração de rovers, o Perseverance  para Marte em 30 de julho de 2020.\n\n" +
+                        "Consulte na íntegra: https://canaltech.com.br/espaco/mars-2020-rover-perseverance-e-helicoptero-ingenuity-sao-lancados-rumo-a-marte-169033/",
             ),
 
             Planet(
@@ -156,7 +162,8 @@ class PlanetRepository {
                         "•\tÉ um planeta gasoso, como Saturno, Urano e Netuno.n" +
                         "•\tJúpiter possui a maior velocidade de rotação entre os planetas do Sistema Solar.\n\n" +
                         "•\tDesde a década de 1970, sete sondas já visitaram Júpiter\n\n",
-                "Lua de Júpiter, além da possibilidade de abrigar vida, pode brilhar no escuro \n\n"
+                "•\tLua de Júpiter, além da possibilidade de abrigar vida, pode brilhar no escuro \n\n" +
+                        "Consulte na íntegra: https://www.hypeness.com.br/2020/11/lua-de-jupiter-alem-da-possibilidade-de-abrigar-vida-pode-brilhar-no-escuro/",
             ),
             Planet(
                 R.drawable.saturno,
@@ -175,7 +182,8 @@ class PlanetRepository {
                         "•\tO interior de Saturno é composto por rochas, gelos e uma camada de hidrogênio metálico.\n\n" +
                         "•\tOs ventos em Saturno podem atingir a velocidade de quase 2.000 km/h.\n\n" +
                         "•\tEste planeta possui um formato esferoide com achatamento nas regiões polares.\n\n",
-                "Crateras de impacto revelam detalhes do desgaste dinâmico da superfície de Titã(Lua de Saturno)\n\n"
+                "•\tCrateras de impacto revelam detalhes do desgaste dinâmico da superfície de Titã(Lua de Saturno)\n\n" +
+                        "Consulte na íntegra: https://canaltech.com.br/espaco/novo-mapa-de-tita-revela-que-a-lua-de-saturno-e-coberta-por-material-organico-155599/"
             ),
             Planet(
                 R.drawable.urano,
@@ -199,9 +207,9 @@ class PlanetRepository {
                         "•\tÉ o planeta mais quente, apesar de não ser o mais próximo do Sol.\n\n" +
                         "•\tOs satélites conhecidos de Urano totalizam 27, e na sua maioria são nomeados em relação a personagens literários, como: Ophelia, Ferdinand e Ariel.\n\n" +
                         "•\tAssim como Saturno, Júpiter e Netuno, Urano é um planeta com anéis.\n\n",
-                "•\tEm 2011 A New Horizons passou pela órbita de Urano no seu caminho para Plutão, sendo a primeira nave que passou da órbita de Urano desde a Voyager 2.)\n\n",
-
-                ),
+                "•\tUrano pode ter colidido com enorme planeta gelado durante sua formação\n\n" +
+                        "Consulte na íntegra: https://revistagalileu.globo.com/Ciencia/Espaco/noticia/2020/04/urano-pode-ter-colidido-com-enorme-planeta-gelado-durante-sua-formacao.html",
+            ),
             Planet(
                 R.drawable.netuno,
                 "Netuno",
@@ -224,8 +232,8 @@ class PlanetRepository {
                         "•\tNetuno tem 14 satélites confirmados.\n\n" +
                         "•\tApenas a Voyager 2 passou por Netuno, em 1989.\n\n",
 
-                "•\t2013: Estudando uma imagem feito pelo Hubble foi descoberta o 14º satélite.\n\n" +
-                        "•\t2016: Estudando mais imagens do Hubble, foi descoberto um Vortex escuro que se acredita ser a primeiro novo vortex atmosférico visto no século 21.\n"
+                "•\tDe volta a Netuno: Muito se tem falado nas missões de exploração dos planetas mais distantes do sistema solar\n\n" +
+                        "Consulte na íntegra: https://g1.globo.com/ciencia-e-saude/blog/cassio-barbosa/post/2020/01/03/de-volta-a-netuno-entenda-os-proximos-passos-na-exploracao-do-sistema-solar-exterior.ghtml"
             )
         )
     }

@@ -37,6 +37,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dim20dp"
+            android:autoLink="web"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/dim18sp"
             tools:text="@tools:sample/lorem/random" />
