@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.liveData
 import com.nasinha.digitalspace.apod.repository.ApodRepository
 import kotlinx.coroutines.Dispatchers
+import java.io.IOException
 
 class ApodViewModel(
     private val repository: ApodRepository
@@ -12,9 +13,16 @@ class ApodViewModel(
 
     fun getDataApod() =
         liveData(Dispatchers.IO) {
-            val explanation = repository.getData()
 
-            emit(explanation)
+            try {
+                val explanation = repository.getData()
+
+                emit(explanation)
+
+            }catch(e: Exception) {
+                emit(e.message)
+            }
+
 
         }
 
