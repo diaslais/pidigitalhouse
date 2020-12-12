@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.renan.digitalspace">
+    package="com.nasinha.digitalspace">
 
     <uses-feature android:name="android.hardware.screen.portrait" />
     <uses-permission android:name="android.permission.INTERNET" />
@@ -14,7 +14,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:screenOrientation="locked"
-            android:name=".splashscreen.view.SplashscreenActivity"
+            android:name="com.nasinha.digitalspace.splashscreen.view.SplashscreenActivity"
             android:noHistory="true"
             android:theme="@style/AppTheme.Splashscreen">
             <intent-filter>
@@ -23,7 +23,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" android:screenOrientation="portrait"/>
+        <activity android:name="com.nasinha.digitalspace.MainActivity" android:screenOrientation="portrait"/>
 
         <meta-data
             android:name="preloaded_fonts"
