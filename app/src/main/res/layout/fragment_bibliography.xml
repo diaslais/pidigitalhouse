@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@drawable/bg_planetas2"
     android:padding="@dimen/dim24dp"
-    tools:context=".exploration.view.BibliografiaFragment">
+    tools:context=".exploration.view.BibliographyFragment">
 
     <ImageButton
         android:id="@+id/btnBackBibliography"

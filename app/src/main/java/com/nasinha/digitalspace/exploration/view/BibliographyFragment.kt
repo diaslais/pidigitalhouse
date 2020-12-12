@@ -8,13 +8,13 @@ import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import com.nasinha.digitalspace.R
 
-class BibliografiaFragment : Fragment() {
+class BibliographyFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_bibliografia, container, false)
+        return inflater.inflate(R.layout.fragment_bibliography, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
