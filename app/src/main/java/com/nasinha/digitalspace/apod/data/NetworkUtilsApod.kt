@@ -11,9 +11,9 @@ class NetworkUtilsApod {
         private lateinit var retrofit: Retrofit
         private const val baseUrl = "https://api.nasa.gov/"
 
-       fun getRetroFitInstance(): Retrofit {
+        fun getRetroFitInstance(): Retrofit {
 
-            val httpClient = OkHttpClient.Builder()
+            val httpClient = OkHttpClient.Builder().addInterceptor(NetwokInterceptor())
 
             if (!Companion::retrofit.isInitialized) {
                 retrofit = Retrofit.Builder()

@@ -11,8 +11,9 @@ interface ApodEndPoint {
 
     @GET("planetary/apod")
     suspend fun getAstronomicalFact(
-        @Query("api_key") api_key: String = "gAFkqlGusIgjAzp0UrMhjbkqYfzlyq5jRL8BeBjv",
-        @Query("date") date: String = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(Calendar.getInstance().time)
+        @Query("date") date: String = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
+            Calendar.getInstance().time
+        )
     ): ApodResponseModel
 
     companion object {
