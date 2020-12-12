@@ -12,33 +12,6 @@ class FavoriteAdapter(
     private val listener: (FavoriteEntity) -> Unit
 ) : RecyclerView.Adapter<FavoriteViewHolder>() {
 
-/*    fun addFavorite(favorite: FavoriteEntity) {
-        _favorites.add(favorite)
-        notifyDataSetChanged()
-    }
-
-    fun addFavorites(favorites: List<FavoriteEntity>) {
-        _favorites.addAll(favorites)
-        notifyDataSetChanged()
-    }
-
-    fun deleteOne(position: Int) {
-        _favorites.removeAt(position)
-        notifyItemRemoved(position)
-        notifyItemRangeChanged(position, _favorites.size)
-        notifyDataSetChanged()
-    }
-
-    fun deleteAll() {
-        _favorites.clear()
-        notifyDataSetChanged()
-    }
-
-    fun addFavoriteAt(favorite: FavoriteEntity, position: Int) {
-        _favorites.add(position, favorite)
-        notifyDataSetChanged()
-    }*/
-
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): FavoriteViewHolder {
         val view =
             LayoutInflater.from(parent.context)

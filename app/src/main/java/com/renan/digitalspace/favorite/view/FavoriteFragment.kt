@@ -56,14 +56,7 @@ class FavoriteFragment : Fragment(), IFavorite {
         backBtn()
 
 //        criado view model
-        _favoriteViewModel = ViewModelProvider(
-            this,
-            FavoriteViewModelFactory(
-                FavoriteRepository(
-                    AppDatabase.getDatabase(view.context).favoriteDao()
-                )
-            )
-        ).get(FavoriteViewModel::class.java)
+        addViewModel(view)
 
 //        criado recycler view
         _list = view.findViewById(R.id.recyclerViewFavorite)
@@ -87,6 +80,25 @@ class FavoriteFragment : Fragment(), IFavorite {
 //        deleteAll()
     }
 
+    private fun backBtn() {
+        val btnBackView = _view.findViewById<ImageButton>(R.id.ibBackFavorite)
+
+        btnBackView.setOnClickListener {
+            _navController.navigate(R.id.action_favoriteFragment_to_explorationFragment)
+        }
+    }
+
+    fun addViewModel(view: View) {
+        _favoriteViewModel = ViewModelProvider(
+            this,
+            FavoriteViewModelFactory(
+                FavoriteRepository(
+                    AppDatabase.getDatabase(view.context).favoriteDao()
+                )
+            )
+        ).get(FavoriteViewModel::class.java)
+    }
+
     private fun initalize() {
         _favoriteViewModel.getAllFavorite().observe(viewLifecycleOwner, {
             addAll(it)
@@ -98,15 +110,7 @@ class FavoriteFragment : Fragment(), IFavorite {
     }
 
 
-    private fun backBtn() {
-        val btnBackView = _view.findViewById<ImageButton>(R.id.ibBackFavorite)
-
-        btnBackView.setOnClickListener {
-            _navController.navigate(R.id.action_favoriteFragment_to_explorationFragment)
-        }
-    }
-
-// lista de dados mocados para teste
+    // lista de dados mocados para teste
     private fun addFavoriteInitializer() {
         addFavorite(
             FavoriteEntity(
@@ -178,9 +182,8 @@ class FavoriteFragment : Fragment(), IFavorite {
         })
     }
 
-    private fun addFavorite(favorite: FavoriteEntity) {
+    fun addFavorite(favorite: FavoriteEntity) {
         _favoriteViewModel.addFavorite(favorite).observe(viewLifecycleOwner, {
-//            _favoriteAdapter.addFavorite(it)
             _favoriteList.add(favorite)
             _favoriteAdapter.notifyDataSetChanged()
         })
@@ -196,29 +199,33 @@ class FavoriteFragment : Fragment(), IFavorite {
         favorite: FavoriteEntity,
         cardView: MaterialCardView
     ) {
-        var undoIs = false
+        var removeIs = true
 
-        cardView.findViewById<ImageButton>(R.id.ibFavoriteButton)
-            .setImageResource(R.drawable.ic_outline_star_border_24)
+        val btnFavorite = cardView.findViewById<ImageButton>(R.id.ibFavoriteButton)
+        btnFavorite.isEnabled = false
+        btnFavorite.setImageResource(R.drawable.ic_outline_star_border_24)
 
-        val snackbar = Snackbar.make(_view, getString(R.string.item_removido), Snackbar.LENGTH_SHORT)
-            .setAction(getString(R.string.desfazer)) {
+        val snackbar =
+            Snackbar.make(_view, getString(R.string.item_removido), Snackbar.LENGTH_SHORT)
+                .setAction(getString(R.string.desfazer)) {
 
-                undoIs = true
+                    removeIs = false
 
-                cardView.findViewById<ImageButton>(R.id.ibFavoriteButton)
-                    .setImageResource(R.drawable.ic_baseline_star_24)
+                    btnFavorite.isEnabled = true
+                    btnFavorite.setImageResource(R.drawable.ic_baseline_star_24)
 
-            }.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
-                override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-                    super.onDismissed(transientBottomBar, event)
-                    if (!undoIs) {
-                        _favoriteViewModel.deleteOne(favorite).observe(viewLifecycleOwner, {
-                            deleteOneFavorite(position)
-                        })
+
+                }.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
+                    override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
+                        super.onDismissed(transientBottomBar, event)
+
+                        if (removeIs) {
+                            _favoriteViewModel.deleteOne(favorite).observe(viewLifecycleOwner, {
+                                deleteOneFavorite(position)
+                            })
+                        }
                     }
-                }
-            })
+                })
         snackbar.show()
     }
 }

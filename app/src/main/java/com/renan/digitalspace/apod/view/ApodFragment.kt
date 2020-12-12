@@ -16,6 +16,8 @@ import com.renan.digitalspace.apod.model.ApodResponseModel
 import com.renan.digitalspace.apod.repository.ApodRepository
 import com.renan.digitalspace.apod.viewmodel.ApodViewModel
 import com.renan.digitalspace.favorite.entity.FavoriteEntity
+import com.renan.digitalspace.favorite.view.FavoriteFragment
+import com.renan.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.squareup.picasso.Picasso
 
 
@@ -23,6 +25,9 @@ class ApodFragment : Fragment() {
     private lateinit var _view: View
     private lateinit var _apodResponse: ApodResponseModel
 
+    /*private var _favoriteViewModel =
+        ViewModelProvider(requireActivity()).get(FavoriteViewModel::class.java)*/
+    private var _favoriteFragment = FavoriteFragment()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -93,15 +98,16 @@ class ApodFragment : Fragment() {
         btnAddFavorite.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
                 val favorite = FavoriteEntity(
-                    0,
-                    _apodResponse.url,
-                    _apodResponse.title,
-                    _apodResponse.date,
-                    true
+                    id = 0,
+                    image = _apodResponse.url,
+                    title = _apodResponse.title,
+                    date = _apodResponse.date,
+                    active = true
                 )
-
+//                _favoriteViewModel.addFavorite(favorite)
+                _favoriteFragment.addViewModel(_view)
+                _favoriteFragment.addFavorite(favorite)
             }
         }
     }
-
 }
