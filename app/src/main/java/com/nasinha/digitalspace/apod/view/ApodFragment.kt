@@ -11,6 +11,9 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.mlkit.nl.translate.TranslateLanguage
+import com.google.mlkit.nl.translate.Translation
+import com.google.mlkit.nl.translate.TranslatorOptions
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.apod.model.ApodResponseModel
 import com.nasinha.digitalspace.apod.repository.ApodRepository
@@ -23,6 +26,13 @@ import com.squareup.picasso.Picasso
 class ApodFragment : Fragment() {
     private lateinit var _view: View
     private lateinit var _apodResponse: ApodResponseModel
+
+    val options = TranslatorOptions.Builder()
+        .setSourceLanguage(TranslateLanguage.ENGLISH)
+        .setTargetLanguage(TranslateLanguage.PORTUGUESE)
+        .build()
+
+    private val englishPortugueseTranslator = Translation.getClient(options)
 
     /*private var _favoriteViewModel =
         ViewModelProvider(requireActivity()).get(FavoriteViewModel::class.java)*/
@@ -38,6 +48,7 @@ class ApodFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         _view = view
         val imgLoad = _view.findViewById<ImageView>(R.id.imgApod)
         val txtExplanation = _view.findViewById<TextView>(R.id.txtExplanationApod)
@@ -81,8 +92,23 @@ class ApodFragment : Fragment() {
         _apodResponse = it
         btnFavorite()
 
-        txtTitle.text = it.title
-        txtExplanation.text = it.explanation + getText(R.string.quebra_linha)
+
+        englishPortugueseTranslator.translate(it.title).addOnSuccessListener {
+            txtTitle.text = it
+        }
+            .addOnFailureListener {
+                txtTitle.text = _apodResponse.title
+            }
+
+        englishPortugueseTranslator.translate(it.explanation).addOnSuccessListener {
+
+            txtExplanation.text = it + getText(R.string.quebra_linha)
+
+        }.addOnFailureListener {
+            txtExplanation.text = _apodResponse.explanation + getText(R.string.quebra_linha)
+        }
+
+
 
         Picasso.get()
             .load(it.url)
