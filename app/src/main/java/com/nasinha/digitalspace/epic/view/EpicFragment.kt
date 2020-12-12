@@ -83,7 +83,7 @@ class EpicFragment : Fragment() {
             if (it != null) {
                 if(it[0].isNotEmpty()){
 
-                    txtEpic.text = getString(R.string.updateMessage) + lastday.toString()
+                    txtEpic.text = getString(R.string.updateMessage) + "${dayId}/${monthId}/${yearId}"
 
 
                     picasso.load("https://epic.gsfc.nasa.gov/archive/natural/${yearId}/${monthId}/${dayId}/png/${imageId}")
