@@ -14,8 +14,9 @@ class FavoriteViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val _imageView = view.findViewById<ImageView>(R.id.ivThumbnailFavoriteList)
     private val _titleView = view.findViewById<TextView>(R.id.tvTitleFavoriteList)
     private val _dateView = view.findViewById<TextView>(R.id.tvDateFavoriteList)
-    val favoriteBtn = view.findViewById<ImageButton>(R.id.ibFavoriteButton)
+    val favoriteBtn = view.findViewById<ImageButton>(R.id.ibFavoriteButtonFavorite)
     val cardView = view.findViewById<MaterialCardView>(R.id.mcvCardLayoutFavoriteList)
+    val shareBtn = view.findViewById<ImageButton>(R.id.ibShareButtonFavorite)
 
     fun bind(thumbnail: String, title: String?, date: String) {
         _titleView.text = if (title.isNullOrEmpty()) "" else title

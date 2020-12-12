@@ -113,7 +113,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
-                        android:gravity="top"
+                        android:gravity="center"
                         android:text="@string/esqueci_minha_senha"
                         android:textAllCaps="false" />
 

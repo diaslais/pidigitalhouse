@@ -13,7 +13,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dim200dp"
+            android:layout_height="@dimen/dim190dp"
             android:scaleType="centerCrop"
             android:src="@drawable/bg_navigation" />
 
@@ -32,7 +32,7 @@
         <com.google.android.material.card.MaterialCardView
             android:layout_width="@dimen/dim100dp"
             android:layout_height="@dimen/dim100dp"
-            android:layout_marginTop="@dimen/dim20dp"
+            android:layout_marginTop="@dimen/dim10dp"
             android:gravity="center"
             app:cardCornerRadius="@dimen/dim50dp">
 
@@ -43,7 +43,7 @@
                 android:background="@color/colorWhite"
                 android:contentDescription="@string/avatar"
                 android:scaleType="centerCrop"
-                tools:src="@tools:sample/avatars" />
+                android:src="@mipmap/ic_launcher_round" />
         </com.google.android.material.card.MaterialCardView>
 
         <TextView

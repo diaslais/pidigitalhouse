@@ -6,10 +6,6 @@
             android:icon="@drawable/ic_outline_star_border_24"
             android:title="@string/meus_favoritos" />
         <item
-            android:id="@+id/itemPontuacaoMenu"
-            android:icon="@drawable/ic_outline_videogame_asset_24"
-            android:title="@string/maior_pontuacao" />
-        <item
             android:id="@+id/itemBibliografiaMenu"
             android:icon="@drawable/ic_outline_book_24"
             android:title="@string/bibliografia2" />
@@ -27,10 +23,19 @@
             android:id="@+id/itemChangePasswordMenu"
             android:icon="@drawable/ic_outline_lock_24"
             android:title="@string/alterar_senha" />
+        <item
+            android:id="@+id/itemSettingsMenu"
+            android:icon="@drawable/ic_outline_settings_24"
+            android:title="Opções" />
     </group>
     <group>
-        <item android:id="@+id/itemSairMenu"
+        <item
+            android:id="@+id/itemDevelopersMenu"
+            android:icon="@drawable/ic_outline_local_cafe_24"
+            android:title="Desenvolvedores" />
+        <item
+            android:id="@+id/itemExitMenu"
             android:icon="@drawable/ic_outline_exit_to_app_24"
-            android:title="@string/sair"/>
+            android:title="@string/sair" />
     </group>
 </menu>
