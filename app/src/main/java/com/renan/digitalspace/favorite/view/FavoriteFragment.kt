@@ -1,5 +1,6 @@
 package com.renan.digitalspace.favorite.view
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,8 +14,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
-import com.google.android.material.snackbar.BaseTransientBottomBar
-import com.google.android.material.snackbar.Snackbar
 import com.renan.digitalspace.R
 import com.renan.digitalspace.favorite.adapter.FavoriteAdapter
 import com.renan.digitalspace.favorite.adapter.IFavorite
@@ -189,43 +188,35 @@ class FavoriteFragment : Fragment(), IFavorite {
         })
     }
 
-    fun deleteOneFavorite(position: Int) {
-        _favoriteList.removeAt(position)
-        _favoriteAdapter.notifyItemRemoved(position)
+    fun deleteOneFavorite(position: Int, favorite: FavoriteEntity) {
+        _favoriteViewModel.deleteOne(favorite).observe(viewLifecycleOwner, {
+            _favoriteList.let {
+                it.removeAt(position)
+            }
+            _favoriteAdapter.notifyItemRemoved(position)
+        })
     }
 
-    override fun changedFavorite(
+    override fun deleteFavorite(
         position: Int,
         favorite: FavoriteEntity,
         cardView: MaterialCardView
     ) {
-        var removeIs = true
+        val alertDialog = AlertDialog.Builder(_view.context)
+        alertDialog.setTitle(getString(R.string.excluir_favorito))
+        alertDialog.setMessage(getString(R.string.voce_quer_mesmo))
+        alertDialog.setPositiveButton(getString(R.string.sim)) { _, _ ->
+            deleteOneFavorite(position, favorite)
+            Toast.makeText(_view.context, getString(R.string.Item_removido), Toast.LENGTH_SHORT)
+                .show()
+        }
+        alertDialog.setNegativeButton(getString(R.string.nao)) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
+    }
 
-        val btnFavorite = cardView.findViewById<ImageButton>(R.id.ibFavoriteButton)
-        btnFavorite.isEnabled = false
-        btnFavorite.setImageResource(R.drawable.ic_outline_star_border_24)
-
-        val snackbar =
-            Snackbar.make(_view, getString(R.string.item_removido), Snackbar.LENGTH_SHORT)
-                .setAction(getString(R.string.desfazer)) {
-
-                    removeIs = false
-
-                    btnFavorite.isEnabled = true
-                    btnFavorite.setImageResource(R.drawable.ic_baseline_star_24)
-
-
-                }.addCallback(object : BaseTransientBottomBar.BaseCallback<Snackbar>() {
-                    override fun onDismissed(transientBottomBar: Snackbar?, event: Int) {
-                        super.onDismissed(transientBottomBar, event)
-
-                        if (removeIs) {
-                            _favoriteViewModel.deleteOne(favorite).observe(viewLifecycleOwner, {
-                                deleteOneFavorite(position)
-                            })
-                        }
-                    }
-                })
-        snackbar.show()
+    override fun shareFavorite(favorite: FavoriteEntity) {
+        Toast.makeText(_view.context, "Share clicado", Toast.LENGTH_SHORT).show()
     }
 }

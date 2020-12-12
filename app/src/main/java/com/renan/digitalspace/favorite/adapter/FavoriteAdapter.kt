@@ -33,11 +33,14 @@ class FavoriteAdapter(
         holder.favoriteBtn.setOnClickListener {
 
 //            holder.cardView.visibility = View.GONE
-            _iFavorite.changedFavorite(
+            _iFavorite.deleteFavorite(
                 holder.adapterPosition,
                 _favorites[holder.adapterPosition],
                 holder.cardView
             )
+        }
+        holder.shareBtn.setOnClickListener {
+            _iFavorite.shareFavorite(_favorites[holder.adapterPosition])
         }
     }
 
