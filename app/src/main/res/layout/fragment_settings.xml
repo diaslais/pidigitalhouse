@@ -41,7 +41,7 @@
                     android:textStyle="bold" />
 
                 <ImageButton
-                    android:id="@+id/ibCloseDialogName"
+                    android:id="@+id/ibCloseDialogNameSettings"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="end"
@@ -63,12 +63,14 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:text="@string/traduzir_texto"
-                    android:textColor="@color/colorWhite" />
+                    android:textColor="@color/colorWhite"
+                    tools:ignore="UseSwitchCompatOrMaterialXml" />
 
             </FrameLayout>
 
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/confirmButtonSettings"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dim20dp"

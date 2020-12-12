@@ -4,8 +4,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.Switch
 import androidx.fragment.app.DialogFragment
+import com.google.android.material.button.MaterialButton
 import com.google.mlkit.common.model.DownloadConditions
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
@@ -30,6 +33,8 @@ class SettingsFragment : DialogFragment() {
 
         _view = view
         val switchButton = _view.findViewById<Switch>(R.id.btnSwitchTranslate)
+        closeBtn()
+        confirmButton()
 
         switchButton.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
@@ -53,11 +58,24 @@ class SettingsFragment : DialogFragment() {
                         // ...
                     }
 
-
             }
         }
 
 
+    }
+
+    private fun confirmButton() {
+        val confirmButtonSetting = _view.findViewById<MaterialButton>(R.id.confirmButtonSettings)
+        confirmButtonSetting.setOnClickListener {
+            dismiss()
+        }
+    }
+
+    private fun closeBtn() {
+        val btnClose = _view.findViewById<ImageButton>(R.id.ibCloseDialogNameSettings)
+        btnClose.setOnClickListener {
+            dismiss()
+        }
     }
 
 
