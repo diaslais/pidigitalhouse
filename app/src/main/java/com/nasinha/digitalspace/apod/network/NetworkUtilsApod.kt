@@ -1,4 +1,4 @@
-package com.nasinha.digitalspace.apod.data
+package com.nasinha.digitalspace.apod.network
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit

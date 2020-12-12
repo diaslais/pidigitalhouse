@@ -1,4 +1,4 @@
-package com.nasinha.digitalspace.apod.data
+package com.nasinha.digitalspace.apod.network
 
 import okhttp3.Interceptor
 import okhttp3.Response
