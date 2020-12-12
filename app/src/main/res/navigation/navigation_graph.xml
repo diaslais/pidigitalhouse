@@ -73,8 +73,11 @@
         <action
             android:id="@+id/action_explorationFragment_to_quizFragment"
             app:destination="@id/quizFragment" />
+        <action
+            android:id="@+id/action_explorationFragment_to_developerFragment"
+            app:destination="@id/developerFragment" />
 
-       </fragment>
+    </fragment>
     <fragment
         android:id="@+id/sistemaSolarFragment"
         android:name="com.nasinha.digitalspace.exploration.view.SolarSystemFragment"
@@ -166,6 +169,15 @@
         <action
             android:id="@+id/action_quizQuestionsFragment_to_quizScoreFragment"
             app:destination="@id/quizScoreFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/developerFragment"
+        android:name="com.nasinha.digitalspace.developer.view.DeveloperFragment"
+        android:label="fragment_developer"
+        tools:layout="@layout/fragment_developer" >
+        <action
+            android:id="@+id/action_developerFragment_to_explorationFragment"
+            app:destination="@id/explorationFragment" />
     </fragment>
 
 

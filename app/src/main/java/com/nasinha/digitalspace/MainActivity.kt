@@ -54,12 +54,10 @@ class MainActivity : AppCompatActivity() {
                 R.id.itemChangePasswordMenu -> _navController.navigate(R.id.action_explorationFragment_to_changePasswordFragment)
                 R.id.itemSettingsMenu -> Toast.makeText(this, "Opções", Toast.LENGTH_LONG)
                     .show()
-                R.id.itemDevelopersMenu -> Toast.makeText(
-                    this,
-                    "Desenvolvedores",
-                    Toast.LENGTH_LONG
-                )
-                    .show()
+                R.id.itemDevelopersMenu -> {
+                    _drawerLayout.closeDrawer(Gravity.LEFT, false)
+                    _navController.navigate(R.id.action_explorationFragment_to_developerFragment)
+                }
                 R.id.itemExitMenu -> {
                     _drawerLayout.closeDrawer(Gravity.LEFT, false)
                     _navController.navigate(R.id.loginFragment)

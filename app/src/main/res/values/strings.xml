@@ -91,4 +91,6 @@
     <string name="sim">Sim</string>
     <string name="Item_removido">Item removido</string>
     <string name="nao">Não</string>
+    <string name="configuracoes">Configurações</string>
+    <string name="desenvolvedores">Desenvolvedores</string>
 </resources>

@@ -1,0 +1,127 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.nasinha.digitalspace.developer.view.DeveloperFragment">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarDeveloper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/colorBlack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <ImageButton
+            android:id="@+id/ibBackDeveloper"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:background="@color/colorTransparent"
+            android:padding="@dimen/dim10dp"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dim30dp"
+            android:text="@string/desenvolvedores"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dim18sp"
+            android:textStyle="bold" />
+    </androidx.appcompat.widget.Toolbar>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        app:cardBackgroundColor="@color/colorBlack"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbarDeveloper"
+        app:strokeColor="@color/colorWhite"
+        app:strokeWidth="@dimen/dim2dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <com.google.android.material.card.MaterialCardView
+                android:layout_width="@dimen/dim100dp"
+                android:layout_height="@dimen/dim100dp"
+                android:layout_margin="@dimen/dim16dp"
+                app:cardCornerRadius="@dimen/dim50dp">
+
+
+                <ImageButton
+                    android:id="@+id/ibThumbnailDeveloper"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:background="@color/colorTransparent"
+                    android:scaleType="centerCrop"
+                    android:src="@mipmap/ic_launcher" />
+            </com.google.android.material.card.MaterialCardView>
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/tvNameDeveloper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim16dp"
+                    android:textSize="@dimen/dim18sp"
+                    android:textStyle="bold"
+                    tools:text="@tools:sample/lorem" />
+
+                <TextView
+                    android:id="@+id/tvEmailDeveloper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textSize="@dimen/dim16sp"
+                    tools:text="@tools:sample/lorem" />
+
+                <TextView
+                    android:id="@+id/tvBioDeveloper"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim5dp"
+                    android:textSize="@dimen/dim16sp"
+                    tools:text="@tools:sample/lorem/random" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:padding="@dimen/dim5dp"
+                android:orientation="vertical">
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorTransparent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_linkedin" />
+
+                <ImageButton
+                    android:layout_width="30dp"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:background="@color/colorTransparent"
+                    android:scaleType="fitCenter"
+                    android:src="@drawable/ic_github"
+                    android:tint="@color/colorWhite" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+</androidx.constraintlayout.widget.ConstraintLayout>
