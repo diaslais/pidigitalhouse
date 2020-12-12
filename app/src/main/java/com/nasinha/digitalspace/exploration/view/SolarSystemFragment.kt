@@ -10,14 +10,14 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.nasinha.digitalspace.R
 
-class ViaLacteaFragment : Fragment() {
+class SolarSystemFragment : Fragment() {
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_via_lactea, container, false)
+        return inflater.inflate(R.layout.fragment_solar_system, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,10 +25,10 @@ class ViaLacteaFragment : Fragment() {
 
         val navController = findNavController()
 
-        view.findViewById<MaterialButton>(R.id.btnConhecaSistemaSolar).setOnClickListener {
-            navController.navigate(R.id.action_viaLacteaFragment_to_sistemaSolarFragment)
+        view.findViewById<MaterialButton>(R.id.btnIniciarExploracao).setOnClickListener {
+            navController.navigate(R.id.action_sistemaSolarFragment_to_planetsMenuFragment)
         }
-        view.findViewById<ImageButton>(R.id.btnBackMilkyWay).setOnClickListener {
+        view.findViewById<ImageButton>(R.id.btnBackSolarSystem).setOnClickListener {
             activity?.onBackPressed()
         }
     }

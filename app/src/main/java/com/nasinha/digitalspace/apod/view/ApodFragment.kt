@@ -29,7 +29,7 @@ class ApodFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fato_astronomico, container, false)
+        return inflater.inflate(R.layout.fragment_apod, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
