@@ -1,6 +1,5 @@
-package com.nasinha.digitalspace.epic.data
+package com.nasinha.digitalspace.epic.network
 
-import com.nasinha.digitalspace.apod.network.NetwokInterceptor
 import okhttp3.Interceptor
 import okhttp3.Response
 
