@@ -1,6 +1,6 @@
 package com.nasinha.digitalspace.epic.repository
 
-import com.nasinha.digitalspace.epic.data.NetworkUtilsEpic
+import com.nasinha.digitalspace.epic.network.NetworkUtilsEpic
 import com.nasinha.digitalspace.epic.model.EpicResponseModel
 import retrofit2.http.GET
 

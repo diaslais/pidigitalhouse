@@ -1,4 +1,4 @@
-package com.nasinha.digitalspace.epic.data
+package com.nasinha.digitalspace.epic.network
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
