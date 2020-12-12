@@ -20,7 +20,7 @@
             style="@style/Widget.App.Toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:backgroundTint="@color/colorBlack1"
+            android:backgroundTint="@color/colorBlack35pct"
             app:menu="@menu/top_app_bar"
             app:navigationIcon="@drawable/ic_baseline_menu_24"
             app:title="@string/explora_o_espacial"

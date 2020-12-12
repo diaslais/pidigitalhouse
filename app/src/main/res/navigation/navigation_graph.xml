@@ -6,7 +6,7 @@
     app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.renan.digitalspace.login.view.LoginFragment"
+        android:name="com.nasinha.digitalspace.login.view.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -20,12 +20,12 @@
     </fragment>
     <fragment
         android:id="@+id/fatoAstronomicoFragment2"
-        android:name="com.renan.digitalspace.apod.view.ApodFragment"
+        android:name="com.nasinha.digitalspace.apod.view.ApodFragment"
         android:label="fragment_fato_astronomico"
-        tools:layout="@layout/fragment_fato_astronomico" />
+        tools:layout="@layout/fragment_apod" />
     <fragment
         android:id="@+id/signupFragment"
-        android:name="com.renan.digitalspace.signup.view.SignupFragment"
+        android:name="com.nasinha.digitalspace.signup.view.SignupFragment"
         android:label="fragment_signup"
         tools:layout="@layout/fragment_signup">
         <action
@@ -35,12 +35,12 @@
     </fragment>
     <fragment
         android:id="@+id/bibliografiaFragment"
-        android:name="com.renan.digitalspace.exploration.view.BibliografiaFragment"
+        android:name="com.nasinha.digitalspace.exploration.view.BibliographyFragment"
         android:label="fragment_bibliografia"
-        tools:layout="@layout/fragment_bibliografia" />
+        tools:layout="@layout/fragment_bibliography" />
     <fragment
         android:id="@+id/explorationFragment"
-        android:name="com.renan.digitalspace.exploration.view.ExplorationFragment"
+        android:name="com.nasinha.digitalspace.exploration.view.ExplorationFragment"
         android:label="fragment_exploration"
         tools:layout="@layout/fragment_exploration">
         <action
@@ -77,30 +77,30 @@
        </fragment>
     <fragment
         android:id="@+id/sistemaSolarFragment"
-        android:name="com.renan.digitalspace.exploration.view.SistemaSolarFragment"
+        android:name="com.nasinha.digitalspace.exploration.view.SolarSystemFragment"
         android:label="fragment_sistema_solar"
-        tools:layout="@layout/fragment_sistema_solar">
+        tools:layout="@layout/fragment_solar_system">
         <action
             android:id="@+id/action_sistemaSolarFragment_to_planetsMenuFragment"
             app:destination="@id/planetsMenuFragment" />
     </fragment>
     <fragment
         android:id="@+id/viaLacteaFragment"
-        android:name="com.renan.digitalspace.exploration.view.ViaLacteaFragment"
+        android:name="com.nasinha.digitalspace.exploration.view.GalaxyFragment"
         android:label="fragment_via_lactea"
-        tools:layout="@layout/fragment_via_lactea">
+        tools:layout="@layout/fragment_galaxy">
         <action
             android:id="@+id/action_viaLacteaFragment_to_sistemaSolarFragment"
             app:destination="@id/sistemaSolarFragment" />
     </fragment>
     <fragment
         android:id="@+id/epicFragment"
-        android:name="com.renan.digitalspace.epic.view.EpicFragment"
+        android:name="com.nasinha.digitalspace.epic.view.EpicFragment"
         android:label="fragment_epic"
         tools:layout="@layout/fragment_epic" />
     <fragment
         android:id="@+id/planetsMenuFragment"
-        android:name="com.renan.digitalspace.planetsmenu.view.PlanetsMenuFragment"
+        android:name="com.nasinha.digitalspace.planetsmenu.view.PlanetsMenuFragment"
         android:label="fragment_planets_menu"
         tools:layout="@layout/fragment_planets_menu">
         <action
@@ -109,7 +109,7 @@
     </fragment>
     <dialog
         android:id="@+id/bottomsheetFragment"
-        android:name="com.renan.digitalspace.planetsmenu.view.BottomsheetFragment"
+        android:name="com.nasinha.digitalspace.planetsmenu.view.BottomsheetFragment"
         android:label="fragment_bottomsheet"
         tools:layout="@layout/fragment_bottomsheet">
         <action
@@ -118,22 +118,22 @@
     </dialog>
     <dialog
         android:id="@+id/changeNameFragment"
-        android:name="com.renan.digitalspace.dialogs.view.ChangeNameFragment"
+        android:name="com.nasinha.digitalspace.dialogs.view.ChangeNameFragment"
         android:label="fragment_change_name"
         tools:layout="@layout/fragment_change_name" />
     <dialog
         android:id="@+id/changePasswordFragment"
-        android:name="com.renan.digitalspace.dialogs.view.ChangePasswordFragment"
+        android:name="com.nasinha.digitalspace.dialogs.view.ChangePasswordFragment"
         android:label="fragment_change_password"
         tools:layout="@layout/fragment_change_password" />
     <dialog
         android:id="@+id/changeEmailFragment"
-        android:name="com.renan.digitalspace.dialogs.view.ChangeEmailFragment"
+        android:name="com.nasinha.digitalspace.dialogs.view.ChangeEmailFragment"
         android:label="fragment_change_email"
         tools:layout="@layout/fragment_change_email" />
     <fragment
         android:id="@+id/favoriteFragment"
-        android:name="com.renan.digitalspace.favorite.view.FavoriteFragment"
+        android:name="com.nasinha.digitalspace.favorite.view.FavoriteFragment"
         android:label="fragment_favorite"
         tools:layout="@layout/fragment_favorite" >
         <action
@@ -142,7 +142,7 @@
     </fragment>
     <fragment
         android:id="@+id/quizFragment"
-        android:name="com.renan.digitalspace.quiz.view.QuizFragment"
+        android:name="com.nasinha.digitalspace.quiz.view.QuizFragment"
         android:label="fragment_quiz"
         tools:layout="@layout/fragment_quiz" >
         <action
@@ -151,7 +151,7 @@
     </fragment>
     <fragment
         android:id="@+id/quizScoreFragment"
-        android:name="com.renan.digitalspace.quiz.view.QuizScoreFragment"
+        android:name="com.nasinha.digitalspace.quiz.view.QuizScoreFragment"
         android:label="fragment_quiz_score"
         tools:layout="@layout/fragment_quiz_score" >
         <action
@@ -160,7 +160,7 @@
     </fragment>
     <fragment
         android:id="@+id/quizQuestionsFragment"
-        android:name="com.renan.digitalspace.quiz.view.QuizQuestionsFragment"
+        android:name="com.nasinha.digitalspace.quiz.view.QuizQuestionsFragment"
         android:label="fragment_quiz_questions"
         tools:layout="@layout/fragment_quiz_questions" >
         <action
