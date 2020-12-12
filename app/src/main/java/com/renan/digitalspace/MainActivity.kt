@@ -5,10 +5,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.Gravity
 import android.widget.Toast
+import androidx.core.view.GravityCompat
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
+import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var _navController: NavController
@@ -23,6 +25,14 @@ class MainActivity : AppCompatActivity() {
         _drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
 
         navClickListener()
+    }
+
+    override fun onBackPressed() {
+        if (this._drawerLayout.isDrawerOpen(navigationView)) {
+            this._drawerLayout.closeDrawer(navigationView)
+        } else {
+            super.onBackPressed()
+        }
     }
 
     @SuppressLint("RtlHardcoded")
