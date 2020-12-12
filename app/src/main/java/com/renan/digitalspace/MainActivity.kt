@@ -31,20 +31,26 @@ class MainActivity : AppCompatActivity() {
 
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
-                R.id.itemChangeNameMenu -> _navController.navigate(R.id.action_explorationFragment_to_changeNameFragment)
-                R.id.itemChangeEmailMenu -> _navController.navigate(R.id.action_explorationFragment_to_changeEmailFragment)
-                R.id.itemChangePasswordMenu -> _navController.navigate(R.id.action_explorationFragment_to_changePasswordFragment)
                 R.id.itemFavoritosMenu -> {
                     _drawerLayout.closeDrawer(Gravity.LEFT, false)
                     _navController.navigate(R.id.action_explorationFragment_to_favoriteFragment)
                 }
-                R.id.itemPontuacaoMenu -> Toast.makeText(this, "Pontuacao", Toast.LENGTH_LONG)
-                    .show()
                 R.id.itemBibliografiaMenu -> {
                     _drawerLayout.closeDrawer(Gravity.LEFT, false)
                     _navController.navigate(R.id.action_explorationFragment_to_bibliografiaFragment)
                 }
-                R.id.itemSairMenu -> {
+                R.id.itemChangeNameMenu -> _navController.navigate(R.id.action_explorationFragment_to_changeNameFragment)
+                R.id.itemChangeEmailMenu -> _navController.navigate(R.id.action_explorationFragment_to_changeEmailFragment)
+                R.id.itemChangePasswordMenu -> _navController.navigate(R.id.action_explorationFragment_to_changePasswordFragment)
+                R.id.itemSettingsMenu -> Toast.makeText(this, "Opções", Toast.LENGTH_LONG)
+                    .show()
+                R.id.itemDevelopersMenu -> Toast.makeText(
+                    this,
+                    "Desenvolvedores",
+                    Toast.LENGTH_LONG
+                )
+                    .show()
+                R.id.itemExitMenu -> {
                     _drawerLayout.closeDrawer(Gravity.LEFT, false)
                     _navController.navigate(R.id.loginFragment)
                 }
