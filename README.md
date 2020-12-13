@@ -7,7 +7,7 @@
 
 > Aplicativo Android criado no projeto integrador do Santander Coders Mobile Android by Digital House, que tem como objetivo permitir o estudo e exploração dos mais novos fatos astronômicos presentes no sistema solar utilizando APIs da NASA como base. 🚀
 
-<div>
+<div align="center">
 <img width="250" src="https://i.ibb.co/JxzK6GL/Screenshot-1607623679.png" alt="Exploracao_Espacial" border="0"> <img width="250" src="https://i.ibb.co/4MXt5gZ/Screenshot-1607623706.png" alt="Web-Signin" border="0"> <img width="250" src="https://i.ibb.co/fqRjNJS/Screenshot-1607623688.png" alt="Sistema_Solar" border="0">
 </div>
 
