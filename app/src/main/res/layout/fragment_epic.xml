@@ -54,6 +54,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dim20dp"
             android:text="@string/stay_a_while_and_listen"
             android:textStyle="bold" />
     </LinearLayout>
