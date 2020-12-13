@@ -19,7 +19,6 @@ import com.nasinha.digitalspace.developer.entity.DeveloperEntity
 import com.nasinha.digitalspace.developer.repository.DeveloperRepository
 import com.nasinha.digitalspace.developer.viewmodel.DeveloperViewModel
 import com.nasinha.digitalspace.developer.viewmodel.DeveloperViewModelFactory
-import java.util.Collections.addAll
 
 class DeveloperFragment : Fragment(), IDeveloper {
     private lateinit var _view: View
@@ -164,14 +163,16 @@ class DeveloperFragment : Fragment(), IDeveloper {
     }
 
     override fun linkedinDeveloper(linkedin: String) {
-        val linkedinUri = Uri.parse(linkedin)
-        val intent = Intent(Intent.ACTION_VIEW, linkedinUri)
-        startActivity(intent)
+        linkHandler(linkedin)
     }
 
     override fun githubDeveloper(github: String) {
-        val linkedinUri = Uri.parse(github)
-        val intent = Intent(Intent.ACTION_VIEW, linkedinUri)
+        linkHandler(github)
+    }
+
+    private fun linkHandler(uri: String) {
+        val linkUri = Uri.parse(uri)
+        val intent = Intent(Intent.ACTION_VIEW, linkUri)
         startActivity(intent)
     }
 }
