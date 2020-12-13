@@ -111,7 +111,7 @@ class EpicFragment : Fragment() {
     }
 
     private fun showLoading(isLoading: Boolean) {
-        val progressBar = _view.findViewById<LinearLayout>(R.id.llProgressBarEpic)
+        val progressBar = _view.findViewById<LinearLayout>(R.id.llProgressEpic)
         progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
     }
 }

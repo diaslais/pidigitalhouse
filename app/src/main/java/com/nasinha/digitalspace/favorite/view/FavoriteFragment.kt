@@ -15,6 +15,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.nasinha.digitalspace.R
+import com.nasinha.digitalspace.apod.view.IFavoriteApod
 import com.nasinha.digitalspace.favorite.adapter.FavoriteAdapter
 import com.nasinha.digitalspace.favorite.adapter.IFavorite
 import com.nasinha.digitalspace.favorite.db.AppDatabase
@@ -23,13 +24,14 @@ import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
 
-class FavoriteFragment : Fragment(), IFavorite {
+class FavoriteFragment : Fragment(), IFavorite, IFavoriteApod {
     private lateinit var _view: View
     private lateinit var _favoriteViewModel: FavoriteViewModel
     private lateinit var _list: RecyclerView
     private lateinit var _navController: NavController
     private lateinit var _favoriteAdapter: FavoriteAdapter
     private lateinit var iFavorite: IFavorite
+
 
     private var _favoriteList = mutableListOf<FavoriteEntity>()
 
@@ -56,10 +58,30 @@ class FavoriteFragment : Fragment(), IFavorite {
 
 //        criado view model
         addViewModel(view)
+        addRecyclerView()
 
-//        criado recycler view
-        _list = view.findViewById(R.id.recyclerViewFavorite)
-        val manager = LinearLayoutManager(view.context)
+
+//        activeAll()
+        initialize()
+//        addFavoriteInitializer()
+//        deleteAll()
+    }
+
+    fun addViewModel(view: View) {
+        _favoriteViewModel = ViewModelProvider(
+            this,
+            FavoriteViewModelFactory(
+                FavoriteRepository(
+                    AppDatabase.getDatabase(view.context).favoriteDao()
+                )
+            )
+        ).get(FavoriteViewModel::class.java)
+    }
+
+    private fun addRecyclerView() {
+        //        criado recycler view
+        _list = _view.findViewById(R.id.recyclerViewFavorite)
+        val manager = LinearLayoutManager(_view.context)
 
 //        passagem da lista de favoritos pro adapter
         _favoriteAdapter = FavoriteAdapter(_favoriteList, iFavorite) {
@@ -72,11 +94,6 @@ class FavoriteFragment : Fragment(), IFavorite {
             layoutManager = manager
             adapter = _favoriteAdapter
         }
-
-//        activeAll()
-        initialize()
-//        addFavoriteInitializer()
-//        deleteAll()
     }
 
     private fun backBtn() {
@@ -85,17 +102,6 @@ class FavoriteFragment : Fragment(), IFavorite {
         btnBackView.setOnClickListener {
             _navController.navigate(R.id.action_favoriteFragment_to_explorationFragment)
         }
-    }
-
-    fun addViewModel(view: View) {
-        _favoriteViewModel = ViewModelProvider(
-            this,
-            FavoriteViewModelFactory(
-                FavoriteRepository(
-                    AppDatabase.getDatabase(view.context).favoriteDao()
-                )
-            )
-        ).get(FavoriteViewModel::class.java)
     }
 
     private fun initialize() {
@@ -167,7 +173,7 @@ class FavoriteFragment : Fragment(), IFavorite {
         )
     }
 
-//    modificadores do adapter
+    //    modificadores do adapter
     private fun addAll(list: List<FavoriteEntity>) {
         _favoriteList.addAll(list)
         _favoriteAdapter.notifyDataSetChanged()
@@ -196,7 +202,7 @@ class FavoriteFragment : Fragment(), IFavorite {
         })
     }
 
-    override fun deleteFavorite(
+    override fun iFavoriteDelete(
         position: Int,
         favorite: FavoriteEntity,
         cardView: MaterialCardView
@@ -215,7 +221,21 @@ class FavoriteFragment : Fragment(), IFavorite {
         alertDialog.show()
     }
 
-    override fun shareFavorite(favorite: FavoriteEntity) {
+    override fun iFavoriteShare(favorite: FavoriteEntity) {
         Toast.makeText(_view.context, "Share clicado", Toast.LENGTH_SHORT).show()
     }
+
+    override fun iFavoriteApodcheck(favorite: FavoriteEntity) {
+        TODO("Not yet implemented")
+    }
+
+    override fun iFavoriteApodAdd(favorite: FavoriteEntity) {
+        _favoriteViewModel.addFavorite(favorite)
+    }
+
+    override fun iFavoriteApodRemove(favorite: FavoriteEntity) {
+        TODO("Not yet implemented")
+    }
+
+
 }
