@@ -31,7 +31,6 @@ class ApodFragment : Fragment() {
     private lateinit var _apodResponse: ApodResponseModel
     private lateinit var _favoriteViewModel: FavoriteViewModel
     private lateinit var _favoriteItem: FavoriteEntity
-    private lateinit var iFavoriteApod: IFavoriteApod
 
 
     val options = TranslatorOptions.Builder()
