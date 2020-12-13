@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Switch
+import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.button.MaterialButton
 import com.google.mlkit.common.model.DownloadConditions
@@ -32,7 +33,7 @@ class SettingsFragment : DialogFragment() {
         super.onViewCreated(view, savedInstanceState)
 
         _view = view
-        val switchButton = _view.findViewById<Switch>(R.id.btnSwitchTranslate)
+        val switchButton = _view.findViewById<SwitchCompat>(R.id.btnSwitchTranslate)
         closeBtn()
         confirmButton()
 
