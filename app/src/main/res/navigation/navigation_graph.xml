@@ -186,7 +186,11 @@
         android:id="@+id/settingsFragment"
         android:name="com.nasinha.digitalspace.dialogs.view.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" />
+        tools:layout="@layout/fragment_settings" >
+        <action
+            android:id="@+id/action_settingsFragment_to_fatoAstronomicoFragment2"
+            app:destination="@id/fatoAstronomicoFragment2" />
+    </dialog>
 
 
 </navigation>

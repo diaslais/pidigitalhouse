@@ -96,4 +96,6 @@
     <string name="op_es">Opções</string>
     <string name="traduzir_texto">Traduzir Texto</string>
     <string name="stay_a_while_and_listen">Stay a while and listen...</string>
+    <string name="alerta_traducao" >Alerta de tradução!</string>
+    <string name="message_traducao" >A tradução é feita de maneira automatizada e por conta de termos técnicos e expresões idiomáticas corre grave risco de falhas de interpretação! Deseja prosseguir? </string>
 </resources>
