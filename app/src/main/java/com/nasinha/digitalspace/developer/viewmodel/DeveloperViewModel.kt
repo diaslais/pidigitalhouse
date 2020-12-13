@@ -23,4 +23,12 @@ class DeveloperViewModel(
         repository.deleteAll()
         emit(true)
     }
+
+    fun setAllDevelopers() = liveData(Dispatchers.IO) {
+        val developers = mutableListOf<DeveloperEntity>()
+        repository.setDevelopers {
+            developers.addAll(it)
+        }
+        emit(developers)
+    }
 }
