@@ -1,4 +1,4 @@
-package com.nasinha.digitalspace.apod.data
+package com.nasinha.digitalspace.apod.network
 
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -11,9 +11,9 @@ class NetworkUtilsApod {
         private lateinit var retrofit: Retrofit
         private const val baseUrl = "https://api.nasa.gov/"
 
-       fun getRetroFitInstance(): Retrofit {
+        fun getRetroFitInstance(): Retrofit {
 
-            val httpClient = OkHttpClient.Builder()
+            val httpClient = OkHttpClient.Builder().addInterceptor(NetwokInterceptor())
 
             if (!Companion::retrofit.isInitialized) {
                 retrofit = Retrofit.Builder()

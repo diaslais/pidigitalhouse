@@ -76,6 +76,9 @@
         <action
             android:id="@+id/action_explorationFragment_to_developerFragment"
             app:destination="@id/developerFragment" />
+        <action
+            android:id="@+id/action_explorationFragment_to_settingsFragment"
+            app:destination="@id/settingsFragment" />
 
     </fragment>
     <fragment
@@ -138,7 +141,7 @@
         android:id="@+id/favoriteFragment"
         android:name="com.nasinha.digitalspace.favorite.view.FavoriteFragment"
         android:label="fragment_favorite"
-        tools:layout="@layout/fragment_favorite" >
+        tools:layout="@layout/fragment_favorite">
         <action
             android:id="@+id/action_favoriteFragment_to_explorationFragment"
             app:destination="@id/explorationFragment" />
@@ -147,7 +150,7 @@
         android:id="@+id/quizFragment"
         android:name="com.nasinha.digitalspace.quiz.view.QuizFragment"
         android:label="fragment_quiz"
-        tools:layout="@layout/fragment_quiz" >
+        tools:layout="@layout/fragment_quiz">
         <action
             android:id="@+id/action_quizFragment_to_quizQuestionsFragment"
             app:destination="@id/quizQuestionsFragment" />
@@ -156,7 +159,7 @@
         android:id="@+id/quizScoreFragment"
         android:name="com.nasinha.digitalspace.quiz.view.QuizScoreFragment"
         android:label="fragment_quiz_score"
-        tools:layout="@layout/fragment_quiz_score" >
+        tools:layout="@layout/fragment_quiz_score">
         <action
             android:id="@+id/action_quizScoreFragment_to_explorationFragment"
             app:destination="@id/explorationFragment" />
@@ -165,7 +168,7 @@
         android:id="@+id/quizQuestionsFragment"
         android:name="com.nasinha.digitalspace.quiz.view.QuizQuestionsFragment"
         android:label="fragment_quiz_questions"
-        tools:layout="@layout/fragment_quiz_questions" >
+        tools:layout="@layout/fragment_quiz_questions">
         <action
             android:id="@+id/action_quizQuestionsFragment_to_quizScoreFragment"
             app:destination="@id/quizScoreFragment" />
@@ -174,11 +177,16 @@
         android:id="@+id/developerFragment"
         android:name="com.nasinha.digitalspace.developer.view.DeveloperFragment"
         android:label="fragment_developer"
-        tools:layout="@layout/fragment_developer" >
+        tools:layout="@layout/fragment_developer">
         <action
             android:id="@+id/action_developerFragment_to_explorationFragment"
             app:destination="@id/explorationFragment" />
     </fragment>
+    <dialog
+        android:id="@+id/settingsFragment"
+        android:name="com.nasinha.digitalspace.dialogs.view.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
 
 
 </navigation>
