@@ -97,6 +97,7 @@ class ApodFragment : Fragment() {
         val txtTitle = _view.findViewById<TextView>(R.id.txtTitle)
         val validation = arguments?.getString("VALIDATION")
 
+
         _apodResponse = it
         btnFavorite()
 
@@ -119,8 +120,10 @@ class ApodFragment : Fragment() {
                 .load(it.url)
                 .into(imgLoad)
         } else {
+
             txtTitle.text = it.title
-            txtExplanation.text = it.explanation
+            txtExplanation.text = it.explanation + getText(R.string.quebra_linha)
+
             Picasso.get()
                 .load(it.url)
                 .into(imgLoad)
@@ -146,4 +149,5 @@ class ApodFragment : Fragment() {
             }
         }
     }
+
 }
