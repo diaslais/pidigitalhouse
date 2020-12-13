@@ -26,13 +26,13 @@
         <item
             android:id="@+id/itemSettingsMenu"
             android:icon="@drawable/ic_outline_settings_24"
-            android:title="Opções" />
+            android:title="@string/configuracoes" />
     </group>
     <group>
         <item
             android:id="@+id/itemDevelopersMenu"
             android:icon="@drawable/ic_outline_local_cafe_24"
-            android:title="Desenvolvedores" />
+            android:title="@string/desenvolvedores" />
         <item
             android:id="@+id/itemExitMenu"
             android:icon="@drawable/ic_outline_exit_to_app_24"

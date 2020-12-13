@@ -74,7 +74,7 @@ class FavoriteFragment : Fragment(), IFavorite {
         }
 
 //        activeAll()
-        initalize()
+        initialize()
 //        addFavoriteInitializer()
 //        deleteAll()
     }
@@ -98,7 +98,7 @@ class FavoriteFragment : Fragment(), IFavorite {
         ).get(FavoriteViewModel::class.java)
     }
 
-    private fun initalize() {
+    private fun initialize() {
         _favoriteViewModel.getAllFavorite().observe(viewLifecycleOwner, {
             addAll(it)
         })
@@ -168,7 +168,6 @@ class FavoriteFragment : Fragment(), IFavorite {
     }
 
 //    modificadores do adapter
-
     private fun addAll(list: List<FavoriteEntity>) {
         _favoriteList.addAll(list)
         _favoriteAdapter.notifyDataSetChanged()

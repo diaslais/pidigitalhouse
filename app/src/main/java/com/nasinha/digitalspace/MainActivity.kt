@@ -52,13 +52,11 @@ class MainActivity : AppCompatActivity() {
                 R.id.itemChangeNameMenu -> _navController.navigate(R.id.action_explorationFragment_to_changeNameFragment)
                 R.id.itemChangeEmailMenu -> _navController.navigate(R.id.action_explorationFragment_to_changeEmailFragment)
                 R.id.itemChangePasswordMenu -> _navController.navigate(R.id.action_explorationFragment_to_changePasswordFragment)
+                R.id.itemDevelopersMenu -> {
+                    _drawerLayout.closeDrawer(Gravity.LEFT, false)
+                    _navController.navigate(R.id.action_explorationFragment_to_developerFragment)
+                }
                 R.id.itemSettingsMenu -> _navController.navigate(R.id.action_explorationFragment_to_settingsFragment)
-                R.id.itemDevelopersMenu -> Toast.makeText(
-                    this,
-                    "Desenvolvedores",
-                    Toast.LENGTH_LONG
-                )
-                    .show()
                 R.id.itemExitMenu -> {
                     _drawerLayout.closeDrawer(Gravity.LEFT, false)
                     _navController.navigate(R.id.loginFragment)
