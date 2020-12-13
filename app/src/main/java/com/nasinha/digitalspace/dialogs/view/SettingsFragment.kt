@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Switch
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.DialogFragment
 import com.google.android.material.button.MaterialButton
@@ -34,10 +35,22 @@ class SettingsFragment : DialogFragment() {
 
         _view = view
         val switchButton = _view.findViewById<SwitchCompat>(R.id.btnSwitchTranslate)
+
+        val prefs = activity?.getSharedPreferences(APP_NAME, AppCompatActivity.MODE_PRIVATE)
+
+        val prefsChecked = prefs?.getBoolean(NOTIFICATION_PREFS,false)
+
+        if (prefsChecked != null) {
+            switchButton.isChecked = prefsChecked
+        }
+
         closeBtn()
         confirmButton()
 
         switchButton.setOnCheckedChangeListener { _, isChecked ->
+
+            prefs?.edit()?.putBoolean(NOTIFICATION_PREFS,isChecked)?.apply()
+
             if (isChecked) {
                 val options = TranslatorOptions.Builder()
                     .setSourceLanguage(TranslateLanguage.ENGLISH)
@@ -63,6 +76,10 @@ class SettingsFragment : DialogFragment() {
         }
 
 
+    }
+    companion object{
+        const val APP_NAME = "switch_prefs"
+        const val NOTIFICATION_PREFS = "NOTIFICATION_PREFS"
     }
 
     private fun confirmButton() {
