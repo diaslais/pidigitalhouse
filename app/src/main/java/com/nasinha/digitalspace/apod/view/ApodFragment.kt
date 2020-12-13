@@ -27,6 +27,7 @@ class ApodFragment : Fragment() {
     private lateinit var _view: View
     private lateinit var _apodResponse: ApodResponseModel
 
+
     val options = TranslatorOptions.Builder()
         .setSourceLanguage(TranslateLanguage.ENGLISH)
         .setTargetLanguage(TranslateLanguage.PORTUGUESE)
@@ -38,6 +39,11 @@ class ApodFragment : Fragment() {
         ViewModelProvider(requireActivity()).get(FavoriteViewModel::class.java)*/
     private var _favoriteFragment = FavoriteFragment()
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,6 +54,7 @@ class ApodFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
 
         _view = view
         val imgLoad = _view.findViewById<ImageView>(R.id.imgApod)
@@ -74,7 +81,6 @@ class ApodFragment : Fragment() {
                     getString(R.string.apod_message)
             }
 
-
         })
 
         val navController = findNavController()
@@ -85,34 +91,43 @@ class ApodFragment : Fragment() {
     }
 
     private fun mostrarResultados(it: ApodResponseModel, view: View) {
+
         val imgLoad = _view.findViewById<ImageView>(R.id.imgApod)
         val txtExplanation = _view.findViewById<TextView>(R.id.txtExplanationApod)
         val txtTitle = _view.findViewById<TextView>(R.id.txtTitle)
+        val validation = arguments?.getString("VALIDATION")
+
 
         _apodResponse = it
         btnFavorite()
 
-
-        englishPortugueseTranslator.translate(it.title).addOnSuccessListener {
-            txtTitle.text = it
-        }
-            .addOnFailureListener {
-                txtTitle.text = _apodResponse.title
+        if (validation == "isChecked") {
+            englishPortugueseTranslator.translate(it.title).addOnSuccessListener {
+                txtTitle.text = it
             }
+                .addOnFailureListener {
+                    txtTitle.text = _apodResponse.title
+                }
 
-        englishPortugueseTranslator.translate(it.explanation).addOnSuccessListener {
+            englishPortugueseTranslator.translate(it.explanation).addOnSuccessListener {
 
-            txtExplanation.text = it + getText(R.string.quebra_linha)
+                txtExplanation.text = it + getText(R.string.quebra_linha)
 
-        }.addOnFailureListener {
-            txtExplanation.text = _apodResponse.explanation + getText(R.string.quebra_linha)
+            }.addOnFailureListener {
+                txtExplanation.text = _apodResponse.explanation + getText(R.string.quebra_linha)
+            }
+            Picasso.get()
+                .load(it.url)
+                .into(imgLoad)
+        } else {
+
+            txtTitle.text = it.title
+            txtExplanation.text = it.explanation + getText(R.string.quebra_linha)
+
+            Picasso.get()
+                .load(it.url)
+                .into(imgLoad)
         }
-
-
-
-        Picasso.get()
-            .load(it.url)
-            .into(imgLoad)
 
     }
 
@@ -134,4 +149,5 @@ class ApodFragment : Fragment() {
             }
         }
     }
+
 }
