@@ -58,7 +58,9 @@ class SettingsFragment : DialogFragment() {
         confirmButton()
 
         switchButton.setOnCheckedChangeListener { _, isChecked ->
+
             val navController = findNavController(this)
+
             prefs?.edit()?.putBoolean(NOTIFICATION_PREFS, isChecked)?.apply()
 
             if (isChecked) {
@@ -73,6 +75,7 @@ class SettingsFragment : DialogFragment() {
                 var conditions = DownloadConditions.Builder()
                     .requireWifi()
                     .build()
+
                 englishPortugueseTranslator.downloadModelIfNeeded(conditions)
                     .addOnSuccessListener {
                         // Model downloaded successfully. Okay to start translating.
@@ -83,7 +86,9 @@ class SettingsFragment : DialogFragment() {
                         // Model couldn’t be downloaded or other internal error.
                         // ...
                     }
+
                 val alertDialog = AlertDialog.Builder(_view.context)
+
                 alertDialog.setTitle(getString(R.string.alerta_traducao))
                 alertDialog.setMessage(getString(R.string.message_traducao))
                 alertDialog.setPositiveButton(getString(R.string.sim)) { _, _ ->
@@ -94,6 +99,7 @@ class SettingsFragment : DialogFragment() {
 
                 }
                 alertDialog.setNegativeButton(getString(R.string.nao)) { dialog, _ ->
+                    switchButton.isChecked = false
                     dialog.dismiss()
                 }
                 alertDialog.show()
