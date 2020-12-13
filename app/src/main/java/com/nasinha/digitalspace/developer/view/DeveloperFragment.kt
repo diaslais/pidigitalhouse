@@ -50,7 +50,6 @@ class DeveloperFragment : Fragment(), IDeveloper {
         addViewModel()
         addRecyclerView()
         initialize()
-//        deleteAll()
     }
 
     private fun backBtn() {
@@ -89,77 +88,30 @@ class DeveloperFragment : Fragment(), IDeveloper {
     private fun initialize() {
         _developerViewModel.getAllDeveloper().observe(viewLifecycleOwner, {
             if (it.isEmpty()) {
-                addDeveloperInitializer()
-            } else {
-                addAllDevelopers(it)
+                setAllDevelopersDb()
+            }
+            addAllDevelopers(it)
+        })
+    }
+
+    private fun setAllDevelopersDb() {
+        _developerViewModel.setAllDevelopers().observe(viewLifecycleOwner, { it ->
+            it.forEach { developer ->
+                addDeveloperDb(developer)
             }
         })
     }
 
-    private fun addDeveloperInitializer() {
-        addDeveloper(
-            DeveloperEntity(
-                1,
-                "https://avatars3.githubusercontent.com/u/53455525?s=400&u=48e7cf6b27239f95a546f14b3f5284612a64d300&v=4",
-                "Lais Dias",
-                "email",
-                "bio",
-                "",
-                "https://github.com/diaslais"
-            )
-        )
-        addDeveloper(
-            DeveloperEntity(
-                2,
-                "https://avatars0.githubusercontent.com/u/67712448?s=400&u=a7e6476cdc9e1dc46599e7f89be03ec0d1f17e52&v=4",
-                "Mariana Marcelli",
-                "email",
-                "bio",
-                "",
-                "https://github.com/MarianaMarcelli"
-            )
-        )
-        addDeveloper(
-            DeveloperEntity(
-                3,
-                "https://avatars0.githubusercontent.com/u/52797828?s=460&u=b419f032286ae7d7f90f6a8a38e4b2e6510d3710&v=4",
-                "Paulo Silva",
-                "email",
-                "bio",
-                "",
-                "https://github.com/paulo4fs"
-            )
-        )
-        addDeveloper(
-            DeveloperEntity(
-                4,
-                "https://avatars1.githubusercontent.com/u/41019069?s=400&u=a155e71b95b525e9bcce7b108afa45d2c41a755f&v=4",
-                "Renan Damasceno",
-                "email",
-                "bio",
-                "",
-                "https://github.com/renandamasceno"
-            )
-        )
-    }
-
-    private fun addAllDevelopers(list: List<DeveloperEntity>) {
-        _developerList.addAll(list)
-        _developerAdapter.notifyDataSetChanged()
-    }
-
-    private fun addDeveloper(developer: DeveloperEntity) {
+    private fun addDeveloperDb(developer: DeveloperEntity) {
         _developerViewModel.addDeveloper(developer).observe(viewLifecycleOwner, {
             _developerList.add(developer)
             _developerAdapter.notifyDataSetChanged()
         })
     }
 
-    private fun deleteAll() {
-        _developerViewModel.deleteAll().observe(viewLifecycleOwner, {
-            _developerList.clear()
-            _developerAdapter.notifyDataSetChanged()
-        })
+    private fun addAllDevelopers(list: List<DeveloperEntity>) {
+        _developerList.addAll(list)
+        _developerAdapter.notifyDataSetChanged()
     }
 
     override fun linkedinDeveloper(linkedin: String) {
