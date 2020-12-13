@@ -154,6 +154,7 @@ class ApodFragment : Fragment() {
                     id = 0,
                     image = _apodResponse.url,
                     title = _apodResponse.title,
+                    text = "",
                     date = _apodResponse.date,
                     active = true
                 )

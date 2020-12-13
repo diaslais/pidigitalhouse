@@ -32,7 +32,6 @@ class FavoriteAdapter(
 
         holder.favoriteBtn.setOnClickListener {
 
-//            holder.cardView.visibility = View.GONE
             _iFavorite.iFavoriteDelete(
                 holder.adapterPosition,
                 _favorites[holder.adapterPosition],

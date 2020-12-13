@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -20,6 +21,7 @@ import com.nasinha.digitalspace.favorite.adapter.IFavorite
 import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
+import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
 
@@ -86,7 +88,13 @@ class FavoriteFragment : Fragment(), IFavorite {
         val manager = LinearLayoutManager(_view.context)
 
         _favoriteAdapter = FavoriteAdapter(_favoriteList, iFavorite) {
-            Toast.makeText(this.context, it.date, Toast.LENGTH_LONG).show()
+            val bundle = bundleOf(
+                "image" to it.image,
+                "title" to it.title,
+                "text" to it.text,
+                "date" to FavoriteUtils.dateModifier(it.date)
+            )
+            _navController.navigate(R.id.action_favoriteFragment_to_favoriteScreenFragment, bundle)
         }
 
         _list.apply {

@@ -19,6 +19,7 @@ class FavoriteRepository(private val favoriteDao: FavoriteDao) {
                 0,
                 "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/iss064e007861.jpg",
                 "Relaxing Inside the Space Station's Window to the World",
+                "",
                 "2020-12-03",
                 true
             ),
@@ -26,6 +27,7 @@ class FavoriteRepository(private val favoriteDao: FavoriteDao) {
                 0,
                 "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/herbig-haro-jet.jpg",
                 "Awakening Newborn Stars",
+                "",
                 "2020-12-02",
                 true
             ),
@@ -33,6 +35,7 @@ class FavoriteRepository(private val favoriteDao: FavoriteDao) {
                 0,
                 "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/pia20176_main.jpg",
                 "Earth May Be Surrounded by Hairy Dark Matter",
+                "",
                 "2020-12-01",
                 true
             ),
@@ -40,6 +43,7 @@ class FavoriteRepository(private val favoriteDao: FavoriteDao) {
                 0,
                 "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/iss064e007861.jpg",
                 "Relaxing Inside the Space Station's Window to the World",
+                "",
                 "2020-12-03",
                 true
 
@@ -48,6 +52,7 @@ class FavoriteRepository(private val favoriteDao: FavoriteDao) {
                 0,
                 "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/herbig-haro-jet.jpg",
                 "Awakening Newborn Stars",
+                "",
                 "2020-12-02",
                 true
             ),
@@ -55,6 +60,7 @@ class FavoriteRepository(private val favoriteDao: FavoriteDao) {
                 0,
                 "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/pia20176_main.jpg",
                 "Earth May Be Surrounded by Hairy Dark Matter",
+                "",
                 "2020-12-01",
                 true
             )
