@@ -13,6 +13,8 @@ data class FavoriteEntity(
     @ColumnInfo
     var title: String?,
     @ColumnInfo
+    var text: String?,
+    @ColumnInfo
     var date: String,
     @ColumnInfo
     var active: Boolean

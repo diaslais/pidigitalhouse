@@ -145,6 +145,9 @@
         <action
             android:id="@+id/action_favoriteFragment_to_explorationFragment"
             app:destination="@id/explorationFragment" />
+        <action
+            android:id="@+id/action_favoriteFragment_to_favoriteScreenFragment"
+            app:destination="@id/favoriteScreenFragment" />
     </fragment>
     <fragment
         android:id="@+id/quizFragment"
@@ -191,6 +194,15 @@
             android:id="@+id/action_settingsFragment_to_fatoAstronomicoFragment2"
             app:destination="@id/fatoAstronomicoFragment2" />
     </dialog>
+    <fragment
+        android:id="@+id/favoriteScreenFragment"
+        android:name="com.nasinha.digitalspace.favoritescreen.view.FavoriteScreenFragment"
+        android:label="fragment_favorite_screen"
+        tools:layout="@layout/fragment_favorite_screen" >
+        <action
+            android:id="@+id/action_favoriteScreenFragment_to_favoriteFragment"
+            app:destination="@id/favoriteFragment" />
+    </fragment>
 
 
 </navigation>

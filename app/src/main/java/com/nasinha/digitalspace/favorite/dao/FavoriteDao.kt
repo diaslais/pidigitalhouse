@@ -11,15 +11,6 @@ interface FavoriteDao {
     @Query("SELECT * FROM Favorite")
     suspend fun getAll(): List<FavoriteEntity>
 
-    @Update
-    suspend fun updateOne(favorite: FavoriteEntity)
-
-    @Query("UPDATE Favorite SET active=:active WHERE active=:activeStatus ")
-    suspend fun updateActiveAll(
-        active: Boolean = true,
-        activeStatus: Boolean = false
-    )
-
     @Delete
     suspend fun deleteOne(favorite: FavoriteEntity)
 

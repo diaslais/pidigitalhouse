@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -20,6 +21,7 @@ import com.squareup.picasso.Picasso
 
 
 class EpicFragment : Fragment() {
+    private lateinit var _view: View
     private lateinit var imageId: String
 
     private lateinit var yearId: String
@@ -37,6 +39,7 @@ class EpicFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        _view = view
 
         val viewModel = ViewModelProvider(
             this, EpicViewModel.EpicViewModelFactory(
@@ -57,16 +60,19 @@ class EpicFragment : Fragment() {
         view.findViewById<ImageButton>(R.id.btnBackEpic).setOnClickListener {
             activity?.onBackPressed()
         }
+
+        showLoading(true)
     }
 
 
     private fun getImage(it: List<EpicResponseModel>?, view: View) {
+        showLoading(false)
         imageId = it?.get(0)?.image.toString() + ".png"
-
     }
 
     @SuppressLint("SetTextI18n")
     private fun getLastDay(it: List<String>?, view: View) {
+        showLoading(false)
         val respost = it?.size
 
         val lastday = respost?.minus(1)?.let { it1 -> it[it1] }
@@ -81,28 +87,31 @@ class EpicFragment : Fragment() {
 
         try {
             if (it != null) {
-                if(it[0].isNotEmpty()){
+                if (it[0].isNotEmpty()) {
 
-                    txtEpic.text = getString(R.string.updateMessage) + "${dayId}/${monthId}/${yearId}"
+                    txtEpic.text =
+                        getString(R.string.updateMessage) + "${dayId}/${monthId}/${yearId}"
 
 
                     picasso.load("https://epic.gsfc.nasa.gov/archive/natural/${yearId}/${monthId}/${dayId}/png/${imageId}")
                         .into(imgEpic)
 
                 }
-            }else {
+            } else {
                 throw RuntimeException()
             }
 
-        }catch (exception: RuntimeException){
+        } catch (exception: RuntimeException) {
             txtEpic.text = getString(R.string.epic_message)
             picasso.load(R.drawable.epic_gatinho).into(imgEpic)
 
         }
 
 
-
     }
 
-
+    private fun showLoading(isLoading: Boolean) {
+        val progressBar = _view.findViewById<LinearLayout>(R.id.llProgressEpic)
+        progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
 }

@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
@@ -20,6 +21,7 @@ import com.nasinha.digitalspace.favorite.adapter.IFavorite
 import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
+import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
 
@@ -30,6 +32,7 @@ class FavoriteFragment : Fragment(), IFavorite {
     private lateinit var _navController: NavController
     private lateinit var _favoriteAdapter: FavoriteAdapter
     private lateinit var iFavorite: IFavorite
+
 
     private var _favoriteList = mutableListOf<FavoriteEntity>()
 
@@ -53,26 +56,8 @@ class FavoriteFragment : Fragment(), IFavorite {
         _navController = findNavController()
 
         backBtn()
-
-//        criado view model
-        addViewModel(view)
-
-//        criado recycler view
-        _list = view.findViewById(R.id.recyclerViewFavorite)
-        val manager = LinearLayoutManager(view.context)
-
-//        passagem da lista de favoritos pro adapter
-        _favoriteAdapter = FavoriteAdapter(_favoriteList, iFavorite) {
-            Toast.makeText(this.context, it.date, Toast.LENGTH_LONG).show()
-        }
-
-//        passagem de informações pro recyclerview
-        _list.apply {
-            setHasFixedSize(true)
-            layoutManager = manager
-            adapter = _favoriteAdapter
-        }
-
+        addViewModel()
+        addRecyclerView()
 //        activeAll()
         initialize()
 //        addFavoriteInitializer()
@@ -87,88 +72,63 @@ class FavoriteFragment : Fragment(), IFavorite {
         }
     }
 
-    fun addViewModel(view: View) {
+    private fun addViewModel() {
         _favoriteViewModel = ViewModelProvider(
             this,
             FavoriteViewModelFactory(
                 FavoriteRepository(
-                    AppDatabase.getDatabase(view.context).favoriteDao()
+                    AppDatabase.getDatabase(_view.context).favoriteDao()
                 )
             )
         ).get(FavoriteViewModel::class.java)
     }
 
+    private fun addRecyclerView() {
+        _list = _view.findViewById(R.id.recyclerViewFavorite)
+        val manager = LinearLayoutManager(_view.context)
+
+        _favoriteAdapter = FavoriteAdapter(_favoriteList, iFavorite) {
+            val bundle = bundleOf(
+                "image" to it.image,
+                "title" to it.title,
+                "text" to it.text,
+                "date" to FavoriteUtils.dateModifier(it.date)
+            )
+            _navController.navigate(R.id.action_favoriteFragment_to_favoriteScreenFragment, bundle)
+        }
+
+        _list.apply {
+            setHasFixedSize(true)
+            layoutManager = manager
+            adapter = _favoriteAdapter
+        }
+    }
+
     private fun initialize() {
         _favoriteViewModel.getAllFavorite().observe(viewLifecycleOwner, {
-            addAll(it)
+            if (it.isEmpty()) {
+                setAllFavoritesDb()
+            }
+            addAllFavorites(it)
         })
     }
 
-    private fun activeAll() {
-        _favoriteViewModel.updateActiveAll(true, false).observe(viewLifecycleOwner, {})
+    private fun setAllFavoritesDb() {
+        _favoriteViewModel.setAllFavorites().observe(viewLifecycleOwner, {
+            it.forEach { favorite ->
+                addFavoriteDb(favorite)
+            }
+        })
     }
 
-
-    // lista de dados mocados para teste
-    private fun addFavoriteInitializer() {
-        addFavorite(
-            FavoriteEntity(
-                0,
-                "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/iss064e007861.jpg",
-                "Relaxing Inside the Space Station's Window to the World",
-                "2020-12-03",
-                true
-            )
-        )
-        addFavorite(
-            FavoriteEntity(
-                0,
-                "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/herbig-haro-jet.jpg",
-                "Awakening Newborn Stars",
-                "2020-12-02",
-                true
-            )
-        )
-        addFavorite(
-            FavoriteEntity(
-                0,
-                "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/pia20176_main.jpg",
-                "Earth May Be Surrounded by Hairy Dark Matter",
-                "2020-12-01",
-                true
-            )
-        )
-        addFavorite(
-            FavoriteEntity(
-                0,
-                "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/iss064e007861.jpg",
-                "Relaxing Inside the Space Station's Window to the World",
-                "2020-12-03",
-                true
-            )
-        )
-        addFavorite(
-            FavoriteEntity(
-                0,
-                "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/herbig-haro-jet.jpg",
-                "Awakening Newborn Stars",
-                "2020-12-02",
-                true
-            )
-        )
-        addFavorite(
-            FavoriteEntity(
-                0,
-                "https://www.nasa.gov/sites/default/files/styles/image_card_4x3_ratio/public/thumbnails/image/pia20176_main.jpg",
-                "Earth May Be Surrounded by Hairy Dark Matter",
-                "2020-12-01",
-                true
-            )
-        )
+    private fun addFavoriteDb(favorite: FavoriteEntity) {
+        _favoriteViewModel.addFavorite(favorite).observe(viewLifecycleOwner, {
+            _favoriteList.add(favorite)
+            _favoriteAdapter.notifyDataSetChanged()
+        })
     }
 
-//    modificadores do adapter
-    private fun addAll(list: List<FavoriteEntity>) {
+    private fun addAllFavorites(list: List<FavoriteEntity>) {
         _favoriteList.addAll(list)
         _favoriteAdapter.notifyDataSetChanged()
     }
@@ -180,23 +140,14 @@ class FavoriteFragment : Fragment(), IFavorite {
         })
     }
 
-    fun addFavorite(favorite: FavoriteEntity) {
-        _favoriteViewModel.addFavorite(favorite).observe(viewLifecycleOwner, {
-            _favoriteList.add(favorite)
-            _favoriteAdapter.notifyDataSetChanged()
-        })
-    }
-
-    fun deleteOneFavorite(position: Int, favorite: FavoriteEntity) {
+    private fun deleteOneFavoriteDb(position: Int, favorite: FavoriteEntity) {
         _favoriteViewModel.deleteOne(favorite).observe(viewLifecycleOwner, {
-            _favoriteList.let {
-                it.removeAt(position)
-            }
+            _favoriteList.removeAt(position)
             _favoriteAdapter.notifyItemRemoved(position)
         })
     }
 
-    override fun deleteFavorite(
+    override fun iFavoriteDelete(
         position: Int,
         favorite: FavoriteEntity,
         cardView: MaterialCardView
@@ -205,7 +156,7 @@ class FavoriteFragment : Fragment(), IFavorite {
         alertDialog.setTitle(getString(R.string.excluir_favorito))
         alertDialog.setMessage(getString(R.string.voce_quer_mesmo))
         alertDialog.setPositiveButton(getString(R.string.sim)) { _, _ ->
-            deleteOneFavorite(position, favorite)
+            deleteOneFavoriteDb(position, favorite)
             Toast.makeText(_view.context, getString(R.string.Item_removido), Toast.LENGTH_SHORT)
                 .show()
         }
@@ -215,7 +166,7 @@ class FavoriteFragment : Fragment(), IFavorite {
         alertDialog.show()
     }
 
-    override fun shareFavorite(favorite: FavoriteEntity) {
+    override fun iFavoriteShare(favorite: FavoriteEntity) {
         Toast.makeText(_view.context, "Share clicado", Toast.LENGTH_SHORT).show()
     }
 }
