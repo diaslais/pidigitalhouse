@@ -22,7 +22,11 @@
         android:id="@+id/apodFragment"
         android:name="com.nasinha.digitalspace.apod.view.ApodFragment"
         android:label="fragment_apod"
-        tools:layout="@layout/fragment_apod" />
+        tools:layout="@layout/fragment_apod" >
+        <action
+            android:id="@+id/action_apodFragment_to_landsScapeApodFragment"
+            app:destination="@id/landsScapeApodFragment" />
+    </fragment>
     <fragment
         android:id="@+id/signupFragment"
         android:name="com.nasinha.digitalspace.signup.view.SignupFragment"
@@ -203,9 +207,11 @@
             android:id="@+id/action_favoriteScreenFragment_to_favoriteFragment"
             app:destination="@id/favoriteFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/landsScapeApodFragment"
+        android:name="com.nasinha.digitalspace.apod.view.LandsScapeApodFragment"
+        android:label="fragment_lands_scape_apod"
+        tools:layout="@layout/fragment_lands_scape_apod" />
 
 
 </navigation>
-
-
-
