@@ -8,8 +8,10 @@ import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
@@ -18,19 +20,14 @@ import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.apod.model.ApodResponseModel
 import com.nasinha.digitalspace.apod.repository.ApodRepository
 import com.nasinha.digitalspace.apod.viewmodel.ApodViewModel
-import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
-import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
-import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
-import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
+import com.nasinha.digitalspace.favorite.view.FavoriteFragment
 import com.squareup.picasso.Picasso
 
 
 class ApodFragment : Fragment() {
     private lateinit var _view: View
     private lateinit var _apodResponse: ApodResponseModel
-    private lateinit var _favoriteViewModel: FavoriteViewModel
-    private lateinit var _favoriteItem: FavoriteEntity
 
 
     val options = TranslatorOptions.Builder()
@@ -39,6 +36,10 @@ class ApodFragment : Fragment() {
         .build()
 
     private val englishPortugueseTranslator = Translation.getClient(options)
+
+    /*private var _favoriteViewModel =
+        ViewModelProvider(requireActivity()).get(FavoriteViewModel::class.java)*/
+    private var _favoriteFragment = FavoriteFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -62,7 +63,6 @@ class ApodFragment : Fragment() {
         val txtExplanation = _view.findViewById<TextView>(R.id.txtExplanationApod)
         val txtTitle = _view.findViewById<TextView>(R.id.txtTitle)
 
-        addFavoriteViewModel()
 
         val viewModel = ViewModelProvider(
             this, ApodViewModel.ApodViewModelFactory(
@@ -93,16 +93,6 @@ class ApodFragment : Fragment() {
         }
     }
 
-    private fun addFavoriteViewModel() {
-        _favoriteViewModel = ViewModelProvider(
-            this,
-            FavoriteViewModelFactory(
-                FavoriteRepository(
-                    AppDatabase.getDatabase(_view.context).favoriteDao()
-                )
-            )
-        ).get(FavoriteViewModel::class.java)
-    }
 
     private fun mostrarResultados(it: ApodResponseModel, view: View) {
 
@@ -142,6 +132,17 @@ class ApodFragment : Fragment() {
                 .load(it.url)
                 .into(imgLoad)
         }
+        landScapeMode(it.url)
+
+    }
+    private fun landScapeMode(urlImg: String) {
+        val imgLoad = _view.findViewById<ImageView>(R.id.imgApod)
+        val navController = NavHostFragment.findNavController(this)
+
+        imgLoad.setOnClickListener {
+            val bundle = bundleOf("IMGAPOD" to urlImg)
+            navController.navigate(R.id.action_apodFragment_to_landsScapeApodFragment, bundle)
+        }
 
     }
 
@@ -150,15 +151,16 @@ class ApodFragment : Fragment() {
         val btnAddFavorite = _view.findViewById<CheckBox>(R.id.ibFavoriteButtonFato)
         btnAddFavorite.setOnCheckedChangeListener { _, isChecked ->
             if (isChecked) {
-                _favoriteItem = FavoriteEntity(
-                    id = 0,
-                    image = _apodResponse.url,
-                    title = _apodResponse.title,
-                    text = "",
-                    date = _apodResponse.date,
-                    active = true
-                )
-                _favoriteViewModel.addFavorite(_favoriteItem)
+//                val favorite = FavoriteEntity(
+//                    id = 0,
+//                    image = _apodResponse.url,
+//                    title = _apodResponse.title,
+//                    date = _apodResponse.date,
+//                    active = true
+//                )
+//                _favoriteViewModel.addFavorite(favorite)
+//                _favoriteFragment.addViewModel(_view)
+//                _favoriteFragment.addFavorite(favorite)
             }
         }
     }
