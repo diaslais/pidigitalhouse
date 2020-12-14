@@ -19,9 +19,9 @@
             app:enterAnim="@android:anim/slide_in_left" />
     </fragment>
     <fragment
-        android:id="@+id/fatoAstronomicoFragment2"
+        android:id="@+id/apodFragment"
         android:name="com.nasinha.digitalspace.apod.view.ApodFragment"
-        android:label="fragment_fato_astronomico"
+        android:label="fragment_apod"
         tools:layout="@layout/fragment_apod" />
     <fragment
         android:id="@+id/signupFragment"
@@ -34,9 +34,9 @@
             app:enterAnim="@android:anim/slide_in_left" />
     </fragment>
     <fragment
-        android:id="@+id/bibliografiaFragment"
-        android:name="com.nasinha.digitalspace.exploration.view.BibliographyFragment"
-        android:label="fragment_bibliografia"
+        android:id="@+id/bibliographyFragment"
+        android:name="com.nasinha.digitalspace.bibliography.view.BibliographyFragment"
+        android:label="fragment_bibliography"
         tools:layout="@layout/fragment_bibliography" />
     <fragment
         android:id="@+id/explorationFragment"
@@ -44,14 +44,14 @@
         android:label="fragment_exploration"
         tools:layout="@layout/fragment_exploration">
         <action
-            android:id="@+id/action_explorationFragment_to_viaLacteaFragment"
-            app:destination="@id/viaLacteaFragment" />
+            android:id="@+id/action_explorationFragment_to_galaxyFragment"
+            app:destination="@id/galaxyFragment" />
         <action
-            android:id="@+id/action_explorationFragment_to_bibliografiaFragment"
-            app:destination="@id/bibliografiaFragment" />
+            android:id="@+id/action_explorationFragment_to_bibliographyFragment"
+            app:destination="@id/bibliographyFragment" />
         <action
-            android:id="@+id/action_explorationFragment_to_fatoAstronomicoFragment2"
-            app:destination="@id/fatoAstronomicoFragment2" />
+            android:id="@+id/action_explorationFragment_to_apodFragment"
+            app:destination="@id/apodFragment" />
         <action
             android:id="@+id/action_explorationFragment_to_epicFragment"
             app:destination="@id/epicFragment" />
@@ -82,22 +82,22 @@
 
     </fragment>
     <fragment
-        android:id="@+id/sistemaSolarFragment"
-        android:name="com.nasinha.digitalspace.exploration.view.SolarSystemFragment"
+        android:id="@+id/solarSystemFragment"
+        android:name="com.nasinha.digitalspace.space.view.SolarSystemFragment"
         android:label="fragment_sistema_solar"
         tools:layout="@layout/fragment_solar_system">
         <action
-            android:id="@+id/action_sistemaSolarFragment_to_planetsMenuFragment"
+            android:id="@+id/action_solarSystemFragment_to_planetsMenuFragment"
             app:destination="@id/planetsMenuFragment" />
     </fragment>
     <fragment
-        android:id="@+id/viaLacteaFragment"
-        android:name="com.nasinha.digitalspace.exploration.view.GalaxyFragment"
+        android:id="@+id/galaxyFragment"
+        android:name="com.nasinha.digitalspace.space.view.GalaxyFragment"
         android:label="fragment_via_lactea"
         tools:layout="@layout/fragment_galaxy">
         <action
-            android:id="@+id/action_viaLacteaFragment_to_sistemaSolarFragment"
-            app:destination="@id/sistemaSolarFragment" />
+            android:id="@+id/action_galaxyFragment_to_solarSystemFragment"
+            app:destination="@id/solarSystemFragment" />
     </fragment>
     <fragment
         android:id="@+id/epicFragment"
@@ -191,8 +191,8 @@
         android:label="fragment_settings"
         tools:layout="@layout/fragment_settings" >
         <action
-            android:id="@+id/action_settingsFragment_to_fatoAstronomicoFragment2"
-            app:destination="@id/fatoAstronomicoFragment2" />
+            android:id="@+id/action_settingsFragment_to_apodFragment"
+            app:destination="@id/apodFragment" />
     </dialog>
     <fragment
         android:id="@+id/favoriteScreenFragment"

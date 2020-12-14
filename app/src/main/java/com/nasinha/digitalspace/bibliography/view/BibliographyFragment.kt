@@ -1,4 +1,4 @@
-package com.nasinha.digitalspace.exploration.view
+package com.nasinha.digitalspace.bibliography.view
 
 import android.os.Bundle
 import android.view.LayoutInflater

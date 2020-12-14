@@ -95,7 +95,7 @@ class SettingsFragment : DialogFragment() {
                     val bundle = bundleOf(
                         "VALIDATION" to "isChecked"
                     )
-                    navController.navigate(R.id.fatoAstronomicoFragment2, bundle)
+                    navController.navigate(R.id.apodFragment, bundle)
 
                 }
                 alertDialog.setNegativeButton(getString(R.string.nao)) { dialog, _ ->

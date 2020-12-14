@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".exploration.view.GalaxyFragment"
+    tools:context=".space.view.GalaxyFragment"
     android:background="@drawable/backkground_vialactea_text"
     android:fillViewport="true">
 
