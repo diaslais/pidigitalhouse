@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.gms.google-services'
 
 android {
     compileSdkVersion 30
@@ -16,7 +17,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.renan.digitalspace"
+        applicationId "com.nasinha.digitalspace"
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
@@ -65,5 +66,9 @@ dependencies {
     implementation 'androidx.lifecycle:lifecycle-livedata-ktx:2.2.0'
     implementation 'androidx.lifecycle:lifecycle-runtime-ktx:2.2.0'
     implementation 'com.google.mlkit:translate:16.1.1'
+    implementation 'com.facebook.android:facebook-android-sdk:4.42.0'
+    implementation platform('com.google.firebase:firebase-bom:26.1.1')
+    implementation 'com.google.firebase:firebase-analytics-ktx'
+
 
 }
