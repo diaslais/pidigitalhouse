@@ -47,7 +47,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 R.id.itemBibliografiaMenu -> {
                     _drawerLayout.closeDrawer(Gravity.LEFT, false)
-                    _navController.navigate(R.id.action_explorationFragment_to_bibliografiaFragment)
+                    _navController.navigate(R.id.action_explorationFragment_to_bibliographyFragment)
                 }
                 R.id.itemChangeNameMenu -> _navController.navigate(R.id.action_explorationFragment_to_changeNameFragment)
                 R.id.itemChangeEmailMenu -> _navController.navigate(R.id.action_explorationFragment_to_changeEmailFragment)

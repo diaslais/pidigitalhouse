@@ -36,10 +36,10 @@ class ExplorationFragment : Fragment() {
             drawerLayout?.openDrawer(Gravity.LEFT)
         }
         view.findViewById<MaterialCardView>(R.id.cardExplore).setOnClickListener {
-            navController.navigate(R.id.action_explorationFragment_to_viaLacteaFragment)
+            navController.navigate(R.id.action_explorationFragment_to_galaxyFragment)
         }
         view.findViewById<MaterialCardView>(R.id.cardAstronomicalFact).setOnClickListener {
-            navController.navigate(R.id.action_explorationFragment_to_fatoAstronomicoFragment2)
+            navController.navigate(R.id.action_explorationFragment_to_apodFragment)
         }
         view.findViewById<MaterialCardView>(R.id.cardEarth).setOnClickListener {
             navController.navigate(R.id.action_explorationFragment_to_epicFragment)
@@ -51,7 +51,7 @@ class ExplorationFragment : Fragment() {
             navController.navigate(R.id.action_explorationFragment_to_quizFragment)
         }
         view.findViewById<MaterialButton>(R.id.btnBibliography).setOnClickListener {
-            navController.navigate(R.id.action_explorationFragment_to_bibliografiaFragment)
+            navController.navigate(R.id.action_explorationFragment_to_bibliographyFragment)
         }
 
     }

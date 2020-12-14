@@ -1,4 +1,4 @@
-package com.nasinha.digitalspace.exploration.view
+package com.nasinha.digitalspace.space.view
 
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -26,7 +26,7 @@ class GalaxyFragment : Fragment() {
         val navController = findNavController()
 
         view.findViewById<MaterialButton>(R.id.btnConhecaSistemaSolar).setOnClickListener {
-            navController.navigate(R.id.action_viaLacteaFragment_to_sistemaSolarFragment)
+            navController.navigate(R.id.action_galaxyFragment_to_solarSystemFragment)
         }
         view.findViewById<ImageButton>(R.id.btnBackMilkyWay).setOnClickListener {
             activity?.onBackPressed()
