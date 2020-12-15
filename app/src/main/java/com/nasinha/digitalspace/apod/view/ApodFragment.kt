@@ -5,10 +5,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -41,11 +38,6 @@ class ApodFragment : Fragment() {
 
     private val englishPortugueseTranslator = Translation.getClient(options)
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -77,10 +69,9 @@ class ApodFragment : Fragment() {
             try {
                 mostrarResultados(it as ApodResponseModel, view)
             } catch (e: Exception) {
-                val checkBoxFavorite = _view.findViewById<CheckBox>(R.id.cbFavoriteApod)
-                checkBoxFavorite.visibility = View.GONE
-                val shareButton = _view.findViewById<ImageButton>(R.id.ibShareFavorite)
-                shareButton.visibility = View.GONE
+                showLoading(false)
+                showShareFavorite(false)
+
                 e.message
                 Picasso.get()
                     .load(R.drawable.gatinho)
@@ -92,11 +83,12 @@ class ApodFragment : Fragment() {
 
         })
 
-        val navController = findNavController()
-
         view.findViewById<ImageButton>(R.id.btnBackApod).setOnClickListener {
             activity?.onBackPressed()
         }
+
+        showLoading(true)
+        showShareFavorite(false)
     }
 
     private fun addFavoriteViewModel() {
@@ -112,6 +104,8 @@ class ApodFragment : Fragment() {
 
 
     private fun mostrarResultados(it: ApodResponseModel, view: View) {
+        showLoading(false)
+        showShareFavorite(true)
 
         val imgLoad = _view.findViewById<ImageView>(R.id.imgApod)
         val txtExplanation = _view.findViewById<TextView>(R.id.txtExplanationApod)
@@ -192,6 +186,18 @@ class ApodFragment : Fragment() {
                     .observe(viewLifecycleOwner, { })
             }
         }
+    }
+
+    private fun showLoading(isLoading: Boolean) {
+        val progressBar = _view.findViewById<LinearLayout>(R.id.llProgressApod)
+        progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun showShareFavorite(isShown: Boolean) {
+        val checkBoxFavorite = _view.findViewById<CheckBox>(R.id.cbFavoriteApod)
+        val shareButton = _view.findViewById<ImageButton>(R.id.ibShareFavorite)
+        checkBoxFavorite.visibility = if (isShown) View.VISIBLE else View.GONE
+        shareButton.visibility = if (isShown) View.VISIBLE else View.GONE
     }
 
 }

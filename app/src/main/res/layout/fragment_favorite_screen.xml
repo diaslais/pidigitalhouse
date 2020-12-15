@@ -50,11 +50,11 @@
             android:id="@+id/ibShareFavoriteScreen"
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
-            android:tint="@color/colorWhite"
             android:layout_marginEnd="@dimen/dim10dp"
             android:background="@color/colorTransparent"
             android:padding="@dimen/dim10dp"
-            android:src="@drawable/ic_baseline_share_24" />
+            android:src="@drawable/ic_baseline_share_24"
+            android:tint="@color/colorWhite" />
     </LinearLayout>
 
     <TextView
@@ -69,6 +69,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="@dimen/dim10dp"
         android:layout_weight="1">
 
         <TextView
