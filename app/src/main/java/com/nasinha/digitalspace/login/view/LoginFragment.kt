@@ -185,6 +185,7 @@ class LoginFragment : Fragment() {
         super.onActivityResult(requestCode, resultCode, data)
         callbackManager.onActivityResult(requestCode, resultCode, data)
     }
+
     private fun loginFacebook() {
         val instanceFirebase = LoginManager.getInstance()
 
@@ -192,8 +193,10 @@ class LoginFragment : Fragment() {
         instanceFirebase.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
 
             override fun onSuccess(loginResult: LoginResult) {
-                val credential: AuthCredential = FacebookAuthProvider.getCredential(loginResult.accessToken.token)
-                FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener { irParaHome(loginResult.accessToken.userId) }
+                val credential: AuthCredential =
+                    FacebookAuthProvider.getCredential(loginResult.accessToken.token)
+                FirebaseAuth.getInstance().signInWithCredential(credential)
+                    .addOnCompleteListener { irParaHome(loginResult.accessToken.userId) }
             }
 
             override fun onCancel() {
@@ -205,6 +208,7 @@ class LoginFragment : Fragment() {
             }
         })
     }
+
     private fun irParaHome(uiid: String) {
         val navController = Navigation.findNavController(_view)
         AppUtil.salvarIdUsuario(_view.context, uiid)
