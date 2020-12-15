@@ -79,6 +79,8 @@ class ApodFragment : Fragment() {
             } catch (e: Exception) {
                 val checkBoxFavorite = _view.findViewById<CheckBox>(R.id.cbFavoriteApod)
                 checkBoxFavorite.visibility = View.GONE
+                val shareButton = _view.findViewById<ImageButton>(R.id.ibShareFavorite)
+                shareButton.visibility = View.GONE
                 e.message
                 Picasso.get()
                     .load(R.drawable.gatinho)
