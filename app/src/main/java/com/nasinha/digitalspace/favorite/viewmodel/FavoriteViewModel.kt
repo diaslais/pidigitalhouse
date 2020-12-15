@@ -24,16 +24,22 @@ class FavoriteViewModel(
         emit(true)
     }
 
-    fun deleteAll() = liveData(Dispatchers.IO) {
-        repository.deleteAll()
+    fun checkFavorite(image: String) = liveData(Dispatchers.IO) {
+        val check = repository.checkFavorite(image)
+        if (check > 0) {
+            emit(true)
+        } else {
+            emit(false)
+        }
+    }
+
+    fun deleteFavoriteItem(image: String) = liveData(Dispatchers.IO) {
+        repository.deleteFavoriteItem(image)
         emit(true)
     }
 
-    fun setAllFavorites() = liveData(Dispatchers.IO) {
-        val favorites = mutableListOf<FavoriteEntity>()
-        repository.setFavorites {
-            favorites.addAll(it)
-        }
-        emit(favorites)
+    fun deleteAll() = liveData(Dispatchers.IO) {
+        repository.deleteAll()
+        emit(true)
     }
 }

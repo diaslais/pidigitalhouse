@@ -1,6 +1,7 @@
 package com.nasinha.digitalspace.apod.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -115,9 +116,12 @@ class ApodFragment : Fragment() {
         val txtTitle = _view.findViewById<TextView>(R.id.txtTitle)
         val validation = arguments?.getString("VALIDATION")
 
-
         _apodResponse = it
-        btnFavorite()
+
+        _favoriteViewModel.checkFavorite(it.url).observe(viewLifecycleOwner, {
+            favoriteIsActive(it)
+            btnFavorite()
+        })
 
         if (validation == "isChecked") {
             englishPortugueseTranslator.translate(it.title).addOnSuccessListener {
@@ -150,6 +154,12 @@ class ApodFragment : Fragment() {
 
     }
 
+    private fun favoriteIsActive(isChecked: Boolean) {
+        Log.d("teste", isChecked.toString())
+        val btnAddFavorite = _view.findViewById<CheckBox>(R.id.cbFavoriteApod)
+        btnAddFavorite.isChecked = isChecked
+    }
+
     private fun landScapeMode(urlImg: String) {
         val imgLoad = _view.findViewById<ImageView>(R.id.imgApod)
         val navController = NavHostFragment.findNavController(this)
@@ -165,16 +175,19 @@ class ApodFragment : Fragment() {
     private fun btnFavorite() {
         val btnAddFavorite = _view.findViewById<CheckBox>(R.id.cbFavoriteApod)
         btnAddFavorite.setOnCheckedChangeListener { _, isChecked ->
+            val favorite = FavoriteEntity(
+                id = 0,
+                image = _apodResponse.url,
+                title = _apodResponse.title,
+                text = _apodResponse.explanation,
+                date = _apodResponse.date,
+                active = true
+            )
             if (isChecked) {
-                val favorite = FavoriteEntity(
-                    id = 0,
-                    image = _apodResponse.url,
-                    title = _apodResponse.title,
-                    text = _apodResponse.explanation,
-                    date = _apodResponse.date,
-                    active = true
-                )
-                _favoriteViewModel.addFavorite(favorite)
+                _favoriteViewModel.addFavorite(favorite).observe(viewLifecycleOwner, { })
+            } else {
+                _favoriteViewModel.deleteFavoriteItem(favorite.image)
+                    .observe(viewLifecycleOwner, { })
             }
         }
     }

@@ -24,7 +24,7 @@
         android:id="@+id/imgApod"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dim300dp"
-        android:layout_marginTop="@dimen/dim20dp"
+        android:layout_marginTop="@dimen/dim10dp"
         android:layout_marginBottom="@dimen/dim9dp"
         android:contentDescription="@string/todo"
         android:padding="@dimen/dim20dp"
