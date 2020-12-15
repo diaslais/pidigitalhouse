@@ -28,12 +28,7 @@ class FavoriteScreenFragment : Fragment() {
 
         _view = view
         closeHandler()
-        val imageArgument = arguments?.getString("image")!!
-        val titleArgument = arguments?.getString("title")
-        val textArgument = arguments?.getString("text")
-        val dateArgument = arguments?.getString("date")!!
-
-        dataHandler(imageArgument, titleArgument, textArgument, dateArgument)
+        argumentsHandler()
     }
 
     private fun closeHandler() {
@@ -44,12 +39,12 @@ class FavoriteScreenFragment : Fragment() {
         }
     }
 
-    private fun dataHandler(
-        imageArgument: String,
-        titleArgument: String?,
-        textArgument: String?,
-        dateArgument: String
-    ) {
+    private fun argumentsHandler() {
+        val imageArgument = arguments?.getString("image")!!
+        val titleArgument = arguments?.getString("title")
+        val textArgument = arguments?.getString("text")
+        val dateArgument = arguments?.getString("date")!!
+
         val image = _view.findViewById<ImageView>(R.id.ivImageFavoriteScreen)
         val title = _view.findViewById<TextView>(R.id.tvTitleFavoriteScreen)
         val text = _view.findViewById<TextView>(R.id.tvTextFavoriteScreen)

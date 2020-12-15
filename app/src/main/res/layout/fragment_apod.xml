@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -13,61 +13,71 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dim10dp"
-        android:padding="@dimen/dim5dp"
         android:layout_marginTop="@dimen/dim10dp"
         android:layout_marginBottom="@dimen/dim10dp"
         android:background="@color/colorTransparent"
-        android:src="@drawable/ic_baseline_arrow_back_24"
-        app:layout_constraintBottom_toTopOf="@+id/imgApod"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        android:contentDescription="@string/todo" />
-
+        android:contentDescription="@string/todo"
+        android:padding="@dimen/dim10dp"
+        android:src="@drawable/ic_baseline_arrow_back_24" />
 
     <ImageView
         android:id="@+id/imgApod"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dim300dp"
-        android:layout_marginTop="@dimen/dim30dp"
+        android:layout_marginTop="@dimen/dim10dp"
         android:layout_marginBottom="@dimen/dim9dp"
+        android:contentDescription="@string/todo"
         android:padding="@dimen/dim20dp"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/ibFavoriteButtonFato"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:srcCompat="@tools:sample/avatars[3]"
-        android:contentDescription="@string/todo" />
+        tools:srcCompat="@tools:sample/avatars[3]" />
 
-    <TextView
-        android:id="@+id/txtTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/dim20dp"
-        android:layout_marginStart="@dimen/dim24dp"
-        android:layout_marginTop="@dimen/dim10dp"
-        android:layout_weight="1"
-        android:ellipsize="end"
-        android:fontFamily="@font/ubuntu_bold"
-        android:textColor="@color/colorWhite"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/ibFavoriteButtonFato"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imgApod"
-        tools:text="@tools:sample/lorem" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
+        <TextView
+            android:id="@+id/txtTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/dim20dp"
+            android:layout_marginStart="@dimen/dim24dp"
+            android:layout_marginTop="@dimen/dim10dp"
+            android:layout_weight="1"
+            android:ellipsize="end"
+            android:fontFamily="@font/ubuntu_bold"
+            android:maxLines="2"
+            android:textColor="@color/colorWhite"
+            android:textStyle="bold"
+            tools:text="@tools:sample/lorem[20]" />
+
+        <ImageButton
+            android:id="@+id/ibShareFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_marginStart="@dimen/dim10dp"
+            android:background="@color/colorTransparent"
+            android:padding="@dimen/dim10dp"
+            android:tint="@color/colorWhite"
+            android:src="@drawable/ic_baseline_share_24" />
+
+        <CheckBox
+            android:id="@+id/cbFavoriteApod"
+            android:layout_width="@dimen/dim52dp"
+            android:layout_height="match_parent"
+            android:layout_gravity="center"
+            android:background="@color/colorTransparent"
+            android:button="@drawable/sl_favorite_24dp"
+            android:contentDescription="@string/botao_de_favoritos"
+            app:buttonTint="@color/colorWhite" />
+    </LinearLayout>
 
     <ScrollView
         android:id="@+id/scrollView2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_marginBottom="@dimen/dim25dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ibFavoriteButtonFato">
+        android:layout_weight="1"
+        app:layout_constraintTop_toBottomOf="@+id/cbFavoriteApod">
 
         <TextView
             android:id="@+id/txtExplanationApod"
@@ -77,24 +87,7 @@
             android:fontFamily="@font/ubuntu_bold"
             android:scrollbars="vertical"
             android:textColor="@color/colorWhite"
-            tools:text="blavboijasiojdaiojdjas" />
-
+            tools:text="@tools:sample/lorem/random" />
     </ScrollView>
 
-    <CheckBox
-        android:id="@+id/ibFavoriteButtonFato"
-        android:layout_width="@dimen/dim52dp"
-        android:layout_height="@dimen/dim53dp"
-        android:layout_gravity="center"
-        android:layout_marginTop="@dimen/dim9dp"
-        android:layout_marginEnd="@dimen/dim16dp"
-        android:background="@color/colorTransparent"
-        android:button="@drawable/sl_favorite_24dp"
-        android:contentDescription="@string/botao_de_favoritos"
-        app:buttonTint="@color/colorWhite"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtTitle"
-        app:layout_constraintTop_toBottomOf="@+id/imgApod" />
-
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</LinearLayout>

@@ -1,6 +1,7 @@
 package com.nasinha.digitalspace.apod.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -20,15 +21,18 @@ import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.apod.model.ApodResponseModel
 import com.nasinha.digitalspace.apod.repository.ApodRepository
 import com.nasinha.digitalspace.apod.viewmodel.ApodViewModel
+import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
-import com.nasinha.digitalspace.favorite.view.FavoriteFragment
+import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
+import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
+import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
 import com.squareup.picasso.Picasso
 
 
 class ApodFragment : Fragment() {
     private lateinit var _view: View
     private lateinit var _apodResponse: ApodResponseModel
-
+    private lateinit var _favoriteViewModel: FavoriteViewModel
 
     val options = TranslatorOptions.Builder()
         .setSourceLanguage(TranslateLanguage.ENGLISH)
@@ -36,10 +40,6 @@ class ApodFragment : Fragment() {
         .build()
 
     private val englishPortugueseTranslator = Translation.getClient(options)
-
-    /*private var _favoriteViewModel =
-        ViewModelProvider(requireActivity()).get(FavoriteViewModel::class.java)*/
-    private var _favoriteFragment = FavoriteFragment()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -70,11 +70,15 @@ class ApodFragment : Fragment() {
             )
         ).get(ApodViewModel::class.java)
 
+        addFavoriteViewModel()
+
         viewModel.getDataApod().observe(viewLifecycleOwner, {
 
             try {
                 mostrarResultados(it as ApodResponseModel, view)
             } catch (e: Exception) {
+                val checkBoxFavorite = _view.findViewById<CheckBox>(R.id.cbFavoriteApod)
+                checkBoxFavorite.visibility = View.GONE
                 e.message
                 Picasso.get()
                     .load(R.drawable.gatinho)
@@ -93,6 +97,17 @@ class ApodFragment : Fragment() {
         }
     }
 
+    private fun addFavoriteViewModel() {
+        _favoriteViewModel = ViewModelProvider(
+            this,
+            FavoriteViewModelFactory(
+                FavoriteRepository(
+                    AppDatabase.getDatabase(_view.context).favoriteDao()
+                )
+            )
+        ).get(FavoriteViewModel::class.java)
+    }
+
 
     private fun mostrarResultados(it: ApodResponseModel, view: View) {
 
@@ -101,9 +116,12 @@ class ApodFragment : Fragment() {
         val txtTitle = _view.findViewById<TextView>(R.id.txtTitle)
         val validation = arguments?.getString("VALIDATION")
 
-
         _apodResponse = it
-        btnFavorite()
+
+        _favoriteViewModel.checkFavorite(it.url).observe(viewLifecycleOwner, {
+            favoriteIsActive(it)
+            btnFavorite()
+        })
 
         if (validation == "isChecked") {
             englishPortugueseTranslator.translate(it.title).addOnSuccessListener {
@@ -135,6 +153,13 @@ class ApodFragment : Fragment() {
         landScapeMode(it.url)
 
     }
+
+    private fun favoriteIsActive(isChecked: Boolean) {
+        Log.d("teste", isChecked.toString())
+        val btnAddFavorite = _view.findViewById<CheckBox>(R.id.cbFavoriteApod)
+        btnAddFavorite.isChecked = isChecked
+    }
+
     private fun landScapeMode(urlImg: String) {
         val imgLoad = _view.findViewById<ImageView>(R.id.imgApod)
         val navController = NavHostFragment.findNavController(this)
@@ -148,19 +173,21 @@ class ApodFragment : Fragment() {
 
 
     private fun btnFavorite() {
-        val btnAddFavorite = _view.findViewById<CheckBox>(R.id.ibFavoriteButtonFato)
+        val btnAddFavorite = _view.findViewById<CheckBox>(R.id.cbFavoriteApod)
         btnAddFavorite.setOnCheckedChangeListener { _, isChecked ->
+            val favorite = FavoriteEntity(
+                id = 0,
+                image = _apodResponse.url,
+                title = _apodResponse.title,
+                text = _apodResponse.explanation,
+                date = _apodResponse.date,
+                active = true
+            )
             if (isChecked) {
-//                val favorite = FavoriteEntity(
-//                    id = 0,
-//                    image = _apodResponse.url,
-//                    title = _apodResponse.title,
-//                    date = _apodResponse.date,
-//                    active = true
-//                )
-//                _favoriteViewModel.addFavorite(favorite)
-//                _favoriteFragment.addViewModel(_view)
-//                _favoriteFragment.addFavorite(favorite)
+                _favoriteViewModel.addFavorite(favorite).observe(viewLifecycleOwner, { })
+            } else {
+                _favoriteViewModel.deleteFavoriteItem(favorite.image)
+                    .observe(viewLifecycleOwner, { })
             }
         }
     }

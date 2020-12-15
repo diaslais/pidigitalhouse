@@ -58,9 +58,7 @@ class FavoriteFragment : Fragment(), IFavorite {
         backBtn()
         addViewModel()
         addRecyclerView()
-//        activeAll()
         initialize()
-//        addFavoriteInitializer()
 //        deleteAll()
     }
 
@@ -106,25 +104,7 @@ class FavoriteFragment : Fragment(), IFavorite {
 
     private fun initialize() {
         _favoriteViewModel.getAllFavorite().observe(viewLifecycleOwner, {
-            if (it.isEmpty()) {
-                setAllFavoritesDb()
-            }
             addAllFavorites(it)
-        })
-    }
-
-    private fun setAllFavoritesDb() {
-        _favoriteViewModel.setAllFavorites().observe(viewLifecycleOwner, {
-            it.forEach { favorite ->
-                addFavoriteDb(favorite)
-            }
-        })
-    }
-
-    private fun addFavoriteDb(favorite: FavoriteEntity) {
-        _favoriteViewModel.addFavorite(favorite).observe(viewLifecycleOwner, {
-            _favoriteList.add(favorite)
-            _favoriteAdapter.notifyDataSetChanged()
         })
     }
 
@@ -133,12 +113,12 @@ class FavoriteFragment : Fragment(), IFavorite {
         _favoriteAdapter.notifyDataSetChanged()
     }
 
-    private fun deleteAll() {
+/*    private fun deleteAll() {
         _favoriteViewModel.deleteAll().observe(viewLifecycleOwner, {
             _favoriteList.clear()
             _favoriteAdapter.notifyDataSetChanged()
         })
-    }
+    }*/
 
     private fun deleteOneFavoriteDb(position: Int, favorite: FavoriteEntity) {
         _favoriteViewModel.deleteOne(favorite).observe(viewLifecycleOwner, {
