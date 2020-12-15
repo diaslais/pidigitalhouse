@@ -176,6 +176,13 @@
                         android:contentDescription="@string/facebook"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_facebookicon" />
+                    <com.facebook.login.widget.LoginButton
+                        android:id="@+id/login_button"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_horizontal"
+                        android:visibility="visible" />
+
 
                     <ImageButton
                         android:id="@+id/imEmailLogin"
@@ -188,6 +195,8 @@
                         android:tint="@color/colorWhite" />
 
                 </LinearLayout>
+
+
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
