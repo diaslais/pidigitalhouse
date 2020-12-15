@@ -156,7 +156,8 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dim20dp"
                     android:layout_marginBottom="@dimen/dim30dp"
-                    android:gravity="center_horizontal">
+                    android:gravity="center_horizontal"
+                    android:orientation="horizontal">
 
                     <ImageButton
                         android:id="@+id/imGoogleLogin"
@@ -176,12 +177,13 @@
                         android:contentDescription="@string/facebook"
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_facebookicon" />
+
                     <com.facebook.login.widget.LoginButton
                         android:id="@+id/login_button"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:visibility="visible" />
+                        android:visibility="gone" />
 
 
                     <ImageButton

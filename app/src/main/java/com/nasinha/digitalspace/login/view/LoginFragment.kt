@@ -59,7 +59,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         _view = view
-
+        val btn = _view.findViewById<ImageButton>(R.id.imFacebookLogin)
         checkBoxHandler()
 
         val argEmail = arguments?.getString("email")
@@ -72,6 +72,7 @@ class LoginFragment : Fragment() {
 
         callbackManager = CallbackManager.Factory.create()
         button.setOnClickListener { loginFacebook() }
+        btn.setOnClickListener { button.performClick() }
 
     }
 
@@ -104,7 +105,6 @@ class LoginFragment : Fragment() {
             navigateLogin(navController)
         }
         navigateSignup(navController, R.id.imEmailLogin)
-        navigateSignup(navController, R.id.imFacebookLogin)
         navigateSignup(navController, R.id.imGoogleLogin)
     }
 
@@ -211,4 +211,5 @@ class LoginFragment : Fragment() {
         navController.navigate(R.id.action_loginFragment_to_explorationFragment)
 
     }
+
 }
