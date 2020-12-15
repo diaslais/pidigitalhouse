@@ -32,7 +32,7 @@
         android:layout_marginBottom="@dimen/dim9dp"
         android:padding="@dimen/dim20dp"
         android:scaleType="centerCrop"
-        app:layout_constraintBottom_toTopOf="@+id/ibFavoriteButtonFato"
+        app:layout_constraintBottom_toTopOf="@+id/cbFavoriteApod"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
         android:fontFamily="@font/ubuntu_bold"
         android:textColor="@color/colorWhite"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/ibFavoriteButtonFato"
+        app:layout_constraintEnd_toStartOf="@+id/cbFavoriteApod"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imgApod"
         tools:text="@tools:sample/lorem" />
@@ -67,7 +67,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/ibFavoriteButtonFato">
+        app:layout_constraintTop_toBottomOf="@+id/cbFavoriteApod">
 
         <TextView
             android:id="@+id/txtExplanationApod"
@@ -82,7 +82,7 @@
     </ScrollView>
 
     <CheckBox
-        android:id="@+id/ibFavoriteButtonFato"
+        android:id="@+id/cbFavoriteApod"
         android:layout_width="@dimen/dim52dp"
         android:layout_height="@dimen/dim53dp"
         android:layout_gravity="center"
