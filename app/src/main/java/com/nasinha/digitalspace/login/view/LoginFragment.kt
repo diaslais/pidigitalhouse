@@ -3,6 +3,7 @@ package com.nasinha.digitalspace.login.view
 import android.app.Activity
 import android.content.Context
 import android.content.Context.MODE_PRIVATE
+import android.content.Intent
 import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
@@ -10,6 +11,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.Toast
@@ -18,15 +20,26 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import com.facebook.CallbackManager
+import com.facebook.FacebookCallback
+import com.facebook.FacebookException
+import com.facebook.login.LoginManager
+import com.facebook.login.LoginResult
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
+import com.google.firebase.auth.AuthCredential
+import com.google.firebase.auth.FacebookAuthProvider
+import com.google.firebase.auth.FirebaseAuth
 import com.nasinha.digitalspace.R
 
 
 class LoginFragment : Fragment() {
 
+
     private lateinit var _view: View
+    private lateinit var callbackManager: CallbackManager
+    private val button: Button by lazy { _view.findViewById<Button>(R.id.login_button) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,6 +69,10 @@ class LoginFragment : Fragment() {
         }
 
         navigationHandler()
+
+        callbackManager = CallbackManager.Factory.create()
+        button.setOnClickListener { loginFacebook() }
+
     }
 
 
@@ -162,5 +179,36 @@ class LoginFragment : Fragment() {
     companion object {
         const val APP_NAME = "DigitalSpace"
         const val SAVED_PREFS = "SAVED_PREFS"
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        callbackManager.onActivityResult(requestCode, resultCode, data)
+    }
+    private fun loginFacebook() {
+        val instanceFirebase = LoginManager.getInstance()
+
+        instanceFirebase.logInWithReadPermissions(this, listOf("email", "public_profile"))
+        instanceFirebase.registerCallback(callbackManager, object : FacebookCallback<LoginResult> {
+
+            override fun onSuccess(loginResult: LoginResult) {
+                val credential: AuthCredential = FacebookAuthProvider.getCredential(loginResult.accessToken.token)
+                FirebaseAuth.getInstance().signInWithCredential(credential).addOnCompleteListener { irParaHome(loginResult.accessToken.userId) }
+            }
+
+            override fun onCancel() {
+                Toast.makeText(_view.context, "Cancelado!", Toast.LENGTH_SHORT).show()
+            }
+
+            override fun onError(error: FacebookException) {
+                Toast.makeText(_view.context, error.message, Toast.LENGTH_SHORT).show()
+            }
+        })
+    }
+    private fun irParaHome(uiid: String) {
+        val navController = Navigation.findNavController(_view)
+        AppUtil.salvarIdUsuario(_view.context, uiid)
+        navController.navigate(R.id.action_loginFragment_to_explorationFragment)
+
     }
 }
