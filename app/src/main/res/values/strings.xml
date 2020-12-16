@@ -68,7 +68,7 @@
     <string name="apod_error">Opss, temos um problema!</string>
     <string name="apod_message">Provavelmente a NASA não liberou as informações do dia de hoje ainda, em breve voltaremos.</string>
     <string name="epic_message">Estamos enfrentando problemas, em breve retornaremos!</string>
-    <string name="updateMessage"> Última atualização de imagem: </string>
+    <string name="updateMessage"> Data: </string>
     <string name="esqueci_minha_senha">Esqueci minha senha</string>
     <string name="exploration_text">Bem vindo, explorador!\nVista seu traje, aperte o cinto e prepare-se para a decolagem.
         Iniciaremos uma missão de exploração pelo Sistema Solar.\nPartimos em 3, 2, 1...</string>
