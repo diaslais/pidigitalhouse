@@ -1,7 +1,6 @@
 package com.nasinha.digitalspace.apod.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
@@ -151,7 +149,6 @@ class ApodFragment : Fragment() {
     }
 
     private fun favoriteIsActive(isChecked: Boolean) {
-        Log.d("teste", isChecked.toString())
         val btnAddFavorite = _view.findViewById<CheckBox>(R.id.cbFavoriteApod)
         btnAddFavorite.isChecked = isChecked
     }
@@ -195,7 +192,7 @@ class ApodFragment : Fragment() {
 
     private fun showShareFavorite(isShown: Boolean) {
         val checkBoxFavorite = _view.findViewById<CheckBox>(R.id.cbFavoriteApod)
-        val shareButton = _view.findViewById<ImageButton>(R.id.ibShareFavorite)
+        val shareButton = _view.findViewById<ImageButton>(R.id.ibShareFavoriteItem)
         checkBoxFavorite.visibility = if (isShown) View.VISIBLE else View.GONE
         shareButton.visibility = if (isShown) View.VISIBLE else View.GONE
     }

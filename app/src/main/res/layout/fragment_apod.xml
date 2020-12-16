@@ -57,7 +57,7 @@
                 tools:text="@tools:sample/lorem[20]" />
 
             <ImageButton
-                android:id="@+id/ibShareFavorite"
+                android:id="@+id/ibShareFavoriteItem"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginStart="@dimen/dim10dp"
