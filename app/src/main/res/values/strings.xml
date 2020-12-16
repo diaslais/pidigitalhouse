@@ -94,5 +94,9 @@
     <string name="facebook_app_id">3277862102318846</string>
     <string name="fb_login_protocol_scheme">fb3277862102318846</string>
     <string name="lembrar_senha">Lembrar Senha</string>
+    <string name="iniciar">INICIAR</string>
+    <string name="intro_quiz">Bem vindo Explorador!!! Aqui iremos testar os seus conhecimentos espaciais com 10 perguntas sobre o sistema solar.</string>
+    <string name="intro_quiz_tempo">Existe um limite de 10 segundos para cada pergunta. Afinal, o espaço é um ambiente impiedoso e é preciso pensar rápido!</string>
+
 
 </resources>
