@@ -2,13 +2,16 @@ package com.nasinha.digitalspace.favorite.view
 
 import android.app.AlertDialog
 import android.graphics.Bitmap
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -115,15 +118,16 @@ class FavoriteFragment : Fragment(), IFavorite {
 
     private fun addAllFavorites(list: List<FavoriteEntity>) {
         _favoriteList.addAll(list)
+        sortHandler()
         _favoriteAdapter.notifyDataSetChanged()
     }
 
-/*    private fun deleteAll() {
+    private fun deleteAll() {
         _favoriteViewModel.deleteAll().observe(viewLifecycleOwner, {
             _favoriteList.clear()
             _favoriteAdapter.notifyDataSetChanged()
         })
-    }*/
+    }
 
     private fun deleteOneFavoriteDb(position: Int, favorite: FavoriteEntity) {
         _favoriteViewModel.deleteOne(favorite).observe(viewLifecycleOwner, {
@@ -156,5 +160,23 @@ class FavoriteFragment : Fragment(), IFavorite {
             _image = FavoriteUtils.getBitmapFromView(_view, favorite.image)
             activity?.let { FavoriteUtils.checkPermissions(it, _view, _image) }
         }
+    }
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    private fun sortHandler() {
+        val sortBtn = _view.findViewById<CheckBox>(R.id.cbOrderFavorite)
+        sortBtn.setOnCheckedChangeListener { _, isChecked ->
+            if (isChecked) {
+                _favoriteList.sortByDescending { FavoriteUtils.stringToDate(it.date) }
+            } else {
+                _favoriteList.sortBy { FavoriteUtils.stringToDate(it.date) }
+            }
+            _favoriteAdapter.notifyDataSetChanged()
+        }
+    }
+
+    companion object {
+        const val APP_NAME = "DigitalSpace"
+        const val SAVED_CHECK_PREFS = "SAVED_CHECK_PREFS"
     }
 }

@@ -12,6 +12,7 @@ import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
@@ -22,8 +23,16 @@ import java.io.ByteArrayOutputStream
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
+import java.util.*
+import kotlin.collections.ArrayList
 
 object FavoriteUtils {
+
+    @RequiresApi(Build.VERSION_CODES.O)
+    fun stringToDate(date: String): LocalDate {
+        return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+    }
+
     fun dateModifier(date: String): String {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val parsedDate =
