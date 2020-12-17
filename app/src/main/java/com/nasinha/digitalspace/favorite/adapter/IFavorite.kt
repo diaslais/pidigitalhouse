@@ -6,5 +6,5 @@ import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
 
 interface IFavorite {
     fun iFavoriteDelete(position: Int, favorite: FavoriteEntity, cardView: MaterialCardView)
-    fun iFavoriteShare(favorite: FavoriteEntity, image: ImageView)
+    fun iFavoriteShare(favorite: FavoriteEntity)
 }

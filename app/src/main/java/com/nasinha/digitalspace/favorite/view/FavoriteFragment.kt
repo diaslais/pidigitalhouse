@@ -1,17 +1,20 @@
 package com.nasinha.digitalspace.favorite.view
 
 import android.app.AlertDialog
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import android.widget.ImageButton
-import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +29,7 @@ import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
 import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
+import kotlinx.coroutines.launch
 
 
 class FavoriteFragment : Fragment(), IFavorite {
@@ -108,20 +112,26 @@ class FavoriteFragment : Fragment(), IFavorite {
     private fun initialize() {
         _favoriteViewModel.getAllFavorite().observe(viewLifecycleOwner, {
             addAllFavorites(it)
+            sharedPrefs()
         })
     }
 
     private fun addAllFavorites(list: List<FavoriteEntity>) {
         _favoriteList.addAll(list)
+        sortBtnHandler()
         _favoriteAdapter.notifyDataSetChanged()
     }
 
-/*    private fun deleteAll() {
+    private fun sharedPrefs() {
+        val sortBtn = _view.findViewById<CheckBox>(R.id.cbOrderFavorite)
+    }
+
+    private fun deleteAll() {
         _favoriteViewModel.deleteAll().observe(viewLifecycleOwner, {
             _favoriteList.clear()
             _favoriteAdapter.notifyDataSetChanged()
         })
-    }*/
+    }
 
     private fun deleteOneFavoriteDb(position: Int, favorite: FavoriteEntity) {
         _favoriteViewModel.deleteOne(favorite).observe(viewLifecycleOwner, {
@@ -149,9 +159,40 @@ class FavoriteFragment : Fragment(), IFavorite {
         alertDialog.show()
     }
 
-    override fun iFavoriteShare(favorite: FavoriteEntity, imageView: ImageView) {
-        _image = FavoriteUtils.getBitmapFromView(imageView)
+    override fun iFavoriteShare(favorite: FavoriteEntity) {
+        lifecycleScope.launch {
+            _image = FavoriteUtils.getBitmapFromView(_view, favorite.image)
+            activity?.let { FavoriteUtils.checkPermissions(it, _view, _image) }
+        }
+    }
 
-        activity?.let { FavoriteUtils.checkPermissions(it, _view, _image) }
+    private fun sortBtnHandler() {
+        val sortBtn = _view.findViewById<CheckBox>(R.id.cbOrderFavorite)
+        val prefs = _view.context.getSharedPreferences(APP_NAME, MODE_PRIVATE)
+        val prefsChecked = prefs.getBoolean(SAVED_PREFS, false)
+
+        sortBtn.isChecked = prefsChecked
+
+        sortCheckHandler(sortBtn.isChecked, prefs)
+
+        sortBtn.setOnCheckedChangeListener { _, isChecked ->
+            sortCheckHandler(isChecked, prefs)
+        }
+    }
+
+    private fun sortCheckHandler(isChecked: Boolean, prefs: SharedPreferences) {
+        if (isChecked) {
+            _favoriteList.sortByDescending { FavoriteUtils.stringToDate(it.date) }
+            prefs.edit().putBoolean(SAVED_PREFS, isChecked).apply()
+        } else {
+            _favoriteList.sortBy { FavoriteUtils.stringToDate(it.date) }
+            prefs.edit().putBoolean(SAVED_PREFS, isChecked).apply()
+        }
+        _favoriteAdapter.notifyDataSetChanged()
+    }
+
+    companion object {
+        const val APP_NAME = "SharedPreferences"
+        const val SAVED_PREFS = "SAVED_PREFS"
     }
 }

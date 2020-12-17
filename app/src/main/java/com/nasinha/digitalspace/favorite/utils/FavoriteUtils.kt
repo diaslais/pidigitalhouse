@@ -5,22 +5,35 @@ import android.app.Activity
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Canvas
+import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.View
 import android.widget.ImageView
+import androidx.annotation.RequiresApi
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
+import coil.ImageLoader
+import coil.request.SuccessResult
+import com.facebook.internal.ImageRequest
 import java.io.ByteArrayOutputStream
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
+import java.util.*
+import kotlin.collections.ArrayList
 
 object FavoriteUtils {
+
+    fun stringToDate(date: String): Date {
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        return simpleDateFormat.parse(date)
+    }
+
     fun dateModifier(date: String): String {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val parsedDate =
@@ -63,12 +76,11 @@ object FavoriteUtils {
         }
     }
 
-    fun getBitmapFromView(imageView: ImageView): Bitmap? {
-//        968x815 APOD image size
-        val bitmap = Bitmap.createBitmap(968, 815, Bitmap.Config.ARGB_8888)
-        val canvas = Canvas(bitmap)
-        imageView.draw(canvas)
-        return bitmap
+    suspend fun getBitmapFromView(view: View, imageUri: String): Bitmap? {
+        val loading = ImageLoader(view.context)
+        val request = coil.request.ImageRequest.Builder(view.context).data(imageUri).build()
+        val result = (loading.execute(request) as SuccessResult).drawable
+        return (result as BitmapDrawable).bitmap
     }
 
     fun getImageUri(view: View, image: Bitmap): Uri? {

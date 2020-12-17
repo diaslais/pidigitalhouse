@@ -28,6 +28,16 @@
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/dim18sp"
             android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/cbOrderFavorite"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:background="@color/colorTransparent"
+            android:button="@drawable/sl_order_24dp"
+            app:buttonTint="@color/colorWhite" />
+
     </androidx.appcompat.widget.Toolbar>
 
     <androidx.recyclerview.widget.RecyclerView
