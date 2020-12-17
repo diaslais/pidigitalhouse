@@ -9,14 +9,17 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.launch
 
 class FavoriteScreenFragment : Fragment() {
     private lateinit var _view: View
     private var _image: Bitmap? = null
+    private lateinit var _imageArgument: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,7 +47,7 @@ class FavoriteScreenFragment : Fragment() {
     }
 
     private fun argumentsHandler() {
-        val imageArgument = arguments?.getString("image")!!
+        _imageArgument = arguments?.getString("image")!!
         val titleArgument = arguments?.getString("title")
         val textArgument = arguments?.getString("text")
         val dateArgument = arguments?.getString("date")!!
@@ -58,16 +61,18 @@ class FavoriteScreenFragment : Fragment() {
         text.text = if (textArgument.isNullOrEmpty()) "" else textArgument
         date.text = dateArgument
 
-        Picasso.get().load(imageArgument).into(image)
+        Picasso.get().load(_imageArgument).into(image)
     }
 
     private fun shareButton() {
-        val imageView = _view.findViewById<ImageView>(R.id.ivImageFavoriteScreen)
         val shareBtn = _view.findViewById<ImageButton>(R.id.ibShareFavoriteScreen)
         shareBtn.setOnClickListener {
-            _image = FavoriteUtils.getBitmapFromView(imageView)
 
-            activity?.let { FavoriteUtils.checkPermissions(it, _view, _image) }
+            lifecycleScope.launch {
+                _image = FavoriteUtils.getBitmapFromView(_view, _imageArgument)
+                activity?.let { FavoriteUtils.checkPermissions(it, _view, _image) }
+            }
+
         }
     }
 }

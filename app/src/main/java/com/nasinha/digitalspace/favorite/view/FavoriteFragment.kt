@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,6 +27,7 @@ import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
 import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
+import kotlinx.coroutines.launch
 
 
 class FavoriteFragment : Fragment(), IFavorite {
@@ -149,9 +151,10 @@ class FavoriteFragment : Fragment(), IFavorite {
         alertDialog.show()
     }
 
-    override fun iFavoriteShare(favorite: FavoriteEntity, imageView: ImageView) {
-        _image = FavoriteUtils.getBitmapFromView(imageView)
-
-        activity?.let { FavoriteUtils.checkPermissions(it, _view, _image) }
+    override fun iFavoriteShare(favorite: FavoriteEntity) {
+        lifecycleScope.launch {
+            _image = FavoriteUtils.getBitmapFromView(_view, favorite.image)
+            activity?.let { FavoriteUtils.checkPermissions(it, _view, _image) }
+        }
     }
 }

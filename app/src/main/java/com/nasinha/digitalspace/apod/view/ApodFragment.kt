@@ -8,6 +8,7 @@ import android.widget.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
@@ -23,6 +24,7 @@ import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
 import com.squareup.picasso.Picasso
+import kotlinx.coroutines.launch
 
 
 class ApodFragment : Fragment() {
@@ -202,8 +204,9 @@ class ApodFragment : Fragment() {
     }
 
     private fun shareHandler() {
-        val imageView = _view.findViewById<ImageView>(R.id.imgApod)
-        val imageBitmap = FavoriteUtils.getBitmapFromView(imageView)
-        activity?.let { FavoriteUtils.checkPermissions(it, _view, imageBitmap) }
+        lifecycleScope.launch {
+            val imageBitmap = FavoriteUtils.getBitmapFromView(_view, _apodResponse.url)
+            activity?.let { FavoriteUtils.checkPermissions(it, _view, imageBitmap) }
+        }
     }
 }
