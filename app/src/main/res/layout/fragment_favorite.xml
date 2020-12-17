@@ -36,8 +36,6 @@
             android:layout_gravity="end"
             android:background="@color/colorTransparent"
             android:button="@drawable/sl_order_24dp"
-            android:text="Data"
-            android:layout_marginEnd="@dimen/dim20dp"
             app:buttonTint="@color/colorWhite" />
 
     </androidx.appcompat.widget.Toolbar>

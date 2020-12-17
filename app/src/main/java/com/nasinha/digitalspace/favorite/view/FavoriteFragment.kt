@@ -1,17 +1,16 @@
 package com.nasinha.digitalspace.favorite.view
 
 import android.app.AlertDialog
+import android.content.Context.MODE_PRIVATE
+import android.content.SharedPreferences
 import android.graphics.Bitmap
-import android.os.Build
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.Toast
-import androidx.annotation.RequiresApi
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -113,13 +112,18 @@ class FavoriteFragment : Fragment(), IFavorite {
     private fun initialize() {
         _favoriteViewModel.getAllFavorite().observe(viewLifecycleOwner, {
             addAllFavorites(it)
+            sharedPrefs()
         })
     }
 
     private fun addAllFavorites(list: List<FavoriteEntity>) {
         _favoriteList.addAll(list)
-        sortHandler()
+        sortBtnHandler()
         _favoriteAdapter.notifyDataSetChanged()
+    }
+
+    private fun sharedPrefs() {
+        val sortBtn = _view.findViewById<CheckBox>(R.id.cbOrderFavorite)
     }
 
     private fun deleteAll() {
@@ -162,21 +166,33 @@ class FavoriteFragment : Fragment(), IFavorite {
         }
     }
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    private fun sortHandler() {
+    private fun sortBtnHandler() {
         val sortBtn = _view.findViewById<CheckBox>(R.id.cbOrderFavorite)
+        val prefs = _view.context.getSharedPreferences(APP_NAME, MODE_PRIVATE)
+        val prefsChecked = prefs.getBoolean(SAVED_PREFS, false)
+
+        sortBtn.isChecked = prefsChecked
+
+        sortCheckHandler(sortBtn.isChecked, prefs)
+
         sortBtn.setOnCheckedChangeListener { _, isChecked ->
-            if (isChecked) {
-                _favoriteList.sortByDescending { FavoriteUtils.stringToDate(it.date) }
-            } else {
-                _favoriteList.sortBy { FavoriteUtils.stringToDate(it.date) }
-            }
-            _favoriteAdapter.notifyDataSetChanged()
+            sortCheckHandler(isChecked, prefs)
         }
     }
 
+    private fun sortCheckHandler(isChecked: Boolean, prefs: SharedPreferences) {
+        if (isChecked) {
+            _favoriteList.sortByDescending { FavoriteUtils.stringToDate(it.date) }
+            prefs.edit().putBoolean(SAVED_PREFS, isChecked).apply()
+        } else {
+            _favoriteList.sortBy { FavoriteUtils.stringToDate(it.date) }
+            prefs.edit().putBoolean(SAVED_PREFS, isChecked).apply()
+        }
+        _favoriteAdapter.notifyDataSetChanged()
+    }
+
     companion object {
-        const val APP_NAME = "DigitalSpace"
-        const val SAVED_CHECK_PREFS = "SAVED_CHECK_PREFS"
+        const val APP_NAME = "SharedPreferences"
+        const val SAVED_PREFS = "SAVED_PREFS"
     }
 }

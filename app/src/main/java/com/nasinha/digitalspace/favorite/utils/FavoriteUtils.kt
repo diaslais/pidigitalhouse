@@ -20,6 +20,7 @@ import coil.ImageLoader
 import coil.request.SuccessResult
 import com.facebook.internal.ImageRequest
 import java.io.ByteArrayOutputStream
+import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
@@ -28,9 +29,9 @@ import kotlin.collections.ArrayList
 
 object FavoriteUtils {
 
-    @RequiresApi(Build.VERSION_CODES.O)
-    fun stringToDate(date: String): LocalDate {
-        return LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
+    fun stringToDate(date: String): Date {
+        val simpleDateFormat = SimpleDateFormat("yyyy-MM-dd")
+        return simpleDateFormat.parse(date)
     }
 
     fun dateModifier(date: String): String {
