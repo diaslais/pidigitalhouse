@@ -18,6 +18,7 @@ import com.nasinha.digitalspace.epic.model.EpicResponseModel
 import com.nasinha.digitalspace.epic.repository.EpicRepository
 import com.nasinha.digitalspace.epic.viewmodel.EpicViewModel
 import com.squareup.picasso.Picasso
+import java.lang.ClassCastException
 
 
 class EpicFragment : Fragment() {
@@ -47,13 +48,23 @@ class EpicFragment : Fragment() {
             )
         ).get(EpicViewModel::class.java)
 
-        viewModel.getImageDay().observe(viewLifecycleOwner, { it ->
-            getImage(it, view)
 
-            viewModel.getlastDay().observe(viewLifecycleOwner, {
-                getLastDay(it, view)
-            })
+        viewModel.getImageDay().observe(viewLifecycleOwner, {
+            try {
+                getImage(it as List<EpicResponseModel>?, view)
+
+                viewModel.getlastDay().observe(viewLifecycleOwner, {
+                    getLastDay(it as List<String>?, view)
+                })
+            } catch (e: Exception) {
+                showLoading(false)
+                val imgEpic = _view.findViewById<ImageView>(R.id.imgEpic)
+                val txtEpic = _view.findViewById<TextView>(R.id.txtDate)
+                txtEpic.text = getString(R.string.epic_message)
+                Picasso.get().load(R.drawable.epic_gatinho).into(imgEpic)
+            }
         })
+
 
         val navController = findNavController()
 
@@ -86,22 +97,20 @@ class EpicFragment : Fragment() {
         val picasso = Picasso.get()
 
         try {
-            if (it != null) {
-                if (it[0].isNotEmpty()) {
 
-                    txtEpic.text =
-                        getString(R.string.updateMessage) + "${dayId}/${monthId}/${yearId}"
+            if (it?.get(0)?.isNotEmpty() == true) {
+
+                txtEpic.text =
+                    getString(R.string.updateMessage) + "${dayId}/${monthId}/${yearId}"
 
 
-                    picasso.load("https://epic.gsfc.nasa.gov/archive/natural/${yearId}/${monthId}/${dayId}/png/${imageId}")
-                        .into(imgEpic)
+                picasso.load("https://epic.gsfc.nasa.gov/archive/natural/${yearId}/${monthId}/${dayId}/png/${imageId}")
+                    .into(imgEpic)
 
-                }
-            } else {
-                throw RuntimeException()
             }
 
-        } catch (exception: RuntimeException) {
+
+        } catch (exception: Exception) {
             txtEpic.text = getString(R.string.epic_message)
             picasso.load(R.drawable.epic_gatinho).into(imgEpic)
 
