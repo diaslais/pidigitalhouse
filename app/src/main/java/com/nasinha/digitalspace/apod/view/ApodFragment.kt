@@ -1,19 +1,14 @@
 package com.nasinha.digitalspace.apod.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.ImageButton
-import android.widget.ImageView
-import android.widget.TextView
+import android.widget.*
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.findNavController
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
@@ -24,6 +19,7 @@ import com.nasinha.digitalspace.apod.viewmodel.ApodViewModel
 import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
+import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
 import com.squareup.picasso.Picasso
@@ -40,11 +36,6 @@ class ApodFragment : Fragment() {
         .build()
 
     private val englishPortugueseTranslator = Translation.getClient(options)
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -77,8 +68,9 @@ class ApodFragment : Fragment() {
             try {
                 mostrarResultados(it as ApodResponseModel, view)
             } catch (e: Exception) {
-                val checkBoxFavorite = _view.findViewById<CheckBox>(R.id.cbFavoriteApod)
-                checkBoxFavorite.visibility = View.GONE
+                showLoading(false)
+                showShareFavorite(false)
+
                 e.message
                 Picasso.get()
                     .load(R.drawable.gatinho)
@@ -90,11 +82,12 @@ class ApodFragment : Fragment() {
 
         })
 
-        val navController = findNavController()
-
         view.findViewById<ImageButton>(R.id.btnBackApod).setOnClickListener {
             activity?.onBackPressed()
         }
+
+        showLoading(true)
+        showShareFavorite(false)
     }
 
     private fun addFavoriteViewModel() {
@@ -110,6 +103,8 @@ class ApodFragment : Fragment() {
 
 
     private fun mostrarResultados(it: ApodResponseModel, view: View) {
+        showLoading(false)
+        showShareFavorite(true)
 
         val imgLoad = _view.findViewById<ImageView>(R.id.imgApod)
         val txtExplanation = _view.findViewById<TextView>(R.id.txtExplanationApod)
@@ -155,7 +150,6 @@ class ApodFragment : Fragment() {
     }
 
     private fun favoriteIsActive(isChecked: Boolean) {
-        Log.d("teste", isChecked.toString())
         val btnAddFavorite = _view.findViewById<CheckBox>(R.id.cbFavoriteApod)
         btnAddFavorite.isChecked = isChecked
     }
@@ -192,4 +186,24 @@ class ApodFragment : Fragment() {
         }
     }
 
+    private fun showLoading(isLoading: Boolean) {
+        val progressBar = _view.findViewById<LinearLayout>(R.id.llProgressApod)
+        progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun showShareFavorite(isShown: Boolean) {
+        val checkBoxFavorite = _view.findViewById<CheckBox>(R.id.cbFavoriteApod)
+        val shareButton = _view.findViewById<ImageButton>(R.id.ibShareFavoriteItem)
+        checkBoxFavorite.visibility = if (isShown) View.VISIBLE else View.GONE
+        shareButton.visibility = if (isShown) View.VISIBLE else View.GONE
+        shareButton.setOnClickListener {
+            shareHandler()
+        }
+    }
+
+    private fun shareHandler() {
+        val imageView = _view.findViewById<ImageView>(R.id.imgApod)
+        val imageBitmap = FavoriteUtils.getBitmapFromView(imageView)
+        activity?.let { FavoriteUtils.checkPermissions(it, _view, imageBitmap) }
+    }
 }

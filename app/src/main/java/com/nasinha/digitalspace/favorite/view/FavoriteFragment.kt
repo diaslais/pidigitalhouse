@@ -1,11 +1,13 @@
 package com.nasinha.digitalspace.favorite.view
 
 import android.app.AlertDialog
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -25,6 +27,7 @@ import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
 
+
 class FavoriteFragment : Fragment(), IFavorite {
     private lateinit var _view: View
     private lateinit var _favoriteViewModel: FavoriteViewModel
@@ -32,7 +35,7 @@ class FavoriteFragment : Fragment(), IFavorite {
     private lateinit var _navController: NavController
     private lateinit var _favoriteAdapter: FavoriteAdapter
     private lateinit var iFavorite: IFavorite
-
+    private var _image: Bitmap? = null
 
     private var _favoriteList = mutableListOf<FavoriteEntity>()
 
@@ -146,7 +149,9 @@ class FavoriteFragment : Fragment(), IFavorite {
         alertDialog.show()
     }
 
-    override fun iFavoriteShare(favorite: FavoriteEntity) {
-        Toast.makeText(_view.context, "Share clicado", Toast.LENGTH_SHORT).show()
+    override fun iFavoriteShare(favorite: FavoriteEntity, imageView: ImageView) {
+        _image = FavoriteUtils.getBitmapFromView(imageView)
+
+        activity?.let { FavoriteUtils.checkPermissions(it, _view, _image) }
     }
 }

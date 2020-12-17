@@ -1,5 +1,6 @@
 package com.nasinha.digitalspace.favoritescreen.view
 
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -10,10 +11,12 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.nasinha.digitalspace.R
+import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.squareup.picasso.Picasso
 
 class FavoriteScreenFragment : Fragment() {
     private lateinit var _view: View
+    private var _image: Bitmap? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -27,13 +30,14 @@ class FavoriteScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         _view = view
-        closeHandler()
+        backBtnHandler()
         argumentsHandler()
+        shareButton()
     }
 
-    private fun closeHandler() {
-        val closeBtn = _view.findViewById<ImageButton>(R.id.ibBackFavoriteScreen)
-        closeBtn.setOnClickListener {
+    private fun backBtnHandler() {
+        val backBtn = _view.findViewById<ImageButton>(R.id.ibBackFavoriteScreen)
+        backBtn.setOnClickListener {
             val navController = findNavController()
             navController.navigate(R.id.action_favoriteScreenFragment_to_favoriteFragment)
         }
@@ -55,5 +59,15 @@ class FavoriteScreenFragment : Fragment() {
         date.text = dateArgument
 
         Picasso.get().load(imageArgument).into(image)
+    }
+
+    private fun shareButton() {
+        val imageView = _view.findViewById<ImageView>(R.id.ivImageFavoriteScreen)
+        val shareBtn = _view.findViewById<ImageButton>(R.id.ibShareFavoriteScreen)
+        shareBtn.setOnClickListener {
+            _image = FavoriteUtils.getBitmapFromView(imageView)
+
+            activity?.let { FavoriteUtils.checkPermissions(it, _view, _image) }
+        }
     }
 }
