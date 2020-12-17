@@ -1,24 +1,14 @@
 package com.nasinha.digitalspace.favorite.view
 
-import android.Manifest
-import android.app.Activity
 import android.app.AlertDialog
-import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.Canvas
-import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
-import androidx.core.content.ContextCompat.checkSelfPermission
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -36,7 +26,6 @@ import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
 import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
-import java.io.ByteArrayOutputStream
 
 
 class FavoriteFragment : Fragment(), IFavorite {
@@ -164,37 +153,5 @@ class FavoriteFragment : Fragment(), IFavorite {
         _image = FavoriteUtils.getBitmapFromView(imageView)
 
         activity?.let { FavoriteUtils.checkPermissions(it, _view, _image) }
-    }
-
-    fun checkPermissions(activity: Activity, view: View, image: Bitmap) {
-        var result: Int
-        val listPermissionsNeeded: MutableList<String> = ArrayList()
-
-        val permissions = arrayOf(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        )
-
-        for (p in permissions) {
-            result = checkSelfPermission(_view.context, p)
-            if (result != PackageManager.PERMISSION_GRANTED) {
-                listPermissionsNeeded.add(p)
-            }
-        }
-
-        if (listPermissionsNeeded.isNotEmpty()) {
-            activity?.let {
-                ActivityCompat.requestPermissions(
-                    it,
-                    listPermissionsNeeded.toTypedArray(),
-                    100
-                )
-            }
-        } else {
-            val share = Intent(Intent.ACTION_SEND)
-            share.type = "image/*"
-            share.putExtra(Intent.EXTRA_STREAM, FavoriteUtils.getImageUri(_view, _image!!))
-            startActivity(Intent.createChooser(share, "Share via"))
-        }
     }
 }

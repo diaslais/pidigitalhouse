@@ -59,12 +59,13 @@ object FavoriteUtils {
             val share = Intent(Intent.ACTION_SEND)
             share.type = "image/*"
             share.putExtra(Intent.EXTRA_STREAM, getImageUri(view, image!!))
-            startActivity(view.context, Intent.createChooser(share, "Share via"), Bundle())
+            startActivity(view.context, Intent.createChooser(share, "Share image via"), Bundle())
         }
     }
 
     fun getBitmapFromView(imageView: ImageView): Bitmap? {
-        val bitmap = Bitmap.createBitmap(imageView.width, imageView.height, Bitmap.Config.ARGB_8888)
+//        968x815 APOD image size
+        val bitmap = Bitmap.createBitmap(968, 815, Bitmap.Config.ARGB_8888)
         val canvas = Canvas(bitmap)
         imageView.draw(canvas)
         return bitmap
