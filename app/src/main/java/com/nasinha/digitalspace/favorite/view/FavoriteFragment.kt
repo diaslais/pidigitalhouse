@@ -110,9 +110,11 @@ class FavoriteFragment : Fragment(), IFavorite {
     }
 
     private fun initialize() {
-        _favoriteViewModel.getAllFavorite().observe(viewLifecycleOwner, {
-            addAllFavorites(it)
-        })
+        if (_favoriteList.isEmpty()) {
+            _favoriteViewModel.getAllFavorite().observe(viewLifecycleOwner, {
+                addAllFavorites(it)
+            })
+        }
     }
 
     private fun addAllFavorites(list: List<FavoriteEntity>) {

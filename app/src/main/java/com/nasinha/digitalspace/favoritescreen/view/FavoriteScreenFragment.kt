@@ -23,19 +23,6 @@ class FavoriteScreenFragment : Fragment() {
     private var _image: Bitmap? = null
     private lateinit var _imageArgument: String
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        val callback: OnBackPressedCallback =
-            object : OnBackPressedCallback(true /* enabled by default */) {
-                override fun handleOnBackPressed() {
-                    val navController = findNavController()
-                    navController.navigate(R.id.action_favoriteScreenFragment_to_favoriteFragment)
-                }
-            }
-        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
