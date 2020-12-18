@@ -16,6 +16,7 @@ import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 
+
 class FavoriteScreenFragment : Fragment() {
     private lateinit var _view: View
     private var _image: Bitmap? = null

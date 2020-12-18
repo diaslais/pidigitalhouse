@@ -1,6 +1,5 @@
 package com.nasinha.digitalspace.favorite.adapter
 
-import android.widget.ImageView
 import com.google.android.material.card.MaterialCardView
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
 
