@@ -110,16 +110,21 @@ class FavoriteFragment : Fragment(), IFavorite {
     }
 
     private fun initialize() {
+        val sortBtn = _view.findViewById<CheckBox>(R.id.cbOrderFavorite)
+        val prefs = _view.context.getSharedPreferences(APP_NAME, MODE_PRIVATE)
+        val prefsChecked = prefs.getBoolean(SAVED_PREFS, false)
+
         if (_favoriteList.isEmpty()) {
             _favoriteViewModel.getAllFavorite().observe(viewLifecycleOwner, {
                 addAllFavorites(it)
+                sortBtnHandler(sortBtn, prefsChecked, prefs)
             })
         }
+        sortBtnHandler(sortBtn, prefsChecked, prefs)
     }
 
     private fun addAllFavorites(list: List<FavoriteEntity>) {
         _favoriteList.addAll(list)
-        sortBtnHandler()
         _favoriteAdapter.notifyDataSetChanged()
     }
 
@@ -164,11 +169,7 @@ class FavoriteFragment : Fragment(), IFavorite {
         }
     }
 
-    private fun sortBtnHandler() {
-        val sortBtn = _view.findViewById<CheckBox>(R.id.cbOrderFavorite)
-        val prefs = _view.context.getSharedPreferences(APP_NAME, MODE_PRIVATE)
-        val prefsChecked = prefs.getBoolean(SAVED_PREFS, false)
-
+    private fun sortBtnHandler(sortBtn: CheckBox, prefsChecked: Boolean, prefs: SharedPreferences) {
         sortBtn.isChecked = prefsChecked
 
         sortCheckHandler(sortBtn.isChecked, prefs)
