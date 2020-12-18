@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
@@ -16,10 +17,24 @@ import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 
+
 class FavoriteScreenFragment : Fragment() {
     private lateinit var _view: View
     private var _image: Bitmap? = null
     private lateinit var _imageArgument: String
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        val callback: OnBackPressedCallback =
+            object : OnBackPressedCallback(true /* enabled by default */) {
+                override fun handleOnBackPressed() {
+                    val navController = findNavController()
+                    navController.navigate(R.id.action_favoriteScreenFragment_to_favoriteFragment)
+                }
+            }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

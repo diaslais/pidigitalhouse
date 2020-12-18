@@ -112,7 +112,6 @@ class FavoriteFragment : Fragment(), IFavorite {
     private fun initialize() {
         _favoriteViewModel.getAllFavorite().observe(viewLifecycleOwner, {
             addAllFavorites(it)
-            sharedPrefs()
         })
     }
 
@@ -122,9 +121,6 @@ class FavoriteFragment : Fragment(), IFavorite {
         _favoriteAdapter.notifyDataSetChanged()
     }
 
-    private fun sharedPrefs() {
-        val sortBtn = _view.findViewById<CheckBox>(R.id.cbOrderFavorite)
-    }
 
     private fun deleteAll() {
         _favoriteViewModel.deleteAll().observe(viewLifecycleOwner, {
