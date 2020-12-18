@@ -22,7 +22,7 @@
             android:layout_height="?attr/actionBarSize"
             android:backgroundTint="@color/colorBlack35pct"
             app:menu="@menu/top_app_bar"
-            app:navigationIcon="@drawable/ic_baseline_menu_24"
+            app:navigationIcon="@drawable/ic_outline_menu_24"
             app:title="@string/explora_o_espacial"
             app:titleTextColor="@color/colorWhite" />
     </com.google.android.material.appbar.AppBarLayout>
@@ -63,6 +63,7 @@
             android:layout_marginBottom="@dimen/dim16dp"
             android:layout_weight="1"
             android:clickable="true"
+            android:focusable="true"
             app:cardElevation="@dimen/dim0dp"
             app:strokeWidth="@dimen/dim1dp">
 
@@ -102,6 +103,7 @@
             android:layout_marginBottom="@dimen/dim16dp"
             android:layout_weight="1"
             android:clickable="true"
+            android:focusable="true"
             app:cardElevation="@dimen/dim0dp"
 
             app:strokeWidth="@dimen/dim1dp">
@@ -142,6 +144,7 @@
             android:layout_marginBottom="@dimen/dim16dp"
             android:layout_weight="1"
             android:clickable="true"
+            android:focusable="true"
             app:cardElevation="@dimen/dim0dp"
             app:strokeWidth="@dimen/dim1dp">
 

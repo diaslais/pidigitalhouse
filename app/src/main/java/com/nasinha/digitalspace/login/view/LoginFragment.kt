@@ -39,7 +39,7 @@ class LoginFragment : Fragment() {
 
     private lateinit var _view: View
     private lateinit var callbackManager: CallbackManager
-    private val button: Button by lazy { _view.findViewById<Button>(R.id.login_button) }
+    private val button: Button by lazy { _view.findViewById(R.id.login_button) }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -11,7 +11,7 @@ import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.squareup.picasso.Picasso
 
 class FavoriteViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
-    val _imageView = view.findViewById<ImageView>(R.id.ivThumbnailFavoriteItem)
+    val imageView = view.findViewById<ImageView>(R.id.ivThumbnailFavoriteItem)
     private val _titleView = view.findViewById<TextView>(R.id.tvTitleFavoriteItem)
     private val _dateView = view.findViewById<TextView>(R.id.tvDateFavoriteItem)
     val favoriteBtn = view.findViewById<ImageButton>(R.id.ibDeleteFavoriteItem)
@@ -22,6 +22,6 @@ class FavoriteViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         _titleView.text = if (title.isNullOrEmpty()) "" else title
         _dateView.text = FavoriteUtils.dateModifier(date)
 
-        Picasso.get().load(thumbnail).into(_imageView)
+        Picasso.get().load(thumbnail).into(imageView)
     }
 }
