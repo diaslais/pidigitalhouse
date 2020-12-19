@@ -26,6 +26,7 @@ import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
 import com.nasinha.digitalspace.authentication.AppUtil
 import com.nasinha.digitalspace.authentication.AppUtil.validateNameEmailPassword
+import kotlinx.android.synthetic.main.fragment_signup.*
 
 class SignupFragment : Fragment() {
 
@@ -69,13 +70,16 @@ class SignupFragment : Fragment() {
     private fun validateRegister() {
         val name = _view.findViewById<TextInputEditText>(R.id.tietNameSignup).text.toString()
         val email = _view.findViewById<TextInputEditText>(R.id.tietEmailSignup).text.toString()
-        val password = _view.findViewById<TextInputEditText>(R.id.tietPasswordSignup).text.toString()
+        val password =
+            _view.findViewById<TextInputEditText>(R.id.tietPasswordSignup).text.toString()
 
         when {
             validateNameEmailPassword(name, email, password) -> {
                 viewModel.registerUser(email, password)
+
             }
         }
+
         initViewModel()
     }
 
@@ -101,12 +105,19 @@ class SignupFragment : Fragment() {
 
     private fun messageError(it: String) {
         val btnRegister = _view.findViewById<MaterialButton>(R.id.btnSignup)
-        Snackbar.make(btnRegister,it,Snackbar.LENGTH_LONG).show()
+        Snackbar.make(btnRegister, it, Snackbar.LENGTH_LONG).show()
 
     }
 
     private fun showloading(status: Boolean) {
-        TODO("Not yet implemented")
+        when {
+            status -> {
+                pb_register.visibility = View.VISIBLE
+            }
+            else -> {
+                pb_register.visibility = View.GONE
+            }
+        }
     }
 
 

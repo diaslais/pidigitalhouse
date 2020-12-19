@@ -28,6 +28,7 @@ import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.android.material.button.MaterialButton
+import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.AuthCredential
@@ -36,6 +37,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.authentication.AppUtil
 import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
+import kotlinx.android.synthetic.main.fragment_login.*
 
 
 class LoginFragment : Fragment() {
@@ -121,7 +123,7 @@ class LoginFragment : Fragment() {
                 viewModel.loginEmailPassword(email, password)
             }
             else -> {
-                TODO()
+                Snackbar.make(mbLoginLogin, "vish", Snackbar.LENGTH_LONG).show()
             }
         }
         initViewModel()
@@ -134,6 +136,11 @@ class LoginFragment : Fragment() {
                 navigateToHome(it)
             }
         })
+        viewModel.error.observe(viewLifecycleOwner, Observer { loading ->
+            loading?.let {
+            messageError(it)
+            }
+        })
     }
 
     private fun navigateToHome(status: Boolean) {
@@ -143,6 +150,11 @@ class LoginFragment : Fragment() {
                 navController.navigate(R.id.action_loginFragment_to_explorationFragment)
             }
         }
+    }
+    private fun messageError(it: String) {
+        val btnLogin = _view.findViewById<MaterialButton>(R.id.mbLoginLogin)
+        Snackbar.make(btnLogin, it, Snackbar.LENGTH_LONG).show()
+
     }
 
     private fun hideKeyboard() {
