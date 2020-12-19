@@ -6,7 +6,7 @@
     app:startDestination="@id/loginFragment">
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.nasinha.digitalspace.login.view.LoginFragment"
+        android:name="com.nasinha.digitalspace.authentication.view.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login">
         <action
@@ -17,6 +17,9 @@
             android:id="@+id/action_loginFragment_to_explorationFragment"
             app:destination="@id/explorationFragment"
             app:enterAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_loginFragment_to_signupFragment2"
+            app:destination="@id/signupFragment" />
     </fragment>
     <fragment
         android:id="@+id/apodFragment"
@@ -29,13 +32,16 @@
     </fragment>
     <fragment
         android:id="@+id/signupFragment"
-        android:name="com.nasinha.digitalspace.signup.view.SignupFragment"
+        android:name="com.nasinha.digitalspace.authentication.view.SignupFragment"
         android:label="fragment_signup"
         tools:layout="@layout/fragment_signup">
         <action
             android:id="@+id/action_signupFragment_to_loginFragment"
             app:destination="@id/loginFragment"
             app:enterAnim="@android:anim/slide_in_left" />
+        <action
+            android:id="@+id/action_signupFragment_to_explorationFragment"
+            app:destination="@id/explorationFragment" />
     </fragment>
     <fragment
         android:id="@+id/bibliographyFragment"
