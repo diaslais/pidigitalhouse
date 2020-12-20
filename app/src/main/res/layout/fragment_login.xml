@@ -98,15 +98,6 @@
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/dim10dp">
 
-                    <CheckBox
-                        android:id="@+id/checkBoxLogin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="@string/lembrar_senha"
-                        android:textColor="@color/colorWhite"
-                        app:buttonTint="@color/colorWhite" />
-
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/mbForgotPasswordLogin"
                         style="@style/Widget.MaterialComponents.Button.TextButton"
