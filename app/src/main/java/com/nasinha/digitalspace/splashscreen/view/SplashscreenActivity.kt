@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.view.WindowInsets
 import android.view.WindowManager
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.MainActivity
@@ -20,14 +21,13 @@ class SplashscreenActivity : AppCompatActivity() {
 //        window.decorView.setSystemU = View.SYSTEM_UI_FLAG_FULLSCREEN
 // Remember that you should never show the action bar if the
 // status bar is hidden, so hide that too if necessary.
-        if (Build.VERSION.SDK_INT < 16) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            window.insetsController?.hide(WindowInsets.Type.statusBars())
+        } else {
             window.setFlags(
                 WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN
             )
-        } else {
-            window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_FULLSCREEN
-            actionBar?.hide()
         }
 
         Handler(Looper.getMainLooper()).postDelayed({

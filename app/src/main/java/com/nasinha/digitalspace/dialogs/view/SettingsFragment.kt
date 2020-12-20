@@ -5,17 +5,11 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
 import android.widget.ImageButton
-import android.widget.Switch
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
-import androidx.fragment.app.activityViewModels
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.mlkit.common.model.DownloadConditions
@@ -23,7 +17,6 @@ import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.nasinha.digitalspace.R
-import java.nio.channels.Selector
 
 
 class SettingsFragment : DialogFragment() {
@@ -72,7 +65,7 @@ class SettingsFragment : DialogFragment() {
                 val englishPortugueseTranslator = Translation.getClient(options)
                 lifecycle.addObserver(englishPortugueseTranslator)
 
-                var conditions = DownloadConditions.Builder()
+                val conditions = DownloadConditions.Builder()
                     .requireWifi()
                     .build()
 

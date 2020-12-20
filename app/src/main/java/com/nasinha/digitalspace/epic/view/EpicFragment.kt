@@ -18,7 +18,6 @@ import com.nasinha.digitalspace.epic.model.EpicResponseModel
 import com.nasinha.digitalspace.epic.repository.EpicRepository
 import com.nasinha.digitalspace.epic.viewmodel.EpicViewModel
 import com.squareup.picasso.Picasso
-import java.lang.ClassCastException
 
 
 class EpicFragment : Fragment() {

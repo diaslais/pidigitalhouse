@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Digital Space</string>
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="digital">Digital</string>
     <string name="space">Space</string>
     <string name="splashscreen_rocket_icon">SplashScreen rocket Icon</string>
@@ -21,7 +20,6 @@
     <string name="error_confirmacao">Confirmação diferente do Password</string>
     <string name="confirmacao">Conta criada com sucesso</string>
     <string name="sair">Sair</string>
-    <string name="explorando_o_dia_em_imagens">EXPLORANDO O DIA EM IMAGENS</string>
     <string name="explorar">EXPLORAR</string>
     <string name="explora_o_espacial">Exploração Espacial</string>
     <string name="fato_astron_mico">FATO ASTRONÔMICO</string>
@@ -36,14 +34,12 @@
     <string name="bibliografia">BIBLIOGRAFIA</string>
     <string name="informa_es_nt_cnicas">Informações \nTécnicas</string>
     <string name="sol">Sol</string>
-    <string name="sol_description">Vênus é o segundo planeta mais próximo ao Sol e o segundo objeto mais brilhante no céu noturno, atrás apenas da lua. Devido às muitas semelhanças com nosso planeta, Vênus também é considerado um planeta irmão da Terra, por conta de sua massa densidade e volume, mas apesar disso, ele tem características únicas e impressionantes.</string>
     <string name="informacoes_tecnicas">Informações Técnicas</string>
     <string name="curiosidades">Curiosidades</string>
     <string name="atualidades">Atualidades</string>
     <string name="interrogacao">?</string>
     <string name="info_sistema_solar">O Sistema Solar é formado pelo Sol, sua estrela, e por tudo que orbita ao seu redor atraído por sua gravidade, como os planetas (Mercúrio, Vênus, Terra , Marte, Júpiter, Saturno, Urano e Netuno) e seus satélites, planetas anões como Plutão e milhões de asteróides, cometas e meteróides.</string>
     <string name="meus_favoritos">Meus favoritos</string>
-    <string name="maior_pontuacao">Maior Pontuação</string>
     <string name="bibliografia2">Bibliografia</string>
     <string name="alterar_nome">Alterar nome</string>
     <string name="alterar_email">Alterar email</string>
@@ -80,12 +76,9 @@
     <string name="solareclipse_imgdescription">Foto de um eclipse solar</string>
     <string name="earth_imgdescription">Foto do planeta Terra</string>
     <string name="parab_ns">Parabéns!!!</string>
-    <string name="item_removido">Item removido dos favoritos.</string>
-    <string name="desfazer">Desfazer</string>
     <string name="botao_de_favoritos">Botao de favoritos</string>
     <string name="todo">TODO</string>
     <string name="quebra_linha">\n\n</string>
-    <string name="lembrar_senha">Lembrar Senha</string>
     <string name="excluir_favorito">Excluir Favorito</string>
     <string name="voce_quer_mesmo">Você quer mesmo fazer isso?</string>
     <string name="sim">Sim</string>
@@ -100,5 +93,6 @@
     <string name="message_traducao">A tradução é feita de maneira automatizada e por conta de termos técnicos e expresões idiomáticas corre grave risco de falhas de interpretação! Deseja prosseguir? </string>
     <string name="facebook_app_id">3277862102318846</string>
     <string name="fb_login_protocol_scheme">fb3277862102318846</string>
+    <string name="lembrar_senha">Lembrar Senha</string>
 
 </resources>

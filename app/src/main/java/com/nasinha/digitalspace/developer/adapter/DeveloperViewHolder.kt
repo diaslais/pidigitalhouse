@@ -7,7 +7,6 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.nasinha.digitalspace.R
 import com.squareup.picasso.Picasso
-import kotlinx.android.synthetic.main.developer_list_item.view.*
 
 class DeveloperViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
     private val _imageView = view.findViewById<ImageView>(R.id.ivThumbnailDeveloper)

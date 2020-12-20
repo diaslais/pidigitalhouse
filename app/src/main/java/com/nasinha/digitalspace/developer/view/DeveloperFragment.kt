@@ -95,7 +95,7 @@ class DeveloperFragment : Fragment(), IDeveloper {
     }
 
     private fun setAllDevelopersDb() {
-        _developerViewModel.setAllDevelopers().observe(viewLifecycleOwner, { it ->
+        _developerViewModel.setAllDevelopers().observe(viewLifecycleOwner, {
             it.forEach { developer ->
                 addDeveloperDb(developer)
             }
