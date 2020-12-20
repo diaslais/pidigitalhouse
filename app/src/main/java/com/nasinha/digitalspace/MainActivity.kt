@@ -8,7 +8,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
+import com.facebook.login.LoginManager
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -58,11 +61,16 @@ class MainActivity : AppCompatActivity() {
                 R.id.itemSettingsMenu -> _navController.navigate(R.id.action_explorationFragment_to_settingsFragment)
                 R.id.itemExitMenu -> {
                     _drawerLayout.closeDrawer(Gravity.LEFT, false)
+                    logout()
                     _navController.navigate(R.id.loginFragment)
                 }
                 else -> Toast.makeText(this, "num deu", Toast.LENGTH_LONG).show()
             }
             true
         }
+    }
+
+    private fun logout() {
+        val instanceFirebase = LoginManager.getInstance().logOut()
     }
 }
