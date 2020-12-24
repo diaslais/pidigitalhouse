@@ -33,6 +33,7 @@
 
         <ImageView
             android:id="@+id/imgPlanet"
+            android:layout_marginTop="@dimen/dim10dp"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dim180dp"
             android:src="@drawable/sol" />
