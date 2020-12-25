@@ -10,6 +10,7 @@ import android.widget.TextView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -19,6 +20,7 @@ import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.planetsmenu.model.Planet
 import com.nasinha.digitalspace.planetsmenu.repository.PlanetRepository
 import com.nasinha.digitalspace.planetsmenu.viewmodel.PlanetViewModel
+
 
 class PlanetsMenuFragment : Fragment(), IPlanetClick {
     private lateinit var _planetsView: View
@@ -44,9 +46,9 @@ class PlanetsMenuFragment : Fragment(), IPlanetClick {
 
         _planetViewModel = viewModel
 
-        viewModel.planetsData.observe(viewLifecycleOwner, {
+        viewModel.planetsData.observe(viewLifecycleOwner) {
             makePlanetsRecyclerview(it)
-        })
+        }
 
         viewModel.getPlanets()
 
@@ -64,7 +66,7 @@ class PlanetsMenuFragment : Fragment(), IPlanetClick {
     private fun makePlanetsRecyclerview(planets: List<Planet>) {
         val planetsRecyclerView = _planetsView.findViewById<RecyclerView>(R.id.planetsRecyclerview)
 
-        planetsRecyclerView.adapter = PlanetsMenuAdapter(planets, this)
+        planetsRecyclerView.adapter = PlanetsMenuAdapter(requireContext(), planets, this)
 
         planetsRecyclerView.setHasFixedSize(true)
         planetsRecyclerView.layoutManager =
@@ -121,4 +123,5 @@ class PlanetsMenuFragment : Fragment(), IPlanetClick {
             )
         }
     }
+
 }
