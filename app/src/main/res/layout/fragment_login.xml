@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".login.view.LoginFragment">
+    tools:context=".authentication.view.LoginFragment">
 
     <ImageView
         android:layout_width="match_parent"
@@ -97,15 +97,6 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingHorizontal="@dimen/dim10dp">
-
-                    <CheckBox
-                        android:id="@+id/checkBoxLogin"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:text="@string/lembrar_senha"
-                        android:textColor="@color/colorWhite"
-                        app:buttonTint="@color/colorWhite" />
 
                     <com.google.android.material.button.MaterialButton
                         android:id="@+id/mbForgotPasswordLogin"
@@ -202,5 +193,16 @@
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>
-
+    <ProgressBar
+        android:id="@+id/pbLogin"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dim9dp"
+        android:layout_marginEnd="@dimen/dim9dp"
+        android:layout_marginBottom="@dimen/dim9dp"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
