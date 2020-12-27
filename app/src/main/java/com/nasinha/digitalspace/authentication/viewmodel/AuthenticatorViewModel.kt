@@ -15,6 +15,7 @@ class AuthenticatorViewModel(application: Application) : AndroidViewModel(applic
     var error: MutableLiveData<String> = MutableLiveData()
     var stateRegister: MutableLiveData<Boolean> = MutableLiveData()
     var stateLogin: MutableLiveData<Boolean> = MutableLiveData()
+    var stateUid: String? = null
 
     fun registerUser(email: String, password: String) {
         loading.value = true
@@ -63,12 +64,13 @@ class AuthenticatorViewModel(application: Application) : AndroidViewModel(applic
             }
     }
 
-    fun getCurrentUser(): String? {
+/*    fun getCurrentUser(): String? {
         if (FirebaseAuth.getInstance().currentUser != null) {
-            return FirebaseAuth.getInstance().currentUser!!.uid
+            stateUid = FirebaseAuth.getInstance().currentUser!!.uid
+            return stateUid
         }
         return null
-    }
+    }*/
 
     fun signOutUser() {
         FirebaseAuth.getInstance().signOut()

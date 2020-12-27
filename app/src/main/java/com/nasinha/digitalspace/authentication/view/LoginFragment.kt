@@ -94,7 +94,11 @@ class LoginFragment : Fragment() {
     }
 
     private fun checkUserId() {
-        if (authenticatorViewModel.getCurrentUser() != null) {
+/*        if (authenticatorViewModel.getCurrentUser() != null) {
+            val navController = findNavController()
+            navController.navigate(R.id.action_loginFragment_to_explorationFragment)
+        }*/
+        if (AppUtil.getUserId(requireActivity().application) != "") {
             val navController = findNavController()
             navController.navigate(R.id.action_loginFragment_to_explorationFragment)
         }
@@ -157,11 +161,6 @@ class LoginFragment : Fragment() {
         }
     }
 
-    companion object {
-        const val APP_NAME = "DigitalSpace"
-        const val SAVED_PREFS = "SAVED_PREFS"
-    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         callbackManager.onActivityResult(requestCode, resultCode, data)
@@ -194,7 +193,10 @@ class LoginFragment : Fragment() {
         val navController = Navigation.findNavController(_view)
         AppUtil.saveUserId(_view.context, uiid)
         navController.navigate(R.id.action_loginFragment_to_explorationFragment)
-
     }
 
+    companion object {
+        const val APP_NAME = "DigitalSpace"
+        const val SAVED_PREFS = "SAVED_PREFS"
+    }
 }
