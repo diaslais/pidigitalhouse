@@ -1,6 +1,7 @@
 package com.nasinha.digitalspace.authentication.viewmodel
 
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.android.gms.tasks.Task
@@ -62,10 +63,20 @@ class AuthenticatorViewModel(application: Application) : AndroidViewModel(applic
             }
     }
 
+    fun getCurrentUser(): String? {
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            return FirebaseAuth.getInstance().currentUser!!.uid
+        }
+        return null
+    }
+
+    fun signOutUser() {
+        FirebaseAuth.getInstance().signOut()
+    }
+
     private fun errorMessage(s: String) {
         error.value = s
     }
-
 
 
 }

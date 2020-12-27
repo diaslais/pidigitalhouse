@@ -67,7 +67,8 @@
             app:destination="@id/epicFragment" />
         <action
             android:id="@+id/action_explorationFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/navigation_graph" />
         <action
             android:id="@+id/action_explorationFragment_to_changeNameFragment"
             app:destination="@id/changeNameFragment" />
