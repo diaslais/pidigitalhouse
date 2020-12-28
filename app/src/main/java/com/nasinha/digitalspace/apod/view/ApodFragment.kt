@@ -33,9 +33,6 @@ class ApodFragment : Fragment() {
     private lateinit var _view: View
     private lateinit var _apodResponse: ApodResponseModel
     private lateinit var _favoriteViewModel: FavoriteViewModel
-    private val authenticatorViewModel: AuthenticatorViewModel by lazy {
-        ViewModelProvider(this).get(AuthenticatorViewModel::class.java)
-    }
 
     val options = TranslatorOptions.Builder()
         .setSourceLanguage(TranslateLanguage.ENGLISH)

@@ -94,10 +94,6 @@ class LoginFragment : Fragment() {
     }
 
     private fun checkUserId() {
-/*        if (authenticatorViewModel.getCurrentUser() != null) {
-            val navController = findNavController()
-            navController.navigate(R.id.action_loginFragment_to_explorationFragment)
-        }*/
         if (AppUtil.getUserId(requireActivity().application) != "") {
             val navController = findNavController()
             navController.navigate(R.id.action_loginFragment_to_explorationFragment)

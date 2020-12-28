@@ -11,6 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
 import com.nasinha.digitalspace.authentication.AppUtil
+import com.nasinha.digitalspace.authentication.Constants.EMPTY_STRING
 import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -76,8 +77,7 @@ class MainActivity : AppCompatActivity() {
 
     private fun logout() {
         _drawerLayout.closeDrawer(Gravity.LEFT, false)
-        AppUtil.saveUserId(application, "")
-        viewModel.signOutUser()
+        viewModel.signOutUser(this)
         _navController.navigate(R.id.action_explorationFragment_to_loginFragment)
     }
 }
