@@ -1,0 +1,77 @@
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_planetas2"
+    tools:context="com.nasinha.digitalspace.quiz.view.QuizScoreLostFragment">
+
+    <TextView
+        android:id="@+id/txtYourLostScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/ubuntu"
+        android:text="@string/sua_pontuacao"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/dim32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtLostMessage"
+        app:layout_constraintVertical_bias="0.16000003" />
+
+    <ImageView
+        android:id="@+id/imageLostAstronaut"
+        android:layout_width="374dp"
+        android:layout_height="403dp"
+        android:layout_marginTop="16dp"
+        android:scaleType="centerInside"
+        android:src="@drawable/astronauta_perdido_branco"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.432"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/txtLostMessage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/ubuntu"
+        android:text="Parece que você está Perdido no Espaço..."
+        android:textAlignment="center"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/dim32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageLostAstronaut" />
+
+    <TextView
+        android:id="@+id/txtScoreLost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/ubuntu"
+        android:text="8/10"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/dim32sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtYourLostScore"
+        app:layout_constraintVertical_bias="0.32999998" />
+
+    <ImageButton
+        android:id="@+id/btnToExploration"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="20dp"
+        android:background="@color/colorTransparent"
+        android:src="@drawable/ic_baseline_exit_to_app_32"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
