@@ -8,6 +8,9 @@ class FavoriteRepository(private val favoriteDao: FavoriteDao) {
     suspend fun getAll(userId: String) = favoriteDao.getAll(userId)
     suspend fun deleteOne(favorite: FavoriteEntity) = favoriteDao.deleteOne(favorite)
     suspend fun deleteAll() = favoriteDao.deleteAll()
-    suspend fun checkFavorite(image: String) = favoriteDao.checkFavorite(image)
-    suspend fun deleteFavoriteItem(image: String,userId:String) = favoriteDao.deleteFavoriteItem(image,userId)
+    suspend fun checkFavorite(image: String, userId: String) =
+        favoriteDao.checkFavorite(image, userId)
+
+    suspend fun deleteFavoriteItem(image: String, userId: String) =
+        favoriteDao.deleteFavoriteItem(image, userId)
 }

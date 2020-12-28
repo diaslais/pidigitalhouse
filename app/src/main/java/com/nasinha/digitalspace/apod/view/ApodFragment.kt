@@ -117,7 +117,7 @@ class ApodFragment : Fragment() {
 
         _apodResponse = it
 
-        _favoriteViewModel.checkFavorite(it.url).observe(viewLifecycleOwner, {
+        _favoriteViewModel.checkFavorite(requireActivity(),it.url).observe(viewLifecycleOwner, {
             favoriteIsActive(it)
             btnFavorite()
         })

@@ -87,7 +87,7 @@ class LoginFragment : Fragment() {
 
         _view.findViewById<MaterialButton>(R.id.mbLoginLogin).setOnClickListener {
             hideKeyboard()
-            navigateLogin(navController)
+            navigateLogin()
         }
         navigateSignup(navController, R.id.imEmailLogin)
         navigateSignup(navController, R.id.imGoogleLogin)
@@ -101,7 +101,7 @@ class LoginFragment : Fragment() {
     }
 
 
-    private fun navigateLogin(navController: NavController) {
+    private fun navigateLogin() {
         val email = _view.findViewById<TextInputEditText>(R.id.tietEmailLogin).text.toString()
         val password = _view.findViewById<TextInputEditText>(R.id.tietPasswordLogin).text.toString()
 
@@ -189,10 +189,5 @@ class LoginFragment : Fragment() {
         val navController = Navigation.findNavController(_view)
         AppUtil.saveUserId(_view.context, uiid)
         navController.navigate(R.id.action_loginFragment_to_explorationFragment)
-    }
-
-    companion object {
-        const val APP_NAME = "DigitalSpace"
-        const val SAVED_PREFS = "SAVED_PREFS"
     }
 }

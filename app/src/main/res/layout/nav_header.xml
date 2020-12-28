@@ -12,7 +12,7 @@
 
         <ImageView
             android:layout_width="match_parent"
-            android:layout_height="@dimen/dim190dp"
+            android:layout_height="@dimen/dim160dp"
             android:scaleType="centerCrop"
             android:src="@drawable/bg_navigation" />
 
@@ -53,20 +53,6 @@
             android:layout_marginTop="@dimen/dim14dp"
             android:fontFamily="@font/ubuntu"
             android:text="@string/explorador_espacial"
-            android:textAlignment="textStart"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dim16sp"
-            android:textStyle="bold" />
-
-        <TextView
-            android:id="@+id/tvEmailNavHeader"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dim14dp"
-            android:layout_marginTop="@dimen/dim10dp"
-            android:layout_marginBottom="@dimen/dim10dp"
-            android:fontFamily="@font/ubuntu"
-            android:text="@string/explorador_espacial_com"
             android:textAlignment="textStart"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/dim16sp"

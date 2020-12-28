@@ -11,8 +11,8 @@ interface FavoriteDao {
     @Query("SELECT * FROM Favorite WHERE userId=:userId")
     suspend fun getAll(userId: String): List<FavoriteEntity>
 
-    @Query("SELECT COUNT(*) FROM Favorite where image=:image")
-    suspend fun checkFavorite(image: String): Int
+    @Query("SELECT COUNT(*) FROM Favorite where userId=:userId AND image=:image")
+    suspend fun checkFavorite(image: String, userId: String): Int
 
     @Query("DELETE FROM Favorite where userId=:userId AND image=:image")
     suspend fun deleteFavoriteItem(image: String, userId: String)
