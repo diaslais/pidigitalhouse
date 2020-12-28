@@ -17,6 +17,8 @@ import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.apod.model.ApodResponseModel
 import com.nasinha.digitalspace.apod.repository.ApodRepository
 import com.nasinha.digitalspace.apod.viewmodel.ApodViewModel
+import com.nasinha.digitalspace.authentication.AppUtil
+import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
 import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
@@ -115,7 +117,7 @@ class ApodFragment : Fragment() {
 
         _apodResponse = it
 
-        _favoriteViewModel.checkFavorite(it.url).observe(viewLifecycleOwner, {
+        _favoriteViewModel.checkFavorite(requireActivity(),it.url).observe(viewLifecycleOwner, {
             favoriteIsActive(it)
             btnFavorite()
         })
@@ -170,6 +172,8 @@ class ApodFragment : Fragment() {
 
     private fun btnFavorite() {
         val btnAddFavorite = _view.findViewById<CheckBox>(R.id.cbFavoriteApod)
+        val userId = AppUtil.getUserId(requireActivity().application)!!
+
         btnAddFavorite.setOnCheckedChangeListener { _, isChecked ->
             val favorite = FavoriteEntity(
                 id = 0,
@@ -177,12 +181,14 @@ class ApodFragment : Fragment() {
                 title = _apodResponse.title,
                 text = _apodResponse.explanation,
                 date = _apodResponse.date,
-                active = true
+                active = true,
+                type = _apodResponse.media_type,
+                userId = userId
             )
             if (isChecked) {
                 _favoriteViewModel.addFavorite(favorite).observe(viewLifecycleOwner, { })
             } else {
-                _favoriteViewModel.deleteFavoriteItem(favorite.image)
+                _favoriteViewModel.deleteFavoriteItem(favorite.image, userId)
                     .observe(viewLifecycleOwner, { })
             }
         }

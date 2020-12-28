@@ -45,6 +45,7 @@
     <dimen name="dim_370dp">370dp</dimen>
     <dimen name="dim130dp">130dp</dimen>
     <dimen name="dim1dp">1dp</dimen>
+    <dimen name="dim160dp">160dp</dimen>
 
 
 </resources>

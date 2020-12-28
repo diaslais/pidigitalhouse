@@ -1,12 +1,16 @@
 package com.nasinha.digitalspace.authentication.viewmodel
 
+import android.app.Activity
 import android.app.Application
+import android.content.Context
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.facebook.login.LoginManager
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.nasinha.digitalspace.authentication.AppUtil
+import com.nasinha.digitalspace.authentication.Constants
 
 class AuthenticatorViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -14,6 +18,7 @@ class AuthenticatorViewModel(application: Application) : AndroidViewModel(applic
     var error: MutableLiveData<String> = MutableLiveData()
     var stateRegister: MutableLiveData<Boolean> = MutableLiveData()
     var stateLogin: MutableLiveData<Boolean> = MutableLiveData()
+    var stateUid: String? = null
 
     fun registerUser(email: String, password: String) {
         loading.value = true
@@ -62,10 +67,23 @@ class AuthenticatorViewModel(application: Application) : AndroidViewModel(applic
             }
     }
 
+/*    fun getCurrentUser(): String? {
+        if (FirebaseAuth.getInstance().currentUser != null) {
+            stateUid = FirebaseAuth.getInstance().currentUser!!.uid
+            return stateUid
+        }
+        return null
+    }*/
+
+    fun signOutUser(activity: Activity) {
+        AppUtil.saveUserId(activity.application, Constants.EMPTY_STRING)
+        FirebaseAuth.getInstance().signOut()
+        LoginManager.getInstance().logOut()
+    }
+
     private fun errorMessage(s: String) {
         error.value = s
     }
-
 
 
 }

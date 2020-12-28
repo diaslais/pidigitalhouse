@@ -17,5 +17,9 @@ data class FavoriteEntity(
     @ColumnInfo
     var date: String,
     @ColumnInfo
-    var active: Boolean
+    var active: Boolean,
+    @ColumnInfo
+    var type: String,
+    @ColumnInfo
+    var userId: String
 )

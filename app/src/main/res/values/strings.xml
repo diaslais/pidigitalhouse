@@ -80,7 +80,7 @@
     <string name="todo">TODO</string>
     <string name="quebra_linha">\n\n</string>
     <string name="excluir_favorito">Excluir Favorito</string>
-    <string name="voce_quer_mesmo">Você quer mesmo fazer isso?</string>
+    <string name="voce_quer_mesmo">Você quer mesmo excluir o item?</string>
     <string name="sim">Sim</string>
     <string name="Item_removido">Item removido</string>
     <string name="nao">Não</string>

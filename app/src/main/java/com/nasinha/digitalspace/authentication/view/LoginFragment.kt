@@ -2,22 +2,17 @@ package com.nasinha.digitalspace.authentication.view
 
 import android.app.Activity
 import android.content.Context
-import android.content.Context.MODE_PRIVATE
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.inputmethod.InputMethodManager
 import android.widget.Button
-import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.Toast
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.Navigation
@@ -30,7 +25,6 @@ import com.facebook.login.LoginResult
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
@@ -45,8 +39,8 @@ class LoginFragment : Fragment() {
 
     private lateinit var _view: View
     private lateinit var callbackManager: CallbackManager
-    private val button: Button by lazy { _view.findViewById(R.id.login_button) }
-    private val viewModel: AuthenticatorViewModel by lazy {
+    private val signupEmailBtn: Button by lazy { _view.findViewById(R.id.imEmailButton) }
+    private val authenticatorViewModel: AuthenticatorViewModel by lazy {
         ViewModelProvider(this).get(AuthenticatorViewModel::class.java)
     }
 
@@ -69,39 +63,51 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         _view = view
-        val btn = _view.findViewById<ImageButton>(R.id.imFacebookLogin)
+        val facebookLoginBtn = _view.findViewById<ImageButton>(R.id.imFacebookLogin)
 
 
         navigationHandler()
+        checkUserId()
 
         callbackManager = CallbackManager.Factory.create()
-        button.setOnClickListener { loginFacebook() }
-        btn.setOnClickListener { button.performClick() }
+        signupEmailBtn.setOnClickListener {
+            hideKeyboard()
+            loginFacebook()
+        }
+        facebookLoginBtn.setOnClickListener {
+            hideKeyboard()
+            signupEmailBtn.performClick()
+        }
 
     }
-
-
 
 
     private fun navigationHandler() {
         val navController = Navigation.findNavController(_view)
 
         _view.findViewById<MaterialButton>(R.id.mbLoginLogin).setOnClickListener {
-
-            navigateLogin(navController)
+            hideKeyboard()
+            navigateLogin()
         }
         navigateSignup(navController, R.id.imEmailLogin)
         navigateSignup(navController, R.id.imGoogleLogin)
     }
 
+    private fun checkUserId() {
+        if (AppUtil.getUserId(requireActivity().application) != "") {
+            val navController = findNavController()
+            navController.navigate(R.id.action_loginFragment_to_explorationFragment)
+        }
+    }
 
-    private fun navigateLogin(navController: NavController) {
+
+    private fun navigateLogin() {
         val email = _view.findViewById<TextInputEditText>(R.id.tietEmailLogin).text.toString()
         val password = _view.findViewById<TextInputEditText>(R.id.tietPasswordLogin).text.toString()
 
         when {
             AppUtil.validateEmailPassword(email, password) -> {
-                viewModel.loginEmailPassword(email, password)
+                authenticatorViewModel.loginEmailPassword(email, password)
             }
             else -> {
                 Snackbar.make(mbLoginLogin, "vish", Snackbar.LENGTH_LONG).show()
@@ -112,14 +118,14 @@ class LoginFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        viewModel.stateLogin.observe(viewLifecycleOwner,  { state ->
+        authenticatorViewModel.stateLogin.observe(viewLifecycleOwner, { state ->
             state?.let {
                 navigateToHome(it)
             }
         })
-        viewModel.error.observe(viewLifecycleOwner,  { loading ->
+        authenticatorViewModel.error.observe(viewLifecycleOwner, { loading ->
             loading?.let {
-            messageError(it)
+                messageError(it)
             }
         })
     }
@@ -132,27 +138,23 @@ class LoginFragment : Fragment() {
             }
         }
     }
+
     private fun messageError(it: String) {
         val btnLogin = _view.findViewById<MaterialButton>(R.id.mbLoginLogin)
         Snackbar.make(btnLogin, it, Snackbar.LENGTH_LONG).show()
 
     }
 
-    /*private fun hideKeyboard() {
+    private fun hideKeyboard() {
         val imm: InputMethodManager =
             _view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(_view.windowToken, 0)
-    }*/
+    }
 
     private fun navigateSignup(navController: NavController, button: Int) {
         _view.findViewById<ImageButton>(button).setOnClickListener {
             navController.navigate(R.id.action_loginFragment_to_signupFragment)
         }
-    }
-
-    companion object {
-        const val APP_NAME = "DigitalSpace"
-        const val SAVED_PREFS = "SAVED_PREFS"
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -187,7 +189,5 @@ class LoginFragment : Fragment() {
         val navController = Navigation.findNavController(_view)
         AppUtil.saveUserId(_view.context, uiid)
         navController.navigate(R.id.action_loginFragment_to_explorationFragment)
-
     }
-
 }

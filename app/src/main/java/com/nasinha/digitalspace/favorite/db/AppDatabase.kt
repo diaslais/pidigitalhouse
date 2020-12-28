@@ -9,7 +9,7 @@ import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
 
 @Database(
     entities = [FavoriteEntity::class],
-    version = 2,
+    version = 3,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {

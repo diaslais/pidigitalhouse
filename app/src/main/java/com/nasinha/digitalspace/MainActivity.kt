@@ -6,17 +6,21 @@ import android.view.Gravity
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
-import com.facebook.login.LoginManager
 import com.google.android.material.navigation.NavigationView
-import com.google.firebase.auth.AuthResult
-import com.google.firebase.auth.FirebaseAuth
+import com.nasinha.digitalspace.authentication.AppUtil
+import com.nasinha.digitalspace.authentication.Constants.EMPTY_STRING
+import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var _navController: NavController
     private lateinit var _drawerLayout: DrawerLayout
+    private val viewModel: AuthenticatorViewModel by lazy {
+        ViewModelProvider(this).get(AuthenticatorViewModel::class.java)
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +38,8 @@ class MainActivity : AppCompatActivity() {
             this._drawerLayout.closeDrawer(navigationView)
         } else {
             super.onBackPressed()
+
+
         }
     }
 
@@ -62,7 +68,6 @@ class MainActivity : AppCompatActivity() {
                 R.id.itemExitMenu -> {
                     _drawerLayout.closeDrawer(Gravity.LEFT, false)
                     logout()
-                    _navController.navigate(R.id.loginFragment)
                 }
                 else -> Toast.makeText(this, "num deu", Toast.LENGTH_LONG).show()
             }
@@ -71,6 +76,8 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun logout() {
-        val instanceFirebase = LoginManager.getInstance().logOut()
+        _drawerLayout.closeDrawer(Gravity.LEFT, false)
+        viewModel.signOutUser(this)
+        _navController.navigate(R.id.action_explorationFragment_to_loginFragment)
     }
 }

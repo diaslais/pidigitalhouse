@@ -21,6 +21,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.nasinha.digitalspace.R
+import com.nasinha.digitalspace.authentication.AppUtil
+import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
 import com.nasinha.digitalspace.favorite.adapter.FavoriteAdapter
 import com.nasinha.digitalspace.favorite.adapter.IFavorite
 import com.nasinha.digitalspace.favorite.db.AppDatabase
@@ -39,6 +41,7 @@ class FavoriteFragment : Fragment(), IFavorite {
     private lateinit var _navController: NavController
     private lateinit var _favoriteAdapter: FavoriteAdapter
     private lateinit var iFavorite: IFavorite
+
     private var _image: Bitmap? = null
 
     private var _favoriteList = mutableListOf<FavoriteEntity>()
@@ -115,7 +118,9 @@ class FavoriteFragment : Fragment(), IFavorite {
         val prefsChecked = prefs.getBoolean(SAVED_PREFS, false)
 
         if (_favoriteList.isEmpty()) {
-            _favoriteViewModel.getAllFavorite().observe(viewLifecycleOwner, {
+            val userId = AppUtil.getUserId(requireActivity().application)!!
+
+            _favoriteViewModel.getAllFavorite(userId).observe(viewLifecycleOwner, {
                 addAllFavorites(it)
                 sortBtnHandler(sortBtn, prefsChecked, prefs)
             })
