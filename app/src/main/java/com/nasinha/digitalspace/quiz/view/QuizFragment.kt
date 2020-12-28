@@ -30,7 +30,7 @@ class QuizFragment : Fragment() {
         val navController = findNavController()
 
         view.findViewById<MaterialButton>(R.id.btnPlay).setOnClickListener {
-            navController.navigate(R.id.action_quizFragment_to_quizQuestionsFragment)
+            navController.navigate(R.id.action_quizFragment_to_questionsFragment)
         }
         val quizToolBar = view.findViewById<MaterialToolbar>(R.id.quizTopAppBar)
 

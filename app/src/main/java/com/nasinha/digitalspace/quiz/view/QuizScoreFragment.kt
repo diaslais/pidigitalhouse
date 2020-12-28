@@ -5,6 +5,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.nasinha.digitalspace.R
@@ -12,16 +13,26 @@ import com.nasinha.digitalspace.R
 
 class QuizScoreFragment : Fragment() {
 
+    private lateinit var _view: View
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quiz_score, container, false)
+    ): View {
+        _view = inflater.inflate(R.layout.fragment_quiz_score, container, false)
+        return _view
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        _view = view
+
+        val totalQuestions = requireArguments().getInt("TOTAL_QUESTIONS")
+        val correctAnswers = requireArguments().getInt("CORRECT_ANSWERS")
+        val result = _view.findViewById<TextView>(R.id.txtScore)
+        result.text = "$correctAnswers / $totalQuestions"
+
 
         val navController = findNavController()
 

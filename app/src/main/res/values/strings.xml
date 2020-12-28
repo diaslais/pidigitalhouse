@@ -37,7 +37,6 @@
     <string name="informacoes_tecnicas">Informações Técnicas</string>
     <string name="curiosidades">Curiosidades</string>
     <string name="atualidades">Atualidades</string>
-    <string name="interrogacao">?</string>
     <string name="info_sistema_solar">O Sistema Solar é formado pelo Sol, sua estrela, e por tudo que orbita ao seu redor atraído por sua gravidade, como os planetas (Mercúrio, Vênus, Terra , Marte, Júpiter, Saturno, Urano e Netuno) e seus satélites, planetas anões como Plutão e milhões de asteróides, cometas e meteróides.</string>
     <string name="meus_favoritos">Meus favoritos</string>
     <string name="bibliografia2">Bibliografia</string>
@@ -75,7 +74,9 @@
     <string name="milkyway_imgdescription">Foto da via láctea</string>
     <string name="solareclipse_imgdescription">Foto de um eclipse solar</string>
     <string name="earth_imgdescription">Foto do planeta Terra</string>
-    <string name="parab_ns">Parabéns!!!</string>
+    <string name="parab_ns">Parabéns Explorador!!!</string>
+    <string name="item_removido">Item removido dos favoritos.</string>
+    <string name="desfazer">Desfazer</string>
     <string name="botao_de_favoritos">Botao de favoritos</string>
     <string name="todo">TODO</string>
     <string name="quebra_linha">\n\n</string>
@@ -96,7 +97,9 @@
     <string name="lembrar_senha">Lembrar Senha</string>
     <string name="iniciar">INICIAR</string>
     <string name="intro_quiz">Bem vindo Explorador!!! Aqui iremos testar os seus conhecimentos espaciais com 10 perguntas sobre o sistema solar.</string>
-    <string name="intro_quiz_tempo">Existe um limite de 10 segundos para cada pergunta. Afinal, o espaço é um ambiente impiedoso e é preciso pensar rápido!</string>
+    <string name="intro_quiz_tempo">Existe um limite de 30 segundos para cada pergunta. Afinal, o espaço é um ambiente impiedoso e é preciso pensar rápido!</string>
+    <string name="sua_pontuacao">Sua pontuação é :</string>
+    <string name="responder">Responder</string>
 
 
 </resources>
