@@ -166,8 +166,8 @@
         android:label="fragment_quiz"
         tools:layout="@layout/fragment_quiz">
         <action
-            android:id="@+id/action_quizFragment_to_quizQuestionsFragment"
-            app:destination="@id/quizQuestionsFragment" />
+            android:id="@+id/action_quizFragment_to_questionsFragment"
+            app:destination="@id/questionsFragment" />
     </fragment>
     <fragment
         android:id="@+id/quizScoreFragment"
@@ -177,15 +177,6 @@
         <action
             android:id="@+id/action_quizScoreFragment_to_explorationFragment"
             app:destination="@id/explorationFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/quizQuestionsFragment"
-        android:name="com.nasinha.digitalspace.quiz.view.QuizQuestionsFragment"
-        android:label="fragment_quiz_questions"
-        tools:layout="@layout/fragment_quiz_questions">
-        <action
-            android:id="@+id/action_quizQuestionsFragment_to_quizScoreFragment"
-            app:destination="@id/quizScoreFragment" />
     </fragment>
     <fragment
         android:id="@+id/developerFragment"
@@ -219,6 +210,27 @@
         android:name="com.nasinha.digitalspace.apod.view.LandsScapeApodFragment"
         android:label="fragment_lands_scape_apod"
         tools:layout="@layout/fragment_lands_scape_apod" />
+    <fragment
+        android:id="@+id/questionsFragment"
+        android:name="com.nasinha.digitalspace.quiz.view.QuestionsFragment"
+        android:label="fragment_questions"
+        tools:layout="@layout/fragment_questions" >
+        <action
+            android:id="@+id/action_questionsFragment_to_quizScoreFragment"
+            app:destination="@id/quizScoreFragment" />
+        <action
+            android:id="@+id/action_questionsFragment_to_quizScoreLostFragment"
+            app:destination="@id/quizScoreLostFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/quizScoreLostFragment"
+        android:name="com.nasinha.digitalspace.quiz.view.QuizScoreLostFragment"
+        android:label="fragment_quiz_score_lost"
+        tools:layout="@layout/fragment_quiz_score_lost" >
+        <action
+            android:id="@+id/action_quizScoreLostFragment_to_explorationFragment"
+            app:destination="@id/explorationFragment" />
+    </fragment>
 
 
 </navigation>

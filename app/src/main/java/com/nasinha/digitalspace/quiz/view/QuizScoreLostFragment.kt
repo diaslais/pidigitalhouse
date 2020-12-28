@@ -1,17 +1,18 @@
 package com.nasinha.digitalspace.quiz.view
 
 import android.os.Bundle
+import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
-import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.nasinha.digitalspace.R
 
 
-class QuizScoreFragment : Fragment() {
+
+class QuizScoreLostFragment : Fragment() {
 
     private lateinit var _view: View
 
@@ -19,7 +20,7 @@ class QuizScoreFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        _view = inflater.inflate(R.layout.fragment_quiz_score, container, false)
+        _view = inflater.inflate(R.layout.fragment_quiz_score_lost, container, false)
         return _view
     }
 
@@ -30,14 +31,14 @@ class QuizScoreFragment : Fragment() {
 
         val totalQuestions = requireArguments().getInt("TOTAL_QUESTIONS")
         val correctAnswers = requireArguments().getInt("CORRECT_ANSWERS")
-        val result = _view.findViewById<TextView>(R.id.txtScore)
+        val result = _view.findViewById<TextView>(R.id.txtScoreLost)
         result.text = "$correctAnswers / $totalQuestions"
-
 
         val navController = findNavController()
 
-        view.findViewById<ImageButton>(R.id.btnExitToExploration).setOnClickListener {
-            navController.navigate(R.id.action_quizScoreFragment_to_explorationFragment)
+        view.findViewById<ImageButton>(R.id.btnToExploration).setOnClickListener {
+            navController.navigate(R.id.action_quizScoreLostFragment_to_explorationFragment)
         }
+
     }
 }
