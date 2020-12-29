@@ -4,11 +4,13 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
+import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.nasinha.digitalspace.R
+import kotlinx.android.synthetic.main.fragment_quiz.*
 
 
 class QuizFragment : Fragment() {
@@ -28,10 +30,11 @@ class QuizFragment : Fragment() {
         val navController = findNavController()
 
         view.findViewById<MaterialButton>(R.id.btnPlay).setOnClickListener {
-            navController.navigate(R.id.action_quizFragment_to_quizQuestionsFragment)
+            navController.navigate(R.id.action_quizFragment_to_questionsFragment)
         }
+        val quizToolBar = view.findViewById<MaterialToolbar>(R.id.quizTopAppBar)
 
-        view.findViewById<ImageButton>(R.id.btnBackQuiz).setOnClickListener {
+        quizToolBar.setNavigationOnClickListener {
             activity?.onBackPressed()
         }
 
