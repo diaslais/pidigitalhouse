@@ -52,7 +52,7 @@ class ExplorationFragment : Fragment() {
         view.findViewById<MaterialButton>(R.id.btnFavorites).setOnClickListener {
             navController.navigate(R.id.action_explorationFragment_to_favoriteFragment)
         }
-        view.findViewById<MaterialButton>(R.id.btnQuiz).setOnClickListener {
+        view.findViewById<MaterialCardView>(R.id.cardQuiz).setOnClickListener {
             navController.navigate(R.id.action_explorationFragment_to_quizFragment)
         }
         view.findViewById<MaterialButton>(R.id.btnBibliography).setOnClickListener {
