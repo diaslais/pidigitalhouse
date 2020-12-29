@@ -1,10 +1,12 @@
 package com.nasinha.digitalspace.favorite.viewmodel
 
 import android.app.Activity
+import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.nasinha.digitalspace.authentication.AppUtil
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
+import com.nasinha.digitalspace.favorite.entity.UserEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
 import kotlinx.coroutines.Dispatchers
 
@@ -17,13 +19,14 @@ class FavoriteViewModel(
         emit(favorite)
     }
 
-    fun getAllFavorite(userId: String) = liveData(Dispatchers.IO) {
-        emit(repository.getAll(userId).filter { it.active })
+    fun addUserFavorite(user: UserEntity) = liveData(Dispatchers.IO) {
+        repository.addUserFavorite(user)
+        emit(user)
     }
 
-    fun deleteOne(favorite: FavoriteEntity) = liveData(Dispatchers.IO) {
-        repository.deleteOne(favorite)
-        emit(true)
+    fun getUserWithFavorites(userId: String) = liveData(Dispatchers.IO) {
+        val result = repository.getUserWithFavorites(userId)
+        emit(result)
     }
 
     fun checkFavorite(activity: Activity, image: String) = liveData(Dispatchers.IO) {
@@ -41,8 +44,8 @@ class FavoriteViewModel(
         emit(true)
     }
 
-    fun deleteAll() = liveData(Dispatchers.IO) {
-        repository.deleteAll()
+    fun deleteAllFavorite() = liveData(Dispatchers.IO) {
+        repository.deleteAllFavorite()
         emit(true)
     }
 }

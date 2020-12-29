@@ -20,7 +20,7 @@ class DeveloperRepository(private val developerDao: DeveloperDao) {
                 "Lais Dias",
                 "",
                 "bio",
-                "",
+                "https://www.linkedin.com/",
                 "https://github.com/diaslais"
             ), DeveloperEntity(
                 2,
@@ -28,7 +28,7 @@ class DeveloperRepository(private val developerDao: DeveloperDao) {
                 "Mariana Marcelli",
                 "",
                 "bio",
-                "",
+                "https://www.linkedin.com/",
                 "https://github.com/MarianaMarcelli"
             ), DeveloperEntity(
                 3,
@@ -44,7 +44,7 @@ class DeveloperRepository(private val developerDao: DeveloperDao) {
                 "Renan Damasceno",
                 "",
                 "bio",
-                "",
+                "https://www.linkedin.com/",
                 "https://github.com/renandamasceno"
             )
         )

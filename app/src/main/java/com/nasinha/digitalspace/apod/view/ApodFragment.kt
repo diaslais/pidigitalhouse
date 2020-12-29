@@ -21,6 +21,7 @@ import com.nasinha.digitalspace.authentication.AppUtil
 import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
 import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
+import com.nasinha.digitalspace.favorite.entity.UserEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
 import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
@@ -117,7 +118,7 @@ class ApodFragment : Fragment() {
 
         _apodResponse = it
 
-        _favoriteViewModel.checkFavorite(requireActivity(),it.url).observe(viewLifecycleOwner, {
+        _favoriteViewModel.checkFavorite(requireActivity(), it.url).observe(viewLifecycleOwner, {
             favoriteIsActive(it)
             btnFavorite()
         })
@@ -176,17 +177,20 @@ class ApodFragment : Fragment() {
 
         btnAddFavorite.setOnCheckedChangeListener { _, isChecked ->
             val favorite = FavoriteEntity(
-                id = 0,
                 image = _apodResponse.url,
                 title = _apodResponse.title,
                 text = _apodResponse.explanation,
                 date = _apodResponse.date,
                 active = true,
-                type = _apodResponse.media_type,
-                userId = userId
+                type = _apodResponse.media_type
+            )
+            val user = UserEntity(
+                image = _apodResponse.url,
+                userId = AppUtil.getUserId(requireActivity())!!
             )
             if (isChecked) {
-                _favoriteViewModel.addFavorite(favorite).observe(viewLifecycleOwner, { })
+                _favoriteViewModel.addFavorite(favorite).observe(viewLifecycleOwner, {})
+                _favoriteViewModel.addUserFavorite(user).observe(viewLifecycleOwner, {})
             } else {
                 _favoriteViewModel.deleteFavoriteItem(favorite.image, userId)
                     .observe(viewLifecycleOwner, { })
