@@ -2,24 +2,29 @@ package com.nasinha.digitalspace.favorite.dao
 
 import androidx.room.*
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
+import com.nasinha.digitalspace.favorite.entity.UserEntity
+import com.nasinha.digitalspace.favorite.relations.UserWithFavorites
 
 @Dao
 interface FavoriteDao {
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addFavorite(favorite: FavoriteEntity)
 
-    @Query("SELECT * FROM Favorite WHERE userId=:userId")
-    suspend fun getAll(userId: String): List<FavoriteEntity>
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun addUserFavorite(user:UserEntity)
 
-    @Query("SELECT COUNT(*) FROM Favorite where userId=:userId AND image=:image")
+    @Transaction
+    @Query("SELECT * FROM User WHERE userId=:userId")
+    suspend fun getUserWithFavorites(userId: String): List<UserWithFavorites>
+
+    @Transaction
+    @Query("SELECT COUNT(*) FROM User where userId=:userId AND image=:image")
     suspend fun checkFavorite(image: String, userId: String): Int
 
-    @Query("DELETE FROM Favorite where userId=:userId AND image=:image")
+    @Transaction
+    @Query("DELETE FROM User where userId=:userId AND image=:image")
     suspend fun deleteFavoriteItem(image: String, userId: String)
 
-    @Delete
-    suspend fun deleteOne(favorite: FavoriteEntity)
-
     @Query("DELETE FROM Favorite")
-    suspend fun deleteAll()
+    suspend fun deleteAllFavorite()
 }

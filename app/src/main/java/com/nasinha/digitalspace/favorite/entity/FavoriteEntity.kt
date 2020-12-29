@@ -6,8 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "Favorite")
 data class FavoriteEntity(
-    @PrimaryKey(autoGenerate = true)
-    var id: Int,
+    @PrimaryKey
     @ColumnInfo
     var image: String,
     @ColumnInfo
@@ -19,7 +18,5 @@ data class FavoriteEntity(
     @ColumnInfo
     var active: Boolean,
     @ColumnInfo
-    var type: String,
-    @ColumnInfo
-    var userId: String
+    var type: String
 )

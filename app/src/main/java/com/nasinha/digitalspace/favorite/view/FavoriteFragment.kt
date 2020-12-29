@@ -5,6 +5,7 @@ import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,7 +23,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.authentication.AppUtil
-import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
 import com.nasinha.digitalspace.favorite.adapter.FavoriteAdapter
 import com.nasinha.digitalspace.favorite.adapter.IFavorite
 import com.nasinha.digitalspace.favorite.db.AppDatabase
@@ -120,8 +120,9 @@ class FavoriteFragment : Fragment(), IFavorite {
         if (_favoriteList.isEmpty()) {
             val userId = AppUtil.getUserId(requireActivity().application)!!
 
-            _favoriteViewModel.getAllFavorite(userId).observe(viewLifecycleOwner, {
-                addAllFavorites(it)
+            _favoriteViewModel.getUserWithFavorites(userId).observe(viewLifecycleOwner, {
+                val favorites = it.map { userWithFavorites -> userWithFavorites.favorites[0] }
+                addAllFavorites(favorites)
                 sortBtnHandler(sortBtn, prefsChecked, prefs)
             })
         }
@@ -135,17 +136,21 @@ class FavoriteFragment : Fragment(), IFavorite {
 
 
     private fun deleteAll() {
-        _favoriteViewModel.deleteAll().observe(viewLifecycleOwner, {
+        _favoriteViewModel.deleteAllFavorite().observe(viewLifecycleOwner, {
             _favoriteList.clear()
             _favoriteAdapter.notifyDataSetChanged()
         })
     }
 
     private fun deleteOneFavoriteDb(position: Int, favorite: FavoriteEntity) {
-        _favoriteViewModel.deleteOne(favorite).observe(viewLifecycleOwner, {
-            _favoriteList.removeAt(position)
-            _favoriteAdapter.notifyItemRemoved(position)
-        })
+        _favoriteViewModel.deleteFavoriteItem(
+            favorite.image,
+            AppUtil.getUserId(requireActivity())!!
+        )
+            .observe(viewLifecycleOwner, {
+                _favoriteList.removeAt(position)
+                _favoriteAdapter.notifyItemRemoved(position)
+            })
     }
 
     override fun iFavoriteDelete(
