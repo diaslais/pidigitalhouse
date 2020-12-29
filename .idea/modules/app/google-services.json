@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "652483215236",
+    "project_id": "digitalspace-c7c3b",
+    "storage_bucket": "digitalspace-c7c3b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:652483215236:android:612c7f8433de5a90d3a7d1",
+        "android_client_info": {
+          "package_name": "com.nasinha.digitalspace"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "652483215236-g6nu8nndtqr4teph3f3vmq1gh9ke19o6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nasinha.digitalspace",
+            "certificate_hash": "cbc1ce699b12dbaac280c0f1f76e62f3ee9d6412"
+          }
+        },
+        {
+          "client_id": "652483215236-guold11c1su3io18q33stbosgo8gu99u.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.nasinha.digitalspace",
+            "certificate_hash": "56f0fefcf819e5906070e2be10b259e3ee0b899d"
+          }
+        },
+        {
+          "client_id": "652483215236-hejpq7pdenk1oqlam7i8p77cfu1flhbp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAVdTZAR_iqwfh4ikpSA8X3Uq92-WS27Rc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "652483215236-hejpq7pdenk1oqlam7i8p77cfu1flhbp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
