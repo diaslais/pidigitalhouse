@@ -20,6 +20,7 @@ import androidx.navigation.fragment.findNavController
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
+import com.facebook.Profile
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -208,7 +209,9 @@ class LoginFragment : Fragment() {
                     // Sign in success, update UI with the signed-in user's information
 //                    Log.d("googleSignIn", "signInWithCredential:success")
                     val uiid = mAuth.currentUser?.uid
-                    AppUtil.saveUserId(_view.context, uiid)
+                    val name = mAuth.currentUser?.displayName
+                    AppUtil.saveUserId(requireActivity(), uiid)
+                    AppUtil.saveUserName(requireActivity(), name)
                     navigateToHome(!uiid.isNullOrEmpty())
                 } else {
                     // If sign in fails, display a message to the user.
@@ -228,7 +231,11 @@ class LoginFragment : Fragment() {
                 val credential: AuthCredential =
                     FacebookAuthProvider.getCredential(loginResult.accessToken.token)
                 FirebaseAuth.getInstance().signInWithCredential(credential)
-                    .addOnCompleteListener { irParaHome(loginResult.accessToken.userId) }
+                    .addOnCompleteListener {
+                        val profile = Profile.getCurrentProfile()
+                        val name = profile.name
+                        irParaHome(loginResult.accessToken.userId, name)
+                    }
             }
 
             override fun onCancel() {
@@ -241,9 +248,10 @@ class LoginFragment : Fragment() {
         })
     }
 
-    private fun irParaHome(uiid: String) {
+    private fun irParaHome(uiid: String, name: String?) {
         val navController = Navigation.findNavController(_view)
-        AppUtil.saveUserId(_view.context, uiid)
+        AppUtil.saveUserId(requireActivity(), uiid)
+        AppUtil.saveUserName(requireActivity(), name)
         navController.navigate(R.id.action_loginFragment_to_explorationFragment)
     }
 

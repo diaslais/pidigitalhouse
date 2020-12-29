@@ -6,13 +6,16 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.navigation.NavigationView
 import com.nasinha.digitalspace.R
+import com.nasinha.digitalspace.authentication.AppUtil
 
 class ExplorationFragment : Fragment() {
 
@@ -30,6 +33,8 @@ class ExplorationFragment : Fragment() {
         val navController = findNavController()
 
         val explorationToolBar = view.findViewById<MaterialToolbar>(R.id.explorationTopAppBar)
+
+        navInfoHeader()
 
         explorationToolBar.setNavigationOnClickListener {
             val drawerLayout = activity?.findViewById<DrawerLayout>(R.id.drawer_layout)
@@ -54,6 +59,15 @@ class ExplorationFragment : Fragment() {
             navController.navigate(R.id.action_explorationFragment_to_bibliographyFragment)
         }
 
+    }
+
+    @SuppressLint("DefaultLocale")
+    private fun navInfoHeader() {
+        val navigationView = activity?.findViewById<NavigationView>(R.id.navigationView)
+        val headerView = navigationView!!.getHeaderView(0)
+        val nameDrawer = headerView.findViewById<TextView>(R.id.tvNameNavHeader)
+        val nameShared = AppUtil.getUserName(requireActivity())
+        nameDrawer.text = nameShared
     }
 }
 
