@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -14,7 +15,6 @@ import android.widget.Toast
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.facebook.CallbackManager
@@ -22,12 +22,16 @@ import com.facebook.FacebookCallback
 import com.facebook.FacebookException
 import com.facebook.login.LoginManager
 import com.facebook.login.LoginResult
+import com.google.android.gms.auth.api.signin.GoogleSignIn
+import com.google.android.gms.auth.api.signin.GoogleSignInOptions
+import com.google.android.gms.common.api.ApiException
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.AuthCredential
 import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.GoogleAuthProvider
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.authentication.AppUtil
 import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
@@ -35,11 +39,9 @@ import kotlinx.android.synthetic.main.fragment_login.*
 
 
 class LoginFragment : Fragment() {
-
-
     private lateinit var _view: View
     private lateinit var callbackManager: CallbackManager
-    private val signupEmailBtn: Button by lazy { _view.findViewById(R.id.imEmailButton) }
+    private val facebookRealBtn: Button by lazy { _view.findViewById(R.id.imFacebookRealLogin) }
     private val authenticatorViewModel: AuthenticatorViewModel by lazy {
         ViewModelProvider(this).get(AuthenticatorViewModel::class.java)
     }
@@ -63,34 +65,23 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         _view = view
-        val facebookLoginBtn = _view.findViewById<ImageButton>(R.id.imFacebookLogin)
+        val facebookFakeBtn = _view.findViewById<ImageButton>(R.id.imFacebookLogin)
 
-
-        navigationHandler()
         checkUserId()
-
+//        Email login
+        loginHandler()
+//        Email signup
+        emailSignupHandler()
+//        Facebook
         callbackManager = CallbackManager.Factory.create()
-        signupEmailBtn.setOnClickListener {
-            hideKeyboard()
-            loginFacebook()
+        facebookRealBtn.setOnClickListener {
+            facebookLoginHandler()
         }
-        facebookLoginBtn.setOnClickListener {
-            hideKeyboard()
-            signupEmailBtn.performClick()
+        facebookFakeBtn.setOnClickListener {
+            facebookRealBtn.performClick()
         }
-
-    }
-
-
-    private fun navigationHandler() {
-        val navController = Navigation.findNavController(_view)
-
-        _view.findViewById<MaterialButton>(R.id.mbLoginLogin).setOnClickListener {
-            hideKeyboard()
-            navigateLogin()
-        }
-        navigateSignup(navController, R.id.imEmailLogin)
-        navigateSignup(navController, R.id.imGoogleLogin)
+//        Google
+        googleLoginHandler()
     }
 
     private fun checkUserId() {
@@ -100,6 +91,21 @@ class LoginFragment : Fragment() {
         }
     }
 
+    private fun loginHandler() {
+        _view.findViewById<MaterialButton>(R.id.mbLoginLogin).setOnClickListener {
+            hideKeyboard()
+            navigateLogin()
+        }
+    }
+
+    private fun emailSignupHandler() {
+        val loginBtn = _view.findViewById<ImageButton>(R.id.imEmailLogin)
+
+        loginBtn.setOnClickListener {
+            val navController = Navigation.findNavController(_view)
+            navController.navigate(R.id.action_loginFragment_to_signupFragment)
+        }
+    }
 
     private fun navigateLogin() {
         val email = _view.findViewById<TextInputEditText>(R.id.tietEmailLogin).text.toString()
@@ -142,7 +148,6 @@ class LoginFragment : Fragment() {
     private fun messageError(it: String) {
         val btnLogin = _view.findViewById<MaterialButton>(R.id.mbLoginLogin)
         Snackbar.make(btnLogin, it, Snackbar.LENGTH_LONG).show()
-
     }
 
     private fun hideKeyboard() {
@@ -151,18 +156,69 @@ class LoginFragment : Fragment() {
         imm.hideSoftInputFromWindow(_view.windowToken, 0)
     }
 
-    private fun navigateSignup(navController: NavController, button: Int) {
-        _view.findViewById<ImageButton>(button).setOnClickListener {
-            navController.navigate(R.id.action_loginFragment_to_signupFragment)
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == RC_SIGN_IN) {
+            val task = GoogleSignIn.getSignedInAccountFromIntent(data)
+            val exception = task.exception
+            if (task.isSuccessful) {
+                try {
+                    // Google Sign In was successful, authenticate with Firebase
+                    hideKeyboard()
+                    val account = task.getResult(ApiException::class.java)!!
+//                    Log.d("GoogleSignIn", "firebaseAuthWithGoogle:" + account.id)
+                    firebaseAuthWithGoogle(account.idToken!!)
+                } catch (e: ApiException) {
+                    // Google Sign In failed, update UI appropriately
+//                    Log.w("GoogleSignIn", "Google sign in failed", e)
+                }
+            } else {
+                Log.w("GoogleSignIn", exception.toString())
+            }
+        } else {
+            callbackManager.onActivityResult(requestCode, resultCode, data)
         }
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        callbackManager.onActivityResult(requestCode, resultCode, data)
+
+    private fun googleLoginHandler() {
+        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+            .requestIdToken(getString(R.string.default_web_client_id))
+            .requestEmail()
+            .build()
+
+        val googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+
+        val googleSignInBtn = _view.findViewById<ImageButton>(R.id.imGoogleLogin)
+
+        googleSignInBtn.setOnClickListener {
+            val signInIntent = googleSignInClient.signInIntent
+            startActivityForResult(signInIntent, RC_SIGN_IN)
+        }
     }
 
-    private fun loginFacebook() {
+    private fun firebaseAuthWithGoogle(idToken: String) {
+        val credential = GoogleAuthProvider.getCredential(idToken, null)
+        val mAuth = FirebaseAuth.getInstance()
+
+        mAuth.signInWithCredential(credential)
+            .addOnCompleteListener(requireActivity()) { task ->
+                if (task.isSuccessful) {
+                    // Sign in success, update UI with the signed-in user's information
+//                    Log.d("googleSignIn", "signInWithCredential:success")
+                    val uiid = mAuth.currentUser?.uid
+                    AppUtil.saveUserId(_view.context, uiid)
+                    navigateToHome(!uiid.isNullOrEmpty())
+                } else {
+                    // If sign in fails, display a message to the user.
+//                    Log.w("googleSignIn", "signInWithCredential:failure", task.exception)
+                    Snackbar.make(_view, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
+                }
+            }
+    }
+
+    private fun facebookLoginHandler() {
         val instanceFirebase = LoginManager.getInstance()
 
         instanceFirebase.logInWithReadPermissions(this, listOf("email", "public_profile"))
@@ -189,5 +245,9 @@ class LoginFragment : Fragment() {
         val navController = Navigation.findNavController(_view)
         AppUtil.saveUserId(_view.context, uiid)
         navController.navigate(R.id.action_loginFragment_to_explorationFragment)
+    }
+
+    companion object {
+        private const val RC_SIGN_IN = 100
     }
 }
