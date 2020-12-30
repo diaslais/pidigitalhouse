@@ -28,6 +28,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private lateinit var _view: View
     private var _correctAnswers: Int = 0
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -35,6 +36,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         _view = inflater.inflate(R.layout.fragment_questions, container, false)
         return _view
     }
+
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -94,6 +96,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         optionTwo.text = question.answer2
         optionThree.text = question.answer3
         optionFour.text = question.answer4
+
 
     }
 
@@ -158,8 +161,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                     btnAnswer2.isEnabled = false
                     btnAnswer3.isEnabled = false
                     btnAnswer4.isEnabled = false
-                } else if
-                {
+                } else if (btnNext.text == "Próxima Questão"){
                     btnAnswer1.isEnabled = true
                     btnAnswer2.isEnabled = true
                     btnAnswer3.isEnabled = true
@@ -215,6 +217,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
             }
         }
     }
+
 
     private fun selectedOption(tv: TextView, selectedOptionNumber: Int) {
         defaultOptionsView()
