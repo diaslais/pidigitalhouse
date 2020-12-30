@@ -28,7 +28,6 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private lateinit var _view: View
     private var _correctAnswers: Int = 0
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,7 +35,6 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         _view = inflater.inflate(R.layout.fragment_questions, container, false)
         return _view
     }
-
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -62,7 +60,6 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         optionThree.setOnClickListener(this)
         optionFour.setOnClickListener(this)
         answerButton.setOnClickListener(this)
-
 
     }
 
@@ -97,7 +94,6 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         optionTwo.text = question.answer2
         optionThree.text = question.answer3
         optionFour.text = question.answer4
-
 
     }
 
@@ -157,11 +153,26 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                 selectedOption(btnAnswer4, 4)
             }
             R.id.btnNext -> {
+                if (btnNext.text == "Responder"){
+                    btnAnswer1.isEnabled = false
+                    btnAnswer2.isEnabled = false
+                    btnAnswer3.isEnabled = false
+                    btnAnswer4.isEnabled = false
+                } else if
+                {
+                    btnAnswer1.isEnabled = true
+                    btnAnswer2.isEnabled = true
+                    btnAnswer3.isEnabled = true
+                    btnAnswer4.isEnabled = true
+                }
+
                 if (_selectedOptionPosition == 0) {
-                    _currentPosition++
+
+                        _currentPosition++
 
                     when {
                         _currentPosition <= _questionsList!!.size -> {
+
                             setQuestion()
                         }
                         else -> {
@@ -177,6 +188,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                             } else {
                                 navController.navigate(
                                     R.id.action_questionsFragment_to_quizScoreLostFragment, bundle
+
                                 )
                             }
                         }
@@ -192,15 +204,17 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
                     if (_currentPosition == _questionsList!!.size) {
                         btnNext.text = "FIM"
+                        _currentPosition--
+
                     } else {
                         btnNext.text = "Próxima Questão"
+
                     }
                     _selectedOptionPosition = 0
                 }
             }
         }
     }
-
 
     private fun selectedOption(tv: TextView, selectedOptionNumber: Int) {
         defaultOptionsView()
@@ -210,9 +224,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         tv.setTypeface(tv.typeface, Typeface.BOLD)
         tv.background = ContextCompat.getDrawable(_view.context, R.drawable.selected_question)
 
-
     }
-
 
 }
 
