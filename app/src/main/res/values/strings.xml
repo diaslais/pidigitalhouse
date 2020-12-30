@@ -20,10 +20,7 @@
     <string name="error_confirmacao">Confirmação diferente do Password</string>
     <string name="confirmacao">Conta criada com sucesso</string>
     <string name="sair">Sair</string>
-    <string name="explorar">EXPLORAR</string>
     <string name="explora_o_espacial">Exploração Espacial</string>
-    <string name="fato_astron_mico">FATO ASTRONÔMICO</string>
-    <string name="terra">TERRA</string>
     <string name="conhe_a_nosso_sistema_solar">CONHEÇA O SISTEMA SOLAR</string>
     <string name="via_l_ctea">VIA LÁCTEA!</string>
     <string name="galaxia_espiral">Um pontinho nessa linda galáxia espiral chamada:</string>
@@ -31,7 +28,6 @@
     <string name="iniciar_explora_o">INICIAR EXPLORAÇÃO</string>
     <string name="sistema_solar">SISTEMA SOLAR</string>
     <string name="info_galaxias">As galáxias são categorizadas de acordo com sua morfologia visual como elíptica, espiral ou irregular.\n\Acredita-se que muitas galáxias tenham buracos negros supermassivos em seus centros.</string>
-    <string name="bibliografia">BIBLIOGRAFIA</string>
     <string name="informa_es_nt_cnicas">Informações \nTécnicas</string>
     <string name="sol">Sol</string>
     <string name="informacoes_tecnicas">Informações Técnicas</string>
@@ -39,7 +35,7 @@
     <string name="atualidades">Atualidades</string>
     <string name="info_sistema_solar">O Sistema Solar é formado pelo Sol, sua estrela, e por tudo que orbita ao seu redor atraído por sua gravidade, como os planetas (Mercúrio, Vênus, Terra , Marte, Júpiter, Saturno, Urano e Netuno) e seus satélites, planetas anões como Plutão e milhões de asteróides, cometas e meteróides.</string>
     <string name="meus_favoritos">Meus favoritos</string>
-    <string name="bibliografia2">Bibliografia</string>
+    <string name="bibliografia">Bibliografia</string>
     <string name="alterar_nome">Alterar nome</string>
     <string name="alterar_email">Alterar email</string>
     <string name="alterar_senha">Alterar senha</string>
@@ -100,6 +96,9 @@
     <string name="intro_quiz_tempo">Existe um limite de 30 segundos para cada pergunta. Afinal, o espaço é um ambiente impiedoso e é preciso pensar rápido!</string>
     <string name="sua_pontuacao">Sua pontuação é :</string>
     <string name="responder">Responder</string>
+    <string name="explorar">Explorar</string>
+    <string name="fato_astron_mico">Fato astronômico</string>
+    <string name="terra">Terra</string>
 
 
 </resources>
