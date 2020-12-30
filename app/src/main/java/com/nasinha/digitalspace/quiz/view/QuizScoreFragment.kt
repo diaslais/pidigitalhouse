@@ -40,4 +40,7 @@ class QuizScoreFragment : Fragment() {
             navController.navigate(R.id.action_quizScoreFragment_to_explorationFragment)
         }
     }
+
+    
+
 }
