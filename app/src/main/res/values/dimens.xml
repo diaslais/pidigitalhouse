@@ -47,7 +47,7 @@
     <dimen name="dim1dp">1dp</dimen>
     <dimen name="dim160dp">160dp</dimen>
     <dimen name="dim22sp">22sp</dimen>
-
+    <dimen name="dim14sp">14sp</dimen>
 
 
 </resources>
