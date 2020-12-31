@@ -146,11 +146,10 @@ class FavoriteFragment : Fragment(), IFavorite {
         _favoriteViewModel.deleteFavoriteItem(
             favorite.image,
             AppUtil.getUserId(requireActivity())!!
-        )
-            .observe(viewLifecycleOwner, {
-                _favoriteList.removeAt(position)
-                _favoriteAdapter.notifyItemRemoved(position)
-            })
+        ).observe(viewLifecycleOwner, {
+            _favoriteList.removeAt(position)
+            _favoriteAdapter.notifyItemRemoved(position)
+        })
     }
 
     override fun iFavoriteDelete(
