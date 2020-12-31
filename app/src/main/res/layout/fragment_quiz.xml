@@ -4,27 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBlackQuiz"
     android:isScrollContainer="true"
     tools:context=".quiz.view.QuizFragment">
-
-    <TextView
-        android:id="@+id/txtTesteConhecimentos2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="12dp"
-        android:layout_marginEnd="40dp"
-        android:fontFamily="@font/ubuntu"
-        android:text="@string/intro_quiz"
-        android:textAlignment="textStart"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim20sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageTitleQuiz" />
 
     <com.google.android.material.appbar.AppBarLayout
         android:id="@+id/appBarLayout"
@@ -46,16 +27,14 @@
             app:titleTextColor="@color/colorWhite" />
     </com.google.android.material.appbar.AppBarLayout>
 
-
     <ImageView
         android:id="@+id/imageTitleQuiz"
-        android:layout_width="214dp"
-        android:layout_height="292dp"
-        android:layout_marginStart="100dp"
-        android:layout_marginEnd="100dp"
-        android:background="@color/colorWhite"
-        android:padding="@dimen/dim1dp"
-        android:scaleType="fitCenter"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dim300dp"
+        android:contentDescription="@string/todo"
+        android:layout_marginHorizontal="@dimen/dim20dp"
+        android:layout_marginTop="@dimen/dim10dp"
+        android:scaleType="centerCrop"
         android:src="@drawable/gatinho"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -64,39 +43,36 @@
     <TextView
         android:id="@+id/txtTesteConhecimentos"
         android:layout_width="0dp"
-        android:layout_height="94dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="40dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/dim20dp"
+        android:layout_marginTop="@dimen/dim10dp"
         android:fontFamily="@font/ubuntu"
-        android:text="@string/intro_quiz_tempo"
-        android:textAlignment="viewStart"
+        android:lineSpacingExtra="@dimen/dim2sp"
+        android:text="@string/intro_quiz"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim20sp"
-        android:textStyle="bold"
+        android:textSize="@dimen/dim16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTesteConhecimentos2" />
+        app:layout_constraintTop_toBottomOf="@+id/imageTitleQuiz" />
 
-    <com.google.android.material.button.MaterialButton
+    <Button
         android:id="@+id/btnPlay"
+        style="?attr/materialButtonOutlinedStyle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="@dimen/dim10dp"
-        android:layout_marginStart="40dp"
-        android:layout_marginEnd="40dp"
-        android:layout_marginBottom="22dp"
-        android:backgroundTint="@color/colorTransparent"
-        android:fontFamily="@font/ubuntu"
+        android:layout_marginHorizontal="@dimen/dim20dp"
+        android:layout_marginBottom="@dimen/dim20dp"
+        android:fontFamily="@font/ubuntu_bold"
+        android:paddingVertical="@dimen/dim14dp"
         android:text="@string/iniciar"
+        android:textAlignment="center"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim22sp"
-        app:cornerRadius="@dimen/dim6dp"
+        android:textSize="@dimen/dim14sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:strokeColor="@color/colorWhite"
-        app:strokeWidth="2dp" />
+        app:layout_constraintVertical_bias="1.0"
+        app:strokeColor="@color/colorWhite" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

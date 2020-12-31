@@ -48,13 +48,14 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/dim16dp"
                 android:textSize="@dimen/dim18sp"
-                android:textStyle="bold"
+                android:fontFamily="@font/ubuntu_bold"
                 tools:text="@tools:sample/lorem" />
 
             <TextView
                 android:id="@+id/tvBioDeveloper"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/ubuntu"
                 android:layout_marginTop="@dimen/dim5dp"
                 tools:text="@tools:sample/lorem/random" />
         </LinearLayout>

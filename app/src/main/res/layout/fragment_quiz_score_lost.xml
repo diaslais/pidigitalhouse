@@ -6,21 +6,6 @@
     android:background="@drawable/bg_planetas2"
     tools:context="com.nasinha.digitalspace.quiz.view.QuizScoreLostFragment">
 
-    <TextView
-        android:id="@+id/txtYourLostScore"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
-        android:fontFamily="@font/ubuntu"
-        android:text="@string/sua_pontuacao"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim32sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtLostMessage"
-        app:layout_constraintVertical_bias="0.16000003" />
-
     <ImageView
         android:id="@+id/imageLostAstronaut"
         android:layout_width="374dp"
@@ -44,10 +29,25 @@
         android:text="Parece que você está Perdido no Espaço..."
         android:textAlignment="center"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim32sp"
+        android:textSize="@dimen/dim24sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageLostAstronaut" />
+
+    <TextView
+        android:id="@+id/txtYourLostScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/ubuntu"
+        android:text="@string/sua_pontuacao"
+        android:textColor="@color/colorWhite"
+        android:textSize="@dimen/dim24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtLostMessage"
+        app:layout_constraintVertical_bias="0.16000003" />
 
     <TextView
         android:id="@+id/txtScoreLost"

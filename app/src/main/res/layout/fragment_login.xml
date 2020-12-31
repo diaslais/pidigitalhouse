@@ -46,10 +46,11 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dim30dp"
+                    android:fontFamily="@font/ubuntu"
                     android:gravity="center_horizontal"
                     android:text="@string/entre_com_seu_email_e_senha"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/dim24sp" />
+                    android:textSize="@dimen/dim20sp" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilEmailLogin"
@@ -117,18 +118,19 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dim10dp"
                     android:paddingHorizontal="@dimen/dim40dp"
-                    android:paddingVertical="@dimen/dim10dp"
+                    android:paddingVertical="@dimen/dim14dp"
+                    android:fontFamily="@font/ubuntu_bold"
                     android:text="@string/entrar"
-                    android:textAllCaps="false"
+                    android:textAllCaps="true"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/dim20sp"
-                    app:cornerRadius="@dimen/dim6dp"
+                    android:textSize="@dimen/dim14sp"
                     app:strokeColor="@color/colorWhite" />
 
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/dim20sp"
+                    android:fontFamily="@font/ubuntu"
                     android:gravity="center_horizontal"
                     android:text="@string/ou_inscreva_se_para_participar"
                     android:textColor="@color/colorWhite"
@@ -138,7 +140,9 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:gravity="center_horizontal"
+                    android:fontFamily="@font/ubuntu"
                     android:text="@string/das_nossas_atividades"
+                    android:layout_marginTop="@dimen/dim4dp"
                     android:textColor="@color/colorWhite"
                     android:textSize="@dimen/dim20sp" />
 

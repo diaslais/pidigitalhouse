@@ -12,82 +12,79 @@
         android:layout_height="wrap_content">
 
         <ImageView
+            android:id="@+id/imageView"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:scaleType="centerCrop"
-            android:src="@drawable/background_sistema_solar"
+            android:src="@drawable/bg_solar_system"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-
         <ImageButton
             android:id="@+id/btnBackSolarSystem"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="@dimen/dim20dp"
+            android:layout_marginStart="@dimen/dim10dp"
+            android:layout_marginTop="@dimen/dim10dp"
+            android:padding="@dimen/dim10dp"
             android:background="@color/colorTransparent"
             android:src="@drawable/ic_baseline_arrow_back_24"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginHorizontal="@dimen/dim20dp"
+            app:layout_constraintBottom_toTopOf="@+id/btnIniciarExploracao"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <TextView
+                android:id="@+id/txtSistemaSolar"
+                android:layout_width="177dp"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="@dimen/dim50dp"
+                android:fontFamily="@font/ubuntu_bold"
+                android:lineSpacingExtra="2sp"
+                android:text="@string/sistema_solar"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dim20sp" />
+
+            <TextView
+                android:id="@+id/txtIntroSistemaSolar"
+                android:layout_width="177dp"
+                android:layout_height="wrap_content"
+                android:fontFamily="@font/ubuntu"
+                android:lineSpacingExtra="@dimen/dim2sp"
+                android:text="@string/info_sistema_solar"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dim16sp"/>
+
+        </LinearLayout>
 
         <Button
             android:id="@+id/btnIniciarExploracao"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="@dimen/dim16dp"
-            android:fontFamily="@font/ubuntu"
+            android:layout_marginHorizontal="@dimen/dim20dp"
+            android:layout_marginBottom="@dimen/dim20dp"
+            android:fontFamily="@font/ubuntu_bold"
             android:paddingVertical="@dimen/dim14dp"
             android:text="@string/iniciar_explora_o"
             android:textAlignment="center"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dim18sp"
-            android:textStyle="bold"
-            app:cornerRadius="@dimen/dim10dp"
+            android:textSize="@dimen/dim14sp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtIntroSistemaSolar"
             app:layout_constraintVertical_bias="1.0"
             app:strokeColor="@color/colorWhite" />
-
-        <TextView
-            android:id="@+id/txtSistemaSolar"
-            android:layout_width="159dp"
-            android:layout_height="67dp"
-            android:layout_marginStart="@dimen/dim24dp"
-            android:layout_marginEnd="@dimen/dim170dp"
-            android:fontFamily="@font/ubuntu_bold"
-            android:text="@string/sistema_solar"
-            android:textAlignment="center"
-            android:lineSpacingExtra="2sp"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dim26sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btnBackSolarSystem" />
-
-        <TextView
-            android:id="@+id/txtIntroSistemaSolar"
-            android:layout_width="177dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="40dp"
-            android:fontFamily="@font/ubuntu"
-            android:lineSpacingExtra="2sp"
-            android:text="@string/info_sistema_solar"
-            android:textAlignment="center"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dim18sp"
-            app:layout_constraintEnd_toEndOf="@+id/txtSistemaSolar"
-            app:layout_constraintStart_toStartOf="@+id/txtSistemaSolar"
-            app:layout_constraintTop_toBottomOf="@+id/txtSistemaSolar" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

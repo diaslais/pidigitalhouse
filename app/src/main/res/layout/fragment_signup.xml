@@ -48,9 +48,9 @@
                     android:layout_marginTop="@dimen/dim30dp"
                     android:gravity="center_horizontal"
                     android:text="@string/vamos_nessa"
+                    android:fontFamily="@font/ubuntu"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/dim24sp" />
-
+                    android:textSize="@dimen/dim20sp" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/tilNameSignup"
@@ -140,12 +140,12 @@
                     android:layout_marginTop="@dimen/dim20dp"
                     android:layout_marginBottom="@dimen/dim12dp"
                     android:paddingHorizontal="@dimen/dim40dp"
-                    android:paddingVertical="@dimen/dim10dp"
+                    android:paddingVertical="@dimen/dim14dp"
+                    android:fontFamily="@font/ubuntu_bold"
                     android:text="@string/cadastrar"
-                    android:textAllCaps="false"
+                    android:textAllCaps="true"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/dim20sp"
-                    app:cornerRadius="@dimen/dim6dp"
+                    android:textSize="@dimen/dim14sp"
                     app:strokeColor="@color/colorWhite" />
 
                 <TextView
@@ -154,19 +154,21 @@
                     android:gravity="center_horizontal"
                     android:text="@string/ou"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/dim24sp" />
+                    android:textSize="@dimen/dim16sp" />
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/mbLoginSignup"
                     style="@style/Widget.MaterialComponents.Button.TextButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/dim12dp"
                     android:layout_marginBottom="@dimen/dim20dp"
+                    android:fontFamily="@font/ubuntu_bold"
                     android:paddingHorizontal="@dimen/dim40dp"
                     android:text="@string/fazer_login"
-                    android:textAllCaps="false"
+                    android:textAllCaps="true"
                     android:textColor="@color/colorWhite"
-                    android:textSize="@dimen/dim20sp" />
+                    android:textSize="@dimen/dim14sp" />
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
     </LinearLayout>

@@ -4,7 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorBackgroundApod"
     android:orientation="vertical"
     tools:context=".apod.view.ApodFragment">
 
@@ -12,7 +11,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
 
         <ImageButton
             android:id="@+id/btnBackApod"
@@ -51,9 +49,10 @@
                 android:layout_weight="1"
                 android:ellipsize="end"
                 android:fontFamily="@font/ubuntu_bold"
+                android:lineSpacingExtra="@dimen/dim2sp"
                 android:maxLines="2"
                 android:textColor="@color/colorWhite"
-                android:textStyle="bold"
+                android:textSize="@dimen/dim16sp"
                 tools:text="@tools:sample/lorem[20]" />
 
             <ImageButton
@@ -81,7 +80,7 @@
             android:id="@+id/scrollView2"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_marginBottom="@dimen/dim25dp"
+            android:layout_marginBottom="@dimen/dim20dp"
             android:layout_weight="1"
             app:layout_constraintTop_toBottomOf="@+id/cbFavoriteApod">
 
@@ -89,8 +88,10 @@
                 android:id="@+id/txtExplanationApod"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/dim20sp"
-                android:fontFamily="@font/ubuntu_bold"
+                android:layout_margin="@dimen/dim20dp"
+                android:fontFamily="@font/ubuntu"
+                android:textSize="@dimen/dim16sp"
+                android:lineSpacingExtra="@dimen/dim2sp"
                 android:scrollbars="vertical"
                 android:textColor="@color/colorWhite"
                 tools:text="@tools:sample/lorem/random" />
