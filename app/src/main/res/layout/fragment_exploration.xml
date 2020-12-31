@@ -20,27 +20,12 @@
             style="@style/Widget.App.Toolbar"
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
-            android:backgroundTint="@color/colorBlack35pct"
+            android:backgroundTint="@color/colorBlack"
             app:menu="@menu/top_app_bar"
             app:navigationIcon="@drawable/ic_outline_menu_24"
             app:title="@string/explora_o_espacial"
             app:titleTextColor="@color/colorWhite" />
     </com.google.android.material.appbar.AppBarLayout>
-
-    <TextView
-        android:id="@+id/txtInfoExploration"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_margin="@dimen/dim16dp"
-        android:layout_marginHorizontal="@dimen/dim16dp"
-        android:fontFamily="@font/ubuntu"
-        android:lineSpacingExtra="@dimen/dim2sp"
-        android:text="@string/exploration_text"
-        android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout" />
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -50,16 +35,13 @@
         app:layout_constraintBottom_toTopOf="@id/lnExplorationBottombar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/txtInfoExploration">
-
+        app:layout_constraintTop_toBottomOf="@id/appBarLayout">
 
         <com.google.android.material.card.MaterialCardView
             android:id="@+id/cardExplore"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/dim16dp"
-            android:layout_marginStart="@dimen/dim16dp"
-            android:layout_marginEnd="@dimen/dim16dp"
             android:layout_marginBottom="@dimen/dim16dp"
             android:layout_weight="1"
             android:clickable="true"
@@ -98,8 +80,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/dim16dp"
-            android:layout_marginStart="@dimen/dim16dp"
-            android:layout_marginEnd="@dimen/dim16dp"
             android:layout_marginBottom="@dimen/dim16dp"
             android:layout_weight="1"
             android:clickable="true"
@@ -139,8 +119,6 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginHorizontal="@dimen/dim16dp"
-            android:layout_marginStart="@dimen/dim16dp"
-            android:layout_marginEnd="@dimen/dim16dp"
             android:layout_marginBottom="@dimen/dim16dp"
             android:layout_weight="1"
             android:clickable="true"
@@ -174,6 +152,44 @@
             </FrameLayout>
         </com.google.android.material.card.MaterialCardView>
 
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/cardQuiz"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginHorizontal="@dimen/dim16dp"
+            android:layout_marginBottom="@dimen/dim16dp"
+            android:layout_weight="1"
+            android:clickable="true"
+            android:focusable="true"
+            app:cardElevation="@dimen/dim0dp"
+            app:strokeWidth="@dimen/dim1dp">
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:contentDescription="@string/milkyway_imgdescription"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/exploreimgquiz" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_marginStart="@dimen/dim10dp"
+                    android:layout_marginBottom="@dimen/dim10dp"
+                    android:fontFamily="@font/ubuntu_bold"
+                    android:text="@string/quiz"
+                    android:textAllCaps="true"
+                    android:textColor="@color/colorWhite"
+                    android:textSize="@dimen/dim18sp" />
+            </FrameLayout>
+        </com.google.android.material.card.MaterialCardView>
+
     </LinearLayout>
 
     <LinearLayout
@@ -187,15 +203,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent">
 
-
         <Button
             android:id="@+id/btnFavorites"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dim90dp"
             android:layout_gravity="center"
-            android:layout_marginHorizontal="@dimen/dim5dp"
             android:layout_weight="1"
+            android:layout_marginHorizontal="@dimen/dim6dp"
             android:drawableTop="@drawable/ic_baseline_star_24"
             android:fontFamily="@font/ubuntu_bold"
             android:gravity="center"
@@ -207,31 +222,13 @@
             app:strokeColor="@color/colorWhite" />
 
         <Button
-            android:id="@+id/btnQuiz"
-            style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="@dimen/dim90dp"
-            android:layout_gravity="center"
-            android:layout_marginHorizontal="@dimen/dim5dp"
-            android:layout_weight="1"
-            android:drawableTop="@drawable/ic_help_outline_24px"
-            android:fontFamily="@font/ubuntu_bold"
-            android:gravity="center"
-            android:paddingHorizontal="@dimen/dim4dp"
-            android:paddingVertical="@dimen/dim10dp"
-            android:text="@string/quiz"
-            android:textAllCaps="false"
-            android:textSize="@dimen/dim12sp"
-            app:strokeColor="@color/colorWhite" />
-
-        <Button
             android:id="@+id/btnBibliography"
             style="@style/Widget.MaterialComponents.Button.OutlinedButton.Icon"
             android:layout_width="wrap_content"
             android:layout_height="@dimen/dim90dp"
             android:layout_gravity="center"
-            android:layout_marginHorizontal="@dimen/dim5dp"
             android:layout_weight="1"
+            android:layout_marginHorizontal="@dimen/dim6dp"
             android:drawableTop="@drawable/ic_baseline_menu_book_24"
             android:fontFamily="@font/ubuntu_bold"
             android:gravity="center"
