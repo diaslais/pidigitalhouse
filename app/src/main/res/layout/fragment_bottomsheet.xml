@@ -23,9 +23,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="@dimen/dim10dp"
+        android:fontFamily="@font/ubuntu_bold"
         android:textColor="@color/colorWhite"
         android:textSize="@dimen/dim20sp"
-        android:textStyle="bold"
         tools:text="@tools:sample/lorem" />
 
     <ScrollView
@@ -37,9 +37,11 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="@dimen/dim20dp"
+            android:fontFamily="@font/ubuntu"
+            android:lineSpacingExtra="@dimen/dim2sp"
             android:autoLink="web"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dim18sp"
+            android:textSize="@dimen/dim16sp"
             tools:text="@tools:sample/lorem/random" />
     </ScrollView>
 

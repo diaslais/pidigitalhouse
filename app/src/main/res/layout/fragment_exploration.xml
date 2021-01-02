@@ -234,7 +234,7 @@
             android:gravity="center"
             android:paddingHorizontal="@dimen/dim4dp"
             android:paddingVertical="@dimen/dim10dp"
-            android:text="@string/bibliografia2"
+            android:text="@string/bibliografia"
             android:textAllCaps="false"
             android:textSize="@dimen/dim12sp"
             app:strokeColor="@color/colorWhite" />

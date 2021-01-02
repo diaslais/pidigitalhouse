@@ -36,14 +36,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dim20dp"
-            android:layout_marginVertical="@dimen/dim10dp"
+            android:layout_marginVertical="@dimen/dim20dp"
             android:layout_weight="1"
             android:ellipsize="end"
             android:fontFamily="@font/ubuntu_bold"
+            android:lineSpacingExtra="@dimen/dim2sp"
             android:maxLines="2"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dim18sp"
-            android:textStyle="bold"
+            android:textSize="@dimen/dim16sp"
             tools:text="@tools:sample/lorem[6]" />
 
         <ImageButton
@@ -63,6 +63,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="@dimen/dim20dp"
         android:layout_marginEnd="@dimen/dim20dp"
+        android:fontFamily="@font/ubuntu"
         android:textColor="@color/colorWhite"
         tools:text="@tools:sample/date/mmddyy" />
 
@@ -76,6 +77,9 @@
             android:id="@+id/tvTextFavoriteScreen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/ubuntu"
+            android:lineSpacingExtra="@dimen/dim2sp"
+            android:textSize="@dimen/dim16sp"
             android:layout_marginHorizontal="@dimen/dim20dp"
             android:textColor="@color/colorWhite"
             tools:text="@tools:sample/lorem/random" />
