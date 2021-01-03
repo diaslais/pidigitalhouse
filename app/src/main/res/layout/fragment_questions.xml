@@ -4,6 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:fillViewport="true"
+    android:background="@color/colorBlackQuiz"
     tools:context="com.nasinha.digitalspace.quiz.view.QuestionsFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -32,10 +34,10 @@
 
         <ImageView
             android:id="@+id/imageClock"
-            android:layout_width="@dimen/dim24dp"
-            android:layout_height="@dimen/dim24dp"
+            android:layout_width="25dp"
+            android:layout_height="26dp"
             android:layout_marginEnd="8dp"
-            android:src="@drawable/ic_astronauta_perdido"
+            android:src="@drawable/ic_clock"
             app:layout_constraintBottom_toBottomOf="@+id/txtChronometer"
             app:layout_constraintEnd_toStartOf="@+id/txtChronometer" />
 
@@ -44,7 +46,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dim20dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="@dimen/dim30dp"
             android:backgroundTint="@color/colorTransparent"
             app:cardCornerRadius="@dimen/dim6dp"
             app:cardElevation="@dimen/dim0dp"
@@ -158,12 +160,12 @@
             android:id="@+id/txtChronometer"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="@dimen/dim20dp"
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/ubuntu"
-            android:text="00:30"
+            tools:text="00:30"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dim16sp"
+            android:textSize="@dimen/dim22sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/appBarLayoutQuestions" />
 

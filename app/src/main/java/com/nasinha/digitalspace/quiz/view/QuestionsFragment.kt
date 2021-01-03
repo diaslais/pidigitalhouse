@@ -4,10 +4,12 @@ import android.annotation.SuppressLint
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
+import android.os.CountDownTimer
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -18,6 +20,8 @@ import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.quiz.model.Constants
 import com.nasinha.digitalspace.quiz.model.QuestionsModel
 import kotlinx.android.synthetic.main.fragment_questions.*
+import java.util.*
+import kotlin.collections.ArrayList
 
 
 class QuestionsFragment : Fragment(), View.OnClickListener {
@@ -27,6 +31,9 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private var _selectedOptionPosition: Int = 0
     private lateinit var _view: View
     private var _correctAnswers: Int = 0
+    private lateinit var countDownTimer: CountDownTimer
+    private var timeLeftInMillis: Long = 0
+    private var countDownMillis: Long = 30000
 
 
     override fun onCreateView(
@@ -37,10 +44,8 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         return _view
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
 
         val quizToolBar = view.findViewById<MaterialToolbar>(R.id.quizTopAppBarQuestions)
 
@@ -62,16 +67,15 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         optionThree.setOnClickListener(this)
         optionFour.setOnClickListener(this)
         answerButton.setOnClickListener(this)
-
     }
 
     @SuppressLint("SetTextI18n")
     private fun setQuestion() {
 
-
         val question = _questionsList!![_currentPosition - 1]
 
         defaultOptionsView()
+        startCountDown()
 
         val answerButton = _view.findViewById<MaterialButton>(R.id.btnNext)
 
@@ -96,7 +100,56 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         optionTwo.text = question.answer2
         optionThree.text = question.answer3
         optionFour.text = question.answer4
+    }
 
+    private fun startCountDown() {
+        val optionOne = _view.findViewById<TextView>(R.id.btnAnswer1)
+        val optionTwo = _view.findViewById<TextView>(R.id.btnAnswer2)
+        val optionThree = _view.findViewById<TextView>(R.id.btnAnswer3)
+        val optionFour = _view.findViewById<TextView>(R.id.btnAnswer4)
+
+        countDownTimer = object : CountDownTimer(30000, 1000) {
+            override fun onTick(millisUntilFinished: Long) {
+                timeLeftInMillis = millisUntilFinished
+                val minutes = (timeLeftInMillis / 1000) / 60
+                val seconds = (timeLeftInMillis / 1000) % 60
+                val timeFormatted =
+                    String.format(Locale.getDefault(), "%02d:%02d", minutes, seconds)
+
+                val countdown = _view.findViewById<TextView>(R.id.txtChronometer)
+                val imageClock = _view.findViewById<ImageView>(R.id.imageClock)
+
+                countdown.text = timeFormatted
+
+                if (seconds <= 10000) {
+                    changeCountDownColor()
+                }
+
+                if (seconds == 0L) {
+                    optionOne.isEnabled = false
+                    optionTwo.isEnabled = false
+                    optionThree.isEnabled = false
+                    optionFour.isEnabled = false
+                }
+            }
+
+            override fun onFinish() {
+                timeLeftInMillis = 0
+            }
+        }
+        countDownTimer.start()
+    }
+
+    private fun changeCountDownColor() {
+        val countdown = _view.findViewById<TextView>(R.id.txtChronometer)
+//        val imageClock = _view.findViewById<ImageView>(R.id.imageClock)
+
+        if (timeLeftInMillis < 10000) {
+            //imageClock.tint
+            countdown.setTextColor(Color.parseColor("#FF3034"))
+        } else {
+            countdown.setTextColor(Color.parseColor("#FFFFFF"))
+        }
 
     }
 
@@ -122,12 +175,12 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         }
     }
 
-
     private fun defaultOptionsView() {
         val optionOne = _view.findViewById<TextView>(R.id.btnAnswer1)
         val optionTwo = _view.findViewById<TextView>(R.id.btnAnswer2)
         val optionThree = _view.findViewById<TextView>(R.id.btnAnswer3)
         val optionFour = _view.findViewById<TextView>(R.id.btnAnswer4)
+
         val options = ArrayList<TextView>()
         options.add(0, optionOne)
         options.add(1, optionTwo)
@@ -138,6 +191,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
             option.setTextColor(Color.parseColor("#FFFFFF"))
             option.background =
                 ContextCompat.getDrawable(_view.context, R.drawable.txt_question_stroke)
+            option.isEnabled = true
         }
     }
 
@@ -156,25 +210,19 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                 selectedOption(btnAnswer4, 4)
             }
             R.id.btnNext -> {
-                if (btnNext.text == "Responder"){
+                if (btnNext.text == "Responder") {
                     btnAnswer1.isEnabled = false
                     btnAnswer2.isEnabled = false
                     btnAnswer3.isEnabled = false
                     btnAnswer4.isEnabled = false
-                } else if (btnNext.text == "Próxima Questão"){
-                    btnAnswer1.isEnabled = true
-                    btnAnswer2.isEnabled = true
-                    btnAnswer3.isEnabled = true
-                    btnAnswer4.isEnabled = true
+                    countDownTimer.cancel()
                 }
-
                 if (_selectedOptionPosition == 0) {
 
-                        _currentPosition++
+                    _currentPosition++
 
                     when {
                         _currentPosition <= _questionsList!!.size -> {
-
                             setQuestion()
                         }
                         else -> {
@@ -190,13 +238,13 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                             } else {
                                 navController.navigate(
                                     R.id.action_questionsFragment_to_quizScoreLostFragment, bundle
-
                                 )
                             }
                         }
                     }
                 } else {
                     val question = _questionsList?.get(_currentPosition - 1)
+
                     if (question!!.correctAnswer != _selectedOptionPosition) {
                         answerQuestion(_selectedOptionPosition, R.drawable.incorrect_question)
                     } else {
@@ -207,17 +255,14 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                     if (_currentPosition == _questionsList!!.size) {
                         btnNext.text = "FIM"
                         _currentPosition--
-
                     } else {
                         btnNext.text = "Próxima Questão"
-
                     }
                     _selectedOptionPosition = 0
                 }
             }
         }
     }
-
 
     private fun selectedOption(tv: TextView, selectedOptionNumber: Int) {
         defaultOptionsView()
@@ -226,7 +271,6 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         tv.setTextColor(Color.parseColor("#FFFFFF"))
         tv.setTypeface(tv.typeface, Typeface.BOLD)
         tv.background = ContextCompat.getDrawable(_view.context, R.drawable.selected_question)
-
     }
 
 }
