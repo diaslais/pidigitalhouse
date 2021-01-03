@@ -17,7 +17,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.nasinha.digitalspace.R
-import com.nasinha.digitalspace.quiz.model.Constants
+import com.nasinha.digitalspace.quiz.data.Constants
 import com.nasinha.digitalspace.quiz.model.QuestionsModel
 import kotlinx.android.synthetic.main.fragment_questions.*
 import java.util.*
@@ -108,7 +108,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         val optionThree = _view.findViewById<TextView>(R.id.btnAnswer3)
         val optionFour = _view.findViewById<TextView>(R.id.btnAnswer4)
 
-        countDownTimer = object : CountDownTimer(30000, 1000) {
+        countDownTimer = object : CountDownTimer(15000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 timeLeftInMillis = millisUntilFinished
                 val minutes = (timeLeftInMillis / 1000) / 60
@@ -142,15 +142,15 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
     private fun changeCountDownColor() {
         val countdown = _view.findViewById<TextView>(R.id.txtChronometer)
-//        val imageClock = _view.findViewById<ImageView>(R.id.imageClock)
+        val imageClock = _view.findViewById<ImageView>(R.id.imageClock)
 
         if (timeLeftInMillis < 10000) {
-            //imageClock.tint
+            imageClock.setColorFilter(_view.context.resources.getColor(R.color.colorIncorrectOption))
             countdown.setTextColor(Color.parseColor("#FF3034"))
         } else {
             countdown.setTextColor(Color.parseColor("#FFFFFF"))
+            imageClock.setColorFilter(_view.context.resources.getColor(R.color.colorWhite))
         }
-
     }
 
     private fun answerQuestion(answer: Int, drawableView: Int) {
@@ -218,9 +218,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                     countDownTimer.cancel()
                 }
                 if (_selectedOptionPosition == 0) {
-
                     _currentPosition++
-
                     when {
                         _currentPosition <= _questionsList!!.size -> {
                             setQuestion()
@@ -254,7 +252,12 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
                     if (_currentPosition == _questionsList!!.size) {
                         btnNext.text = "FIM"
-                        _currentPosition--
+                        countDownTimer.cancel()
+                        btnAnswer1.isEnabled = false
+                        btnAnswer2.isEnabled = false
+                        btnAnswer3.isEnabled = false
+                        btnAnswer4.isEnabled = false
+                        countDownTimer.cancel()
                     } else {
                         btnNext.text = "Próxima Questão"
                     }
