@@ -36,6 +36,7 @@ import com.google.firebase.auth.GoogleAuthProvider
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.authentication.AppUtil
 import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
+import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
 import kotlinx.android.synthetic.main.fragment_login.*
 
 
@@ -64,7 +65,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        lockDrawer(requireActivity())
         _view = view
         val facebookFakeBtn = _view.findViewById<ImageButton>(R.id.imFacebookLogin)
 

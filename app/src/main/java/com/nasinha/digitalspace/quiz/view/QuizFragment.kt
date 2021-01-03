@@ -10,6 +10,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.nasinha.digitalspace.R
+import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
 import kotlinx.android.synthetic.main.fragment_quiz.*
 
 
@@ -26,6 +27,7 @@ class QuizFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        lockDrawer(requireActivity())
 
         val navController = findNavController()
 

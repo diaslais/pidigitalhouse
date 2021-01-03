@@ -16,6 +16,8 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.navigation.NavigationView
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.authentication.AppUtil
+import com.nasinha.digitalspace.exploration.utils.DrawerUtils
+import com.nasinha.digitalspace.exploration.utils.DrawerUtils.unlockDrawer
 
 class ExplorationFragment : Fragment() {
 
@@ -30,35 +32,45 @@ class ExplorationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        navInfoHeader()
+        unlockDrawer(requireActivity())
+        drawerListener(view)
+    }
+
+    private fun drawerListener(view: View) {
         val navController = findNavController()
 
         val explorationToolBar = view.findViewById<MaterialToolbar>(R.id.explorationTopAppBar)
 
-        navInfoHeader()
+        val drawerLayout = requireActivity().findViewById<DrawerLayout>(R.id.drawer_layout)
 
         explorationToolBar.setNavigationOnClickListener {
-            val drawerLayout = activity?.findViewById<DrawerLayout>(R.id.drawer_layout)
             drawerLayout?.openDrawer(Gravity.LEFT)
         }
+//        Explorer
         view.findViewById<MaterialCardView>(R.id.cardExplore).setOnClickListener {
             navController.navigate(R.id.action_explorationFragment_to_galaxyFragment)
         }
+//        APOD
         view.findViewById<MaterialCardView>(R.id.cardAstronomicalFact).setOnClickListener {
             navController.navigate(R.id.action_explorationFragment_to_apodFragment)
         }
+//        EPIC
         view.findViewById<MaterialCardView>(R.id.cardEarth).setOnClickListener {
             navController.navigate(R.id.action_explorationFragment_to_epicFragment)
         }
+//        FAVORITES
         view.findViewById<MaterialButton>(R.id.btnFavorites).setOnClickListener {
             navController.navigate(R.id.action_explorationFragment_to_favoriteFragment)
         }
+//        QUIZ
         view.findViewById<MaterialCardView>(R.id.cardQuiz).setOnClickListener {
             navController.navigate(R.id.action_explorationFragment_to_quizFragment)
         }
+//        BIBLIOGRAPHY
         view.findViewById<MaterialButton>(R.id.btnBibliography).setOnClickListener {
             navController.navigate(R.id.action_explorationFragment_to_bibliographyFragment)
         }
-
     }
 
     @SuppressLint("DefaultLocale")
