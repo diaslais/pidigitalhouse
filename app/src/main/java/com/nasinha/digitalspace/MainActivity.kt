@@ -13,6 +13,7 @@ import com.google.android.material.navigation.NavigationView
 import com.nasinha.digitalspace.authentication.AppUtil
 import com.nasinha.digitalspace.authentication.Constants.EMPTY_STRING
 import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
+import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -28,7 +29,7 @@ class MainActivity : AppCompatActivity() {
         _navController = findNavController(R.id.navigation_header_container)
 
         _drawerLayout = findViewById(R.id.drawer_layout)
-        _drawerLayout.setDrawerLockMode(DrawerLayout.LOCK_MODE_LOCKED_CLOSED)
+        lockDrawer(this)
 
         navClickListener()
     }

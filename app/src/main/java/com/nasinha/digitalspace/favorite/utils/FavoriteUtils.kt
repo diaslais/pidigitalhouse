@@ -41,7 +41,7 @@ object FavoriteUtils {
         }
     }
 
-    fun checkPermissions(activity: Activity, view: View, image: Bitmap?) {
+    fun shareImageText(activity: Activity, view: View, image: Bitmap?, text: String) {
         var result: Int
         val listPermissionsNeeded: MutableList<String> = ArrayList()
 
@@ -66,10 +66,11 @@ object FavoriteUtils {
                 )
             }
         } else {
-            val share = Intent(Intent.ACTION_SEND)
-            share.type = "image/*"
-            share.putExtra(Intent.EXTRA_STREAM, getImageUri(view, image!!))
-            startActivity(view.context, Intent.createChooser(share, "Share image via"), Bundle())
+            val shareIntent = Intent(Intent.ACTION_SEND)
+            shareIntent.putExtra(Intent.EXTRA_STREAM, getImageUri(view, image!!))
+            shareIntent.putExtra(Intent.EXTRA_TEXT, text)
+            shareIntent.type = "*/*"
+            startActivity(view.context, Intent.createChooser(shareIntent, "Compartilhar"), Bundle())
         }
     }
 

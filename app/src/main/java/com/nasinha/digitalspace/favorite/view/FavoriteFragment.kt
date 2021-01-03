@@ -5,12 +5,12 @@ import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -176,7 +176,8 @@ class FavoriteFragment : Fragment(), IFavorite {
     override fun iFavoriteShare(favorite: FavoriteEntity) {
         lifecycleScope.launch {
             _image = FavoriteUtils.getBitmapFromView(_view, favorite.image)
-            activity?.let { FavoriteUtils.checkPermissions(it, _view, _image) }
+            val text = favorite.text.toString()
+            activity?.let { FavoriteUtils.shareImageText(it, _view, _image, text) }
         }
     }
 
