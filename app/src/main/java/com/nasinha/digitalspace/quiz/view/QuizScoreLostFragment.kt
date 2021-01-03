@@ -7,6 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.TextView
+import androidx.activity.addCallback
 import androidx.navigation.fragment.findNavController
 import com.nasinha.digitalspace.R
 
@@ -38,6 +39,10 @@ class QuizScoreLostFragment : Fragment() {
 
         view.findViewById<ImageButton>(R.id.btnToExploration).setOnClickListener {
             navController.navigate(R.id.action_quizScoreLostFragment_to_explorationFragment)
+        }
+
+        requireActivity().onBackPressedDispatcher.addCallback(this){
+            navController.navigate(R.id.action_quizScoreLostFragment_to_quizFragment)
         }
 
     }

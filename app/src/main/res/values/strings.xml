@@ -90,7 +90,7 @@
     <string name="fb_login_protocol_scheme">fb3277862102318846</string>
     <string name="lembrar_senha">Lembrar senha</string>
     <string name="iniciar">Iniciar</string>
-    <string name="intro_quiz">Bem vindo explorador! Aqui iremos testar os seus conhecimentos espaciais com 10 perguntas sobre o sistema solar.\n\nExiste um limite de 30 segundos para cada pergunta. Afinal, o espaço é um ambiente impiedoso e é preciso pensar rápido!</string>
+    <string name="intro_quiz">Bem vindo explorador! Aqui iremos testar os seus conhecimentos espaciais com 10 perguntas sobre o sistema solar.\n\nExiste um limite de 15 segundos para cada pergunta. Afinal, o espaço é um ambiente impiedoso e é preciso pensar rápido!</string>
     <string name="sua_pontuacao">Sua pontuação é :</string>
     <string name="responder">Responder</string>
     <string name="explorar">Explorar</string>
