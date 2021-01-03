@@ -18,7 +18,6 @@ import com.nasinha.digitalspace.apod.model.ApodResponseModel
 import com.nasinha.digitalspace.apod.repository.ApodRepository
 import com.nasinha.digitalspace.apod.viewmodel.ApodViewModel
 import com.nasinha.digitalspace.authentication.AppUtil
-import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
 import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
 import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
@@ -209,14 +208,15 @@ class ApodFragment : Fragment() {
         checkBoxFavorite.visibility = if (isShown) View.VISIBLE else View.GONE
         shareButton.visibility = if (isShown) View.VISIBLE else View.GONE
         shareButton.setOnClickListener {
-            shareHandler()
+            val text = _view.findViewById<TextView>(R.id.txtExplanationApod).text.toString()
+            shareHandler(text)
         }
     }
 
-    private fun shareHandler() {
+    private fun shareHandler(text: String) {
         lifecycleScope.launch {
             val imageBitmap = FavoriteUtils.getBitmapFromView(_view, _apodResponse.url)
-            activity?.let { FavoriteUtils.checkPermissions(it, _view, imageBitmap) }
+            activity?.let { FavoriteUtils.shareImageText(it, _view, imageBitmap, text) }
         }
     }
 }

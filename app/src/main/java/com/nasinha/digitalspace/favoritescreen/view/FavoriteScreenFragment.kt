@@ -71,7 +71,8 @@ class FavoriteScreenFragment : Fragment() {
 
             lifecycleScope.launch {
                 _image = FavoriteUtils.getBitmapFromView(_view, _imageArgument)
-                activity?.let { FavoriteUtils.checkPermissions(it, _view, _image) }
+                val text = _view.findViewById<TextView>(R.id.tvTextFavoriteScreen).text.toString()
+                activity?.let { FavoriteUtils.shareImageText(it, _view, _image, text) }
             }
 
         }
