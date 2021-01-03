@@ -64,7 +64,7 @@ class LoginFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        lockDrawer(requireActivity())
         _view = view
         val facebookFakeBtn = _view.findViewById<ImageButton>(R.id.imFacebookLogin)
 

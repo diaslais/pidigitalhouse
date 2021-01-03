@@ -17,6 +17,7 @@ import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.epic.model.EpicResponseModel
 import com.nasinha.digitalspace.epic.repository.EpicRepository
 import com.nasinha.digitalspace.epic.viewmodel.EpicViewModel
+import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
 import com.squareup.picasso.Picasso
 
 
@@ -39,6 +40,7 @@ class EpicFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        lockDrawer(requireActivity())
         _view = view
 
         val viewModel = ViewModelProvider(

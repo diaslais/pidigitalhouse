@@ -23,6 +23,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.authentication.AppUtil
+import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
 import com.nasinha.digitalspace.favorite.adapter.FavoriteAdapter
 import com.nasinha.digitalspace.favorite.adapter.IFavorite
 import com.nasinha.digitalspace.favorite.db.AppDatabase
@@ -61,6 +62,7 @@ class FavoriteFragment : Fragment(), IFavorite {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        lockDrawer(requireActivity())
         _view = view
 
         _navController = findNavController()
