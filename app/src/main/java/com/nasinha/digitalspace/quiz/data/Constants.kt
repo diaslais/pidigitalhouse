@@ -1,4 +1,6 @@
-package com.nasinha.digitalspace.quiz.model
+package com.nasinha.digitalspace.quiz.data
+
+import com.nasinha.digitalspace.quiz.model.QuestionsModel
 
 object Constants {
 
@@ -67,8 +69,8 @@ object Constants {
             "Quanto tempo a luz demora para chegar do Sol à Terra?",
             "Três minutos",
             "Cinco minutos",
-            "8 minutos",
-            "10 minutos",
+            "oito minutos",
+            "dez minutos",
             3)
 
         questionsList.add(question6)

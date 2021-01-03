@@ -178,6 +178,9 @@
         <action
             android:id="@+id/action_quizScoreFragment_to_explorationFragment"
             app:destination="@id/explorationFragment" />
+        <action
+            android:id="@+id/action_quizScoreFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
     </fragment>
     <fragment
         android:id="@+id/developerFragment"
@@ -231,6 +234,9 @@
         <action
             android:id="@+id/action_quizScoreLostFragment_to_explorationFragment"
             app:destination="@id/explorationFragment" />
+        <action
+            android:id="@+id/action_quizScoreLostFragment_to_quizFragment"
+            app:destination="@id/quizFragment" />
     </fragment>
 
 
