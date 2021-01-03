@@ -2,6 +2,7 @@ package com.nasinha.digitalspace.quiz.model
 
 object Constants {
 
+
         fun getQuestions(): ArrayList<QuestionsModel>{
 
         val questionsList = ArrayList<QuestionsModel>()
