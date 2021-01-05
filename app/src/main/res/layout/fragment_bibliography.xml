@@ -30,15 +30,10 @@
             android:textSize="@dimen/dim20sp"/>
     </androidx.appcompat.widget.Toolbar>
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        tools:text="@tools:sample/lorem/random"
-        android:textSize="@dimen/dim16sp"
-        android:textColor="@color/colorWhite"
-        android:fontFamily="@font/ubuntu"
-        android:lineSpacingExtra="@dimen/dim2sp"
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/bibliographyRecyclerView"
         android:layout_marginHorizontal="@dimen/dim20dp"
-        android:layout_marginTop="@dimen/dim20dp"/>
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
 
 </LinearLayout>
