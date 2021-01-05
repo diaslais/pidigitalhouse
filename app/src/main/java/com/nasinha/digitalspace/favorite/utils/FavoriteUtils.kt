@@ -16,6 +16,8 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import coil.ImageLoader
 import coil.request.SuccessResult
+import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.COMPARTILHAR
+import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.TITLE
 import java.io.ByteArrayOutputStream
 import java.text.SimpleDateFormat
 import java.time.LocalDate
@@ -41,21 +43,26 @@ object FavoriteUtils {
         }
     }
 
-    fun shareImageText(activity: Activity, view: View, image: Bitmap?, text: String) {
-        var result: Int
+    fun permissionChecker(view: View, permissions: Array<String>): MutableList<String> {
         val listPermissionsNeeded: MutableList<String> = ArrayList()
+
+        for (p in permissions) {
+            val result = ContextCompat.checkSelfPermission(view.context, p)
+            if (result != PackageManager.PERMISSION_GRANTED) {
+                listPermissionsNeeded.add(p)
+            }
+        }
+        return listPermissionsNeeded
+    }
+
+    fun shareImageText(activity: Activity, view: View, image: Bitmap?, text: String?) {
 
         val permissions = arrayOf(
             Manifest.permission.READ_EXTERNAL_STORAGE,
             Manifest.permission.WRITE_EXTERNAL_STORAGE
         )
 
-        for (p in permissions) {
-            result = ContextCompat.checkSelfPermission(view.context, p)
-            if (result != PackageManager.PERMISSION_GRANTED) {
-                listPermissionsNeeded.add(p)
-            }
-        }
+        val listPermissionsNeeded: MutableList<String> = permissionChecker(view, permissions)
 
         if (listPermissionsNeeded.isNotEmpty()) {
             activity.let {
@@ -68,9 +75,23 @@ object FavoriteUtils {
         } else {
             val shareIntent = Intent(Intent.ACTION_SEND)
             shareIntent.putExtra(Intent.EXTRA_STREAM, getImageUri(view, image!!))
-            shareIntent.putExtra(Intent.EXTRA_TEXT, text)
-            shareIntent.type = "*/*"
-            startActivity(view.context, Intent.createChooser(shareIntent, "Compartilhar"), Bundle())
+            if (text.isNullOrEmpty()) {
+                shareIntent.type = "image/PNG"
+                startActivity(
+                    view.context,
+                    Intent.createChooser(shareIntent, COMPARTILHAR),
+                    Bundle()
+                )
+            } else {
+                shareIntent.putExtra(Intent.EXTRA_TEXT, text)
+                shareIntent.type = "*/*"
+                startActivity(
+                    view.context,
+                    Intent.createChooser(shareIntent, COMPARTILHAR),
+                    Bundle()
+                )
+
+            }
         }
     }
 
@@ -85,7 +106,7 @@ object FavoriteUtils {
         val bytes = ByteArrayOutputStream()
         image.compress(Bitmap.CompressFormat.PNG, 100, bytes)
         val path =
-            MediaStore.Images.Media.insertImage(view.context.contentResolver, image, "title", null)
+            MediaStore.Images.Media.insertImage(view.context.contentResolver, image, TITLE, null)
         return Uri.parse(path)
     }
 }
