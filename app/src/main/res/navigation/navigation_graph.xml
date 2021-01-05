@@ -202,12 +202,12 @@
     </dialog>
     <fragment
         android:id="@+id/favoriteScreenFragment"
-        android:name="com.nasinha.digitalspace.favoritescreen.view.FavoriteScreenFragment"
+        android:name="com.nasinha.digitalspace.favorite.view.FavoriteScreenFragment"
         android:label="fragment_favorite_screen"
         tools:layout="@layout/fragment_favorite_screen" >
         <action
-            android:id="@+id/action_favoriteScreenFragment_to_favoriteFragment"
-            app:destination="@id/favoriteFragment" />
+            android:id="@+id/action_favoriteScreenFragment_to_favoriteImageFragment"
+            app:destination="@id/favoriteImageFragment" />
     </fragment>
     <fragment
         android:id="@+id/landsScapeApodFragment"
@@ -238,6 +238,11 @@
             android:id="@+id/action_quizScoreLostFragment_to_quizFragment"
             app:destination="@id/quizFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/favoriteImageFragment"
+        android:name="com.nasinha.digitalspace.favorite.view.FavoriteImageFragment"
+        android:label="fragment_favorite_image"
+        tools:layout="@layout/fragment_favorite_image" />
 
 
 </navigation>

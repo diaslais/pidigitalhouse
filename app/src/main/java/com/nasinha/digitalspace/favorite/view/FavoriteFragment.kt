@@ -3,14 +3,12 @@ package com.nasinha.digitalspace.favorite.view
 import android.app.AlertDialog
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
-import android.graphics.Bitmap
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
-import android.widget.TextView
 import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -29,6 +27,11 @@ import com.nasinha.digitalspace.favorite.adapter.IFavorite
 import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
+import com.nasinha.digitalspace.favorite.utils.FavoriteConstants
+import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.DATE
+import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.TEXT
+import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.TITLE
+import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.TYPE
 import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
@@ -38,12 +41,10 @@ import kotlinx.coroutines.launch
 class FavoriteFragment : Fragment(), IFavorite {
     private lateinit var _view: View
     private lateinit var _favoriteViewModel: FavoriteViewModel
-    private lateinit var _list: RecyclerView
+    private lateinit var _listRecyclerView: RecyclerView
     private lateinit var _navController: NavController
     private lateinit var _favoriteAdapter: FavoriteAdapter
     private lateinit var iFavorite: IFavorite
-
-    private var _image: Bitmap? = null
 
     private var _favoriteList = mutableListOf<FavoriteEntity>()
 
@@ -71,14 +72,13 @@ class FavoriteFragment : Fragment(), IFavorite {
         addViewModel()
         addRecyclerView()
         initialize()
-//        deleteAll()
     }
 
     private fun backBtn() {
         val btnBackView = _view.findViewById<ImageButton>(R.id.ibBackFavorite)
 
         btnBackView.setOnClickListener {
-            _navController.navigate(R.id.action_favoriteFragment_to_explorationFragment)
+            requireActivity().onBackPressed()
         }
     }
 
@@ -94,20 +94,21 @@ class FavoriteFragment : Fragment(), IFavorite {
     }
 
     private fun addRecyclerView() {
-        _list = _view.findViewById(R.id.recyclerViewFavorite)
+        _listRecyclerView = _view.findViewById(R.id.recyclerViewFavorite)
         val manager = LinearLayoutManager(_view.context)
 
         _favoriteAdapter = FavoriteAdapter(_favoriteList, iFavorite) {
             val bundle = bundleOf(
-                "image" to it.image,
-                "title" to it.title,
-                "text" to it.text,
-                "date" to FavoriteUtils.dateModifier(it.date)
+                FavoriteConstants.IMAGE to it.image,
+                TITLE to it.title,
+                TEXT to it.text,
+                DATE to FavoriteUtils.dateModifier(it.date),
+                TYPE to it.type
             )
             _navController.navigate(R.id.action_favoriteFragment_to_favoriteScreenFragment, bundle)
         }
 
-        _list.apply {
+        _listRecyclerView.apply {
             setHasFixedSize(true)
             layoutManager = manager
             adapter = _favoriteAdapter
@@ -134,14 +135,6 @@ class FavoriteFragment : Fragment(), IFavorite {
     private fun addAllFavorites(list: List<FavoriteEntity>) {
         _favoriteList.addAll(list)
         _favoriteAdapter.notifyDataSetChanged()
-    }
-
-
-    private fun deleteAll() {
-        _favoriteViewModel.deleteAllFavorite().observe(viewLifecycleOwner, {
-            _favoriteList.clear()
-            _favoriteAdapter.notifyDataSetChanged()
-        })
     }
 
     private fun deleteOneFavoriteDb(position: Int, favorite: FavoriteEntity) {
@@ -175,9 +168,9 @@ class FavoriteFragment : Fragment(), IFavorite {
 
     override fun iFavoriteShare(favorite: FavoriteEntity) {
         lifecycleScope.launch {
-            _image = FavoriteUtils.getBitmapFromView(_view, favorite.image)
+            val imageBitmap = FavoriteUtils.getBitmapFromView(_view, favorite.image)
             val text = favorite.text.toString()
-            activity?.let { FavoriteUtils.shareImageText(it, _view, _image, text) }
+            activity?.let { FavoriteUtils.shareImageText(it, _view, imageBitmap, text) }
         }
     }
 

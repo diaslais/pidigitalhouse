@@ -1,22 +1,31 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context="com.nasinha.digitalspace.favoritescreen.view.FavoriteScreenFragment">
-
+    tools:context="com.nasinha.digitalspace.favorite.view.FavoriteScreenFragment">
     <androidx.appcompat.widget.Toolbar
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorTransparent">
+        android:background="@color/colorBlack">
 
         <ImageButton
             android:id="@+id/ibBackFavoriteScreen"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorTransparent"
-            android:padding="@dimen/dim10dp"
             android:src="@drawable/ic_baseline_arrow_back_24" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dim47dp"
+            android:fontFamily="@font/ubuntu"
+            android:text="@string/favoritos"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dim20sp"/>
+
     </androidx.appcompat.widget.Toolbar>
 
     <ImageView
@@ -77,11 +86,11 @@
             android:id="@+id/tvTextFavoriteScreen"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dim20dp"
             android:fontFamily="@font/ubuntu"
             android:lineSpacingExtra="@dimen/dim2sp"
-            android:textSize="@dimen/dim16sp"
-            android:layout_marginHorizontal="@dimen/dim20dp"
             android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dim16sp"
             tools:text="@tools:sample/lorem/random" />
     </ScrollView>
 </LinearLayout>
