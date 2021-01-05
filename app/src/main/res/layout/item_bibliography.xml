@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical">
+
+    <TextView
+        android:id="@+id/txtBibliographyTitle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="Title"
+        android:textSize="@dimen/dim16sp"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/ubuntu_bold"
+        android:lineSpacingExtra="@dimen/dim2sp"
+        android:layout_marginTop="@dimen/dim20dp"/>
+
+    <TextView
+        android:id="@+id/txtBibliographyText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        tools:text="@tools:sample/lorem/random"
+        android:textSize="@dimen/dim14sp"
+        android:autoLink="web"
+        android:textColor="@color/colorWhite"
+        android:fontFamily="@font/ubuntu"
+        android:layout_marginBottom="@dimen/dim10dp"
+        android:lineSpacingExtra="@dimen/dim2sp"
+        android:layout_marginTop="@dimen/dim20dp"/>
+
+</LinearLayout>
