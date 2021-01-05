@@ -25,47 +25,31 @@
         android:visibility="gone"
         tools:visibility="visible">
 
-
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="start"
-            android:layout_marginStart="@dimen/dim50dp"
-            android:orientation="horizontal">
-
-            <ImageButton
-                android:id="@+id/ibSaveFavoriteImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorTransparent"
-                android:padding="@dimen/dim10dp"
-                android:src="@drawable/ic_outline_save_alt_24"
-                app:tint="@color/colorWhite" />
-
-            <ImageButton
-                android:id="@+id/ibShareFavoriteImage"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@color/colorTransparent"
-                android:padding="@dimen/dim10dp"
-                android:src="@drawable/ic_baseline_share_24"
-                app:tint="@color/colorWhite" />
-        </LinearLayout>
-
         <TextView
             android:id="@+id/tvTitleFavoriteImage"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginHorizontal="@dimen/dim10dp"
+            android:layout_marginStart="@dimen/dim50dp"
             android:layout_weight="1"
             android:width="0dp"
             android:ellipsize="end"
             android:maxLines="1"
             android:textColor="@color/colorWhite"
             android:textSize="16sp"
-            android:textAlignment="center"
             tools:text="@tools:sample/lorem[5]" />
+
+        <ImageButton
+            android:id="@+id/ibShareFavoriteImage"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:layout_marginStart="@dimen/dim10dp"
+            android:background="@color/colorTransparent"
+            android:padding="@dimen/dim10dp"
+            android:src="@drawable/ic_baseline_share_24"
+            app:tint="@color/colorWhite" />
 
 
         <ImageButton

@@ -55,12 +55,11 @@ class FavoriteImageFragment : Fragment() {
 
         Picasso.get().load(imageArgument).into(imageView)
 
-        if(!titleArgument.isNullOrEmpty()){
+        if (!titleArgument.isNullOrEmpty()) {
             titleView.text = titleArgument
         }
 
         shareBtnHandler(imageArgument)
-        saveBtnHandle(imageArgument)
 
         imageView.setOnClickListener {
             when (toolbar.visibility) {
@@ -81,13 +80,6 @@ class FavoriteImageFragment : Fragment() {
         }
     }
 
-    private fun saveBtnHandle(imageArgument: String) {
-        val saveBtn = _view.findViewById<ImageButton>(R.id.ibSaveFavoriteImage)
-        saveBtn.setOnClickListener {
-
-        }
-    }
-
     private fun closeBtnHandler() {
         val closeView = _view.findViewById<ImageButton>(R.id.ibCloseFavoriteImage)
         closeView.setOnClickListener {
@@ -99,5 +91,4 @@ class FavoriteImageFragment : Fragment() {
         super.onDestroy()
         requireActivity().requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_PORTRAIT
     }
-
 }
