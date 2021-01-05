@@ -6,5 +6,6 @@ data class Planet (
     val description: String,
     val technicalInformation: String,
     val curiosities: String,
-    val news: String
+    val news: String,
+    val bibliography: String
 )
