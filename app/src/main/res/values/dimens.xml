@@ -49,6 +49,9 @@
     <dimen name="dim22sp">22sp</dimen>
     <dimen name="dim14sp">14sp</dimen>
     <dimen name="dim47dp">47dp</dimen>
+    <dimen name="dim70dp">70dp</dimen>
+    <dimen name="dim140dp">140dp</dimen>
+    <dimen name="dim80dp">80dp</dimen>
 
 
 </resources>

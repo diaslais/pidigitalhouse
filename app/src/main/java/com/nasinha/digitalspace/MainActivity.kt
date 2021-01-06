@@ -10,8 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
-import com.nasinha.digitalspace.authentication.AppUtil
-import com.nasinha.digitalspace.authentication.Constants.EMPTY_STRING
 import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
 import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
 import kotlinx.android.synthetic.main.activity_main.*
@@ -58,9 +56,14 @@ class MainActivity : AppCompatActivity() {
                     _drawerLayout.closeDrawer(Gravity.LEFT, false)
                     _navController.navigate(R.id.action_explorationFragment_to_bibliographyFragment)
                 }
-                R.id.itemChangeNameMenu -> _navController.navigate(R.id.action_explorationFragment_to_changeNameFragment)
-                R.id.itemChangeEmailMenu -> _navController.navigate(R.id.action_explorationFragment_to_changeEmailFragment)
-                R.id.itemChangePasswordMenu -> _navController.navigate(R.id.action_explorationFragment_to_changePasswordFragment)
+                R.id.itemChangeProfileMenu -> {
+                    _drawerLayout.closeDrawer(Gravity.LEFT, false)
+                    _navController.navigate(R.id.action_explorationFragment_to_profileFragment)
+                }
+                R.id.itemChangePasswordMenu -> {
+                    _drawerLayout.closeDrawer(Gravity.LEFT, false)
+                    _navController.navigate(R.id.action_explorationFragment_to_changePasswordFragment)
+                }
                 R.id.itemDevelopersMenu -> {
                     _drawerLayout.closeDrawer(Gravity.LEFT, false)
                     _navController.navigate(R.id.action_explorationFragment_to_developerFragment)

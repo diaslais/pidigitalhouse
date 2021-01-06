@@ -38,7 +38,7 @@
     <string name="bibliografia">Bibliografia</string>
     <string name="alterar_nome">Alterar nome</string>
     <string name="alterar_email">Alterar email</string>
-    <string name="alterar_senha">Alterar senha</string>
+    <string name="alterar_Senha">Alterar senha</string>
     <string name="avatar">Avatar</string>
     <string name="explorador_espacial">Explorador Espacial</string>
     <string name="explorador_espacial_com">Explorador@Espacial.com</string>
@@ -96,5 +96,9 @@
     <string name="explorar">Explorar</string>
     <string name="fato_astron_mico">Fato astronômico</string>
     <string name="terra">Terra</string>
-
+    <string name="perfil">Perfil</string>
+    <string name="atualizar_senha">Atualizar senha</string>
+    <string name="atualizar_perfil">Atualizar perfil</string>
+    <string name="senha_nova">Senha nova</string>
+    <string name="alterar_perfil">Alterar perfil</string>
 </resources>
