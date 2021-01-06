@@ -7,26 +7,33 @@
     android:orientation="vertical"
     tools:context=".epic.view.EpicFragment">
 
-    <ImageButton
-        android:id="@+id/btnBackEpic"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/dim10dp"
-        android:layout_marginTop="@dimen/dim10dp"
-        android:padding="@dimen/dim10dp"
-        android:background="@color/colorTransparent"
-        android:src="@drawable/ic_baseline_arrow_back_24" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/txtDate"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="end"
-        android:layout_marginTop="@dimen/dim20dp"
-        android:layout_marginEnd="@dimen/dim20dp"
-        android:fontFamily="@font/ubuntu_bold"
-        android:textSize="@dimen/dim16sp"
-        tools:text="Última atualização da imagem: 16/11/2000" />
+        <ImageButton
+            android:id="@+id/btnBackEpic"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dim10dp"
+            android:layout_marginTop="@dimen/dim10dp"
+            android:background="@color/colorTransparent"
+            android:padding="@dimen/dim10dp"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dim20dp"
+            android:layout_marginEnd="@dimen/dim20dp"
+            android:layout_weight="1"
+            android:fontFamily="@font/ubuntu_bold"
+            android:gravity="center|end"
+            android:maxLines="2"
+            android:textSize="@dimen/dim16sp"
+            tools:text="Última atualização da imagem: 16/11/2000" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/imgEpic"
@@ -42,9 +49,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
+        android:orientation="vertical"
         android:visibility="gone"
-        tools:visibility="visible"
-        android:orientation="vertical">
+        tools:visibility="visible">
 
         <ProgressBar
             style="?android:attr/progressBarStyle"
@@ -56,8 +63,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/dim10dp"
-            android:textSize="@dimen/dim16sp"
             android:text="@string/stay_a_while_and_listen"
+            android:textSize="@dimen/dim16sp"
             android:textStyle="bold" />
     </LinearLayout>
 </FrameLayout>
