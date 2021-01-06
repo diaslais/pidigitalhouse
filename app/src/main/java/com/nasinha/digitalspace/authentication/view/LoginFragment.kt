@@ -211,8 +211,10 @@ class LoginFragment : Fragment() {
 //                    Log.d("googleSignIn", "signInWithCredential:success")
                     val uiid = mAuth.currentUser?.uid
                     val name = mAuth.currentUser?.displayName
+                    val email = mAuth.currentUser?.email
                     AppUtil.saveUserId(requireActivity(), uiid)
                     AppUtil.saveUserName(requireActivity(), name)
+                    AppUtil.saveUserEmail(requireActivity(), email)
                     navigateToHome(!uiid.isNullOrEmpty())
                 } else {
                     // If sign in fails, display a message to the user.

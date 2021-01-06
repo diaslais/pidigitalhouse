@@ -48,9 +48,18 @@ class AuthenticatorViewModel(application: Application) : AndroidViewModel(applic
             .addOnCompleteListener { task: Task<AuthResult?> ->
                 when {
                     task.isSuccessful -> {
+                        val currentUser = FirebaseAuth.getInstance().currentUser
                         AppUtil.saveUserId(
                             getApplication(),
-                            FirebaseAuth.getInstance().currentUser?.uid
+                            currentUser?.uid
+                        )
+                        AppUtil.saveUserName(
+                            getApplication(),
+                            currentUser?.displayName
+                        )
+                        AppUtil.saveUserEmail(
+                            getApplication(),
+                            currentUser?.email
                         )
                         stateLogin.value = true
                     }

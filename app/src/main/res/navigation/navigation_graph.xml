@@ -71,12 +71,6 @@
             app:destination="@id/loginFragment"
             app:popUpTo="@id/navigation_graph" />
         <action
-            android:id="@+id/action_explorationFragment_to_changeNameFragment"
-            app:destination="@id/changeNameFragment" />
-        <action
-            android:id="@+id/action_explorationFragment_to_changeEmailFragment"
-            app:destination="@id/changeEmailFragment" />
-        <action
             android:id="@+id/action_explorationFragment_to_changePasswordFragment"
             app:destination="@id/changePasswordFragment" />
         <action
@@ -91,6 +85,9 @@
         <action
             android:id="@+id/action_explorationFragment_to_settingsFragment"
             app:destination="@id/settingsFragment" />
+        <action
+            android:id="@+id/action_explorationFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
 
     </fragment>
     <fragment
@@ -134,21 +131,11 @@
             android:id="@+id/action_bottomsheetFragment_to_planetsMenuFragment"
             app:destination="@id/planetsMenuFragment" />
     </dialog>
-    <dialog
-        android:id="@+id/changeNameFragment"
-        android:name="com.nasinha.digitalspace.dialogs.view.ChangeNameFragment"
-        android:label="fragment_change_name"
-        tools:layout="@layout/fragment_change_name" />
-    <dialog
+    <fragment
         android:id="@+id/changePasswordFragment"
-        android:name="com.nasinha.digitalspace.dialogs.view.ChangePasswordFragment"
+        android:name="com.nasinha.digitalspace.profile.view.PasswordFragment"
         android:label="fragment_change_password"
-        tools:layout="@layout/fragment_change_password" />
-    <dialog
-        android:id="@+id/changeEmailFragment"
-        android:name="com.nasinha.digitalspace.dialogs.view.ChangeEmailFragment"
-        android:label="fragment_change_email"
-        tools:layout="@layout/fragment_change_email" />
+        tools:layout="@layout/fragment_password" />
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.nasinha.digitalspace.favorite.view.FavoriteFragment"
@@ -243,6 +230,11 @@
         android:name="com.nasinha.digitalspace.favorite.view.FavoriteImageFragment"
         android:label="fragment_favorite_image"
         tools:layout="@layout/fragment_favorite_image" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.nasinha.digitalspace.profile.view.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
 
 
 </navigation>

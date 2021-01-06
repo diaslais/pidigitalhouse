@@ -6,6 +6,7 @@ import android.util.Patterns
 import com.nasinha.digitalspace.authentication.Constants.APP_KEY
 import com.nasinha.digitalspace.authentication.Constants.EMPTY_STRING
 import com.nasinha.digitalspace.authentication.Constants.UIID_KEY
+import com.nasinha.digitalspace.authentication.Constants.USER_EMAIL
 import com.nasinha.digitalspace.authentication.Constants.USER_NAME
 
 object AppUtil {
@@ -28,6 +29,12 @@ object AppUtil {
         }
     }
 
+    fun saveUserEmail(context: Context, email: String?) {
+        val preferences: SharedPreferences =
+            context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
+        preferences.edit().putString(USER_EMAIL, email).apply()
+    }
+
     fun getUserId(context: Context): String? {
         val preferences = context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
         return preferences.getString(UIID_KEY, EMPTY_STRING)
@@ -36,6 +43,11 @@ object AppUtil {
     fun getUserName(context: Context): String? {
         val preferences = context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
         return preferences.getString(USER_NAME, EMPTY_STRING)
+    }
+
+    fun getUserEmail(context: Context): String? {
+        val preferences = context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
+        return preferences.getString(USER_EMAIL, EMPTY_STRING)
     }
 
     fun clearUserInfo(context: Context) {

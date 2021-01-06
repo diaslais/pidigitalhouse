@@ -12,17 +12,13 @@
     </group>
     <group android:id="@+id/group2">
         <item
-            android:id="@+id/itemChangeNameMenu"
+            android:id="@+id/itemChangeProfileMenu"
             android:icon="@drawable/ic_outline_person_outline_24"
-            android:title="@string/alterar_nome" />
-        <item
-            android:id="@+id/itemChangeEmailMenu"
-            android:icon="@drawable/ic_outline_email_24"
-            android:title="@string/alterar_email" />
+            android:title="@string/alterar_perfil" />
         <item
             android:id="@+id/itemChangePasswordMenu"
             android:icon="@drawable/ic_outline_lock_24"
-            android:title="@string/alterar_senha" />
+            android:title="@string/alterar_Senha" />
         <item
             android:id="@+id/itemSettingsMenu"
             android:icon="@drawable/ic_outline_settings_24"

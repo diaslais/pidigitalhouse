@@ -25,9 +25,9 @@ class FavoriteAdapter(
         val image = item.image
         val title = item.title
         val date = item.date
+        val type = item.type
 
-
-        holder.bind(image, title, date)
+        holder.bind(image, title, date, type)
         holder.itemView.setOnClickListener { listener(item) }
 
         holder.favoriteBtn.setOnClickListener {
