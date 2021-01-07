@@ -4,20 +4,20 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "questionTable")
+@Entity(tableName = "questions")
 data class Question (
     @PrimaryKey(autoGenerate = true)
-    var id: Int,
+    var id: Int?,
     @ColumnInfo
-    var question: String,
+    var question: String?,
     @ColumnInfo
-    var optionOne: String,
+    var optionOne: String?,
     @ColumnInfo
-    var optionTwo: String,
+    var optionTwo: String?,
     @ColumnInfo
-    var optionThree: String,
+    var optionThree: String?,
     @ColumnInfo
-    var optionFour: String,
+    var optionFour: String?,
     @ColumnInfo
-    var correctAnswer: String
+    var correctAnswer: Int?
 )
