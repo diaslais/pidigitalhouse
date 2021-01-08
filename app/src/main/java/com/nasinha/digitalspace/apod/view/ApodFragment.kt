@@ -1,10 +1,12 @@
 package com.nasinha.digitalspace.apod.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -113,8 +115,8 @@ class ApodFragment : Fragment() {
         val imgLoad = _view.findViewById<ImageView>(R.id.imgApod)
         val txtExplanation = _view.findViewById<TextView>(R.id.txtExplanationApod)
         val txtTitle = _view.findViewById<TextView>(R.id.txtTitle)
-        val validation = arguments?.getString("VALIDATION")
-
+        val prefs = activity?.getSharedPreferences("switch_prefs", AppCompatActivity.MODE_PRIVATE)
+        val checkPrefs = prefs?.getBoolean("SWITCH_PREFS", false)
         _apodResponse = it
 
         _favoriteViewModel.checkFavorite(requireActivity(), it.url).observe(viewLifecycleOwner, {
@@ -122,7 +124,7 @@ class ApodFragment : Fragment() {
             btnFavorite()
         })
 
-        if (validation == "isChecked") {
+        if (checkPrefs == true) {
             englishPortugueseTranslator.translate(it.title).addOnSuccessListener {
                 txtTitle.text = it
             }
