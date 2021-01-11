@@ -8,6 +8,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -26,6 +27,7 @@ import com.nasinha.digitalspace.exploration.utils.DrawerUtils.unlockDrawer
 
 class ExplorationFragment : Fragment() {
     lateinit var mediaType: String
+    lateinit var urlVideo: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -54,6 +56,7 @@ class ExplorationFragment : Fragment() {
 
     private fun mediaType(it: ApodResponseModel) {
         mediaType = it.media_type
+        urlVideo = it.url
     }
 
     private fun drawerListener(view: View) {
@@ -72,11 +75,11 @@ class ExplorationFragment : Fragment() {
         }
 //        APOD
         view.findViewById<MaterialCardView>(R.id.cardAstronomicalFact).setOnClickListener {
-            Log.d("RENAN","ta chegando isso = ${mediaType}")
-            if (mediaType == "image"){
+
+            if (mediaType == "ola"){
                 navController.navigate(R.id.action_explorationFragment_to_apodFragment)
             } else {
-                navController.navigate(R.id.action_explorationFragment_to_apodFragmentVideo)
+                navController.navigate(R.id.action_explorationFragment_to_apodVideoActivity)
             }
 
         }

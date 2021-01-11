@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".apod.view.ApodVideoActivity">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageButton
+            android:id="@+id/btnBackApod"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/dim10dp"
+            android:layout_marginTop="@dimen/dim10dp"
+            android:layout_marginBottom="@dimen/dim10dp"
+            android:background="@color/colorTransparent"
+            android:contentDescription="@string/todo"
+            android:padding="@dimen/dim10dp"
+            android:src="@drawable/ic_baseline_arrow_back_24" />
+
+        <fragment
+            android:id="@+id/youtube_view"
+            android:name="com.google.android.youtube.player.YouTubePlayerSupportFragment"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim300dp"
+            android:layout_marginTop="@dimen/dim10dp"
+            android:layout_marginBottom="@dimen/dim9dp"
+            tools:srcCompat="@tools:sample/avatars[3]"
+            tools:ignore="Instantiatable" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/txtTitle"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginVertical="@dimen/dim20dp"
+                android:layout_marginStart="@dimen/dim24dp"
+                android:layout_marginTop="@dimen/dim10dp"
+                android:layout_weight="1"
+                android:ellipsize="end"
+                android:fontFamily="@font/ubuntu_bold"
+                android:maxLines="2"
+                android:textColor="@color/colorWhite"
+                android:textStyle="bold"
+                tools:text="@tools:sample/lorem[20]" />
+
+            <ImageButton
+                android:id="@+id/ibShareFavoriteItem"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginStart="@dimen/dim10dp"
+                android:background="@color/colorTransparent"
+                android:padding="@dimen/dim10dp"
+                android:src="@drawable/ic_baseline_share_24"
+                android:tint="@color/colorWhite" />
+
+            <CheckBox
+                android:id="@+id/cbFavoriteApod"
+                android:layout_width="@dimen/dim52dp"
+                android:layout_height="match_parent"
+                android:layout_gravity="center"
+                android:background="@color/colorTransparent"
+                android:button="@drawable/sl_favorite_24dp"
+                android:contentDescription="@string/botao_de_favoritos"
+                app:buttonTint="@color/colorWhite" />
+        </LinearLayout>
+
+        <ScrollView
+            android:id="@+id/scrollView2"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_marginBottom="@dimen/dim25dp"
+            android:layout_weight="1"
+            app:layout_constraintTop_toBottomOf="@+id/cbFavoriteApod">
+
+            <TextView
+                android:id="@+id/txtExplanationApod"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/dim20sp"
+                android:fontFamily="@font/ubuntu_bold"
+                android:scrollbars="vertical"
+                android:textColor="@color/colorWhite"
+                tools:text="@tools:sample/lorem/random" />
+        </ScrollView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/llProgressApod"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <ProgressBar
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dim10dp"
+            android:text="@string/stay_a_while_and_listen"
+            android:textSize="@dimen/dim16sp"
+            android:textStyle="bold" />
+    </LinearLayout>
+
+</FrameLayout>

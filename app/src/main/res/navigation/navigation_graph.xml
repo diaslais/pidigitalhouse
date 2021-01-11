@@ -91,6 +91,9 @@
         <action
             android:id="@+id/action_explorationFragment_to_apodFragmentVideo"
             app:destination="@id/apodFragmentVideo" />
+        <action
+            android:id="@+id/action_explorationFragment_to_apodVideoActivity"
+            app:destination="@id/apodVideoActivity" />
 
     </fragment>
     <fragment
@@ -243,6 +246,11 @@
         android:name="com.nasinha.digitalspace.apod.view.ApodFragmentVideo"
         android:label="fragment_apod_video"
         tools:layout="@layout/fragment_apod_video" />
+    <activity
+        android:id="@+id/apodVideoActivity"
+        android:name="com.nasinha.digitalspace.apod.view.ApodVideoActivity"
+        android:label="activity_apod_video"
+        tools:layout="@layout/activity_apod_video" />
 
 
 </navigation>
