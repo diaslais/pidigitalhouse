@@ -46,6 +46,7 @@
             android:layout_width="@dimen/dim0dp"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dim20dp"
+            android:progress="0"
             android:theme="@style/AppTheme.ProgressBarColor"
             style="@style/Widget.AppCompat.ProgressBar.Horizontal"
             app:layout_constraintEnd_toStartOf="@id/txtChronometer"

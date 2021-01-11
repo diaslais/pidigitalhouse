@@ -1,15 +1,20 @@
 package com.nasinha.digitalspace.quiz.view
 
+import android.animation.Animator
+import android.animation.AnimatorSet
+import android.animation.ObjectAnimator
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
@@ -34,9 +39,8 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private var _goToNextQuestion: Boolean = false //user already clicked on "answer"
 
     private lateinit var countDownTimer: CountDownTimer
+    private lateinit var timerBarAnimation: Animator
     private var timeLeftInMillis: Long = 0
-    private var barCounter: Int = 0
-    lateinit var barTimer: Timer
 
     private lateinit var _view: View
     private lateinit var _viewModel: QuizViewModel
@@ -163,6 +167,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                 }
                 R.id.btnNext -> {
                     if (_goToNextQuestion) { //second click
+                        countdownBar.setProgress(0)
                         _currentPosition++
                         _goToNextQuestion = false
                         _isAnswered = false
@@ -229,6 +234,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
     private fun startCountDown() {
         startCountDownBar()
+
         countDownTimer = object : CountDownTimer(15000, 1000) {
             override fun onTick(millisUntilFinished: Long) {
                 timeLeftInMillis = millisUntilFinished
@@ -238,16 +244,12 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
                 txtChronometer.text = timeFormatted
 
-                if (seconds <= 5000) {
-                    changeCountDownColor()
-                }
-
-                if (seconds == 0L) {
-                    optionsSwitch()
-                }
+                changeCountDownColor()
             }
 
             override fun onFinish() {
+                Toast.makeText(_view.context, "TEMPO ESGOTADO", Toast.LENGTH_SHORT).show()
+                btnAnswer.isEnabled = false
                 timeLeftInMillis = 0
             }
         }
@@ -255,28 +257,20 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun startCountDownBar() {
-        barTimer = Timer()
-        val barTimerTask = object : TimerTask() {
-            override fun run() {
-                barCounter++
-                countdownBar.setProgress(barCounter)
-                if (barCounter == 100) {
-                    stopTimer()
-                    btnAnswer.isEnabled = false
-                }
-            }
-        }
-        barTimer.schedule(barTimerTask, 0, 150)
+        countdownBar.max = 15000
+        val currentProgress = 15000
+
+        timerBarAnimation = ObjectAnimator.ofInt(countdownBar, "progress", currentProgress).setDuration(15000)
+        timerBarAnimation.start()
     }
 
     private fun stopTimer() {
-        barTimer.cancel()
+        timerBarAnimation.cancel()
         countDownTimer.cancel()
-        barCounter = 0
     }
 
     private fun changeCountDownColor() {
-        if (timeLeftInMillis <= 5000) {
+        if (timeLeftInMillis <= 6000) {
             txtChronometer.setTextColor(Color.parseColor("#FF3034"))
         } else {
             txtChronometer.setTextColor(Color.parseColor("#FFFFFF"))
