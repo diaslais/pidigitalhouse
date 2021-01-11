@@ -1,12 +1,13 @@
 package com.nasinha.digitalspace.quiz.viewmodel
 
 import androidx.lifecycle.*
-import com.nasinha.digitalspace.planetsmenu.model.Planet
 import com.nasinha.digitalspace.quiz.entity.Question
 import com.nasinha.digitalspace.quiz.repository.QuizRepository
 import kotlinx.coroutines.Dispatchers
 
 class QuizViewModel (private val repository: QuizRepository): ViewModel() {
+
+    val questionsList: LiveData<List<Question>> = repository.readQuestionsData().asLiveData()
 
     fun addQuestion(question: Question){
         liveData(Dispatchers.IO) {
