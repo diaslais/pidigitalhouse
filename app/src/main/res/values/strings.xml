@@ -101,4 +101,8 @@
     <string name="atualizar_perfil">Atualizar perfil</string>
     <string name="senha_nova">Senha nova</string>
     <string name="alterar_perfil">Alterar perfil</string>
+    <string name="Responder">Responder</string>
+    <string name="contagem_questoes">%d/%d</string>
+    <string name="fim">FIM</string>
+    <string name="proxima_questao">Próxima questão</string>
 </resources>
