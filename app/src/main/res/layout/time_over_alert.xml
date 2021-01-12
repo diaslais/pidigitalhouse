@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/dim20dp"
+    android:background="@color/colorBlack1"
+    android:showDividers="middle">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginBottom="@dimen/dim20dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="@dimen/dim10dp"
+            android:src="@drawable/ic_clock"/>
+
+        <TextView
+            android:id="@+id/txtTimeDialog"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/tempo_esgotado"
+            android:fontFamily="@font/ubuntu_bold"
+            android:textSize="20sp"
+            android:gravity="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="10dp"/>
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btnTimeNextQuestion"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingVertical="@dimen/dim14dp"
+        android:text="@string/proxima_questao"
+        android:textSize="@dimen/dim14sp"
+        android:textColor="@color/colorWhite"
+        app:backgroundTint="@color/colorTransparent"
+        app:strokeColor="@color/colorWhite"
+        app:strokeWidth="1dp"
+        android:textAllCaps="true"/>
+</LinearLayout>

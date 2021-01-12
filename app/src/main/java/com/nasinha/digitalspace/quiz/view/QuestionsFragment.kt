@@ -1,25 +1,26 @@
 package com.nasinha.digitalspace.quiz.view
 
 import android.animation.Animator
-import android.animation.AnimatorSet
 import android.animation.ObjectAnimator
+import android.app.AlertDialog
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
-import android.widget.Toast
+import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.observe
+import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
@@ -29,7 +30,6 @@ import com.nasinha.digitalspace.quiz.repository.QuizRepository
 import com.nasinha.digitalspace.quiz.viewmodel.QuizViewModel
 import java.util.*
 import kotlin.collections.ArrayList
-
 
 class QuestionsFragment : Fragment(), View.OnClickListener {
     private var _currentPosition: Int = 1
@@ -41,6 +41,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private lateinit var countDownTimer: CountDownTimer
     private lateinit var timerBarAnimation: Animator
     private var timeLeftInMillis: Long = 0
+    private var finished = false
 
     private lateinit var _view: View
     private lateinit var _viewModel: QuizViewModel
@@ -55,6 +56,16 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     lateinit var txtChronometer: TextView
     lateinit var imageClock: ImageView
     lateinit var countdownBar: ProgressBar
+    lateinit var navController: NavController
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
+            stopTimer()
+            navController.popBackStack()
+        }
+        callback.isEnabled = true
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -82,6 +93,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         txtChronometer = view.findViewById(R.id.txtChronometer)
         imageClock = view.findViewById(R.id.imgClock)
         countdownBar = view.findViewById(R.id.pbCountDown)
+        navController = findNavController()
 
         setQuestion()
 
@@ -98,8 +110,8 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         btnAnswer.setOnClickListener(this)
     }
 
-
     private fun setQuestion() {
+        btnAnswer.isEnabled = true
         _viewModel.questionsList.observe(viewLifecycleOwner) {
 
             val question = it[_currentPosition - 1]
@@ -141,7 +153,6 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         options.add(3, txtOptionFour)
 
         for (option in options) {
-            option.setTextColor(Color.parseColor("#FFFFFF"))
             option.background =
                 ContextCompat.getDrawable(_view.context, R.drawable.txt_question_stroke)
             option.isEnabled = true
@@ -167,31 +178,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                 }
                 R.id.btnNext -> {
                     if (_goToNextQuestion) { //second click
-                        countdownBar.setProgress(0)
-                        _currentPosition++
-                        _goToNextQuestion = false
-                        _isAnswered = false
-                        when {
-                            _currentPosition <= it.size -> {
-                                setQuestion()
-                            }
-                            else -> {
-                                val navController = findNavController()
-                                val bundle = bundleOf(
-                                    "CORRECT_ANSWERS" to _correctAnswers,
-                                    "TOTAL_QUESTIONS" to it.size
-                                )
-                                if (_correctAnswers >= 5) {
-                                    navController.navigate(
-                                        R.id.action_questionsFragment_to_quizScoreFragment, bundle
-                                    )
-                                } else {
-                                    navController.navigate(
-                                        R.id.action_questionsFragment_to_quizScoreLostFragment, bundle
-                                    )
-                                }
-                            }
-                        }
+                        nextQuestion()
                         optionsSwitch()
                     } else if (_isAnswered) { //first click
                         stopTimer()
@@ -203,13 +190,41 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                         }
                         question.correctAnswer?.let { answerView(it, R.drawable.correct_question) }
 
-                        if (_currentPosition == it.size) {
+                        if (_currentPosition == NUMBER_QUESTIONS) {
                             btnAnswer.text = getString(R.string.fim)
                         } else {
                             btnAnswer.text = getString(R.string.proxima_questao)
                         }
                         optionsSwitch()
                     }
+                }
+            }
+        }
+    }
+
+    private fun nextQuestion() {
+        countdownBar.setProgress(0)
+        _currentPosition++
+        _goToNextQuestion = false
+        _isAnswered = false
+
+        when {
+            _currentPosition <= NUMBER_QUESTIONS -> {
+                setQuestion()
+            }
+            else -> {
+                val bundle = bundleOf(
+                    "CORRECT_ANSWERS" to _correctAnswers,
+                    "TOTAL_QUESTIONS" to NUMBER_QUESTIONS
+                )
+                if (_correctAnswers >= 5) {
+                    navController.navigate(
+                        R.id.action_questionsFragment_to_quizScoreFragment, bundle
+                    )
+                } else {
+                    navController.navigate(
+                        R.id.action_questionsFragment_to_quizScoreLostFragment, bundle
+                    )
                 }
             }
         }
@@ -232,6 +247,8 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         tv.background = ContextCompat.getDrawable(_view.context, R.drawable.selected_question)
     }
 
+    //timer-related methods
+
     private fun startCountDown() {
         startCountDownBar()
 
@@ -248,12 +265,31 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
             }
 
             override fun onFinish() {
-                Toast.makeText(_view.context, "TEMPO ESGOTADO", Toast.LENGTH_SHORT).show()
+                finished = true
+                timeIsOverDialog()
                 btnAnswer.isEnabled = false
                 timeLeftInMillis = 0
             }
         }
         countDownTimer.start()
+    }
+
+    private fun timeIsOverDialog() {
+        val dialog = AlertDialog.Builder(_view.context)
+        val view: View =
+            requireActivity().layoutInflater.inflate(R.layout.time_over_alert, null)
+        dialog.setView(view)
+        val btnTimeNextQuestion = view.findViewById<Button>(R.id.btnTimeNextQuestion)
+        if (_currentPosition == NUMBER_QUESTIONS) btnTimeNextQuestion.text = getString(R.string.fim)
+
+        val alert = dialog.create()
+
+        btnTimeNextQuestion.setOnClickListener {
+            nextQuestion()
+            alert.dismiss()
+        }
+        alert.setCancelable(false)
+        alert.show()
     }
 
     private fun startCountDownBar() {
@@ -275,6 +311,10 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         } else {
             txtChronometer.setTextColor(Color.parseColor("#FFFFFF"))
         }
+    }
+
+    companion object {
+        const val NUMBER_QUESTIONS = 10
     }
 }
 
