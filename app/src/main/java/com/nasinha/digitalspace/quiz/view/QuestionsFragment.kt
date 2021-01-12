@@ -208,27 +208,32 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         _goToNextQuestion = false
         _isAnswered = false
 
-        when {
-            _currentPosition <= NUMBER_QUESTIONS -> {
+        if (_currentPosition <= NUMBER_QUESTIONS){
                 setQuestion()
+        } else {
+            val astronautImage: Int
+            val resultsMessage: String
+
+            if (_correctAnswers >= 5) {
+                astronautImage = R.drawable.astronauta_quiz
+                resultsMessage = getString(R.string.parab_ns)
+            } else {
+                astronautImage = R.drawable.astronauta_perdido_branco
+                resultsMessage = getString(R.string.perdido_no_espaco)
             }
-            else -> {
-                val bundle = bundleOf(
-                    "CORRECT_ANSWERS" to _correctAnswers,
-                    "TOTAL_QUESTIONS" to NUMBER_QUESTIONS
-                )
-                if (_correctAnswers >= 5) {
-                    navController.navigate(
-                        R.id.action_questionsFragment_to_quizScoreFragment, bundle
-                    )
-                } else {
-                    navController.navigate(
-                        R.id.action_questionsFragment_to_quizScoreLostFragment, bundle
-                    )
-                }
-            }
+
+            val bundle = bundleOf(
+                "CORRECT_ANSWERS" to _correctAnswers,
+                "TOTAL_QUESTIONS" to NUMBER_QUESTIONS,
+                "ASTRONAUT_IMAGE" to astronautImage,
+                "RESULTS_MESSAGE" to resultsMessage
+            )
+            navController.navigate(
+                R.id.action_questionsFragment_to_scoreFragment, bundle
+            )
         }
     }
+
 
     private fun optionsSwitch() {
         txtOptionOne.isEnabled = !(txtOptionOne.isEnabled)
