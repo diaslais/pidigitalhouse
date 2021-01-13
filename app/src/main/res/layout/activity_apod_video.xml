@@ -38,7 +38,7 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:id="@+id/txtTitle"
+                android:id="@+id/txtTitleApodVideo"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginVertical="@dimen/dim20dp"
@@ -82,7 +82,7 @@
             app:layout_constraintTop_toBottomOf="@+id/cbFavoriteApod">
 
             <TextView
-                android:id="@+id/txtExplanationApod"
+                android:id="@+id/txtExplanationApodVideo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dim20sp"

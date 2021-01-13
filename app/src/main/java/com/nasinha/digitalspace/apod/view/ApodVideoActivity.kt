@@ -1,15 +1,12 @@
 package com.nasinha.digitalspace.apod.view
 
-import android.content.Context
 import android.os.Bundle
-import android.util.AttributeSet
-import android.util.Log
-import android.view.View
+import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.youtube.player.*
 import com.nasinha.digitalspace.R
-import com.nasinha.digitalspace.apod.ApodUtils.getIdVideo
+import com.nasinha.digitalspace.apod.utils.ApodUtils.getIdVideo
 import com.nasinha.digitalspace.apod.model.ApodResponseModel
 import com.nasinha.digitalspace.apod.repository.ApodRepository
 import com.nasinha.digitalspace.apod.viewmodel.ApodViewModel
@@ -36,13 +33,13 @@ class ApodVideoActivity : AppCompatActivity(), YouTubePlayer.OnInitializedListen
         val youtubePlayer =
             supportFragmentManager.findFragmentById(R.id.youtube_view) as YouTubePlayerSupportFragment?
         youtubePlayer?.initialize("AIzaSyCBxR_q7U_L1xSdppQ0LG-0Vwq4sxANHHE", this)
-
-        //
     }
 
     private fun showResults(it: ApodResponseModel) {
-        text = it.explanation
-        title = it.title
+        val txtExplanation = findViewById<TextView>(R.id.txtExplanationApod)
+        val txtTitle = findViewById<TextView>(R.id.txtTitle)
+        txtExplanation.text = it.explanation
+        txtTitle.text = it.title
         url = getIdVideo(it.url)
 
     }

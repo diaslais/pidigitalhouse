@@ -1,4 +1,4 @@
-package com.nasinha.digitalspace.apod
+package com.nasinha.digitalspace.apod.utils
 
 object ApodUtils {
      fun getIdVideo(urlVideo: String): String {

@@ -26,7 +26,7 @@ import com.nasinha.digitalspace.exploration.utils.DrawerUtils
 import com.nasinha.digitalspace.exploration.utils.DrawerUtils.unlockDrawer
 
 class ExplorationFragment : Fragment() {
-    lateinit var mediaType: String
+     var mediaType: String = ""
     lateinit var urlVideo: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -75,11 +75,13 @@ class ExplorationFragment : Fragment() {
         }
 //        APOD
         view.findViewById<MaterialCardView>(R.id.cardAstronomicalFact).setOnClickListener {
+            Log.d("RENANN","$mediaType")
+            if (mediaType == "video") {
 
-            if (mediaType == "ola"){
-                navController.navigate(R.id.action_explorationFragment_to_apodFragment)
-            } else {
                 navController.navigate(R.id.action_explorationFragment_to_apodVideoActivity)
+
+            } else {
+                navController.navigate(R.id.action_explorationFragment_to_apodFragment)
             }
 
         }
