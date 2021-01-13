@@ -5,15 +5,11 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
-import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
-import kotlinx.android.synthetic.main.fragment_quiz.*
-
 
 class QuizFragment : Fragment() {
 

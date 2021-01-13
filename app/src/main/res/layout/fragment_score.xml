@@ -63,7 +63,7 @@
             android:layout_gravity="center"
             android:fontFamily="@font/ubuntu_bold"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dim24sp"
+            android:textSize="@dimen/dim24dp"
             tools:text="8/10" />
     </LinearLayout>
 

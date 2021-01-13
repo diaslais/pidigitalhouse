@@ -164,18 +164,6 @@
             app:destination="@id/questionsFragment" />
     </fragment>
     <fragment
-        android:id="@+id/quizScoreFragment"
-        android:name="com.nasinha.digitalspace.quiz.view.QuizScoreFragment"
-        android:label="fragment_quiz_score"
-        tools:layout="@layout/fragment_quiz_score">
-        <action
-            android:id="@+id/action_quizScoreFragment_to_explorationFragment"
-            app:destination="@id/explorationFragment" />
-        <action
-            android:id="@+id/action_quizScoreFragment_to_quizFragment"
-            app:destination="@id/quizFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/developerFragment"
         android:name="com.nasinha.digitalspace.developer.view.DeveloperFragment"
         android:label="fragment_developer"
@@ -213,23 +201,8 @@
         android:label="fragment_questions"
         tools:layout="@layout/fragment_questions" >
         <action
-            android:id="@+id/action_questionsFragment_to_quizScoreFragment"
-            app:destination="@id/quizScoreFragment" />
-        <action
-            android:id="@+id/action_questionsFragment_to_quizScoreLostFragment"
-            app:destination="@id/quizScoreLostFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/quizScoreLostFragment"
-        android:name="com.nasinha.digitalspace.quiz.view.QuizScoreLostFragment"
-        android:label="fragment_quiz_score_lost"
-        tools:layout="@layout/fragment_quiz_score_lost" >
-        <action
-            android:id="@+id/action_quizScoreLostFragment_to_explorationFragment"
-            app:destination="@id/explorationFragment" />
-        <action
-            android:id="@+id/action_quizScoreLostFragment_to_quizFragment"
-            app:destination="@id/quizFragment" />
+            android:id="@+id/action_questionsFragment_to_scoreFragment"
+            app:destination="@id/scoreFragment" />
     </fragment>
     <fragment
         android:id="@+id/favoriteImageFragment"
@@ -251,6 +224,13 @@
         android:name="com.nasinha.digitalspace.apod.view.ApodVideoActivity"
         android:label="activity_apod_video"
         tools:layout="@layout/activity_apod_video" />
+
+    <fragment
+        android:id="@+id/scoreFragment"
+        android:name="com.nasinha.digitalspace.quiz.view.ScoreFragment"
+        android:label="fragment_score"
+        tools:layout="@layout/fragment_score">
+    </fragment>
 
 
 </navigation>
