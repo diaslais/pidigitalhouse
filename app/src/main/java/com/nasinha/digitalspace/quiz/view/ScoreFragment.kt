@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.activity.addCallback
@@ -34,7 +35,7 @@ class ScoreFragment : Fragment() {
         val imgAstronautResults = view.findViewById<ImageView>(R.id.imgAstronautResults)
         val txtScore = view.findViewById<TextView>(R.id.txtScore)
         val btnPlayAgain = view.findViewById<Button>(R.id.btnPlayAgain)
-        val btnBackToHome = view.findViewById<Button>(R.id.btnBackToHome)
+        val btnBackToHome = view.findViewById<ImageButton>(R.id.btnBackScore)
         val navController = findNavController()
 
         txtResults.text = messageResult
@@ -42,15 +43,16 @@ class ScoreFragment : Fragment() {
         txtScore.text = getString(R.string.contagem_questoes, correctAnswers, totalQuestions)
 
         val callback = requireActivity().onBackPressedDispatcher.addCallback(this) {
-            navController.navigate(R.id.action_scoreFragment_to_quizFragment)
+            navController.popBackStack()
+            navController.popBackStack()
         }
         callback.isEnabled = true
 
         btnPlayAgain.setOnClickListener{
-            navController.navigate(R.id.action_scoreFragment_to_quizFragment)
+            activity?.onBackPressed()
         }
         btnBackToHome.setOnClickListener {
-            navController.navigate(R.id.action_scoreFragment_to_explorationFragment)
+            activity?.onBackPressed()
         }
     }
 }
