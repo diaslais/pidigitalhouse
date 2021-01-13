@@ -41,7 +41,7 @@
         <LinearLayout
             android:id="@+id/LinearLayoutCat"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
+            android:layout_height="@dimen/dim0dp"
             android:layout_weight="1"
             android:orientation="vertical"
             app:layout_constraintTop_toBottomOf="@+id/quizToolbar"
@@ -50,7 +50,7 @@
             <com.google.android.material.card.MaterialCardView
                 android:id="@+id/cardCatQuiz"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="@dimen/dim0dp"
                 android:layout_weight="1"
                 android:layout_marginHorizontal="@dimen/dim20dp"
                 android:layout_marginTop="@dimen/dim10dp"
