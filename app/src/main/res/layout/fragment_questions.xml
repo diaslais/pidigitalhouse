@@ -12,25 +12,31 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
-        <com.google.android.material.appbar.AppBarLayout
-            android:id="@+id/appBarLayoutQuestions"
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/quizQuestionsToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:background="@color/colorBlack"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent">
 
-            <com.google.android.material.appbar.MaterialToolbar
-                android:id="@+id/quizTopAppBarQuestions"
-                style="@style/Widget.App.Toolbar"
-                android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:backgroundTint="@color/colorBlack80pct"
-                app:menu="@menu/top_app_bar"
-                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
-                app:title="@string/quiz"
-                app:titleTextColor="@color/colorWhite" />
-        </com.google.android.material.appbar.AppBarLayout>
+            <ImageButton
+                android:id="@+id/btnBackQuizQuestions"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/colorTransparent"
+                android:padding="@dimen/dim10dp"
+                android:src="@drawable/ic_baseline_arrow_back_24" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/dim30dp"
+                android:text="@string/quiz"
+                android:fontFamily="@font/ubuntu_bold"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dim20sp"/>
+        </androidx.appcompat.widget.Toolbar>
 
         <ImageView
             android:id="@+id/imgClock"
@@ -39,7 +45,7 @@
             android:src="@drawable/ic_clock"
             android:layout_marginStart="@dimen/dim20dp"
             app:layout_constraintBottom_toBottomOf="@+id/txtChronometer"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintStart_toStartOf="parent"/>
 
         <ProgressBar
             android:id="@+id/pbCountDown"
@@ -64,139 +70,132 @@
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/dim16sp"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/appBarLayoutQuestions" />
+            app:layout_constraintTop_toBottomOf="@+id/quizQuestionsToolbar" />
 
-        <com.google.android.material.card.MaterialCardView
-            android:id="@+id/cardQuestions"
-            android:layout_width="0dp"
+        <LinearLayout
+            android:id="@+id/LinearLayoutOptions"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/dim20dp"
-            android:layout_marginTop="@dimen/dim30dp"
-            android:backgroundTint="@color/colorTransparent"
-            app:cardCornerRadius="@dimen/dim6dp"
-            app:cardElevation="@dimen/dim0dp"
+            android:orientation="vertical"
+            app:layout_constraintBottom_toTopOf="@+id/btnNext"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtChronometer"
-            app:strokeColor="@color/colorWhite"
-            app:strokeWidth="@dimen/dim1dp">
+            app:layout_constraintTop_toBottomOf="@+id/quizQuestionsToolbar">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/cardQuestions"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <TextView
-                    android:id="@+id/txtQuestion"
-                    android:layout_width="346dp"
+                android:layout_height="wrap_content"
+                app:strokeWidth="1dp"
+                app:strokeColor="@color/colorWhite"
+                app:cardElevation="0dp"
+                android:layout_marginHorizontal="@dimen/dim20dp"
+                android:layout_marginVertical="@dimen/dim20dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/txtChronometer"
+                app:layout_constraintBottom_toTopOf="@+id/LinearLayoutOptions">
+                <LinearLayout
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/dim10dp"
-                    android:gravity="center"
-                    android:textColor="@color/colorWhite"
-                    android:textSize="16sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    tools:text="Os quatro planetas rochosos do nosso Sistema Solar são Mercúrio, Vênus, Terra e Marte. Mas seus núcleos são feitos principalmente do que?" />
+                    android:orientation="vertical"
+                    android:padding="10dp">
+                    <TextView
+                        android:id="@+id/txtQuestion"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        tools:text="Os quatro planetas rochosos do nosso Sistema Solar são Mercúrio, Vênus, Terra e Marte. Mas seus núcleos são feitos principalmente do que?"
+                        android:fontFamily="@font/ubuntu"
+                        android:textSize="@dimen/dim16sp"
+                        android:lineSpacingExtra="@dimen/dim2sp"
+                        android:textColor="@color/colorWhite"
+                        android:gravity="center"
+                        android:layout_gravity="center"/>
+                    <TextView
+                        android:id="@+id/txtQuestionNumber"
+                        android:layout_gravity="end"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="@dimen/dim15dp"
+                        tools:text="4/10"
+                        android:fontFamily="@font/ubuntu"
+                        android:textSize="@dimen/dim12sp"
+                        android:textColor="?android:attr/textColorSecondary"/>
+                </LinearLayout>
+            </com.google.android.material.card.MaterialCardView>
 
-                <TextView
-                    android:id="@+id/txtQuestionNumber"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="bottom"
-                    android:layout_margin="@dimen/dim10dp"
-                    android:textSize="14sp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/txtQuestion"
-                    tools:text="4/10" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
+            <TextView
+                android:id="@+id/txtAnswer1"
+                android:layout_gravity="center"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/txt_question_stroke"
+                android:fontFamily="@font/ubuntu"
+                android:padding="@dimen/dim14dp"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dim16sp"
+                tools:text="Resposta 1" />
 
-        </com.google.android.material.card.MaterialCardView>
+            <TextView
+                android:id="@+id/txtAnswer2"
+                android:layout_gravity="center"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/txt_question_stroke"
+                android:fontFamily="@font/ubuntu"
+                android:padding="@dimen/dim14dp"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dim16sp"
+                tools:text="Resposta 1" />
 
-        <TextView
-            android:id="@+id/txtAnswer1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="50dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="50dp"
-            android:background="@drawable/txt_question_stroke"
-            android:fontFamily="@font/ubuntu"
-            android:padding="@dimen/dim15dp"
-            android:textAlignment="viewStart"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dim16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/cardQuestions"
-            tools:text="Resposta 1" />
+            <TextView
+                android:id="@+id/txtAnswer3"
+                android:layout_gravity="center"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/txt_question_stroke"
+                android:fontFamily="@font/ubuntu"
+                android:padding="@dimen/dim14dp"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dim16sp"
+                tools:text="Resposta 1" />
 
-        <TextView
-            android:id="@+id/txtAnswer2"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/txt_question_stroke"
-            android:fontFamily="@font/ubuntu"
-            android:padding="@dimen/dim15dp"
-            android:textAlignment="viewStart"
-            android:textAllCaps="false"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dim16sp"
-            app:layout_constraintEnd_toEndOf="@+id/txtAnswer1"
-            app:layout_constraintStart_toStartOf="@+id/txtAnswer1"
-            app:layout_constraintTop_toBottomOf="@+id/txtAnswer1"
-            tools:text="Resposta 1" />
-
-        <TextView
-            android:id="@+id/txtAnswer3"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/txt_question_stroke"
-            android:fontFamily="@font/ubuntu"
-            android:padding="@dimen/dim15dp"
-            android:textAlignment="viewStart"
-            android:textAllCaps="false"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dim16sp"
-            app:layout_constraintEnd_toEndOf="@+id/txtAnswer2"
-            app:layout_constraintStart_toStartOf="@+id/txtAnswer2"
-            app:layout_constraintTop_toBottomOf="@+id/txtAnswer2"
-            tools:text="Resposta 1" />
-
-        <TextView
-            android:id="@+id/txtAnswer4"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="16dp"
-            android:background="@drawable/txt_question_stroke"
-            android:fontFamily="@font/ubuntu"
-            android:padding="@dimen/dim15dp"
-            android:textAlignment="viewStart"
-            android:textAllCaps="false"
-            android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dim16sp"
-            app:layout_constraintEnd_toEndOf="@+id/txtAnswer3"
-            app:layout_constraintStart_toStartOf="@+id/txtAnswer3"
-            app:layout_constraintTop_toBottomOf="@+id/txtAnswer3"
-            tools:text="Resposta 1" />
+            <TextView
+                android:id="@+id/txtAnswer4"
+                android:layout_gravity="center"
+                android:layout_width="280dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/txt_question_stroke"
+                android:fontFamily="@font/ubuntu"
+                android:padding="@dimen/dim14dp"
+                android:textAllCaps="false"
+                android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dim16sp"
+                tools:text="Resposta 1" />
+        </LinearLayout>
 
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnNext"
             style="?attr/materialButtonOutlinedStyle"
             android:layout_width="225dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
+            android:layout_marginVertical="20dp"
             android:paddingVertical="@dimen/dim14dp"
             android:text="@string/responder"
             android:textAllCaps="true"
             android:textColor="@color/colorWhite"
+            android:fontFamily="@font/ubuntu_bold"
             android:textSize="@dimen/dim14sp"
             app:backgroundTint="@color/colorTransparent"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/txtAnswer4"
+            app:layout_constraintEnd_toEndOf="parent"
             app:strokeColor="@color/colorWhite" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

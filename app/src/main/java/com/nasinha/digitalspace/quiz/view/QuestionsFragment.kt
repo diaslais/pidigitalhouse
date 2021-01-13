@@ -10,10 +10,7 @@ import android.os.CountDownTimer
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.ImageView
-import android.widget.ProgressBar
-import android.widget.TextView
+import android.widget.*
 import androidx.activity.addCallback
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
@@ -25,6 +22,7 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.nasinha.digitalspace.R
+import com.nasinha.digitalspace.exploration.utils.DrawerUtils
 import com.nasinha.digitalspace.quiz.db.QuizDatabase
 import com.nasinha.digitalspace.quiz.repository.QuizRepository
 import com.nasinha.digitalspace.quiz.viewmodel.QuizViewModel
@@ -97,9 +95,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
         setQuestion()
 
-        val quizToolBar = view.findViewById<MaterialToolbar>(R.id.quizTopAppBarQuestions)
-
-        quizToolBar.setNavigationOnClickListener {
+        view.findViewById<ImageButton>(R.id.btnBackQuizQuestions).setOnClickListener {
             activity?.onBackPressed()
         }
 
@@ -113,7 +109,6 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private fun setQuestion() {
         btnAnswer.isEnabled = true
         _viewModel.questionsList.observe(viewLifecycleOwner) {
-
             val question = it[_currentPosition - 1]
             defaultOptionsView()
             startCountDown()
@@ -208,7 +203,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         _goToNextQuestion = false
         _isAnswered = false
 
-        if (_currentPosition <= NUMBER_QUESTIONS){
+        if (_currentPosition <= NUMBER_QUESTIONS) {
                 setQuestion()
         } else {
             val astronautImage: Int
@@ -233,7 +228,6 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
             )
         }
     }
-
 
     private fun optionsSwitch() {
         txtOptionOne.isEnabled = !(txtOptionOne.isEnabled)

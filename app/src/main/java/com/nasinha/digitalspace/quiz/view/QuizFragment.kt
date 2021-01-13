@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageButton
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
@@ -29,16 +30,14 @@ class QuizFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lockDrawer(requireActivity())
 
+        view.findViewById<ImageButton>(R.id.btnBackQuiz).setOnClickListener {
+            activity?.onBackPressed()
+        }
+
         val navController = findNavController()
 
         view.findViewById<MaterialButton>(R.id.btnPlay).setOnClickListener {
             navController.navigate(R.id.action_quizFragment_to_questionsFragment)
         }
-        val quizToolBar = view.findViewById<MaterialToolbar>(R.id.quizTopAppBar)
-
-        quizToolBar.setNavigationOnClickListener {
-            activity?.onBackPressed()
-        }
-
     }
 }
