@@ -2,25 +2,32 @@ package com.nasinha.digitalspace.exploration.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.core.os.bundleOf
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.navigation.NavigationView
 import com.nasinha.digitalspace.R
+import com.nasinha.digitalspace.apod.model.ApodResponseModel
+import com.nasinha.digitalspace.apod.repository.ApodRepository
+import com.nasinha.digitalspace.apod.viewmodel.ApodViewModel
 import com.nasinha.digitalspace.authentication.AppUtil
 import com.nasinha.digitalspace.exploration.utils.DrawerUtils
 import com.nasinha.digitalspace.exploration.utils.DrawerUtils.unlockDrawer
 
 class ExplorationFragment : Fragment() {
-
+     var mediaType: String = ""
+    lateinit var urlVideo: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -32,9 +39,24 @@ class ExplorationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        val viewModel = ViewModelProvider(
+            this,
+            ApodViewModel.ApodViewModelFactory(ApodRepository())
+        ).get(ApodViewModel::class.java)
+
+        viewModel.getDataApod().observe(viewLifecycleOwner, {
+            mediaType(it as ApodResponseModel)
+
+        })
+
         navInfoHeader()
         unlockDrawer(requireActivity())
         drawerListener(view)
+    }
+
+    private fun mediaType(it: ApodResponseModel) {
+        mediaType = it.media_type
+        urlVideo = it.url
     }
 
     private fun drawerListener(view: View) {
@@ -53,7 +75,15 @@ class ExplorationFragment : Fragment() {
         }
 //        APOD
         view.findViewById<MaterialCardView>(R.id.cardAstronomicalFact).setOnClickListener {
-            navController.navigate(R.id.action_explorationFragment_to_apodFragment)
+            Log.d("RENANN","$mediaType")
+            if (mediaType == "video") {
+
+                navController.navigate(R.id.action_explorationFragment_to_apodVideoActivity)
+
+            } else {
+                navController.navigate(R.id.action_explorationFragment_to_apodFragment)
+            }
+
         }
 //        EPIC
         view.findViewById<MaterialCardView>(R.id.cardEarth).setOnClickListener {

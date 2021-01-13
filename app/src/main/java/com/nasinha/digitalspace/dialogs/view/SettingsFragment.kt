@@ -84,11 +84,8 @@ class SettingsFragment : DialogFragment() {
 
                 alertDialog.setTitle(getString(R.string.alerta_traducao))
                 alertDialog.setMessage(getString(R.string.message_traducao))
-                alertDialog.setPositiveButton(getString(R.string.sim)) { _, _ ->
-                    val bundle = bundleOf(
-                        "VALIDATION" to "isChecked"
-                    )
-                    navController.navigate(R.id.apodFragment, bundle)
+                alertDialog.setPositiveButton(getString(R.string.sim)) { dialog, _ ->
+                    dialog.dismiss()
 
                 }
                 alertDialog.setNegativeButton(getString(R.string.nao)) { dialog, _ ->
@@ -106,7 +103,7 @@ class SettingsFragment : DialogFragment() {
 
     companion object {
         const val APP_NAME = "switch_prefs"
-        const val NOTIFICATION_PREFS = "NOTIFICATION_PREFS"
+        const val NOTIFICATION_PREFS = "SWITCH_PREFS"
     }
 
     private fun confirmButton() {
