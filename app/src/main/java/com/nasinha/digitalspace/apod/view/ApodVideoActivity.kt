@@ -9,6 +9,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.youtube.player.*
 import com.nasinha.digitalspace.R
+import com.nasinha.digitalspace.apod.ApodUtils.getIdVideo
 import com.nasinha.digitalspace.apod.model.ApodResponseModel
 import com.nasinha.digitalspace.apod.repository.ApodRepository
 import com.nasinha.digitalspace.apod.viewmodel.ApodViewModel
@@ -35,27 +36,25 @@ class ApodVideoActivity : AppCompatActivity(), YouTubePlayer.OnInitializedListen
         val youtubePlayer =
             supportFragmentManager.findFragmentById(R.id.youtube_view) as YouTubePlayerSupportFragment?
         youtubePlayer?.initialize("AIzaSyCBxR_q7U_L1xSdppQ0LG-0Vwq4sxANHHE", this)
+
+        //
     }
 
     private fun showResults(it: ApodResponseModel) {
         text = it.explanation
         title = it.title
-        url = it.url
+        url = getIdVideo(it.url)
+
     }
 
-    private fun getIdVideo(urlVideo: String): String {
-        val index = urlVideo.indexOf("=")
-        val url = urlVideo.subSequence(index + 1, url.length)
-        val idVideo = url.subSequence(0, 11)
-        return idVideo.toString()
-    }
 
     override fun onInitializationSuccess(
         p0: YouTubePlayer.Provider?,
         p1: YouTubePlayer?,
         p2: Boolean
     ) {
-        p1?.cueVideo(getIdVideo(url))
+        p1?.cueVideo(url)
+        //Log.d("RENAN", url)
 
     }
 
