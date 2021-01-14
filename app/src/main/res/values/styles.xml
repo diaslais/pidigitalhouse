@@ -41,4 +41,7 @@
         <item name="colorAccent">#e91e63</item>
     </style>
 
+    <style name="AppTheme.ProgressBarColor">
+        <item name="colorAccent">@color/colorCorrectOption</item>
+    </style>
 </resources>
