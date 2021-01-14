@@ -3,10 +3,13 @@ package com.nasinha.digitalspace.quiz.view
 import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.app.AlertDialog
+import android.app.Dialog
+import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -287,6 +290,15 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         }
         alert.setCancelable(false)
         alert.show()
+
+        alert?.setOnKeyListener { dialog, keyCode, _ ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                activity?.onBackPressed()
+                dialog?.dismiss()
+                true
+            }
+            false
+        }
     }
 
     private fun startCountDownBar() {
