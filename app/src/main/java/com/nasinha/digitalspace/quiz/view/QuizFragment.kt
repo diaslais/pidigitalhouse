@@ -4,15 +4,12 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.drawerlayout.widget.DrawerLayout
+import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
-import kotlinx.android.synthetic.main.fragment_quiz.*
-
 
 class QuizFragment : Fragment() {
 
@@ -29,16 +26,14 @@ class QuizFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lockDrawer(requireActivity())
 
+        view.findViewById<ImageButton>(R.id.btnBackQuiz).setOnClickListener {
+            activity?.onBackPressed()
+        }
+
         val navController = findNavController()
 
         view.findViewById<MaterialButton>(R.id.btnPlay).setOnClickListener {
             navController.navigate(R.id.action_quizFragment_to_questionsFragment)
         }
-        val quizToolBar = view.findViewById<MaterialToolbar>(R.id.quizTopAppBar)
-
-        quizToolBar.setNavigationOnClickListener {
-            activity?.onBackPressed()
-        }
-
     }
 }

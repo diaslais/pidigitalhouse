@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:background="@drawable/bg_planetas2"
+    tools:context=".quiz.view.ScoreFragment">
+
+    <ImageButton
+        android:id="@+id/btnBackScore"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorTransparent"
+        android:padding="@dimen/dim10dp"
+        android:layout_marginStart="@dimen/dim10dp"
+        android:layout_marginTop="@dimen/dim10dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"/>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toBottomOf="@+id/btnPlayAgain">
+
+        <TextView
+            android:id="@+id/txtResults"
+            android:layout_width="300dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/dim30dp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dim20sp"
+            tools:text="Parabéns explorador!" />
+
+        <ImageView
+            android:id="@+id/imgAstronautResults"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="@dimen/dim30dp"
+            android:layout_height="240dp"
+            tools:src="@drawable/astronauta_quiz" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dim10dp"
+            android:fontFamily="@font/ubuntu"
+            android:text="@string/sua_pontua_o"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dim18sp" />
+
+        <TextView
+            android:id="@+id/txtScore"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:fontFamily="@font/ubuntu_bold"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dim24dp"
+            tools:text="8/10" />
+    </LinearLayout>
+
+        <Button
+            android:id="@+id/btnPlayAgain"
+            style="?attr/materialButtonOutlinedStyle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/dim20dp"
+            android:layout_marginBottom="@dimen/dim20dp"
+            android:fontFamily="@font/ubuntu_bold"
+            android:paddingVertical="@dimen/dim14dp"
+            android:text="@string/jogar_novamente"
+            android:textAlignment="center"
+            android:textColor="@color/colorWhite"
+            app:strokeColor="@color/colorWhite"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
