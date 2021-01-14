@@ -3,8 +3,6 @@ package com.nasinha.digitalspace.quiz.view
 import android.animation.Animator
 import android.animation.ObjectAnimator
 import android.app.AlertDialog
-import android.app.Dialog
-import android.content.DialogInterface
 import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
