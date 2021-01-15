@@ -1,15 +1,18 @@
 package com.nasinha.digitalspace.favorite.view
 
-import android.content.pm.ActivityInfo
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.mlkit.nl.translate.TranslateLanguage
+import com.google.mlkit.nl.translate.Translation
+import com.google.mlkit.nl.translate.TranslatorOptions
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.DATE
 import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.IMAGE
@@ -24,6 +27,13 @@ import kotlinx.coroutines.launch
 
 class FavoriteScreenFragment : Fragment() {
     private lateinit var _view: View
+
+    val options = TranslatorOptions.Builder()
+        .setSourceLanguage(TranslateLanguage.ENGLISH)
+        .setTargetLanguage(TranslateLanguage.PORTUGUESE)
+        .build()
+
+    private val englishPortugueseTranslator = Translation.getClient(options)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -56,23 +66,55 @@ class FavoriteScreenFragment : Fragment() {
         val typeArgument = arguments?.getString(TYPE)!!
 
         val imageView = _view.findViewById<ImageView>(R.id.ivImageFavoriteScreen)
+        val dateView = _view.findViewById<TextView>(R.id.tvDateFavoriteScreen)
         val titleView = _view.findViewById<TextView>(R.id.tvTitleFavoriteScreen)
         val textView = _view.findViewById<TextView>(R.id.tvTextFavoriteScreen)
-        val dateView = _view.findViewById<TextView>(R.id.tvDateFavoriteScreen)
 
-        titleView.text = if (titleArgument.isNullOrEmpty()) "" else titleArgument
-        textView.text = if (textArgument.isNullOrEmpty()) "" else textArgument
+        checkPrefsListener(titleArgument, textArgument, titleView, textView)
+
         dateView.text = dateArgument
 
         when (typeArgument) {
             IMAGE -> {
                 Picasso.get().load(imageArgument).into(imageView)
-                imageClickHandler(imageView, imageArgument, titleArgument)
+                imageClickHandler(imageView, imageArgument, titleView)
                 shareButton(imageArgument)
             }
             VIDEO -> {
                 Toast.makeText(_view.context, "é video sô!", Toast.LENGTH_LONG).show()
             }
+        }
+    }
+
+    private fun checkPrefsListener(
+        titleArgument: String?,
+        textArgument: String?,
+        titleView: TextView,
+        textView: TextView
+    ) {
+
+        val titleArgumentTranslate = if (titleArgument.isNullOrEmpty()) "" else titleArgument
+        val textArgumentTranslate = if (textArgument.isNullOrEmpty()) "" else textArgument
+
+        val prefs =
+            requireActivity().getSharedPreferences("switch_prefs", AppCompatActivity.MODE_PRIVATE)
+        val checkPrefs = prefs?.getBoolean("SWITCH_PREFS", false)
+
+        if (checkPrefs == true) {
+            englishPortugueseTranslator.translate(titleArgumentTranslate).addOnSuccessListener {
+                titleView.text = it
+            }.addOnFailureListener {
+                titleView.text = titleArgumentTranslate
+            }
+
+            englishPortugueseTranslator.translate(textArgumentTranslate).addOnSuccessListener {
+                textView.text = it
+            }.addOnFailureListener {
+                textView.text = textArgumentTranslate
+            }
+        } else {
+            titleView.text = titleArgumentTranslate
+            textView.text = textArgumentTranslate
         }
     }
 
@@ -92,11 +134,11 @@ class FavoriteScreenFragment : Fragment() {
     private fun imageClickHandler(
         imageView: ImageView,
         imageArgument: String,
-        titleArgument: String?,
+        titleText: TextView,
     ) {
         imageView.setOnClickListener {
             val navController = findNavController()
-            val bundle = bundleOf(IMAGE to imageArgument, TITLE to titleArgument)
+            val bundle = bundleOf(IMAGE to imageArgument, TITLE to titleText.text.toString())
             navController.navigate(
                 R.id.action_favoriteScreenFragment_to_favoriteImageFragment,
                 bundle
