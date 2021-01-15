@@ -43,6 +43,7 @@ dependencies {
     kapt "androidx.room:room-compiler:$room_version"
 //    firebase
     implementation 'com.google.firebase:firebase-auth:20.0.1'
+    implementation 'com.google.firebase:firebase-auth-ktx'
     implementation 'com.google.firebase:firebase-messaging:21.0.0'
     implementation platform('com.google.firebase:firebase-bom:26.2.0')
     implementation 'com.google.android.gms:play-services-auth:19.0.0'

@@ -1,6 +1,5 @@
 package com.nasinha.digitalspace.authentication.view
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -8,7 +7,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
 import android.widget.Button
 import android.widget.ImageButton
 import android.widget.Toast
@@ -35,6 +33,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.authentication.AppUtil
+import com.nasinha.digitalspace.authentication.AppUtil.hideKeyboard
 import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
 import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
 import kotlinx.android.synthetic.main.fragment_login.*
@@ -74,7 +73,7 @@ class LoginFragment : Fragment() {
         loginHandler()
 //        Email signup
         emailSignupHandler()
-//        Facebook
+//        Facebook signup
         callbackManager = CallbackManager.Factory.create()
         facebookRealBtn.setOnClickListener {
             facebookLoginHandler()
@@ -82,31 +81,24 @@ class LoginFragment : Fragment() {
         facebookFakeBtn.setOnClickListener {
             facebookRealBtn.performClick()
         }
-//        Google
+//        Google signup
         googleLoginHandler()
     }
 
     private fun checkUserId() {
-        if (AppUtil.getUserId(requireActivity().application) != "") {
+        if (!AppUtil.getUserId(requireActivity()).isNullOrEmpty()) {
             val navController = findNavController()
             navController.navigate(R.id.action_loginFragment_to_explorationFragment)
         }
     }
 
     private fun loginHandler() {
-        _view.findViewById<MaterialButton>(R.id.mbLoginLogin).setOnClickListener {
-            hideKeyboard()
+        val loginBtn = _view.findViewById<MaterialButton>(R.id.mbLoginLogin)
+        loginBtn.setOnClickListener {
+            hideKeyboard(_view)
             navigateLogin()
         }
-    }
-
-    private fun emailSignupHandler() {
-        val loginBtn = _view.findViewById<ImageButton>(R.id.imEmailLogin)
-
-        loginBtn.setOnClickListener {
-            val navController = Navigation.findNavController(_view)
-            navController.navigate(R.id.action_loginFragment_to_signupFragment)
-        }
+        initViewModel()
     }
 
     private fun navigateLogin() {
@@ -115,20 +107,27 @@ class LoginFragment : Fragment() {
 
         when {
             AppUtil.validateEmailPassword(email, password) -> {
-                authenticatorViewModel.loginEmailPassword(email, password)
+                authenticatorViewModel.loginEmailPassword(requireActivity(), email, password)
             }
             else -> {
-                Snackbar.make(mbLoginLogin, "vish", Snackbar.LENGTH_LONG).show()
+                Snackbar.make(mbLoginLogin, getString(R.string.campos_invalidos), Snackbar.LENGTH_LONG).show()
             }
         }
-        initViewModel()
+    }
 
+    private fun emailSignupHandler() {
+        val signupEmailBtn = _view.findViewById<ImageButton>(R.id.imEmailLogin)
+
+        signupEmailBtn.setOnClickListener {
+            val navController = Navigation.findNavController(_view)
+            navController.navigate(R.id.action_loginFragment_to_signupFragment)
+        }
     }
 
     private fun initViewModel() {
         authenticatorViewModel.stateLogin.observe(viewLifecycleOwner, { state ->
             state?.let {
-                navigateToHome(it)
+                navigateToHomeEmail(it)
             }
         })
         authenticatorViewModel.error.observe(viewLifecycleOwner, { loading ->
@@ -138,24 +137,15 @@ class LoginFragment : Fragment() {
         })
     }
 
-    private fun navigateToHome(status: Boolean) {
-        val navController = Navigation.findNavController(_view)
-        when {
-            status -> {
-                navController.navigate(R.id.action_loginFragment_to_explorationFragment)
-            }
+    private fun navigateToHomeEmail(status: Boolean) {
+        val navController = findNavController()
+        if (status) {
+            navController.navigate(R.id.action_loginFragment_to_explorationFragment)
         }
     }
 
     private fun messageError(it: String) {
-        val btnLogin = _view.findViewById<MaterialButton>(R.id.mbLoginLogin)
-        Snackbar.make(btnLogin, it, Snackbar.LENGTH_LONG).show()
-    }
-
-    private fun hideKeyboard() {
-        val imm: InputMethodManager =
-            _view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(_view.windowToken, 0)
+        Snackbar.make(_view, it, Snackbar.LENGTH_LONG).show()
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -167,7 +157,7 @@ class LoginFragment : Fragment() {
             if (task.isSuccessful) {
                 try {
                     // Google Sign In was successful, authenticate with Firebase
-                    hideKeyboard()
+                    hideKeyboard(_view)
                     val account = task.getResult(ApiException::class.java)!!
 //                    Log.d("GoogleSignIn", "firebaseAuthWithGoogle:" + account.id)
                     firebaseAuthWithGoogle(account.idToken!!)
@@ -185,16 +175,17 @@ class LoginFragment : Fragment() {
 
 
     private fun googleLoginHandler() {
-        val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
-            .requestIdToken(getString(R.string.default_web_client_id))
-            .requestEmail()
-            .build()
-
-        val googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
-
         val googleSignInBtn = _view.findViewById<ImageButton>(R.id.imGoogleLogin)
 
         googleSignInBtn.setOnClickListener {
+
+            val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
+                .requestIdToken(getString(R.string.default_web_client_id))
+                .requestEmail()
+                .build()
+
+            val googleSignInClient = GoogleSignIn.getClient(requireActivity(), gso)
+
             val signInIntent = googleSignInClient.signInIntent
             startActivityForResult(signInIntent, RC_SIGN_IN)
         }
@@ -215,11 +206,15 @@ class LoginFragment : Fragment() {
                     AppUtil.saveUserId(requireActivity(), uiid)
                     AppUtil.saveUserName(requireActivity(), name)
                     AppUtil.saveUserEmail(requireActivity(), email)
-                    navigateToHome(!uiid.isNullOrEmpty())
+                    navigateToHomeEmail(!uiid.isNullOrEmpty())
                 } else {
                     // If sign in fails, display a message to the user.
 //                    Log.w("googleSignIn", "signInWithCredential:failure", task.exception)
-                    Snackbar.make(_view, "Authentication Failed.", Snackbar.LENGTH_SHORT).show()
+                    Snackbar.make(
+                        _view,
+                        getString(R.string.autenticacao_falhou),
+                        Snackbar.LENGTH_SHORT
+                    ).show()
                 }
             }
     }
@@ -237,7 +232,7 @@ class LoginFragment : Fragment() {
                     .addOnCompleteListener {
                         val profile = Profile.getCurrentProfile()
                         val name = profile.name
-                        irParaHome(loginResult.accessToken.userId, name)
+                        navigateToHomeFacebook(loginResult.accessToken.userId, name)
                     }
             }
 
@@ -251,7 +246,7 @@ class LoginFragment : Fragment() {
         })
     }
 
-    private fun irParaHome(uiid: String, name: String?) {
+    private fun navigateToHomeFacebook(uiid: String, name: String?) {
         val navController = Navigation.findNavController(_view)
         AppUtil.saveUserId(requireActivity(), uiid)
         AppUtil.saveUserName(requireActivity(), name)

@@ -1,31 +1,24 @@
 package com.nasinha.digitalspace.authentication.view
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
-import androidx.fragment.app.Fragment
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.appcompat.view.ContextThemeWrapper
-import androidx.core.os.bundleOf
-import androidx.lifecycle.Observer
+import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.Navigation
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
-import com.google.android.material.textfield.TextInputLayout
+import com.nasinha.digitalspace.MainActivity
 import com.nasinha.digitalspace.R
-import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
-import com.nasinha.digitalspace.authentication.AppUtil
+import com.nasinha.digitalspace.authentication.AppUtil.hideKeyboard
 import com.nasinha.digitalspace.authentication.AppUtil.validateNameEmailPassword
+import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
 import kotlinx.android.synthetic.main.fragment_signup.*
 
 class SignupFragment : Fragment() {
@@ -58,13 +51,26 @@ class SignupFragment : Fragment() {
 
         _view = view
 
+        registerListener()
+        loginListener()
+    }
+
+    private fun registerListener() {
         val btnRegister = _view.findViewById<MaterialButton>(R.id.btnSignup)
 
         btnRegister.setOnClickListener {
+            hideKeyboard(_view)
             validateRegister()
         }
+        initViewModel()
+    }
 
+    private fun loginListener() {
+        val btnLogin = _view.findViewById<MaterialButton>(R.id.mbLoginSignup)
 
+        btnLogin.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
     }
 
     private fun validateRegister() {
@@ -75,18 +81,16 @@ class SignupFragment : Fragment() {
 
         when {
             validateNameEmailPassword(name, email, password) -> {
-                viewModel.registerUser(email, password)
-
+                viewModel.registerUser(requireActivity(), name, email, password)
             }
         }
 
-        initViewModel()
     }
 
     private fun initViewModel() {
         viewModel.stateRegister.observe(viewLifecycleOwner, { state ->
             state?.let {
-                navigateToHome(it)
+                navigateToLogin(it)
             }
         })
 
@@ -121,18 +125,12 @@ class SignupFragment : Fragment() {
     }
 
 
-    private fun navigateToHome(status: Boolean) {
-        val navController = Navigation.findNavController(_view)
-        when {
-            status -> {
-                navController.navigate(R.id.action_signupFragment_to_explorationFragment)
-            }
+    private fun navigateToLogin(isRegistered: Boolean) {
+        if (isRegistered) {
+            Snackbar.make(_view, getString(R.string.email_verificacao), Snackbar.LENGTH_LONG).show()
+            Handler(Looper.getMainLooper()).postDelayed({
+                requireActivity().onBackPressed()
+            }, 500)
         }
-    }
-
-    private fun hideKeyboard() {
-        val imm: InputMethodManager =
-            _view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
-        imm.hideSoftInputFromWindow(_view.windowToken, 0)
     }
 }

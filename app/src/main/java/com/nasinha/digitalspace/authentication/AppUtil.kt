@@ -1,8 +1,11 @@
 package com.nasinha.digitalspace.authentication
 
+import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
 import android.util.Patterns
+import android.view.View
+import android.view.inputmethod.InputMethodManager
 import com.nasinha.digitalspace.authentication.Constants.APP_KEY
 import com.nasinha.digitalspace.authentication.Constants.EMPTY_STRING
 import com.nasinha.digitalspace.authentication.Constants.UIID_KEY
@@ -54,6 +57,7 @@ object AppUtil {
         val preferences = context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
         preferences.edit().putString(UIID_KEY, EMPTY_STRING).apply()
         preferences.edit().putString(USER_NAME, EMPTY_STRING).apply()
+        preferences.edit().putString(USER_EMAIL, EMPTY_STRING).apply()
     }
 
     fun validateNameEmailPassword(name: String, email: String, password: String): Boolean {
@@ -84,5 +88,11 @@ object AppUtil {
             }
             else -> true
         }
+    }
+
+    fun hideKeyboard(view: View) {
+        val imm: InputMethodManager =
+            view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+        imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }
