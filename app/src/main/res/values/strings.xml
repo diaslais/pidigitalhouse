@@ -114,5 +114,8 @@
     <string name="autenticacao_falhou">Autenticação falhou!</string>
     <string name="verificar_email">É necessário verificar o email!</string>
     <string name="campos_invalidos">Preencha corretamente.</string>
+    <string name="bem_vindo_explorador">Bem vindo explorador!</string>
+    <string name="vista_seu_traje">Vista seu traje e prepare-se para a decolagem. Iniciaremos uma missão de exploração pelo espaço.\n\nAcomode-se em seu assento, aperte o cinto e prepare-se para ir, audaciosamente, onde ninguém jamais esteve.\n\nPartimos em 3, 2, 1...</string>
+    <string name="vamos_l">Vamos lá!</string>
 
 </resources>

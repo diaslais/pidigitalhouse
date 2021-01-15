@@ -1,14 +1,14 @@
 package com.nasinha.digitalspace.exploration.view
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.os.Bundle
 import android.util.Log
-import android.view.Gravity
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import android.widget.Button
+import android.widget.ImageButton
 import android.widget.TextView
-import androidx.core.os.bundleOf
+import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -22,12 +22,12 @@ import com.nasinha.digitalspace.apod.model.ApodResponseModel
 import com.nasinha.digitalspace.apod.repository.ApodRepository
 import com.nasinha.digitalspace.apod.viewmodel.ApodViewModel
 import com.nasinha.digitalspace.authentication.AppUtil
-import com.nasinha.digitalspace.exploration.utils.DrawerUtils
 import com.nasinha.digitalspace.exploration.utils.DrawerUtils.unlockDrawer
 
 class ExplorationFragment : Fragment() {
      var mediaType: String = ""
     lateinit var urlVideo: String
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -39,6 +39,8 @@ class ExplorationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        welcomeDialog(view)
+
         val viewModel = ViewModelProvider(
             this,
             ApodViewModel.ApodViewModelFactory(ApodRepository())
@@ -46,12 +48,41 @@ class ExplorationFragment : Fragment() {
 
         viewModel.getDataApod().observe(viewLifecycleOwner, {
             mediaType(it as ApodResponseModel)
-
         })
 
         navInfoHeader()
         unlockDrawer(requireActivity())
         drawerListener(view)
+    }
+
+    private fun welcomeDialog(explorationView: View) {
+        val dialog = AlertDialog.Builder(explorationView.context)
+        val view: View =
+            requireActivity().layoutInflater.inflate(R.layout.welcome_alert, null)
+        dialog.setView(view)
+
+        val btnLetsGo = view.findViewById<Button>(R.id.btnLetsGo)
+        val closeWelcomeDialog = view.findViewById<ImageButton>(R.id.ibCloseWelcome)
+
+        val alert = dialog.create()
+
+        closeWelcomeDialog.setOnClickListener {
+            alert.dismiss()
+        }
+        btnLetsGo.setOnClickListener {
+            alert.dismiss()
+        }
+
+        alert.setCancelable(false)
+        alert.show()
+
+        alert?.setOnKeyListener { dialog, keyCode, _ ->
+            if (keyCode == KeyEvent.KEYCODE_BACK) {
+                dialog?.dismiss()
+                true
+            }
+            false
+        }
     }
 
     private fun mediaType(it: ApodResponseModel) {
@@ -77,9 +108,7 @@ class ExplorationFragment : Fragment() {
         view.findViewById<MaterialCardView>(R.id.cardAstronomicalFact).setOnClickListener {
             Log.d("RENANN","$mediaType")
             if (mediaType == "video") {
-
                 navController.navigate(R.id.action_explorationFragment_to_apodVideoActivity)
-
             } else {
                 navController.navigate(R.id.action_explorationFragment_to_apodFragment)
             }
