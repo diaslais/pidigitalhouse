@@ -110,5 +110,9 @@
     <string name="sua_pontua_o">Sua pontuação é:</string>
     <string name="jogar_novamente">Jogar novamente</string>
     <string name="voltar_tela_inicial">Voltar à tela inicial</string>
+    <string name="email_verificacao">Email de verificação enviado com sucesso</string>
+    <string name="autenticacao_falhou">Autenticação falhou!</string>
+    <string name="verificar_email">É necessário verificar o email!</string>
+    <string name="campos_invalidos">Preencha corretamente.</string>
 
 </resources>
