@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -19,6 +20,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
+import com.google.mlkit.nl.translate.TranslateLanguage
+import com.google.mlkit.nl.translate.Translation
+import com.google.mlkit.nl.translate.TranslatorOptions
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.authentication.AppUtil
 import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
@@ -47,6 +51,13 @@ class FavoriteFragment : Fragment(), IFavorite {
     private lateinit var iFavorite: IFavorite
 
     private var _favoriteList = mutableListOf<FavoriteEntity>()
+
+    val options = TranslatorOptions.Builder()
+        .setSourceLanguage(TranslateLanguage.ENGLISH)
+        .setTargetLanguage(TranslateLanguage.PORTUGUESE)
+        .build()
+
+    private val englishPortugueseTranslator = Translation.getClient(options)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -135,6 +146,31 @@ class FavoriteFragment : Fragment(), IFavorite {
     private fun addAllFavorites(list: List<FavoriteEntity>) {
         _favoriteList.addAll(list)
         _favoriteAdapter.notifyDataSetChanged()
+        checkTranslationPrefs()
+    }
+
+    private fun checkTranslationPrefs() {
+        val prefs =
+            requireActivity().getSharedPreferences(
+                "switch_prefs",
+                AppCompatActivity.MODE_PRIVATE
+            )
+        val checkPrefs = prefs?.getBoolean("SWITCH_PREFS", false)
+
+        if (checkPrefs == true) {
+            _favoriteList.map {
+                val index = _favoriteList.indexOf(it)
+
+                if (!it.title.isNullOrEmpty())
+                    englishPortugueseTranslator.translate(it.title!!)
+                        .addOnSuccessListener { result ->
+                            it.title = result
+                            _favoriteAdapter.notifyItemChanged(index)
+                        }.addOnFailureListener { e ->
+                            it.title = it.title
+                        }
+            }
+        }
     }
 
     private fun deleteOneFavoriteDb(position: Int, favorite: FavoriteEntity) {

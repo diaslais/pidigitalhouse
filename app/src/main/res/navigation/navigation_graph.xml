@@ -129,11 +129,7 @@
         android:id="@+id/bottomsheetFragment"
         android:name="com.nasinha.digitalspace.planetsmenu.view.BottomsheetFragment"
         android:label="fragment_bottomsheet"
-        tools:layout="@layout/fragment_bottomsheet">
-        <action
-            android:id="@+id/action_bottomsheetFragment_to_planetsMenuFragment"
-            app:destination="@id/planetsMenuFragment" />
-    </dialog>
+        tools:layout="@layout/fragment_bottomsheet"/>
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.nasinha.digitalspace.profile.view.PasswordFragment"
