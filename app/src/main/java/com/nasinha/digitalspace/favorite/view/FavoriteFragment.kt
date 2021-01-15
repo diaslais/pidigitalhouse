@@ -52,6 +52,13 @@ class FavoriteFragment : Fragment(), IFavorite {
 
     private var _favoriteList = mutableListOf<FavoriteEntity>()
 
+    val options = TranslatorOptions.Builder()
+        .setSourceLanguage(TranslateLanguage.ENGLISH)
+        .setTargetLanguage(TranslateLanguage.PORTUGUESE)
+        .build()
+
+    private val englishPortugueseTranslator = Translation.getClient(options)
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         iFavorite = this
@@ -139,6 +146,31 @@ class FavoriteFragment : Fragment(), IFavorite {
     private fun addAllFavorites(list: List<FavoriteEntity>) {
         _favoriteList.addAll(list)
         _favoriteAdapter.notifyDataSetChanged()
+        checkTranslationPrefs()
+    }
+
+    private fun checkTranslationPrefs() {
+        val prefs =
+            requireActivity().getSharedPreferences(
+                "switch_prefs",
+                AppCompatActivity.MODE_PRIVATE
+            )
+        val checkPrefs = prefs?.getBoolean("SWITCH_PREFS", false)
+
+        if (checkPrefs == true) {
+            _favoriteList.map {
+                val index = _favoriteList.indexOf(it)
+
+                if (!it.title.isNullOrEmpty())
+                    englishPortugueseTranslator.translate(it.title!!)
+                        .addOnSuccessListener { result ->
+                            it.title = result
+                            _favoriteAdapter.notifyItemChanged(index)
+                        }.addOnFailureListener { e ->
+                            it.title = it.title
+                        }
+            }
+        }
     }
 
     private fun deleteOneFavoriteDb(position: Int, favorite: FavoriteEntity) {
