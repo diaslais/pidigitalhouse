@@ -38,7 +38,6 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private lateinit var countDownTimer: CountDownTimer
     private lateinit var timerBarAnimation: Animator
     private var timeLeftInMillis: Long = 0
-    private var finished = false
 
     private lateinit var _view: View
     private lateinit var _viewModel: QuizViewModel
@@ -91,10 +90,11 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         imageClock = view.findViewById(R.id.imgClock)
         countdownBar = view.findViewById(R.id.pbCountDown)
         navController = findNavController()
+        val btnBack = view.findViewById<ImageButton>(R.id.btnBackQuizQuestions)
 
         setQuestion()
 
-        view.findViewById<ImageButton>(R.id.btnBackQuizQuestions).setOnClickListener {
+        btnBack.setOnClickListener {
             activity?.onBackPressed()
         }
 
@@ -113,7 +113,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
             startCountDown()
 
             btnAnswer.text = getString(R.string.Responder)
-            txtQuestionNumber.text = getString(R.string.contagem_questoes, _currentPosition, it.size)
+            txtQuestionNumber.text = getString(R.string.contagem_questoes, _currentPosition, NUMBER_QUESTIONS)
             txtQuestion.text = question.question
             txtOptionOne.text = question.optionOne
             txtOptionTwo.text = question.optionTwo
@@ -173,7 +173,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                 R.id.btnNext -> {
                     if (_goToNextQuestion) { //second click
                         nextQuestion()
-                        optionsSwitch()
+                        optionsToggle()
                     } else if (_isAnswered) { //first click
                         stopTimer()
                         _goToNextQuestion = true
@@ -189,7 +189,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                         } else {
                             btnAnswer.text = getString(R.string.proxima_questao)
                         }
-                        optionsSwitch()
+                        optionsToggle()
                     }
                 }
             }
@@ -228,7 +228,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    private fun optionsSwitch() {
+    private fun optionsToggle() {
         txtOptionOne.isEnabled = !(txtOptionOne.isEnabled)
         txtOptionTwo.isEnabled = !(txtOptionTwo.isEnabled)
         txtOptionThree.isEnabled = !(txtOptionThree.isEnabled)
@@ -263,7 +263,6 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
             }
 
             override fun onFinish() {
-                finished = true
                 timeIsOverDialog()
                 btnAnswer.isEnabled = false
                 timeLeftInMillis = 0

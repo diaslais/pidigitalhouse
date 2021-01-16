@@ -12,17 +12,13 @@ class ApodViewModel(
 
     fun getDataApod() =
         liveData(Dispatchers.IO) {
-
             try {
                 val explanation = repository.getData()
-
                 emit(explanation)
 
-            }catch(e: Exception) {
+            } catch(e: Exception) {
                 emit(e.message)
             }
-
-
         }
 
     class ApodViewModelFactory(
@@ -31,7 +27,5 @@ class ApodViewModel(
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             return ApodViewModel(repository) as T
         }
-
     }
-
 }

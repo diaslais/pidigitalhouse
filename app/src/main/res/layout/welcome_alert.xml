@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card"
+        android:backgroundTint="@color/colorBlack"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:strokeWidth="1dp"
+        app:strokeColor="@color/colorWhite"
+        app:cardElevation="0dp">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+                <ImageButton
+                    android:id="@+id/ibCloseWelcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:background="@color/colorTransparent"
+                    android:padding="@dimen/dim10dp"
+                    android:src="@drawable/ic_outline_close_24"
+                    app:tint="@color/colorWhite" />
+
+                <TextView
+                    android:paddingHorizontal="@dimen/dim20dp"
+                    android:paddingTop="@dimen/dim20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/bem_vindo_explorador"
+                    android:fontFamily="@font/ubuntu_bold"
+                    android:textSize="@dimen/dim16sp"
+                    android:textColor="@color/colorWhite"/>
+                <TextView
+                    android:paddingHorizontal="@dimen/dim20dp"
+                    android:paddingTop="@dimen/dim20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:lineSpacingExtra="@dimen/dim2sp"
+                    android:text="@string/vista_seu_traje"
+                    android:fontFamily="@font/ubuntu"
+                    android:textSize="@dimen/dim16sp"
+                    android:textColor="@color/colorWhite"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btnLetsGo"
+                    android:layout_marginTop="@dimen/dim30dp"
+                    android:layout_marginBottom="@dimen/dim10dp"
+                    android:layout_marginEnd="@dimen/dim20dp"
+                    android:layout_gravity="end"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/vamos_l"
+                    style="?attr/borderlessButtonStyle"/>
+        </LinearLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+</LinearLayout>
