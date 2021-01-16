@@ -50,7 +50,9 @@ class ExplorationFragment : Fragment() {
         ).get(ApodViewModel::class.java)
 
         viewModel.getDataApod().observe(viewLifecycleOwner) {
-            mediaType(it as ApodResponseModel)
+            if (it is ApodResponseModel) {
+                mediaType(it)
+            }
         }
 
         navInfoHeader()
