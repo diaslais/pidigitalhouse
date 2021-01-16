@@ -10,7 +10,6 @@ import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -32,7 +31,10 @@ import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
 import com.nasinha.digitalspace.favorite.utils.FavoriteConstants
+import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.APP_KEY
 import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.DATE
+import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.SORT_PREFS
+import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.SWITCH_PREFS
 import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.TEXT
 import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.TITLE
 import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.TYPE
@@ -128,8 +130,8 @@ class FavoriteFragment : Fragment(), IFavorite {
 
     private fun initialize() {
         val sortBtn = _view.findViewById<CheckBox>(R.id.cbOrderFavorite)
-        val prefs = _view.context.getSharedPreferences(APP_NAME, MODE_PRIVATE)
-        val prefsChecked = prefs.getBoolean(SAVED_PREFS, false)
+        val prefs = _view.context.getSharedPreferences(APP_KEY, MODE_PRIVATE)
+        val prefsChecked = prefs.getBoolean(SORT_PREFS, false)
 
         if (_favoriteList.isEmpty()) {
             val userId = AppUtil.getUserId(requireActivity().application)!!
@@ -152,10 +154,10 @@ class FavoriteFragment : Fragment(), IFavorite {
     private fun checkTranslationPrefs() {
         val prefs =
             requireActivity().getSharedPreferences(
-                "switch_prefs",
-                AppCompatActivity.MODE_PRIVATE
+                APP_KEY,
+                MODE_PRIVATE
             )
-        val checkPrefs = prefs?.getBoolean("SWITCH_PREFS", false)
+        val checkPrefs = prefs?.getBoolean(SWITCH_PREFS, false)
 
         if (checkPrefs == true) {
             _favoriteList.map {
@@ -223,16 +225,12 @@ class FavoriteFragment : Fragment(), IFavorite {
     private fun sortCheckHandler(isChecked: Boolean, prefs: SharedPreferences) {
         if (isChecked) {
             _favoriteList.sortByDescending { FavoriteUtils.stringToDate(it.date) }
-            prefs.edit().putBoolean(SAVED_PREFS, isChecked).apply()
+            prefs.edit().putBoolean(SORT_PREFS, isChecked).apply()
         } else {
             _favoriteList.sortBy { FavoriteUtils.stringToDate(it.date) }
-            prefs.edit().putBoolean(SAVED_PREFS, isChecked).apply()
+            prefs.edit().putBoolean(SORT_PREFS, isChecked).apply()
         }
         _favoriteAdapter.notifyDataSetChanged()
     }
 
-    companion object {
-        const val APP_NAME = "SharedPreferences"
-        const val SAVED_PREFS = "SAVED_PREFS"
-    }
 }

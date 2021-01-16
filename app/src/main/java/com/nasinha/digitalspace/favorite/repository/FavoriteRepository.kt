@@ -1,5 +1,7 @@
 package com.nasinha.digitalspace.favorite.repository
 
+import androidx.room.Query
+import androidx.room.Transaction
 import com.nasinha.digitalspace.favorite.dao.FavoriteDao
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
 import com.nasinha.digitalspace.favorite.entity.UserEntity
@@ -8,6 +10,8 @@ class FavoriteRepository(private val favoriteDao: FavoriteDao) {
     suspend fun addFavorite(favorite: FavoriteEntity) = favoriteDao.addFavorite(favorite)
     suspend fun addUserFavorite(user: UserEntity) = favoriteDao.addUserFavorite(user)
     suspend fun getUserWithFavorites(userId: String) = favoriteDao.getUserWithFavorites(userId)
+    suspend fun updateTitle(image: String, title: String) = favoriteDao.updateTitle(image, title)
+    suspend fun updateText(image: String, text: String) = favoriteDao.updateText(image, text)
     suspend fun deleteAllFavorite() = favoriteDao.deleteAllFavorite()
     suspend fun checkFavorite(image: String, userId: String) =
         favoriteDao.checkFavorite(image, userId)

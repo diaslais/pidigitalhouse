@@ -1,7 +1,6 @@
 package com.nasinha.digitalspace.favorite.viewmodel
 
 import android.app.Activity
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
 import com.nasinha.digitalspace.authentication.AppUtil
@@ -27,6 +26,16 @@ class FavoriteViewModel(
     fun getUserWithFavorites(userId: String) = liveData(Dispatchers.IO) {
         val result = repository.getUserWithFavorites(userId)
         emit(result)
+    }
+
+    fun updateTitle(image: String, title: String) = liveData(Dispatchers.IO) {
+        val updateTitle = repository.updateTitle(image, title)
+        emit(updateTitle)
+    }
+
+    fun updateText(image: String, text: String) = liveData(Dispatchers.IO) {
+        val updateText = repository.updateTitle(image, text)
+        emit(updateText)
     }
 
     fun checkFavorite(activity: Activity, image: String) = liveData(Dispatchers.IO) {

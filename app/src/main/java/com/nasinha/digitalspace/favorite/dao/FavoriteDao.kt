@@ -11,7 +11,7 @@ interface FavoriteDao {
     suspend fun addFavorite(favorite: FavoriteEntity)
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun addUserFavorite(user:UserEntity)
+    suspend fun addUserFavorite(user: UserEntity)
 
     @Transaction
     @Query("SELECT * FROM User WHERE userId=:userId")
@@ -20,6 +20,14 @@ interface FavoriteDao {
     @Transaction
     @Query("SELECT COUNT(*) FROM User where userId=:userId AND image=:image")
     suspend fun checkFavorite(image: String, userId: String): Int
+
+    @Transaction
+    @Query("UPDATE Favorite SET title = :title where image=:image")
+    suspend fun updateTitle(image: String, title: String)
+
+    @Transaction
+    @Query("UPDATE Favorite SET text = :text where image=:image")
+    suspend fun updateText(image: String, text: String)
 
     @Transaction
     @Query("DELETE FROM User where userId=:userId AND image=:image")
