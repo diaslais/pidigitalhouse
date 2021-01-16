@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
@@ -39,16 +40,18 @@ class ExplorationFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        welcomeDialog(view)
+        if (isFirstTime()) {
+            welcomeDialog(view)
+        }
 
         val viewModel = ViewModelProvider(
             this,
             ApodViewModel.ApodViewModelFactory(ApodRepository())
         ).get(ApodViewModel::class.java)
 
-        viewModel.getDataApod().observe(viewLifecycleOwner, {
+        viewModel.getDataApod().observe(viewLifecycleOwner) {
             mediaType(it as ApodResponseModel)
-        })
+        }
 
         navInfoHeader()
         unlockDrawer(requireActivity())
@@ -83,6 +86,16 @@ class ExplorationFragment : Fragment() {
             }
             false
         }
+    }
+
+    private fun isFirstTime(): Boolean {
+        val prefs = activity?.getSharedPreferences(PREFS_NAME, AppCompatActivity.MODE_PRIVATE)
+        val dialogShown = prefs?.getBoolean(DIALOG_SHOWN, true)
+
+        if (dialogShown!!) {
+            prefs.edit()?.putBoolean(DIALOG_SHOWN, false)?.apply()
+        }
+        return dialogShown
     }
 
     private fun mediaType(it: ApodResponseModel) {
@@ -139,6 +152,11 @@ class ExplorationFragment : Fragment() {
         val nameDrawer = headerView.findViewById<TextView>(R.id.tvNameNavHeader)
         val nameShared = AppUtil.getUserName(requireActivity())
         nameDrawer.text = nameShared
+    }
+
+    companion object {
+        const val PREFS_NAME = "welcome_prefs"
+        const val DIALOG_SHOWN = "dialog_shown"
     }
 }
 
