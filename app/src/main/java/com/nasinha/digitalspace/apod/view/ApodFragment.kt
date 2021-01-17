@@ -18,6 +18,7 @@ import com.google.mlkit.nl.translate.TranslatorOptions
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.apod.model.ApodResponseModel
 import com.nasinha.digitalspace.apod.repository.ApodRepository
+import com.nasinha.digitalspace.apod.utils.ApodUtils
 import com.nasinha.digitalspace.apod.viewmodel.ApodViewModel
 import com.nasinha.digitalspace.authentication.AppUtil
 import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
@@ -28,7 +29,12 @@ import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
 import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.squareup.picasso.Picasso
+import com.nasinha.digitalspace.apod.utils.ApodUtils.getIdVideo
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerFullScreenListener
 import kotlinx.coroutines.launch
 
 
@@ -115,6 +121,8 @@ class ApodFragment : Fragment() {
         val imgLoad = _view.findViewById<ImageView>(R.id.imgApod)
         val txtExplanation = _view.findViewById<TextView>(R.id.txtExplanationApod)
         val txtTitle = _view.findViewById<TextView>(R.id.txtTitle)
+        val youTubePlayerView: YouTubePlayerView = _view.findViewById(R.id.youtube_player_view)
+        val mediaType = it.media_type
         val prefs = activity?.getSharedPreferences("switch_prefs", AppCompatActivity.MODE_PRIVATE)
         val checkPrefs = prefs?.getBoolean("SWITCH_PREFS", false)
         _apodResponse = it
@@ -125,6 +133,22 @@ class ApodFragment : Fragment() {
         })
 
         if (checkPrefs == true) {
+
+            if(mediaType == "video"){
+
+                imgLoad.visibility = View.GONE
+                youTubePlayerView.visibility = View.VISIBLE
+
+                lifecycle.addObserver(youTubePlayerView)
+                youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+                    override fun onReady(youTubePlayer: YouTubePlayer) {
+                        super.onReady(youTubePlayer)
+                        val videoId = getIdVideo(it.url)
+                        youTubePlayer.loadVideo(videoId, 1F)
+                        youTubePlayer.play()
+                    }
+                })
+            }
             englishPortugueseTranslator.translate(it.title).addOnSuccessListener {
                 txtTitle.text = it
             }
@@ -143,6 +167,21 @@ class ApodFragment : Fragment() {
                 .load(it.url)
                 .into(imgLoad)
         } else {
+
+            if(mediaType == "video"){
+                imgLoad.visibility = View.GONE
+                youTubePlayerView.visibility = View.VISIBLE
+
+                lifecycle.addObserver(youTubePlayerView)
+                youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+                    override fun onReady(youTubePlayer: YouTubePlayer) {
+                        super.onReady(youTubePlayer)
+                        val videoId = getIdVideo(it.url)
+                        youTubePlayer.loadVideo(videoId, 1F)
+                        youTubePlayer.play()
+                    }
+                })
+            }
 
             txtTitle.text = it.title
             txtExplanation.text = it.explanation + getText(R.string.quebra_linha)

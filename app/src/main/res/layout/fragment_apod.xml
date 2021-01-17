@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    
     tools:context=".apod.view.ApodFragment">
 
     <LinearLayout
@@ -34,6 +35,14 @@
             android:padding="@dimen/dim20dp"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars[3]" />
+
+        <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+            android:id="@+id/youtube_player_view"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/dim300dp"
+            android:layout_marginTop="@dimen/dim10dp"
+            android:layout_marginBottom="@dimen/dim9dp"
+            android:visibility="gone"/>
 
         <LinearLayout
             android:layout_width="match_parent"

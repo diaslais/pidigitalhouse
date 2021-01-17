@@ -91,6 +91,9 @@
         <action
             android:id="@+id/action_explorationFragment_to_apodVideoActivity"
             app:destination="@id/apodVideoActivity" />
+        <action
+            android:id="@+id/action_explorationFragment_to_testeFragment"
+            app:destination="@id/testeFragment" />
 
     </fragment>
     <fragment
@@ -218,6 +221,11 @@
         android:label="fragment_score"
         tools:layout="@layout/fragment_score">
     </fragment>
+    <fragment
+        android:id="@+id/testeFragment"
+        android:name="com.nasinha.digitalspace.apod.view.TesteFragment"
+        android:label="fragment_teste"
+        tools:layout="@layout/fragment_teste" />
 
 
 </navigation>
