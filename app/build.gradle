@@ -83,5 +83,6 @@ dependencies {
 
     //YOUTUBE API
     implementation files('libs/YouTubeAndroidPlayerApi.jar')
+    implementation 'com.pierfrancescosoffritti.androidyoutubeplayer:core:10.0.5'
 
 }

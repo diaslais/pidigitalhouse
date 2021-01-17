@@ -26,8 +26,6 @@ import com.nasinha.digitalspace.authentication.AppUtil
 import com.nasinha.digitalspace.exploration.utils.DrawerUtils.unlockDrawer
 
 class ExplorationFragment : Fragment() {
-     var mediaType: String = ""
-    lateinit var urlVideo: String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -42,17 +40,6 @@ class ExplorationFragment : Fragment() {
 
         if (isFirstTime()) {
             welcomeDialog(view)
-        }
-
-        val viewModel = ViewModelProvider(
-            this,
-            ApodViewModel.ApodViewModelFactory(ApodRepository())
-        ).get(ApodViewModel::class.java)
-
-        viewModel.getDataApod().observe(viewLifecycleOwner) {
-            if (it is ApodResponseModel) {
-                mediaType(it)
-            }
         }
 
         navInfoHeader()
@@ -100,11 +87,6 @@ class ExplorationFragment : Fragment() {
         return dialogShown
     }
 
-    private fun mediaType(it: ApodResponseModel) {
-        mediaType = it.media_type
-        urlVideo = it.url
-    }
-
     private fun drawerListener(view: View) {
         val navController = findNavController()
 
@@ -121,13 +103,7 @@ class ExplorationFragment : Fragment() {
         }
 //        APOD
         view.findViewById<MaterialCardView>(R.id.cardAstronomicalFact).setOnClickListener {
-            Log.d("RENANN","$mediaType")
-            if (mediaType == "video") {
-                navController.navigate(R.id.action_explorationFragment_to_apodVideoActivity)
-            } else {
                 navController.navigate(R.id.action_explorationFragment_to_apodFragment)
-            }
-
         }
 //        EPIC
         view.findViewById<MaterialCardView>(R.id.cardEarth).setOnClickListener {
