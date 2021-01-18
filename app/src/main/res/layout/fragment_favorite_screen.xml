@@ -36,6 +36,14 @@
         android:scaleType="centerCrop"
         tools:src="@tools:sample/backgrounds/scenic" />
 
+    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+        android:id="@+id/ypYoutubePlayerFavorite"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/dim300dp"
+        android:layout_marginTop="@dimen/dim10dp"
+        android:layout_marginBottom="@dimen/dim9dp"
+        android:visibility="gone"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">

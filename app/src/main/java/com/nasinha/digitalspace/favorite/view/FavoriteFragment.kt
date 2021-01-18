@@ -4,6 +4,7 @@ import android.app.AlertDialog
 import android.content.Context.MODE_PRIVATE
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -27,6 +28,7 @@ import com.nasinha.digitalspace.favorite.adapter.FavoriteAdapter
 import com.nasinha.digitalspace.favorite.adapter.IFavorite
 import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
+import com.nasinha.digitalspace.favorite.entity.UserEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
@@ -146,6 +148,7 @@ class FavoriteFragment : Fragment(), IFavorite {
 
     private fun addAllFavorites(list: List<FavoriteEntity>) {
         _favoriteList.addAll(list)
+        Log.d("favorito", list.size.toString())
         _favoriteAdapter.notifyDataSetChanged()
         checkTranslationPrefs()
     }
