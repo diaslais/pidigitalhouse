@@ -1,5 +1,6 @@
 package com.nasinha.digitalspace.favorite.view
 
+import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -21,7 +22,9 @@ import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
+import com.nasinha.digitalspace.utils.Constants.APP_KEY
 import com.nasinha.digitalspace.utils.Constants.IMAGE
+import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
 import com.nasinha.digitalspace.utils.Constants.TITLE
 import com.nasinha.digitalspace.utils.Constants.VIDEO
 import com.nasinha.digitalspace.utils.FavoriteUtils
@@ -66,8 +69,8 @@ class FavoriteScreenFragment : Fragment() {
 
     private fun translatePrefHandler() {
         val prefs =
-            requireActivity().getSharedPreferences("switch_prefs", AppCompatActivity.MODE_PRIVATE)
-        _translatePrefs = prefs?.getBoolean("SWITCH_PREFS", false)
+            requireActivity().getSharedPreferences(APP_KEY, MODE_PRIVATE)
+        _translatePrefs = prefs?.getBoolean(SWITCH_PREFS, false)
     }
 
     private fun backBtnHandler() {

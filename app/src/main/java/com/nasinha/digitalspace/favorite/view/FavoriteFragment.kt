@@ -158,28 +158,32 @@ class FavoriteFragment : Fragment(), IFavorite {
         val checkPrefs = prefs?.getBoolean(SWITCH_PREFS, false)
 
         if (checkPrefs == true) {
-            _favoriteList.map {
-                val index = _favoriteList.indexOf(it)
+            _favoriteList.map { favorite ->
+                val index = _favoriteList.indexOf(favorite)
 
-                if (!it.title.isNullOrEmpty() && it.titleBr.isNullOrEmpty()) {
-                    englishPortugueseTranslator.translate(it.title!!)
+                if (!favorite.title.isNullOrEmpty() && favorite.titleBr.isNullOrEmpty()) {
+                    englishPortugueseTranslator.translate(favorite.title!!)
                         .addOnSuccessListener { result ->
-                            it.titleBr = result
-                            _favoriteViewModel.updateTitleBr(it.image, result)
-                            _favoriteAdapter.notifyItemChanged(index)
+                            _favoriteViewModel.updateTitleBr(favorite.image, result)
+                                .observe(viewLifecycleOwner, {
+                                    favorite.titleBr = result
+                                    _favoriteAdapter.notifyItemChanged(index)
+                                })
                         }.addOnFailureListener { _ ->
-                            it.title = it.title
+                            favorite.title = favorite.title
                         }
                 }
 
-                if (!it.text.isNullOrEmpty() && it.textBr.isNullOrEmpty()) {
-                    englishPortugueseTranslator.translate(it.text!!)
+                if (!favorite.text.isNullOrEmpty() && favorite.textBr.isNullOrEmpty()) {
+                    englishPortugueseTranslator.translate(favorite.text!!)
                         .addOnSuccessListener { result ->
-                            it.textBr = result
-                            _favoriteViewModel.updateTextBr(it.image, result)
-//                            _favoriteAdapter.notifyItemChanged(index)
+                            _favoriteViewModel.updateTextBr(favorite.image, result)
+                                .observe(viewLifecycleOwner, {
+                                    favorite.textBr = result
+                                    _favoriteAdapter.notifyItemChanged(index)
+                                })
                         }.addOnFailureListener { _ ->
-                            it.text = it.text
+                            favorite.text = favorite.text
                         }
                 }
             }

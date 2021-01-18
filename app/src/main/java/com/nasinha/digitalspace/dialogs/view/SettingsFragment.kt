@@ -9,13 +9,14 @@ import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.DialogFragment
-import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.mlkit.common.model.DownloadConditions
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.nasinha.digitalspace.R
+import com.nasinha.digitalspace.utils.Constants.APP_KEY
+import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
 
 
 class SettingsFragment : DialogFragment() {
@@ -40,7 +41,7 @@ class SettingsFragment : DialogFragment() {
 
         val prefs = activity?.getSharedPreferences(APP_KEY, AppCompatActivity.MODE_PRIVATE)
 
-        val prefsChecked = prefs?.getBoolean(NOTIFICATION_PREFS, false)
+        val prefsChecked = prefs?.getBoolean(SWITCH_PREFS, false)
 
         if (prefsChecked != null) {
             switchButton.isChecked = prefsChecked
@@ -51,9 +52,7 @@ class SettingsFragment : DialogFragment() {
 
         switchButton.setOnCheckedChangeListener { _, isChecked ->
 
-            val navController = findNavController(this)
-
-            prefs?.edit()?.putBoolean(NOTIFICATION_PREFS, isChecked)?.apply()
+            prefs?.edit()?.putBoolean(SWITCH_PREFS, isChecked)?.apply()
 
             if (isChecked) {
                 val options = TranslatorOptions.Builder()
@@ -74,7 +73,7 @@ class SettingsFragment : DialogFragment() {
                         // (Set a flag, unhide the translation UI, etc.)
 
                     }
-                    .addOnFailureListener { exception ->
+                    .addOnFailureListener { _ ->
                         // Model couldn’t be downloaded or other internal error.
                         // ...
                     }
@@ -97,12 +96,6 @@ class SettingsFragment : DialogFragment() {
             }
         }
 
-    }
-
-
-    companion object {
-        const val APP_KEY = "APP"
-        const val NOTIFICATION_PREFS = "SWITCH_PREFS"
     }
 
     private fun confirmButton() {

@@ -27,6 +27,7 @@ import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
 import com.nasinha.digitalspace.utils.ApodUtils.getIdVideo
 import com.nasinha.digitalspace.utils.AuthUtil
 import com.nasinha.digitalspace.utils.Constants.APP_KEY
+import com.nasinha.digitalspace.utils.Constants.IMGAPOD
 import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
 import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 import com.nasinha.digitalspace.utils.FavoriteUtils
@@ -207,7 +208,7 @@ class ApodFragment : Fragment() {
         val navController = NavHostFragment.findNavController(this)
 
         imgLoad.setOnClickListener {
-            val bundle = bundleOf("IMGAPOD" to urlImg)
+            val bundle = bundleOf(IMGAPOD to urlImg)
             navController.navigate(R.id.action_apodFragment_to_landsScapeApodFragment, bundle)
         }
 
