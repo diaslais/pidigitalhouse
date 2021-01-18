@@ -1,8 +1,7 @@
-package com.nasinha.digitalspace.favorite.utils
+package com.nasinha.digitalspace.utils
 
 import android.Manifest
 import android.app.Activity
-import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
@@ -10,7 +9,6 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import android.view.View
 import androidx.core.app.ActivityCompat
@@ -18,10 +16,9 @@ import androidx.core.content.ContextCompat
 import androidx.core.content.ContextCompat.startActivity
 import coil.ImageLoader
 import coil.request.SuccessResult
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.COMPARTILHAR
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.TITLE
+import com.nasinha.digitalspace.utils.Constants.COMPARTILHAR
+import com.nasinha.digitalspace.utils.Constants.TITLE
 import java.io.ByteArrayOutputStream
-import java.io.File
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter

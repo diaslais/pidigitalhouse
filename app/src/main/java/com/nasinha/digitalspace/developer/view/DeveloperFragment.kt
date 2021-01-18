@@ -19,7 +19,7 @@ import com.nasinha.digitalspace.developer.entity.DeveloperEntity
 import com.nasinha.digitalspace.developer.repository.DeveloperRepository
 import com.nasinha.digitalspace.developer.viewmodel.DeveloperViewModel
 import com.nasinha.digitalspace.developer.viewmodel.DeveloperViewModelFactory
-import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
+import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 
 class DeveloperFragment : Fragment(), IDeveloper {
     private lateinit var _view: View

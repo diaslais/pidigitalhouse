@@ -22,12 +22,16 @@ interface FavoriteDao {
     suspend fun checkFavorite(image: String, userId: String): Int
 
     @Transaction
-    @Query("UPDATE Favorite SET title = :title where image=:image")
-    suspend fun updateTitle(image: String, title: String)
+    @Query("SELECT * FROM Favorite where image=:image")
+    suspend fun getFavorite(image: String): FavoriteEntity
 
     @Transaction
-    @Query("UPDATE Favorite SET text = :text where image=:image")
-    suspend fun updateText(image: String, text: String)
+    @Query("UPDATE Favorite SET titleBr = :titleBr where image=:image")
+    suspend fun updateTitleBr(image: String, titleBr: String)
+
+    @Transaction
+    @Query("UPDATE Favorite SET textBr = :textBr where image=:image")
+    suspend fun updateTextBr(image: String, textBr: String)
 
     @Transaction
     @Query("DELETE FROM User where userId=:userId AND image=:image")

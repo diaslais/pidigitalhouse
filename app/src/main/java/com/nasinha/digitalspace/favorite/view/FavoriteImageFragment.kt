@@ -4,17 +4,16 @@ import android.content.pm.ActivityInfo
 import android.os.Build
 import android.os.Bundle
 import android.view.*
-import android.widget.*
-import androidx.appcompat.app.AppCompatActivity
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.LinearLayout
+import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.google.mlkit.nl.translate.TranslateLanguage
-import com.google.mlkit.nl.translate.Translation
-import com.google.mlkit.nl.translate.TranslatorOptions
 import com.nasinha.digitalspace.R
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.IMAGE
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.TITLE
-import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
+import com.nasinha.digitalspace.utils.Constants.IMAGE
+import com.nasinha.digitalspace.utils.Constants.TITLE
+import com.nasinha.digitalspace.utils.FavoriteUtils
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 

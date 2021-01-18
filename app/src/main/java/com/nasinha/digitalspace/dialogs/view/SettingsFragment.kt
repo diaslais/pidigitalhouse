@@ -8,7 +8,6 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
-import androidx.core.os.bundleOf
 import androidx.fragment.app.DialogFragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import com.google.android.material.button.MaterialButton
@@ -39,7 +38,7 @@ class SettingsFragment : DialogFragment() {
 
         val switchButton = _view.findViewById<SwitchCompat>(R.id.btnSwitchTranslate)
 
-        val prefs = activity?.getSharedPreferences(APP_NAME, AppCompatActivity.MODE_PRIVATE)
+        val prefs = activity?.getSharedPreferences(APP_KEY, AppCompatActivity.MODE_PRIVATE)
 
         val prefsChecked = prefs?.getBoolean(NOTIFICATION_PREFS, false)
 
@@ -102,7 +101,7 @@ class SettingsFragment : DialogFragment() {
 
 
     companion object {
-        const val APP_NAME = "switch_prefs"
+        const val APP_KEY = "APP"
         const val NOTIFICATION_PREFS = "SWITCH_PREFS"
     }
 

@@ -1,39 +1,39 @@
 package com.nasinha.digitalspace.favorite.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.*
+import android.widget.ImageButton
+import android.widget.ImageView
+import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.google.mlkit.nl.translate.TranslateLanguage
-import com.google.mlkit.nl.translate.Translation
-import com.google.mlkit.nl.translate.TranslatorOptions
 import com.nasinha.digitalspace.R
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.DATE
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.IMAGE
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.TEXT
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.TITLE
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.TYPE
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.VIDEO
-import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
+import com.nasinha.digitalspace.favorite.db.AppDatabase
+import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
+import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
+import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
+import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
+import com.nasinha.digitalspace.utils.Constants.IMAGE
+import com.nasinha.digitalspace.utils.Constants.TITLE
+import com.nasinha.digitalspace.utils.Constants.VIDEO
+import com.nasinha.digitalspace.utils.FavoriteUtils
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 
 
 class FavoriteScreenFragment : Fragment() {
     private lateinit var _view: View
-
-    val options = TranslatorOptions.Builder()
-        .setSourceLanguage(TranslateLanguage.ENGLISH)
-        .setTargetLanguage(TranslateLanguage.PORTUGUESE)
-        .build()
-
-    private val englishPortugueseTranslator = Translation.getClient(options)
+    private lateinit var _favoriteViewModel: FavoriteViewModel
+    private lateinit var _favorite: FavoriteEntity
+    private var _translatePrefs: Boolean? = false
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -47,8 +47,27 @@ class FavoriteScreenFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         _view = view
+        addViewModel()
+        translatePrefHandler()
         backBtnHandler()
         argumentsHandler()
+    }
+
+    private fun addViewModel() {
+        _favoriteViewModel = ViewModelProvider(
+            this,
+            FavoriteViewModelFactory(
+                FavoriteRepository(
+                    AppDatabase.getDatabase(_view.context).favoriteDao()
+                )
+            )
+        ).get(FavoriteViewModel::class.java)
+    }
+
+    private fun translatePrefHandler() {
+        val prefs =
+            requireActivity().getSharedPreferences("switch_prefs", AppCompatActivity.MODE_PRIVATE)
+        _translatePrefs = prefs?.getBoolean("SWITCH_PREFS", false)
     }
 
     private fun backBtnHandler() {
@@ -60,61 +79,33 @@ class FavoriteScreenFragment : Fragment() {
 
     private fun argumentsHandler() {
         val imageArgument = arguments?.getString(IMAGE)!!
-        val titleArgument = arguments?.getString(TITLE)
-        val textArgument = arguments?.getString(TEXT)
-        val dateArgument = arguments?.getString(DATE)!!
-        val typeArgument = arguments?.getString(TYPE)!!
 
+        _favoriteViewModel.getFavorite(imageArgument).observe(viewLifecycleOwner, {
+            addInfoToFavorite(it)
+        })
+    }
+
+    private fun addInfoToFavorite(favorite: FavoriteEntity) {
+        Log.d("favoritoTitulo", favorite.title.toString())
         val imageView = _view.findViewById<ImageView>(R.id.ivImageFavoriteScreen)
         val dateView = _view.findViewById<TextView>(R.id.tvDateFavoriteScreen)
         val titleView = _view.findViewById<TextView>(R.id.tvTitleFavoriteScreen)
         val textView = _view.findViewById<TextView>(R.id.tvTextFavoriteScreen)
 
-        checkPrefsListener(titleArgument, textArgument, titleView, textView)
+        titleView.text = if (_translatePrefs == true) favorite.titleBr else favorite.title
+        textView.text = if (_translatePrefs == true) favorite.textBr else favorite.text
 
-        dateView.text = dateArgument
+        dateView.text = favorite.date
 
-        when (typeArgument) {
+        when (favorite.type) {
             IMAGE -> {
-                Picasso.get().load(imageArgument).into(imageView)
-                imageClickHandler(imageView, imageArgument, titleView)
-                shareButton(imageArgument)
+                Picasso.get().load(favorite.image).into(imageView)
+                imageClickHandler(imageView, favorite.image, titleView)
+                shareButton(favorite.image)
             }
             VIDEO -> {
                 Toast.makeText(_view.context, "é video sô!", Toast.LENGTH_LONG).show()
             }
-        }
-    }
-
-    private fun checkPrefsListener(
-        titleArgument: String?,
-        textArgument: String?,
-        titleView: TextView,
-        textView: TextView
-    ) {
-
-        val titleArgumentTranslate = if (titleArgument.isNullOrEmpty()) "" else titleArgument
-        val textArgumentTranslate = if (textArgument.isNullOrEmpty()) "" else textArgument
-
-        val prefs =
-            requireActivity().getSharedPreferences("switch_prefs", AppCompatActivity.MODE_PRIVATE)
-        val checkPrefs = prefs?.getBoolean("SWITCH_PREFS", false)
-
-        if (checkPrefs == true) {
-            englishPortugueseTranslator.translate(titleArgumentTranslate).addOnSuccessListener {
-                titleView.text = it
-            }.addOnFailureListener {
-                titleView.text = titleArgumentTranslate
-            }
-
-            englishPortugueseTranslator.translate(textArgumentTranslate).addOnSuccessListener {
-                textView.text = it
-            }.addOnFailureListener {
-                textView.text = textArgumentTranslate
-            }
-        } else {
-            titleView.text = titleArgumentTranslate
-            textView.text = textArgumentTranslate
         }
     }
 

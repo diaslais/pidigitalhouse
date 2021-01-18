@@ -11,7 +11,7 @@ import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import com.google.android.material.navigation.NavigationView
 import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
-import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
+import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {

@@ -22,8 +22,8 @@ import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.apod.model.ApodResponseModel
 import com.nasinha.digitalspace.apod.repository.ApodRepository
 import com.nasinha.digitalspace.apod.viewmodel.ApodViewModel
-import com.nasinha.digitalspace.authentication.AppUtil
-import com.nasinha.digitalspace.exploration.utils.DrawerUtils.unlockDrawer
+import com.nasinha.digitalspace.utils.AuthUtil
+import com.nasinha.digitalspace.utils.DrawerUtils.unlockDrawer
 
 class ExplorationFragment : Fragment() {
      var mediaType: String = ""
@@ -152,7 +152,7 @@ class ExplorationFragment : Fragment() {
         val navigationView = activity?.findViewById<NavigationView>(R.id.navigationView)
         val headerView = navigationView!!.getHeaderView(0)
         val nameDrawer = headerView.findViewById<TextView>(R.id.tvNameNavHeader)
-        val nameShared = AppUtil.getUserName(requireActivity())
+        val nameShared = AuthUtil.getUserName(requireActivity())
         nameDrawer.text = nameShared
     }
 

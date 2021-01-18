@@ -23,24 +23,20 @@ import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.nasinha.digitalspace.R
-import com.nasinha.digitalspace.authentication.AppUtil
-import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
 import com.nasinha.digitalspace.favorite.adapter.FavoriteAdapter
 import com.nasinha.digitalspace.favorite.adapter.IFavorite
 import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.APP_KEY
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.DATE
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.SORT_PREFS
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.SWITCH_PREFS
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.TEXT
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.TITLE
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.TYPE
-import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
+import com.nasinha.digitalspace.utils.AuthUtil
+import com.nasinha.digitalspace.utils.Constants.APP_KEY
+import com.nasinha.digitalspace.utils.Constants.IMAGE
+import com.nasinha.digitalspace.utils.Constants.SORT_PREFS
+import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
+import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
+import com.nasinha.digitalspace.utils.FavoriteUtils
 import kotlinx.coroutines.launch
 
 
@@ -51,6 +47,9 @@ class FavoriteFragment : Fragment(), IFavorite {
     private lateinit var _navController: NavController
     private lateinit var _favoriteAdapter: FavoriteAdapter
     private lateinit var iFavorite: IFavorite
+    private lateinit var _prefs: SharedPreferences
+    private var _translateChecked = false
+    private var _sortChecked = false
 
     private var _favoriteList = mutableListOf<FavoriteEntity>()
 
@@ -81,10 +80,18 @@ class FavoriteFragment : Fragment(), IFavorite {
 
         _navController = findNavController()
 
+        sharedPreferencesCheck()
         backBtn()
         addViewModel()
         addRecyclerView()
         initialize()
+    }
+
+    private fun sharedPreferencesCheck() {
+        _prefs = _view.context.getSharedPreferences(APP_KEY, MODE_PRIVATE)
+
+        _translateChecked = _prefs.getBoolean(SWITCH_PREFS, false)
+        _sortChecked = _prefs.getBoolean(SORT_PREFS, false)
     }
 
     private fun backBtn() {
@@ -110,14 +117,8 @@ class FavoriteFragment : Fragment(), IFavorite {
         _listRecyclerView = _view.findViewById(R.id.recyclerViewFavorite)
         val manager = LinearLayoutManager(_view.context)
 
-        _favoriteAdapter = FavoriteAdapter(_favoriteList, iFavorite) {
-            val bundle = bundleOf(
-                FavoriteConstants.IMAGE to it.image,
-                TITLE to it.title,
-                TEXT to it.text,
-                DATE to FavoriteUtils.dateModifier(it.date),
-                TYPE to it.type
-            )
+        _favoriteAdapter = FavoriteAdapter(_favoriteList, iFavorite, _translateChecked) {
+            val bundle = bundleOf(IMAGE to it.image)
             _navController.navigate(R.id.action_favoriteFragment_to_favoriteScreenFragment, bundle)
         }
 
@@ -130,19 +131,17 @@ class FavoriteFragment : Fragment(), IFavorite {
 
     private fun initialize() {
         val sortBtn = _view.findViewById<CheckBox>(R.id.cbOrderFavorite)
-        val prefs = _view.context.getSharedPreferences(APP_KEY, MODE_PRIVATE)
-        val prefsChecked = prefs.getBoolean(SORT_PREFS, false)
 
         if (_favoriteList.isEmpty()) {
-            val userId = AppUtil.getUserId(requireActivity().application)!!
+            val userId = AuthUtil.getUserId(requireActivity().application)!!
 
             _favoriteViewModel.getUserWithFavorites(userId).observe(viewLifecycleOwner, {
                 val favorites = it.map { userWithFavorites -> userWithFavorites.favorites[0] }
                 addAllFavorites(favorites)
-                sortBtnHandler(sortBtn, prefsChecked, prefs)
+                sortBtnHandler(sortBtn, _sortChecked)
             })
         }
-        sortBtnHandler(sortBtn, prefsChecked, prefs)
+        sortBtnHandler(sortBtn, _sortChecked)
     }
 
     private fun addAllFavorites(list: List<FavoriteEntity>) {
@@ -152,25 +151,37 @@ class FavoriteFragment : Fragment(), IFavorite {
     }
 
     private fun checkTranslationPrefs() {
-        val prefs =
-            requireActivity().getSharedPreferences(
-                APP_KEY,
-                MODE_PRIVATE
-            )
+        val prefs = requireActivity().getSharedPreferences(
+            APP_KEY,
+            MODE_PRIVATE
+        )
         val checkPrefs = prefs?.getBoolean(SWITCH_PREFS, false)
 
         if (checkPrefs == true) {
             _favoriteList.map {
                 val index = _favoriteList.indexOf(it)
 
-                if (!it.title.isNullOrEmpty())
+                if (!it.title.isNullOrEmpty() && it.titleBr.isNullOrEmpty()) {
                     englishPortugueseTranslator.translate(it.title!!)
                         .addOnSuccessListener { result ->
-                            it.title = result
+                            it.titleBr = result
+                            _favoriteViewModel.updateTitleBr(it.image, result)
                             _favoriteAdapter.notifyItemChanged(index)
-                        }.addOnFailureListener { e ->
+                        }.addOnFailureListener { _ ->
                             it.title = it.title
                         }
+                }
+
+                if (!it.text.isNullOrEmpty() && it.textBr.isNullOrEmpty()) {
+                    englishPortugueseTranslator.translate(it.text!!)
+                        .addOnSuccessListener { result ->
+                            it.textBr = result
+                            _favoriteViewModel.updateTextBr(it.image, result)
+//                            _favoriteAdapter.notifyItemChanged(index)
+                        }.addOnFailureListener { _ ->
+                            it.text = it.text
+                        }
+                }
             }
         }
     }
@@ -178,7 +189,7 @@ class FavoriteFragment : Fragment(), IFavorite {
     private fun deleteOneFavoriteDb(position: Int, favorite: FavoriteEntity) {
         _favoriteViewModel.deleteFavoriteItem(
             favorite.image,
-            AppUtil.getUserId(requireActivity())!!
+            AuthUtil.getUserId(requireActivity())!!
         ).observe(viewLifecycleOwner, {
             _favoriteList.removeAt(position)
             _favoriteAdapter.notifyItemRemoved(position)
@@ -212,23 +223,23 @@ class FavoriteFragment : Fragment(), IFavorite {
         }
     }
 
-    private fun sortBtnHandler(sortBtn: CheckBox, prefsChecked: Boolean, prefs: SharedPreferences) {
+    private fun sortBtnHandler(sortBtn: CheckBox, prefsChecked: Boolean) {
         sortBtn.isChecked = prefsChecked
 
-        sortCheckHandler(sortBtn.isChecked, prefs)
+        sortCheckHandler(sortBtn.isChecked)
 
         sortBtn.setOnCheckedChangeListener { _, isChecked ->
-            sortCheckHandler(isChecked, prefs)
+            sortCheckHandler(isChecked)
         }
     }
 
-    private fun sortCheckHandler(isChecked: Boolean, prefs: SharedPreferences) {
+    private fun sortCheckHandler(isChecked: Boolean) {
         if (isChecked) {
             _favoriteList.sortByDescending { FavoriteUtils.stringToDate(it.date) }
-            prefs.edit().putBoolean(SORT_PREFS, isChecked).apply()
+            _prefs.edit().putBoolean(SORT_PREFS, isChecked).apply()
         } else {
             _favoriteList.sortBy { FavoriteUtils.stringToDate(it.date) }
-            prefs.edit().putBoolean(SORT_PREFS, isChecked).apply()
+            _prefs.edit().putBoolean(SORT_PREFS, isChecked).apply()
         }
         _favoriteAdapter.notifyDataSetChanged()
     }

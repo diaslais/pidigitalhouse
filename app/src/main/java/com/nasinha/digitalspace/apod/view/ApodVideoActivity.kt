@@ -6,7 +6,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.google.android.youtube.player.*
 import com.nasinha.digitalspace.R
-import com.nasinha.digitalspace.apod.utils.ApodUtils.getIdVideo
+import com.nasinha.digitalspace.utils.ApodUtils.getIdVideo
 import com.nasinha.digitalspace.apod.model.ApodResponseModel
 import com.nasinha.digitalspace.apod.repository.ApodRepository
 import com.nasinha.digitalspace.apod.viewmodel.ApodViewModel

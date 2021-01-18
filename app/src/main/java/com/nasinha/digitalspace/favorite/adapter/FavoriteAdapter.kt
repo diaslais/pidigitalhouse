@@ -1,14 +1,17 @@
 package com.nasinha.digitalspace.favorite.adapter
 
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
+import com.nasinha.digitalspace.utils.Constants
 
 class FavoriteAdapter(
     private val _favorites: MutableList<FavoriteEntity>,
     private var _iFavorite: IFavorite,
+    private val _translateChecked: Boolean,
     private val listener: (FavoriteEntity) -> Unit
 ) : RecyclerView.Adapter<FavoriteViewHolder>() {
 
@@ -23,7 +26,7 @@ class FavoriteAdapter(
         val item = _favorites[position]
 
         val image = item.image
-        val title = item.title
+        val title = if (_translateChecked) item.titleBr else item.title
         val date = item.date
         val type = item.type
 

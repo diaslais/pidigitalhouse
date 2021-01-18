@@ -7,9 +7,9 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.nasinha.digitalspace.R
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.IMAGE
-import com.nasinha.digitalspace.favorite.utils.FavoriteConstants.VIDEO
-import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
+import com.nasinha.digitalspace.utils.Constants.IMAGE
+import com.nasinha.digitalspace.utils.Constants.VIDEO
+import com.nasinha.digitalspace.utils.FavoriteUtils
 import com.squareup.picasso.Picasso
 
 class FavoriteViewHolder(val view: View) : RecyclerView.ViewHolder(view) {

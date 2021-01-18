@@ -9,7 +9,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.nasinha.digitalspace.R
-import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
+import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 
 class QuizFragment : Fragment() {
 
