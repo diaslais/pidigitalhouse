@@ -88,9 +88,6 @@
         <action
             android:id="@+id/action_explorationFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
-        <action
-            android:id="@+id/action_explorationFragment_to_apodVideoActivity"
-            app:destination="@id/apodVideoActivity" />
 
     </fragment>
     <fragment
@@ -207,11 +204,6 @@
         android:name="com.nasinha.digitalspace.profile.view.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
-    <activity
-        android:id="@+id/apodVideoActivity"
-        android:name="com.nasinha.digitalspace.apod.view.ApodVideoActivity"
-        android:label="activity_apod_video"
-        tools:layout="@layout/activity_apod_video" />
     <fragment
         android:id="@+id/scoreFragment"
         android:name="com.nasinha.digitalspace.quiz.view.ScoreFragment"

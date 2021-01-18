@@ -18,16 +18,22 @@ import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.apod.model.ApodResponseModel
 import com.nasinha.digitalspace.apod.repository.ApodRepository
 import com.nasinha.digitalspace.apod.viewmodel.ApodViewModel
-import com.nasinha.digitalspace.utils.AuthUtil
-import com.nasinha.digitalspace.utils.Constants.APP_KEY
-import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
 import com.nasinha.digitalspace.favorite.entity.UserEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
-import com.nasinha.digitalspace.utils.FavoriteUtils
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
+import com.nasinha.digitalspace.utils.ApodUtils.getIdVideo
+import com.nasinha.digitalspace.utils.AuthUtil
+import com.nasinha.digitalspace.utils.Constants.APP_KEY
+import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
+import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
+import com.nasinha.digitalspace.utils.FavoriteUtils
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerFullScreenListener
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 
@@ -116,7 +122,10 @@ class ApodFragment : Fragment() {
         val txtExplanation = _view.findViewById<TextView>(R.id.txtExplanationApod)
         val txtTitle = _view.findViewById<TextView>(R.id.txtTitle)
         val prefs = activity?.getSharedPreferences(APP_KEY, AppCompatActivity.MODE_PRIVATE)
-        val checkPrefs = prefs?.getBoolean("SWITCH_PREFS", false)
+
+        val youTubePlayerView: YouTubePlayerView = _view.findViewById(R.id.youtube_player_view)
+        val mediaType = it.media_type
+        val checkPrefs = prefs?.getBoolean(SWITCH_PREFS, false)
         _apodResponse = it
 
         _favoriteViewModel.checkFavorite(requireActivity(), it.url).observe(viewLifecycleOwner, {
@@ -125,6 +134,23 @@ class ApodFragment : Fragment() {
         })
 
         if (checkPrefs == true) {
+
+            if (mediaType == "video") {
+
+                imgLoad.visibility = View.GONE
+                youTubePlayerView.visibility = View.VISIBLE
+
+                lifecycle.addObserver(youTubePlayerView)
+                youTubePlayerView.addYouTubePlayerListener(object :
+                    AbstractYouTubePlayerListener() {
+                    override fun onReady(youTubePlayer: YouTubePlayer) {
+                        super.onReady(youTubePlayer)
+                        val videoId = getIdVideo(it.url)
+                        youTubePlayer.loadVideo(videoId, 1F)
+                        youTubePlayer.play()
+                    }
+                })
+            }
             englishPortugueseTranslator.translate(it.title).addOnSuccessListener {
                 txtTitle.text = it
             }
@@ -143,6 +169,22 @@ class ApodFragment : Fragment() {
                 .load(it.url)
                 .into(imgLoad)
         } else {
+
+            if (mediaType == "video") {
+                imgLoad.visibility = View.GONE
+                youTubePlayerView.visibility = View.VISIBLE
+
+                lifecycle.addObserver(youTubePlayerView)
+                youTubePlayerView.addYouTubePlayerListener(object :
+                    AbstractYouTubePlayerListener() {
+                    override fun onReady(youTubePlayer: YouTubePlayer) {
+                        super.onReady(youTubePlayer)
+                        val videoId = getIdVideo(it.url)
+                        youTubePlayer.loadVideo(videoId, 1F)
+                        youTubePlayer.play()
+                    }
+                })
+            }
 
             txtTitle.text = it.title
             txtExplanation.text = it.explanation + getText(R.string.quebra_linha)
