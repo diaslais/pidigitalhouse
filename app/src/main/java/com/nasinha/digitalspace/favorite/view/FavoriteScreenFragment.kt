@@ -2,7 +2,6 @@ package com.nasinha.digitalspace.favorite.view
 
 import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,6 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -22,12 +20,16 @@ import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
+import com.nasinha.digitalspace.utils.ApodUtils
 import com.nasinha.digitalspace.utils.Constants.APP_KEY
 import com.nasinha.digitalspace.utils.Constants.IMAGE
 import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
 import com.nasinha.digitalspace.utils.Constants.TITLE
 import com.nasinha.digitalspace.utils.Constants.VIDEO
 import com.nasinha.digitalspace.utils.FavoriteUtils
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 
@@ -90,6 +92,7 @@ class FavoriteScreenFragment : Fragment() {
 
     private fun addInfoToFavorite(favorite: FavoriteEntity) {
         val imageView = _view.findViewById<ImageView>(R.id.ivImageFavoriteScreen)
+        val youTubePlayerView = _view.findViewById<YouTubePlayerView>(R.id.ypYoutubePlayerFavorite)
         val dateView = _view.findViewById<TextView>(R.id.tvDateFavoriteScreen)
         val titleView = _view.findViewById<TextView>(R.id.tvTitleFavoriteScreen)
         val textView = _view.findViewById<TextView>(R.id.tvTextFavoriteScreen)
@@ -106,21 +109,10 @@ class FavoriteScreenFragment : Fragment() {
                 shareButton(favorite.image)
             }
             VIDEO -> {
-                Toast.makeText(_view.context, "é video sô!", Toast.LENGTH_LONG).show()
+                imageView.visibility = View.GONE
+                youTubePlayerView.visibility = View.VISIBLE
+                youTubePlayerHandler(youTubePlayerView, favorite.image)
             }
-        }
-    }
-
-    private fun shareButton(imageArgument: String) {
-        val shareBtn = _view.findViewById<ImageButton>(R.id.ibShareFavoriteScreen)
-        shareBtn.setOnClickListener {
-
-            lifecycleScope.launch {
-                val imageBitmap = FavoriteUtils.getBitmapFromView(_view, imageArgument)
-                val text = _view.findViewById<TextView>(R.id.tvTextFavoriteScreen).text.toString()
-                activity?.let { FavoriteUtils.shareImageText(it, _view, imageBitmap, text) }
-            }
-
         }
     }
 
@@ -137,5 +129,31 @@ class FavoriteScreenFragment : Fragment() {
                 bundle
             )
         }
+    }
+
+    private fun shareButton(imageArgument: String) {
+        val shareBtn = _view.findViewById<ImageButton>(R.id.ibShareFavoriteScreen)
+        shareBtn.setOnClickListener {
+
+            lifecycleScope.launch {
+                val imageBitmap = FavoriteUtils.getBitmapFromView(_view, imageArgument)
+                val text = _view.findViewById<TextView>(R.id.tvTextFavoriteScreen).text.toString()
+                activity?.let { FavoriteUtils.shareImageText(it, _view, imageBitmap, text) }
+            }
+
+        }
+    }
+
+    private fun youTubePlayerHandler(youTubePlayerView: YouTubePlayerView, image: String) {
+        lifecycle.addObserver(youTubePlayerView)
+        youTubePlayerView.addYouTubePlayerListener(object :
+            AbstractYouTubePlayerListener() {
+            override fun onReady(youTubePlayer: YouTubePlayer) {
+                super.onReady(youTubePlayer)
+                val videoId = ApodUtils.getIdVideo(image)
+                youTubePlayer.loadVideo(videoId, 1F)
+                youTubePlayer.play()
+            }
+        })
     }
 }
