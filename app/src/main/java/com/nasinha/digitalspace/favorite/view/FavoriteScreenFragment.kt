@@ -86,7 +86,6 @@ class FavoriteScreenFragment : Fragment() {
     }
 
     private fun addInfoToFavorite(favorite: FavoriteEntity) {
-        Log.d("favoritoTitulo", favorite.title.toString())
         val imageView = _view.findViewById<ImageView>(R.id.ivImageFavoriteScreen)
         val dateView = _view.findViewById<TextView>(R.id.tvDateFavoriteScreen)
         val titleView = _view.findViewById<TextView>(R.id.tvTitleFavoriteScreen)
@@ -95,7 +94,7 @@ class FavoriteScreenFragment : Fragment() {
         titleView.text = if (_translatePrefs == true) favorite.titleBr else favorite.title
         textView.text = if (_translatePrefs == true) favorite.textBr else favorite.text
 
-        dateView.text = favorite.date
+        dateView.text = FavoriteUtils.dateModifier(favorite.date)
 
         when (favorite.type) {
             IMAGE -> {

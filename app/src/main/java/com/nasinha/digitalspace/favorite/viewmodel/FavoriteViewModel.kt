@@ -29,13 +29,13 @@ class FavoriteViewModel(
     }
 
     fun updateTitleBr(image: String, title: String) = liveData(Dispatchers.IO) {
-        val updateTitle = repository.updateTitleBr(image, title)
-        emit(updateTitle)
+        repository.updateTitleBr(image, title)
+        emit(Unit)
     }
 
     fun updateTextBr(image: String, text: String) = liveData(Dispatchers.IO) {
-        val updateText = repository.updateTextBr(image, text)
-        emit(updateText)
+        repository.updateTextBr(image, text)
+        emit(Unit)
     }
 
     fun checkFavorite(activity: Activity, image: String) = liveData(Dispatchers.IO) {
