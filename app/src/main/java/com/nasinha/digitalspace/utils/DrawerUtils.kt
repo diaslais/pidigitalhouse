@@ -1,4 +1,4 @@
-package com.nasinha.digitalspace.exploration.utils
+package com.nasinha.digitalspace.utils
 
 import android.app.Activity
 import androidx.drawerlayout.widget.DrawerLayout

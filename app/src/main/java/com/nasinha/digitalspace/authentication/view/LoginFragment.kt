@@ -32,10 +32,10 @@ import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.nasinha.digitalspace.R
-import com.nasinha.digitalspace.authentication.AppUtil
-import com.nasinha.digitalspace.authentication.AppUtil.hideKeyboard
+import com.nasinha.digitalspace.utils.AuthUtil
+import com.nasinha.digitalspace.utils.AuthUtil.hideKeyboard
 import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
-import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
+import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 import kotlinx.android.synthetic.main.fragment_login.*
 
 
@@ -86,7 +86,7 @@ class LoginFragment : Fragment() {
     }
 
     private fun checkUserId() {
-        if (!AppUtil.getUserId(requireActivity()).isNullOrEmpty()) {
+        if (!AuthUtil.getUserId(requireActivity()).isNullOrEmpty()) {
             val navController = findNavController()
             navController.navigate(R.id.action_loginFragment_to_explorationFragment)
         }
@@ -106,7 +106,7 @@ class LoginFragment : Fragment() {
         val password = _view.findViewById<TextInputEditText>(R.id.tietPasswordLogin).text.toString()
 
         when {
-            AppUtil.validateEmailPassword(email, password) -> {
+            AuthUtil.validateEmailPassword(email, password) -> {
                 authenticatorViewModel.loginEmailPassword(requireActivity(), email, password)
             }
             else -> {
@@ -203,9 +203,9 @@ class LoginFragment : Fragment() {
                     val uiid = mAuth.currentUser?.uid
                     val name = mAuth.currentUser?.displayName
                     val email = mAuth.currentUser?.email
-                    AppUtil.saveUserId(requireActivity(), uiid)
-                    AppUtil.saveUserName(requireActivity(), name)
-                    AppUtil.saveUserEmail(requireActivity(), email)
+                    AuthUtil.saveUserId(requireActivity(), uiid)
+                    AuthUtil.saveUserName(requireActivity(), name)
+                    AuthUtil.saveUserEmail(requireActivity(), email)
                     navigateToHomeEmail(!uiid.isNullOrEmpty())
                 } else {
                     // If sign in fails, display a message to the user.
@@ -248,8 +248,8 @@ class LoginFragment : Fragment() {
 
     private fun navigateToHomeFacebook(uiid: String, name: String?) {
         val navController = Navigation.findNavController(_view)
-        AppUtil.saveUserId(requireActivity(), uiid)
-        AppUtil.saveUserName(requireActivity(), name)
+        AuthUtil.saveUserId(requireActivity(), uiid)
+        AuthUtil.saveUserName(requireActivity(), name)
         navController.navigate(R.id.action_loginFragment_to_explorationFragment)
     }
 

@@ -1,7 +1,6 @@
 package com.nasinha.digitalspace.profile.view
 
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -9,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import com.google.android.material.textfield.TextInputEditText
 import com.nasinha.digitalspace.R
-import com.nasinha.digitalspace.authentication.AppUtil
-import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
+import com.nasinha.digitalspace.utils.AuthUtil
+import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 
 class ProfileFragment : Fragment() {
     private lateinit var _view: View
@@ -40,8 +39,8 @@ class ProfileFragment : Fragment() {
     private fun setUserInfo() {
         val name = _view.findViewById<TextInputEditText>(R.id.tietNameProfile)
         val email = _view.findViewById<TextInputEditText>(R.id.tietEmailProfile)
-        val nameText = AppUtil.getUserName(requireActivity())
-        val emailText = AppUtil.getUserEmail(requireActivity())
+        val nameText = AuthUtil.getUserName(requireActivity())
+        val emailText = AuthUtil.getUserEmail(requireActivity())
 
         if (!nameText.isNullOrEmpty()) {
             name.setText(nameText)

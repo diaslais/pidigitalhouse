@@ -1,10 +1,9 @@
 package com.nasinha.digitalspace.favorite.viewmodel
 
 import android.app.Activity
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.nasinha.digitalspace.authentication.AppUtil
+import com.nasinha.digitalspace.utils.AuthUtil
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
 import com.nasinha.digitalspace.favorite.entity.UserEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
@@ -29,14 +28,29 @@ class FavoriteViewModel(
         emit(result)
     }
 
+    fun updateTitleBr(image: String, title: String) = liveData(Dispatchers.IO) {
+        repository.updateTitleBr(image, title)
+        emit(Unit)
+    }
+
+    fun updateTextBr(image: String, text: String) = liveData(Dispatchers.IO) {
+        repository.updateTextBr(image, text)
+        emit(Unit)
+    }
+
     fun checkFavorite(activity: Activity, image: String) = liveData(Dispatchers.IO) {
-        val check = repository.checkFavorite(image, AppUtil.getUserId(activity.application)!!)
+        val check = repository.checkFavorite(image, AuthUtil.getUserId(activity.application)!!)
 
         if (check > 0) {
             emit(true)
         } else {
             emit(false)
         }
+    }
+
+    fun getFavorite(image: String) = liveData(Dispatchers.IO) {
+        val favorite = repository.getFavorite(image)
+        emit(favorite)
     }
 
     fun deleteFavoriteItem(image: String, userId: String) = liveData(Dispatchers.IO) {

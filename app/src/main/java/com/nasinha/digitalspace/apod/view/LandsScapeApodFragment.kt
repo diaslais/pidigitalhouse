@@ -8,6 +8,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import com.nasinha.digitalspace.R
+import com.nasinha.digitalspace.utils.Constants.IMGAPOD
 import com.squareup.picasso.Picasso
 
 
@@ -30,12 +31,12 @@ class LandsScapeApodFragment : Fragment() {
     }
 
     private fun showImg() {
-        val receiveImg = arguments?.getString("IMGAPOD")
+        val receiveImg = arguments?.getString(IMGAPOD)
         val imgLandScape = view?.findViewById<ImageView>(R.id.imageViewLandScape)
 
         Picasso.get()
             .load(receiveImg)
-            .resize(1000,1000)
+            .resize(1000, 1000)
             .into(imgLandScape)
     }
 

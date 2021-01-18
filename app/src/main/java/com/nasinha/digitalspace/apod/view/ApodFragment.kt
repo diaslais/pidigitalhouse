@@ -1,7 +1,6 @@
 package com.nasinha.digitalspace.apod.view
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,23 +17,25 @@ import com.google.mlkit.nl.translate.TranslatorOptions
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.apod.model.ApodResponseModel
 import com.nasinha.digitalspace.apod.repository.ApodRepository
-import com.nasinha.digitalspace.apod.utils.ApodUtils
 import com.nasinha.digitalspace.apod.viewmodel.ApodViewModel
-import com.nasinha.digitalspace.authentication.AppUtil
-import com.nasinha.digitalspace.exploration.utils.DrawerUtils.lockDrawer
 import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
 import com.nasinha.digitalspace.favorite.entity.UserEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
-import com.nasinha.digitalspace.favorite.utils.FavoriteUtils
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
+import com.nasinha.digitalspace.utils.ApodUtils.getIdVideo
+import com.nasinha.digitalspace.utils.AuthUtil
+import com.nasinha.digitalspace.utils.Constants.APP_KEY
+import com.nasinha.digitalspace.utils.Constants.IMGAPOD
+import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
+import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
+import com.nasinha.digitalspace.utils.FavoriteUtils
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
-import com.squareup.picasso.Picasso
-import com.nasinha.digitalspace.apod.utils.ApodUtils.getIdVideo
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.YouTubePlayerFullScreenListener
+import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 
 
@@ -121,10 +122,11 @@ class ApodFragment : Fragment() {
         val imgLoad = _view.findViewById<ImageView>(R.id.imgApod)
         val txtExplanation = _view.findViewById<TextView>(R.id.txtExplanationApod)
         val txtTitle = _view.findViewById<TextView>(R.id.txtTitle)
+        val prefs = activity?.getSharedPreferences(APP_KEY, AppCompatActivity.MODE_PRIVATE)
+
         val youTubePlayerView: YouTubePlayerView = _view.findViewById(R.id.youtube_player_view)
         val mediaType = it.media_type
-        val prefs = activity?.getSharedPreferences("switch_prefs", AppCompatActivity.MODE_PRIVATE)
-        val checkPrefs = prefs?.getBoolean("SWITCH_PREFS", false)
+        val checkPrefs = prefs?.getBoolean(SWITCH_PREFS, false)
         _apodResponse = it
 
         _favoriteViewModel.checkFavorite(requireActivity(), it.url).observe(viewLifecycleOwner, {
@@ -134,13 +136,14 @@ class ApodFragment : Fragment() {
 
         if (checkPrefs == true) {
 
-            if(mediaType == "video"){
+            if (mediaType == "video") {
 
                 imgLoad.visibility = View.GONE
                 youTubePlayerView.visibility = View.VISIBLE
 
                 lifecycle.addObserver(youTubePlayerView)
-                youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+                youTubePlayerView.addYouTubePlayerListener(object :
+                    AbstractYouTubePlayerListener() {
                     override fun onReady(youTubePlayer: YouTubePlayer) {
                         super.onReady(youTubePlayer)
                         val videoId = getIdVideo(it.url)
@@ -168,12 +171,13 @@ class ApodFragment : Fragment() {
                 .into(imgLoad)
         } else {
 
-            if(mediaType == "video"){
+            if (mediaType == "video") {
                 imgLoad.visibility = View.GONE
                 youTubePlayerView.visibility = View.VISIBLE
 
                 lifecycle.addObserver(youTubePlayerView)
-                youTubePlayerView.addYouTubePlayerListener(object : AbstractYouTubePlayerListener() {
+                youTubePlayerView.addYouTubePlayerListener(object :
+                    AbstractYouTubePlayerListener() {
                     override fun onReady(youTubePlayer: YouTubePlayer) {
                         super.onReady(youTubePlayer)
                         val videoId = getIdVideo(it.url)
@@ -204,7 +208,7 @@ class ApodFragment : Fragment() {
         val navController = NavHostFragment.findNavController(this)
 
         imgLoad.setOnClickListener {
-            val bundle = bundleOf("IMGAPOD" to urlImg)
+            val bundle = bundleOf(IMGAPOD to urlImg)
             navController.navigate(R.id.action_apodFragment_to_landsScapeApodFragment, bundle)
         }
 
@@ -213,20 +217,21 @@ class ApodFragment : Fragment() {
 
     private fun btnFavorite() {
         val btnAddFavorite = _view.findViewById<CheckBox>(R.id.cbFavoriteApod)
-        val userId = AppUtil.getUserId(requireActivity().application)!!
+        val userId = AuthUtil.getUserId(requireActivity().application)!!
 
         btnAddFavorite.setOnCheckedChangeListener { _, isChecked ->
             val favorite = FavoriteEntity(
                 image = _apodResponse.url,
                 title = _apodResponse.title,
+                "",
                 text = _apodResponse.explanation,
+                "",
                 date = _apodResponse.date,
-                active = true,
                 type = _apodResponse.media_type
             )
             val user = UserEntity(
                 image = _apodResponse.url,
-                userId = AppUtil.getUserId(requireActivity())!!
+                userId = AuthUtil.getUserId(requireActivity())!!
             )
             if (isChecked) {
                 _favoriteViewModel.addFavorite(favorite).observe(viewLifecycleOwner, {})

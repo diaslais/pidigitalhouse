@@ -2,7 +2,6 @@ package com.nasinha.digitalspace.authentication.viewmodel
 
 import android.app.Activity
 import android.app.Application
-import android.widget.Toast
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.facebook.login.LoginManager
@@ -11,7 +10,7 @@ import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.nasinha.digitalspace.R
-import com.nasinha.digitalspace.authentication.AppUtil
+import com.nasinha.digitalspace.utils.AuthUtil
 
 class AuthenticatorViewModel(application: Application) : AndroidViewModel(application) {
 
@@ -60,17 +59,17 @@ class AuthenticatorViewModel(application: Application) : AndroidViewModel(applic
                         if (FirebaseAuth.getInstance().currentUser!!.isEmailVerified) {
                             val currentUser = FirebaseAuth.getInstance().currentUser
 
-                            AppUtil.saveUserId(
+                            AuthUtil.saveUserId(
                                 getApplication(),
                                 currentUser?.uid
                             )
 
-                            AppUtil.saveUserName(
+                            AuthUtil.saveUserName(
                                 getApplication(),
                                 currentUser?.displayName
                             )
 
-                            AppUtil.saveUserEmail(
+                            AuthUtil.saveUserEmail(
                                 getApplication(),
                                 currentUser?.email
                             )
@@ -91,7 +90,7 @@ class AuthenticatorViewModel(application: Application) : AndroidViewModel(applic
     }
 
     fun signOutUser(activity: Activity) {
-        AppUtil.clearUserInfo(activity)
+        AuthUtil.clearUserInfo(activity)
         FirebaseAuth.getInstance().signOut()
         LoginManager.getInstance().logOut()
     }

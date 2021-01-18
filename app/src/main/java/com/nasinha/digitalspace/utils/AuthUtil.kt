@@ -1,4 +1,4 @@
-package com.nasinha.digitalspace.authentication
+package com.nasinha.digitalspace.utils
 
 import android.app.Activity
 import android.content.Context
@@ -6,13 +6,13 @@ import android.content.SharedPreferences
 import android.util.Patterns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import com.nasinha.digitalspace.authentication.Constants.APP_KEY
-import com.nasinha.digitalspace.authentication.Constants.EMPTY_STRING
-import com.nasinha.digitalspace.authentication.Constants.UIID_KEY
-import com.nasinha.digitalspace.authentication.Constants.USER_EMAIL
-import com.nasinha.digitalspace.authentication.Constants.USER_NAME
+import com.nasinha.digitalspace.utils.Constants.APP_KEY
+import com.nasinha.digitalspace.utils.Constants.EMPTY_STRING
+import com.nasinha.digitalspace.utils.Constants.UIID_KEY
+import com.nasinha.digitalspace.utils.Constants.USER_EMAIL
+import com.nasinha.digitalspace.utils.Constants.USER_NAME
 
-object AppUtil {
+object AuthUtil {
 
     fun saveUserId(context: Context, uiid: String?) {
         val preferences: SharedPreferences =
