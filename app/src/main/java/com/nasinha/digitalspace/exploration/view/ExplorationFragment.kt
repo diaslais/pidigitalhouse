@@ -130,7 +130,9 @@ class ExplorationFragment : Fragment() {
         val nameShared = AuthUtil.getUserName(requireActivity())
         val userImage = AuthUtil.getUserImage(requireActivity())
         nameDrawer.text = nameShared
-        Picasso.get().load(userImage).into(imageDrawer)
+        if (!userImage.isNullOrEmpty()) {
+            Picasso.get().load(userImage).into(imageDrawer)
+        }
     }
 }
 
