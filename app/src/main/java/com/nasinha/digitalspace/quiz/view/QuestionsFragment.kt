@@ -25,6 +25,7 @@ import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.quiz.db.QuizDatabase
 import com.nasinha.digitalspace.quiz.repository.QuizRepository
 import com.nasinha.digitalspace.quiz.viewmodel.QuizViewModel
+import com.nasinha.digitalspace.utils.Constants.NUMBER_QUESTIONS
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -317,10 +318,6 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         } else {
             txtChronometer.setTextColor(Color.parseColor("#FFFFFF"))
         }
-    }
-
-    companion object {
-        const val NUMBER_QUESTIONS = 10
     }
 }
 
