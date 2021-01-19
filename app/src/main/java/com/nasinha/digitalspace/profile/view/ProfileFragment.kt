@@ -54,7 +54,6 @@ class ProfileFragment : Fragment() {
     private var _userName: String? = null
     private var _userEmail: String? = null
     private var _userProvider: String? = null
-    private var _progressBar: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -271,7 +270,7 @@ class ProfileFragment : Fragment() {
             hideKeyboard(_view)
 
             when {
-                validateName(nameTextInputView.text.toString()) -> {
+                !validateName(nameTextInputView.text.toString()) -> {
                     snackBarMessage(_view.context.getString(R.string.error_vazio))
                 }
                 (nameTextInputView.text.toString() == _userName) -> {
