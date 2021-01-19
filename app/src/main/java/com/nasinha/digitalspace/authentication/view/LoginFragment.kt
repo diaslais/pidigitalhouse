@@ -83,6 +83,8 @@ class LoginFragment : Fragment() {
         }
 //        Google signup
         googleLoginHandler()
+
+        forgotPassword()
     }
 
     private fun checkUserId() {
@@ -110,7 +112,11 @@ class LoginFragment : Fragment() {
                 authenticatorViewModel.loginEmailPassword(requireActivity(), email, password)
             }
             else -> {
-                Snackbar.make(mbLoginLogin, getString(R.string.campos_invalidos), Snackbar.LENGTH_LONG).show()
+                Snackbar.make(
+                    mbLoginLogin,
+                    getString(R.string.campos_invalidos),
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
         }
     }
@@ -142,6 +148,16 @@ class LoginFragment : Fragment() {
         if (status) {
             navController.navigate(R.id.action_loginFragment_to_explorationFragment)
         }
+    }
+
+    private fun forgotPassword() {
+        val forgotButton = _view.findViewById<MaterialButton>(R.id.mbForgotPasswordLogin)
+        val navController = findNavController()
+
+        forgotButton.setOnClickListener {
+            navController.navigate(R.id.forgotPasswordFragment)
+        }
+
     }
 
     private fun messageError(it: String) {
