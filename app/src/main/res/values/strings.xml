@@ -134,5 +134,11 @@
     <string name="esqueceu_sua_senha">Esqueceu sua senha?</string>
     <string name="text_forgot_password">Digite o email abaixo para receber um link de redefinição de senha</string>
     <string name="invalid_format">Formato Inválido!</string>
+    <string name="erro_senha_6_algarismos">A senha deve ter mais de 6 algarismos</string>
+    <string name="erro_validacao_campo">Problema de validação dos campos</string>
+    <string name="erro_image_perfil">Não foi possivel alterar a imagem do perfil</string>
+    <string name="erro_obter_imagem">Não foi possivel obter imagem</string>
+    <string name="erro_alterar_senha">Não foi possível alterar sua senha</string>
+    <string name="erro_autenticacao">Problema de autenticação com sua senha</string>
 
 </resources>

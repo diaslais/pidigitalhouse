@@ -90,6 +90,7 @@ object AuthUtil {
         preferences.edit().putString(UIID_KEY, EMPTY_STRING).apply()
         preferences.edit().putString(USER_NAME, EMPTY_STRING).apply()
         preferences.edit().putString(USER_EMAIL, EMPTY_STRING).apply()
+        preferences.edit().putString(USER_PHOTO_URL, EMPTY_STRING).apply()
         preferences.edit().putString(USER_SIGN_IN_METHOD, EMPTY_STRING).apply()
     }
 
@@ -124,7 +125,7 @@ object AuthUtil {
     }
 
     fun validateName(name: String): Boolean {
-        return name.isEmpty()
+        return name.isNotEmpty()
     }
 
     fun validadeEmail(context: Context, email: String): Boolean {
@@ -133,6 +134,10 @@ object AuthUtil {
         } else {
             false
         }
+    }
+
+    fun validatePassword(password: String): Boolean {
+        return password.length > 6
     }
 
     fun hideKeyboard(view: View) {

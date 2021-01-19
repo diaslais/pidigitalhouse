@@ -6,24 +6,20 @@ import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.google.android.material.snackbar.Snackbar
+import com.google.firebase.auth.EmailAuthCredential
+import com.google.firebase.auth.EmailAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.ktx.userProfileChangeRequest
-import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
 import com.nasinha.digitalspace.R
-import com.nasinha.digitalspace.utils.AuthUtil
-import com.nasinha.digitalspace.utils.AuthUtil.getUserEmail
-import com.nasinha.digitalspace.utils.AuthUtil.getUserName
-import com.nasinha.digitalspace.utils.AuthUtil.getUserProvider
 import com.nasinha.digitalspace.utils.AuthUtil.saveUserName
-import com.nasinha.digitalspace.utils.Constants
-import com.nasinha.digitalspace.utils.Constants.PASSWORD
 import com.nasinha.digitalspace.utils.ProfileUtils
 
 class ProfileViewModel(application: Application) : AndroidViewModel(application) {
     var stateUserEmail: MutableLiveData<Boolean> = MutableLiveData()
     var stateUserName: MutableLiveData<Boolean> = MutableLiveData()
     var stateUserImage: MutableLiveData<String> = MutableLiveData()
+    var stateUserPassword: MutableLiveData<Boolean> = MutableLiveData()
     var stateLoading: MutableLiveData<Boolean> = MutableLiveData()
     var error: MutableLiveData<String> = MutableLiveData()
 
@@ -119,18 +115,54 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
                                     stateUserImage.value = imageUrl
                                 }
                                 else -> {
-                                    errorMessage("Não foi possivel alterar a imagem do perfil")
+                                    errorMessage(view.context.getString(R.string.erro_image_perfil))
                                 }
                             }
                         }
                     }
                 }.addOnFailureListener {
                     stateLoading.value = false
-                    errorMessage("Não foi possivel obter imagem")
+                    errorMessage(view.context.getString(R.string.erro_obter_imagem))
                 }
         } else {
             stateLoading.value = false
         }
+    }
+
+    fun updateUserPassword(
+        view: View,
+        userEmail: String,
+        oldUserPassword: String,
+        newUserPassword: String
+    ) {
+        val user = FirebaseAuth.getInstance().currentUser!!
+
+        val credential = EmailAuthProvider.getCredential(userEmail, oldUserPassword)
+        stateLoading.value = true
+
+        user.reauthenticate(credential).addOnCompleteListener { task ->
+            when {
+                task.isSuccessful -> {
+                    user.updatePassword(newUserPassword).addOnCompleteListener { newPasswordTask ->
+                        when {
+                            newPasswordTask.isSuccessful -> {
+                                stateLoading.value = false
+                                stateUserPassword.value = true
+                            }
+                            else -> {
+                                stateLoading.value = false
+                                errorMessage(view.context.getString(R.string.erro_alterar_senha))
+                            }
+                        }
+                    }
+                }
+                else -> {
+                    stateLoading.value = false
+                    errorMessage(view.context.getString(R.string.erro_autenticacao))
+                }
+            }
+        }
+
     }
 
     private fun errorMessage(s: String) {
