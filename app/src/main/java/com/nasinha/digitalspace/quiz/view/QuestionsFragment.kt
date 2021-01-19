@@ -109,6 +109,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private fun setQuestion() {
         btnAnswer.isEnabled = true
         _viewModel.questionsList.observe(viewLifecycleOwner) {
+
             val question = it[_currentPosition - 1]
             defaultOptionsView()
             startCountDown()
@@ -156,6 +157,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         _viewModel.questionsList.observe(viewLifecycleOwner) {
+
             val question = it[_currentPosition - 1]
 
             when (v?.id) {
