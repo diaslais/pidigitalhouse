@@ -146,6 +146,7 @@ class LoginFragment : Fragment() {
     private fun navigateToHomeEmail(status: Boolean) {
         val navController = findNavController()
         if (status) {
+            authenticatorViewModel.signInProvider()
             navController.navigate(R.id.action_loginFragment_to_explorationFragment)
         }
     }
@@ -266,6 +267,7 @@ class LoginFragment : Fragment() {
         val navController = Navigation.findNavController(_view)
         AuthUtil.saveUserId(requireActivity(), uiid)
         AuthUtil.saveUserName(requireActivity(), name)
+        authenticatorViewModel.signInProvider()
         navController.navigate(R.id.action_loginFragment_to_explorationFragment)
     }
 

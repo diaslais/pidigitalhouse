@@ -36,7 +36,7 @@
             app:cardCornerRadius="@dimen/dim50dp">
 
             <ImageView
-                android:id="@+id/ivAvatarNavHeader"
+                android:id="@+id/ivImageNavHeader"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@color/colorWhite"

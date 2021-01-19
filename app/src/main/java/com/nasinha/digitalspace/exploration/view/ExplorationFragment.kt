@@ -3,27 +3,23 @@ package com.nasinha.digitalspace.exploration.view
 import android.annotation.SuppressLint
 import android.app.AlertDialog
 import android.os.Bundle
-import android.util.Log
 import android.view.*
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.navigation.NavigationView
 import com.nasinha.digitalspace.R
-import com.nasinha.digitalspace.apod.model.ApodResponseModel
-import com.nasinha.digitalspace.apod.repository.ApodRepository
-import com.nasinha.digitalspace.apod.viewmodel.ApodViewModel
 import com.nasinha.digitalspace.utils.AuthUtil
 import com.nasinha.digitalspace.utils.DrawerUtils.unlockDrawer
+import com.squareup.picasso.Picasso
 
 class ExplorationFragment : Fragment() {
 
@@ -103,7 +99,7 @@ class ExplorationFragment : Fragment() {
         }
 //        APOD
         view.findViewById<MaterialCardView>(R.id.cardAstronomicalFact).setOnClickListener {
-                navController.navigate(R.id.action_explorationFragment_to_apodFragment)
+            navController.navigate(R.id.action_explorationFragment_to_apodFragment)
         }
 //        EPIC
         view.findViewById<MaterialCardView>(R.id.cardEarth).setOnClickListener {
@@ -128,8 +124,11 @@ class ExplorationFragment : Fragment() {
         val navigationView = activity?.findViewById<NavigationView>(R.id.navigationView)
         val headerView = navigationView!!.getHeaderView(0)
         val nameDrawer = headerView.findViewById<TextView>(R.id.tvNameNavHeader)
+        val imageDrawer = headerView.findViewById<ImageView>(R.id.ivImageNavHeader)
         val nameShared = AuthUtil.getUserName(requireActivity())
+        val userImage = AuthUtil.getUserImage(requireActivity())
         nameDrawer.text = nameShared
+        Picasso.get().load(userImage).into(imageDrawer)
     }
 
     companion object {

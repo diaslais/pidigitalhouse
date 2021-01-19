@@ -206,7 +206,12 @@
         android:id="@+id/profileFragment"
         android:name="com.nasinha.digitalspace.profile.view.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" />
+        tools:layout="@layout/fragment_profile" >
+        <action
+            android:id="@+id/action_profileFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/navigation_graph" />
+    </fragment>
     <fragment
         android:id="@+id/scoreFragment"
         android:name="com.nasinha.digitalspace.quiz.view.ScoreFragment"

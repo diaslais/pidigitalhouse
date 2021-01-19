@@ -2,6 +2,7 @@ package com.nasinha.digitalspace.authentication.viewmodel
 
 import android.app.Activity
 import android.app.Application
+import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
 import com.facebook.login.LoginManager
@@ -58,6 +59,7 @@ class AuthenticatorViewModel(application: Application) : AndroidViewModel(applic
                     task.isSuccessful -> {
                         if (FirebaseAuth.getInstance().currentUser!!.isEmailVerified) {
                             val currentUser = FirebaseAuth.getInstance().currentUser
+                            val provider = signInProvider()
 
                             AuthUtil.saveUserId(
                                 getApplication(),
@@ -73,6 +75,12 @@ class AuthenticatorViewModel(application: Application) : AndroidViewModel(applic
                                 getApplication(),
                                 currentUser?.email
                             )
+
+                            AuthUtil.saveUserImage(
+                                getApplication(),
+                                currentUser?.photoUrl.toString()
+                            )
+
                             stateLogin.value = true
                         } else {
                             errorMessage(activity.getString(R.string.verificar_email))
@@ -87,6 +95,17 @@ class AuthenticatorViewModel(application: Application) : AndroidViewModel(applic
                     }
                 }
             }
+    }
+
+    fun signInProvider(): String? {
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        val provider = currentUser?.getIdToken(false)?.result?.signInProvider
+        Log.d("authenticator", provider.toString())
+        AuthUtil.saveSignInMethod(
+            getApplication(),
+            provider
+        )
+        return provider
     }
 
     fun signOutUser(activity: Activity) {
