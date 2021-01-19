@@ -83,6 +83,8 @@ class LoginFragment : Fragment() {
         }
 //        Google signup
         googleLoginHandler()
+
+        forgotPassword()
     }
 
     private fun checkUserId() {
@@ -147,6 +149,16 @@ class LoginFragment : Fragment() {
             authenticatorViewModel.signInProvider()
             navController.navigate(R.id.action_loginFragment_to_explorationFragment)
         }
+    }
+
+    private fun forgotPassword() {
+        val forgotButton = _view.findViewById<MaterialButton>(R.id.mbForgotPasswordLogin)
+        val navController = findNavController()
+
+        forgotButton.setOnClickListener {
+            navController.navigate(R.id.forgotPasswordFragment)
+        }
+
     }
 
     private fun messageError(it: String) {

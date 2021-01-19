@@ -130,5 +130,9 @@
     <string name="email_atualizado_verificar">Informações atualizadas com sucesso, verifique seu email, e faça login novamente.</string>
     <string name="campo_invalido">Campo invalido</string>
     <string name="email_confirmado">Email confirmado</string>
+    <string name="recuperar_senha">Recuperar Senha</string>
+    <string name="esqueceu_sua_senha">Esqueceu sua senha?</string>
+    <string name="text_forgot_password">Digite o email abaixo para receber um link de redefinição de senha</string>
+    <string name="invalid_format">Formato Inválido!</string>
 
 </resources>
