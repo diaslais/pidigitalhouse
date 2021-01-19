@@ -3,6 +3,7 @@ package com.nasinha.digitalspace.utils
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
+import android.net.Uri
 import android.util.Patterns
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -12,6 +13,7 @@ import com.nasinha.digitalspace.utils.Constants.PASSWORD
 import com.nasinha.digitalspace.utils.Constants.UIID_KEY
 import com.nasinha.digitalspace.utils.Constants.USER_EMAIL
 import com.nasinha.digitalspace.utils.Constants.USER_NAME
+import com.nasinha.digitalspace.utils.Constants.USER_PHOTO_URL
 import com.nasinha.digitalspace.utils.Constants.USER_SIGN_IN_METHOD
 
 object AuthUtil {
@@ -50,6 +52,12 @@ object AuthUtil {
         }
     }
 
+    fun saveUserImage(context: Context, photoUrl: String?) {
+        val preferences: SharedPreferences =
+            context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
+        preferences.edit().putString(USER_PHOTO_URL, photoUrl).apply()
+    }
+
     fun getUserId(context: Context): String? {
         val preferences = context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
         return preferences.getString(UIID_KEY, EMPTY_STRING)
@@ -69,6 +77,12 @@ object AuthUtil {
         val preferences: SharedPreferences =
             context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
         return preferences.getString(USER_SIGN_IN_METHOD, EMPTY_STRING)
+    }
+
+    fun getUserImage(context: Context): String? {
+        val preferences: SharedPreferences =
+            context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
+        return preferences.getString(USER_PHOTO_URL, EMPTY_STRING)
     }
 
     fun clearUserInfo(context: Context) {
@@ -109,7 +123,7 @@ object AuthUtil {
         }
     }
 
-    fun validadeName(name: String): Boolean {
+    fun validateName(name: String): Boolean {
         return name.isEmpty()
     }
 

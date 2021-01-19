@@ -75,6 +75,12 @@ class AuthenticatorViewModel(application: Application) : AndroidViewModel(applic
                                 getApplication(),
                                 currentUser?.email
                             )
+
+                            AuthUtil.saveUserImage(
+                                getApplication(),
+                                currentUser?.photoUrl.toString()
+                            )
+
                             stateLogin.value = true
                         } else {
                             errorMessage(activity.getString(R.string.verificar_email))

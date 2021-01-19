@@ -14,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
+import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
@@ -29,11 +30,13 @@ import com.nasinha.digitalspace.profile.viewmodel.ProfileViewModel
 import com.nasinha.digitalspace.utils.AuthUtil
 import com.nasinha.digitalspace.utils.AuthUtil.getUserEmail
 import com.nasinha.digitalspace.utils.AuthUtil.getUserId
+import com.nasinha.digitalspace.utils.AuthUtil.getUserImage
 import com.nasinha.digitalspace.utils.AuthUtil.getUserName
 import com.nasinha.digitalspace.utils.AuthUtil.getUserProvider
 import com.nasinha.digitalspace.utils.AuthUtil.hideKeyboard
+import com.nasinha.digitalspace.utils.AuthUtil.saveUserImage
 import com.nasinha.digitalspace.utils.AuthUtil.validadeEmail
-import com.nasinha.digitalspace.utils.AuthUtil.validadeName
+import com.nasinha.digitalspace.utils.AuthUtil.validateName
 import com.nasinha.digitalspace.utils.Constants
 import com.nasinha.digitalspace.utils.Constants.PICK_IMAGE_REQUEST_CODE
 import com.nasinha.digitalspace.utils.Constants.READ_STORAGE_PERMISSION_CODE
@@ -47,10 +50,11 @@ class ProfileFragment : Fragment() {
     private lateinit var _navController: NavController
     private var _selectedImageUri: Uri? = null
     private var _userId: String? = null
-    private var _userImageUri: Uri? = null
+    private var _userImageUrl: String? = null
     private var _userName: String? = null
     private var _userEmail: String? = null
     private var _userProvider: String? = null
+    private var _progressBar: Boolean = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -102,6 +106,7 @@ class ProfileFragment : Fragment() {
                     snackBarMessage(getString(R.string.nome_atualizado))
                     nameTextInputVisibilityToggle()
                     nameEditBtnToggle()
+                    _userName = getUserName(requireActivity())
                 }
             }
         })
@@ -117,6 +122,19 @@ class ProfileFragment : Fragment() {
             }
         })
 
+        _profileViewModel.stateUserImage.observe(viewLifecycleOwner, { state ->
+            state?.let {
+                snackBarMessage("Imagem atualizada")
+                saveUserImage(_view.context, state)
+            }
+        })
+
+        _profileViewModel.stateLoading.observe(viewLifecycleOwner, { state ->
+            state?.let {
+                showLoading(it)
+            }
+        })
+
         _profileViewModel.error.observe(viewLifecycleOwner, { e ->
             snackBarMessage(e)
         })
@@ -127,10 +145,12 @@ class ProfileFragment : Fragment() {
         _userName = getUserName(requireActivity())
         _userEmail = getUserEmail(requireActivity())
         _userProvider = getUserProvider(requireActivity())
+        _userImageUrl = getUserImage(requireActivity())
     }
 
     private fun imageListener() {
         val imageView = _view.findViewById<ImageView>(R.id.ivImageProfile)
+        Picasso.get().load(_userImageUrl).into(imageView)
 
         imageView.setOnClickListener {
             if (ContextCompat.checkSelfPermission(
@@ -191,6 +211,14 @@ class ProfileFragment : Fragment() {
 
             val profileImageView = _view.findViewById<ImageView>(R.id.ivImageProfile)
             Picasso.get().load(_selectedImageUri).fit().centerCrop().into(profileImageView)
+
+            val confirmPhotoBtn = _view.findViewById<MaterialButton>(R.id.mbConfirmPhotoProfile)
+
+            confirmPhotoBtn.visibility = View.VISIBLE
+
+            confirmPhotoBtn.setOnClickListener {
+                _profileViewModel.updateUserPhoto(_view, _selectedImageUri)
+            }
         }
     }
 
@@ -235,7 +263,6 @@ class ProfileFragment : Fragment() {
         emailTextInputView.isEnabled = !emailTextInputView.isEnabled
     }
 
-
     private fun confirmNameBtnListener() {
         val confirmNameBtn = _view.findViewById<ImageButton>(R.id.ibConfirmNameProfile)
 
@@ -244,7 +271,7 @@ class ProfileFragment : Fragment() {
             hideKeyboard(_view)
 
             when {
-                validadeName(nameTextInputView.text.toString()) -> {
+                validateName(nameTextInputView.text.toString()) -> {
                     snackBarMessage(_view.context.getString(R.string.error_vazio))
                 }
                 (nameTextInputView.text.toString() == _userName) -> {
@@ -324,7 +351,7 @@ class ProfileFragment : Fragment() {
                 AuthUtil.hideKeyboard(_view)
                 _authenticatorViewModel.signOutUser(requireActivity())
                 _navController.navigate(R.id.action_profileFragment_to_loginFragment)
-            }, 500)
+            }, 2000)
         }
     }
 
@@ -340,6 +367,18 @@ class ProfileFragment : Fragment() {
         val backBtn = _view.findViewById<ImageButton>(R.id.ibBackProfile)
         backBtn.setOnClickListener {
             requireActivity().onBackPressed()
+        }
+    }
+
+    private fun showLoading(status: Boolean) {
+        val loadingBtn = _view.findViewById<ProgressBar>(R.id.pbLoadProfile)
+        when {
+            status -> {
+                loadingBtn.visibility = View.VISIBLE
+            }
+            else -> {
+                loadingBtn.visibility = View.GONE
+            }
         }
     }
 }
