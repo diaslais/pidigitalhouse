@@ -37,8 +37,6 @@ class MainActivity : AppCompatActivity() {
             this._drawerLayout.closeDrawer(navigationView)
         } else {
             super.onBackPressed()
-
-
         }
     }
 

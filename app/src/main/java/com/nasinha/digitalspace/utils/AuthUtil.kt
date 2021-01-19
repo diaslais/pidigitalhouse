@@ -8,9 +8,11 @@ import android.view.View
 import android.view.inputmethod.InputMethodManager
 import com.nasinha.digitalspace.utils.Constants.APP_KEY
 import com.nasinha.digitalspace.utils.Constants.EMPTY_STRING
+import com.nasinha.digitalspace.utils.Constants.PASSWORD
 import com.nasinha.digitalspace.utils.Constants.UIID_KEY
 import com.nasinha.digitalspace.utils.Constants.USER_EMAIL
 import com.nasinha.digitalspace.utils.Constants.USER_NAME
+import com.nasinha.digitalspace.utils.Constants.USER_SIGN_IN_METHOD
 
 object AuthUtil {
 
@@ -38,6 +40,16 @@ object AuthUtil {
         preferences.edit().putString(USER_EMAIL, email).apply()
     }
 
+    fun saveSignInMethod(context: Context, method: String?) {
+        val preferences: SharedPreferences =
+            context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
+        if (!method.isNullOrEmpty()) {
+            preferences.edit().putString(USER_SIGN_IN_METHOD, method).apply()
+        } else {
+            preferences.edit().putString(USER_SIGN_IN_METHOD, "").apply()
+        }
+    }
+
     fun getUserId(context: Context): String? {
         val preferences = context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
         return preferences.getString(UIID_KEY, EMPTY_STRING)
@@ -53,11 +65,18 @@ object AuthUtil {
         return preferences.getString(USER_EMAIL, EMPTY_STRING)
     }
 
+    fun getUserProvider(context: Context): String? {
+        val preferences: SharedPreferences =
+            context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
+        return preferences.getString(USER_SIGN_IN_METHOD, EMPTY_STRING)
+    }
+
     fun clearUserInfo(context: Context) {
         val preferences = context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
         preferences.edit().putString(UIID_KEY, EMPTY_STRING).apply()
         preferences.edit().putString(USER_NAME, EMPTY_STRING).apply()
         preferences.edit().putString(USER_EMAIL, EMPTY_STRING).apply()
+        preferences.edit().putString(USER_SIGN_IN_METHOD, EMPTY_STRING).apply()
     }
 
     fun validateNameEmailPassword(name: String, email: String, password: String): Boolean {
@@ -87,6 +106,18 @@ object AuthUtil {
                 false
             }
             else -> true
+        }
+    }
+
+    fun validadeName(name: String): Boolean {
+        return name.isEmpty()
+    }
+
+    fun validadeEmail(context: Context, email: String): Boolean {
+        return if (getUserProvider(context) == PASSWORD) {
+            Patterns.EMAIL_ADDRESS.matcher(email).matches()
+        } else {
+            false
         }
     }
 

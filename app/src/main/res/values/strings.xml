@@ -117,7 +117,18 @@
     <string name="bem_vindo_explorador">Bem vindo explorador!</string>
     <string name="vista_seu_traje">Vista seu traje e prepare-se para a decolagem. Iniciaremos uma missão de exploração pelo espaço.\n\nAcomode-se em seu assento, aperte o cinto e prepare-se para ir, audaciosamente, onde ninguém jamais esteve.\n\nPartimos em 3, 2, 1...</string>
     <string name="vamos_l">Vamos lá!</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="permissao_negada">Permissão negada</string>
+    <string name="informacoes_atualizadas">Informações atualizadas com sucesso</string>
+    <string name="falha_email">Falha na atualização de email</string>
+    <string name="erro_alterar_nome">Não foi possível fazer alteração do nome</string>
+    <string name="atualizado_sucesso">Informações atualizadas com sucesso</string>
+    <string name="alterar_imagem">Alterar imagem</string>
+    <string name="atencao_email_profile">Atenção! Caso não tenha feito login recentemente, pode ser necessário fazer autenticação novamente para alterar seu email.</string>
+    <string name="error_nome_igual">O nome é igual ao existente</string>
+    <string name="nome_atualizado">Nome atualizado com sucesso</string>
+    <string name="problema_email_verificacao">Problema ao enviar email de verificação</string>
+    <string name="email_atualizado_verificar">Informações atualizadas com sucesso, verifique seu email, e faça login novamente.</string>
+    <string name="campo_invalido">Campo invalido</string>
+    <string name="email_confirmado">Email confirmado</string>
 
 </resources>
