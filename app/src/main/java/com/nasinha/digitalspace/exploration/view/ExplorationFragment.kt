@@ -18,6 +18,8 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.navigation.NavigationView
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.utils.AuthUtil
+import com.nasinha.digitalspace.utils.Constants.DIALOG_SHOWN
+import com.nasinha.digitalspace.utils.Constants.PREFS_NAME
 import com.nasinha.digitalspace.utils.DrawerUtils.unlockDrawer
 import com.squareup.picasso.Picasso
 
@@ -128,12 +130,9 @@ class ExplorationFragment : Fragment() {
         val nameShared = AuthUtil.getUserName(requireActivity())
         val userImage = AuthUtil.getUserImage(requireActivity())
         nameDrawer.text = nameShared
-        Picasso.get().load(userImage).into(imageDrawer)
-    }
-
-    companion object {
-        const val PREFS_NAME = "welcome_prefs"
-        const val DIALOG_SHOWN = "dialog_shown"
+        if (!userImage.isNullOrEmpty()) {
+            Picasso.get().load(userImage).into(imageDrawer)
+        }
     }
 }
 
