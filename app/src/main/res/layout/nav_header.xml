@@ -42,7 +42,7 @@
                 android:background="@color/colorWhite"
                 android:contentDescription="@string/avatar"
                 android:scaleType="centerCrop"
-                android:src="@mipmap/ic_launcher_round" />
+                android:src="@drawable/user_placeholder" />
         </com.google.android.material.card.MaterialCardView>
 
         <TextView

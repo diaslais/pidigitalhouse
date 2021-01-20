@@ -128,7 +128,11 @@ class ExplorationFragment : Fragment() {
         val nameShared = AuthUtil.getUserName(requireActivity())
         val userImage = AuthUtil.getUserImage(requireActivity())
         nameDrawer.text = nameShared
-        Picasso.get().load(userImage).into(imageDrawer)
+        if (userImage.isNullOrEmpty() || userImage == "null") {
+            Picasso.get().load(R.drawable.user_placeholder).into(imageDrawer)
+        } else {
+            Picasso.get().load(userImage).into(imageDrawer)
+        }
     }
 
     companion object {
