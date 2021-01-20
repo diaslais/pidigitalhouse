@@ -130,9 +130,16 @@ class ExplorationFragment : Fragment() {
         val nameShared = AuthUtil.getUserName(requireActivity())
         val userImage = AuthUtil.getUserImage(requireActivity())
         nameDrawer.text = nameShared
-        if (!userImage.isNullOrEmpty()) {
+        if (userImage.isNullOrEmpty() || userImage == "null") {
+            Picasso.get().load(R.drawable.user_placeholder).into(imageDrawer)
+        } else {
             Picasso.get().load(userImage).into(imageDrawer)
         }
+    }
+
+    companion object {
+        const val PREFS_NAME = "welcome_prefs"
+        const val DIALOG_SHOWN = "dialog_shown"
     }
 }
 

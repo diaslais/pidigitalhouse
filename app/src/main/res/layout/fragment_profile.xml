@@ -62,12 +62,25 @@
                     app:strokeColor="@color/colorWhite"
                     app:strokeWidth="2dp">
 
-                    <ImageView
-                        android:id="@+id/ivImageProfile"
-                        android:layout_width="@dimen/dim140dp"
-                        android:layout_height="@dimen/dim140dp"
-                        android:scaleType="centerCrop"
-                        android:src="@mipmap/ic_launcher" />
+                    <FrameLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <ImageView
+                            android:id="@+id/ivImageProfile"
+                            android:layout_width="@dimen/dim140dp"
+                            android:layout_height="@dimen/dim140dp"
+                            android:layout_gravity="center"
+                            android:scaleType="centerCrop"
+                            android:src="@drawable/user_placeholder" />
+                        <ImageView
+                            android:id="@+id/ivImageOverlayProfile"
+                            android:layout_width="80dp"
+                            android:layout_height="80dp"
+                            android:layout_gravity="center"
+                            android:src="@drawable/ic_outline_image_24"
+                            app:tint="@color/colorBlack35pct" />
+                    </FrameLayout>
 
                 </com.google.android.material.card.MaterialCardView>
 

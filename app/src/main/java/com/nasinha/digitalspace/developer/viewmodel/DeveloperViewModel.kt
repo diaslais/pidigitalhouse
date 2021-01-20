@@ -6,7 +6,8 @@ import com.nasinha.digitalspace.developer.entity.DeveloperEntity
 import com.nasinha.digitalspace.developer.repository.DeveloperRepository
 import kotlinx.coroutines.Dispatchers
 
-class DeveloperViewModel(
+class
+DeveloperViewModel(
     private val repository: DeveloperRepository
 ) : ViewModel() {
 

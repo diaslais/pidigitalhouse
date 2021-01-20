@@ -125,6 +125,7 @@ class ProfileFragment : Fragment() {
             state?.let {
                 snackBarMessage("Imagem atualizada")
                 saveUserImage(_view.context, state)
+                hideConfirmImageButton()
             }
         })
 
@@ -149,9 +150,14 @@ class ProfileFragment : Fragment() {
 
     private fun imageListener() {
         val imageView = _view.findViewById<ImageView>(R.id.ivImageProfile)
-        Picasso.get().load(_userImageUrl).into(imageView)
+        val imageOverlayView = _view.findViewById<ImageView>(R.id.ivImageOverlayProfile)
+        if (_userImageUrl.isNullOrEmpty() || _userImageUrl == "null") {
+            Picasso.get().load(R.drawable.user_placeholder).into(imageView)
+        } else {
+            Picasso.get().load(_userImageUrl).into(imageView)
+        }
 
-        imageView.setOnClickListener {
+        imageOverlayView.setOnClickListener {
             if (ContextCompat.checkSelfPermission(
                     _view.context,
                     Manifest.permission.READ_EXTERNAL_STORAGE
@@ -213,7 +219,7 @@ class ProfileFragment : Fragment() {
 
             val confirmPhotoBtn = _view.findViewById<MaterialButton>(R.id.mbConfirmPhotoProfile)
 
-            confirmPhotoBtn.visibility = View.VISIBLE
+            showConfirmImageButtonToggle()
 
             confirmPhotoBtn.setOnClickListener {
                 _profileViewModel.updateUserPhoto(_view, _selectedImageUri)
@@ -342,6 +348,16 @@ class ProfileFragment : Fragment() {
                 editEmailBtn.visibility = View.GONE
             }
         }
+    }
+
+    private fun showConfirmImageButtonToggle() {
+        val confirmPhotoBtn = _view.findViewById<MaterialButton>(R.id.mbConfirmPhotoProfile)
+        confirmPhotoBtn.visibility = View.VISIBLE
+    }
+
+    private fun hideConfirmImageButton() {
+        val confirmPhotoBtn = _view.findViewById<MaterialButton>(R.id.mbConfirmPhotoProfile)
+        confirmPhotoBtn.visibility = View.GONE
     }
 
     private fun navigateHome(isUpdated: Boolean) {
