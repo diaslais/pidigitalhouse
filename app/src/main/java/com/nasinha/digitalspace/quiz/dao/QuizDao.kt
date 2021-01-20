@@ -14,7 +14,7 @@ interface QuizDao {
     suspend fun addQuestion(question: Question)
 
 
-    @Query(value = "SELECT * FROM questions ORDER BY id ASC")
+    @Query(value = "SELECT * FROM questions ORDER BY RANDOM()")
     fun readQuestionsData(): Flow<List<Question>>
 
 }

@@ -25,6 +25,7 @@ import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.quiz.db.QuizDatabase
 import com.nasinha.digitalspace.quiz.repository.QuizRepository
 import com.nasinha.digitalspace.quiz.viewmodel.QuizViewModel
+import com.nasinha.digitalspace.utils.Constants.NUMBER_QUESTIONS
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -34,6 +35,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private var _correctAnswers: Int = 0
     private var _isAnswered: Boolean = false //user selected an option
     private var _goToNextQuestion: Boolean = false //user already clicked on "answer"
+    private var alternativeAnswers = arrayListOf(1, 2, 3, 4)
 
     private lateinit var countDownTimer: CountDownTimer
     private lateinit var timerBarAnimation: Animator
@@ -106,7 +108,9 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun setQuestion() {
+        alternativeAnswers.shuffle()
         btnAnswer.isEnabled = true
+
         _viewModel.questionsList.observe(viewLifecycleOwner) {
             val question = it[_currentPosition - 1]
             defaultOptionsView()
@@ -115,14 +119,23 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
             btnAnswer.text = getString(R.string.Responder)
             txtQuestionNumber.text = getString(R.string.contagem_questoes, _currentPosition, NUMBER_QUESTIONS)
             txtQuestion.text = question.question
-            txtOptionOne.text = question.optionOne
-            txtOptionTwo.text = question.optionTwo
-            txtOptionThree.text = question.optionThree
-            txtOptionFour.text = question.optionFour
+
+            val optionsList = arrayListOf(
+                question.optionOne,
+                question.optionTwo,
+                question.optionThree,
+                question.optionFour
+            )
+
+            //set options text shuffled
+            txtOptionOne.text = optionsList[alternativeAnswers[0] - 1]
+            txtOptionTwo.text = optionsList[alternativeAnswers[1] - 1]
+            txtOptionThree.text = optionsList[alternativeAnswers[2] - 1]
+            txtOptionFour.text = optionsList[alternativeAnswers[3] - 1]
         }
     }
 
-    private fun answerView(answer: Int, drawableView: Int) {
+    private fun answerView(answer: Int?, drawableView: Int) {
         when (answer) {
             1 -> {
                 txtOptionOne.background = ContextCompat.getDrawable(_view.context, drawableView)
@@ -155,6 +168,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
     override fun onClick(v: View?) {
         _viewModel.questionsList.observe(viewLifecycleOwner) {
+
             val question = it[_currentPosition - 1]
 
             when (v?.id) {
@@ -177,12 +191,12 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                     } else if (_isAnswered) { //first click
                         stopTimer()
                         _goToNextQuestion = true
-                        if (question.correctAnswer != _selectedOptionPosition) {
+                        if (question.correctAnswer != alternativeAnswers[_selectedOptionPosition - 1]) {
                             answerView(_selectedOptionPosition, R.drawable.incorrect_question)
                         } else {
                             _correctAnswers++
                         }
-                        question.correctAnswer?.let { answerView(it, R.drawable.correct_question) }
+                        answerView(alternativeAnswers.indexOf(question.correctAnswer) + 1, R.drawable.correct_question)
 
                         if (_currentPosition == NUMBER_QUESTIONS) {
                             btnAnswer.text = getString(R.string.fim)
@@ -317,10 +331,6 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         } else {
             txtChronometer.setTextColor(Color.parseColor("#FFFFFF"))
         }
-    }
-
-    companion object {
-        const val NUMBER_QUESTIONS = 10
     }
 }
 

@@ -18,6 +18,8 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.navigation.NavigationView
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.utils.AuthUtil
+import com.nasinha.digitalspace.utils.Constants.DIALOG_SHOWN
+import com.nasinha.digitalspace.utils.Constants.PREFS_NAME
 import com.nasinha.digitalspace.utils.DrawerUtils.unlockDrawer
 import com.squareup.picasso.Picasso
 
