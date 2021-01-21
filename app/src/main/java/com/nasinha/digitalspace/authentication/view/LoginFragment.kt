@@ -2,6 +2,7 @@ package com.nasinha.digitalspace.authentication.view
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -216,17 +217,19 @@ class LoginFragment : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     // Sign in success, update UI with the signed-in user's information
-//                    Log.d("googleSignIn", "signInWithCredential:success")
+                    Log.d("googleSignIn", "signInWithCredential:success")
                     val uiid = mAuth.currentUser?.uid
                     val name = mAuth.currentUser?.displayName
                     val email = mAuth.currentUser?.email
+                    val image = mAuth.currentUser?.photoUrl
                     AuthUtil.saveUserId(requireActivity(), uiid)
                     AuthUtil.saveUserName(requireActivity(), name)
                     AuthUtil.saveUserEmail(requireActivity(), email)
+                    AuthUtil.saveUserImage(requireActivity(), image.toString())
                     navigateToHomeEmail(!uiid.isNullOrEmpty())
                 } else {
                     // If sign in fails, display a message to the user.
-//                    Log.w("googleSignIn", "signInWithCredential:failure", task.exception)
+                    Log.d("googleSignIn", "signInWithCredential:failure", task.exception)
                     Snackbar.make(
                         _view,
                         getString(R.string.autenticacao_falhou),
@@ -245,11 +248,13 @@ class LoginFragment : Fragment() {
             override fun onSuccess(loginResult: LoginResult) {
                 val credential: AuthCredential =
                     FacebookAuthProvider.getCredential(loginResult.accessToken.token)
-                FirebaseAuth.getInstance().signInWithCredential(credential)
+                FirebaseAuth.getInstance()
+                    .signInWithCredential(credential)
                     .addOnCompleteListener {
                         val profile = Profile.getCurrentProfile()
                         val name = profile.name
-                        navigateToHomeFacebook(loginResult.accessToken.userId, name)
+                        val image = profile.getProfilePictureUri(150, 150)
+                        navigateToHomeFacebook(loginResult.accessToken.userId, name, image)
                     }
             }
 
@@ -263,10 +268,11 @@ class LoginFragment : Fragment() {
         })
     }
 
-    private fun navigateToHomeFacebook(uiid: String, name: String?) {
+    private fun navigateToHomeFacebook(uiid: String, name: String?, image: Uri) {
         val navController = Navigation.findNavController(_view)
         AuthUtil.saveUserId(requireActivity(), uiid)
         AuthUtil.saveUserName(requireActivity(), name)
+        AuthUtil.saveUserImage(requireActivity(), image.toString())
         authenticatorViewModel.signInProvider()
         navController.navigate(R.id.action_loginFragment_to_explorationFragment)
     }

@@ -216,8 +216,7 @@
         android:id="@+id/scoreFragment"
         android:name="com.nasinha.digitalspace.quiz.view.ScoreFragment"
         android:label="fragment_score"
-        tools:layout="@layout/fragment_score">
-    </fragment>
+        tools:layout="@layout/fragment_score"/>
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="com.nasinha.digitalspace.authentication.view.ForgotPasswordFragment"
