@@ -6,6 +6,10 @@
             android:icon="@drawable/ic_outline_star_border_24"
             android:title="@string/meus_favoritos" />
         <item
+            android:id="@+id/itemScoreMenu"
+            android:icon="@drawable/ic_outline_sports_esports_24"
+            android:title="@string/minhas_pontuacoes" />
+        <item
             android:id="@+id/itemBibliografiaMenu"
             android:icon="@drawable/ic_outline_book_24"
             android:title="@string/bibliografia" />

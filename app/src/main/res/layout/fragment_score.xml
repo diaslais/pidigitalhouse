@@ -14,7 +14,7 @@
         android:background="@color/colorBlack">
 
         <ImageButton
-            android:id="@+id/btnBackQuizQuestions"
+            android:id="@+id/btnBackScore"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:background="@color/colorTransparent"
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/dim30dp"
             android:text="Pontuações do Quiz"
-            android:fontFamily="@font/ubuntu_bold"
+            android:fontFamily="@font/ubuntu"
             android:textColor="@color/colorWhite"
             android:textSize="@dimen/dim20sp"/>
     </androidx.appcompat.widget.Toolbar>
@@ -38,7 +38,7 @@
         android:orientation="vertical">
 
         <TextView
-            android:layout_marginTop="@dimen/dim30dp"
+            android:layout_marginTop="@dimen/dim20dp"
             android:layout_marginBottom="@dimen/dim30dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="220dp"
+            android:layout_height="200dp"
             android:src="@drawable/trophy_moon"/>
 
         <androidx.recyclerview.widget.RecyclerView
