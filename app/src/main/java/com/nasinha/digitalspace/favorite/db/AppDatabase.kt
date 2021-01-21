@@ -29,7 +29,7 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "Favorite"
-                ).build()
+                ).fallbackToDestructiveMigration().build()
             }
             return INSTANCE!!
         }

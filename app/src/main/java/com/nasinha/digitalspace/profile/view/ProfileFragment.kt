@@ -38,6 +38,7 @@ import com.nasinha.digitalspace.utils.AuthUtil.saveUserImage
 import com.nasinha.digitalspace.utils.AuthUtil.validadeEmail
 import com.nasinha.digitalspace.utils.AuthUtil.validateName
 import com.nasinha.digitalspace.utils.Constants
+import com.nasinha.digitalspace.utils.Constants.PASSWORD
 import com.nasinha.digitalspace.utils.Constants.PICK_IMAGE_REQUEST_CODE
 import com.nasinha.digitalspace.utils.Constants.READ_STORAGE_PERMISSION_CODE
 import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
@@ -157,18 +158,20 @@ class ProfileFragment : Fragment() {
             Picasso.get().load(_userImageUrl).into(imageView)
         }
 
-        imageOverlayView.setOnClickListener {
-            if (ContextCompat.checkSelfPermission(
-                    _view.context,
-                    Manifest.permission.READ_EXTERNAL_STORAGE
-                ) == PackageManager.PERMISSION_GRANTED
-            ) {
-                showImagePicker()
-            } else {
-                checkReadExternalStoragePermission(
-                    _view,
-                    READ_STORAGE_PERMISSION_CODE
-                )
+        if (getUserProvider(requireActivity()) == PASSWORD) {
+            imageOverlayView.setOnClickListener {
+                if (ContextCompat.checkSelfPermission(
+                        _view.context,
+                        Manifest.permission.READ_EXTERNAL_STORAGE
+                    ) == PackageManager.PERMISSION_GRANTED
+                ) {
+                    showImagePicker()
+                } else {
+                    checkReadExternalStoragePermission(
+                        _view,
+                        READ_STORAGE_PERMISSION_CODE
+                    )
+                }
             }
         }
     }
