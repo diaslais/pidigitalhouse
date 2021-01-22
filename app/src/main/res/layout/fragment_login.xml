@@ -37,6 +37,7 @@
             app:cardCornerRadius="@dimen/dim16dp">
 
             <LinearLayout
+                android:id="@+id/linearID"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:gravity="center"
