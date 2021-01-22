@@ -133,7 +133,7 @@ class ExplorationFragment : Fragment() {
         if (userImage.isNullOrEmpty() || userImage == "null") {
             Picasso.get().load(R.drawable.user_placeholder).into(imageDrawer)
         } else {
-            Picasso.get().load(userImage).into(imageDrawer)
+            Picasso.get().load(userImage).placeholder(R.drawable.user_placeholder).into(imageDrawer)
         }
     }
 
