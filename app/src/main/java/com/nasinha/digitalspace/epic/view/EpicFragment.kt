@@ -106,7 +106,9 @@ class EpicFragment : Fragment() {
                     getString(R.string.updateMessage) + "${dayId}/${monthId}/${yearId}"
 
 
-                picasso.load("https://epic.gsfc.nasa.gov/archive/natural/${yearId}/${monthId}/${dayId}/png/${imageId}")
+                picasso
+                    .load("https://epic.gsfc.nasa.gov/archive/natural/${yearId}/${monthId}/${dayId}/png/${imageId}")
+                    .resize(600,600)
                     .into(imgEpic, object : Callback {
                         override fun onSuccess() {
                             showLoading(false)
