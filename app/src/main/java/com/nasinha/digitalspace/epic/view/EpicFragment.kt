@@ -18,6 +18,7 @@ import com.nasinha.digitalspace.epic.model.EpicResponseModel
 import com.nasinha.digitalspace.epic.repository.EpicRepository
 import com.nasinha.digitalspace.epic.viewmodel.EpicViewModel
 import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
 
@@ -84,7 +85,7 @@ class EpicFragment : Fragment() {
 
     @SuppressLint("SetTextI18n")
     private fun getLastDay(it: List<String>?, view: View) {
-        showLoading(false)
+        showLoading(true)
         val respost = it?.size
 
         val lastday = respost?.minus(1)?.let { it1 -> it[it1] }
@@ -105,8 +106,19 @@ class EpicFragment : Fragment() {
                     getString(R.string.updateMessage) + "${dayId}/${monthId}/${yearId}"
 
 
-                picasso.load("https://epic.gsfc.nasa.gov/archive/natural/${yearId}/${monthId}/${dayId}/png/${imageId}")
-                    .into(imgEpic)
+                picasso
+                    .load("https://epic.gsfc.nasa.gov/archive/natural/${yearId}/${monthId}/${dayId}/png/${imageId}")
+                    .resize(600,600)
+                    .into(imgEpic, object : Callback {
+                        override fun onSuccess() {
+                            showLoading(false)
+                        }
+
+                        override fun onError(e: java.lang.Exception?) {
+                            TODO("Not yet implemented")
+                        }
+
+                    })
 
             }
 

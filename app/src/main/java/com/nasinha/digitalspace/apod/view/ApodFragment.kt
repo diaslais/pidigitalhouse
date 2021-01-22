@@ -34,6 +34,7 @@ import com.nasinha.digitalspace.utils.FavoriteUtils
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 
@@ -80,13 +81,22 @@ class ApodFragment : Fragment() {
             try {
                 mostrarResultados(it as ApodResponseModel, view)
             } catch (e: Exception) {
-                showLoading(false)
+                showLoading(true)
                 showShareFavorite(false)
 
                 e.message
                 Picasso.get()
                     .load(R.drawable.gatinho)
-                    .into(imgLoad)
+                    .into(imgLoad, object : Callback {
+                        override fun onSuccess() {
+                            showLoading(false)
+                        }
+
+                        override fun onError(e: java.lang.Exception?) {
+                            TODO("Not yet implemented")
+                        }
+
+                    })
                 txtTitle.text = getString(R.string.apod_error)
                 txtExplanation.text =
                     getString(R.string.apod_message)
@@ -167,7 +177,16 @@ class ApodFragment : Fragment() {
             }
             Picasso.get()
                 .load(it.url)
-                .into(imgLoad)
+                .into(imgLoad, object : Callback {
+                    override fun onSuccess() {
+                        showLoading(false)
+                    }
+
+                    override fun onError(e: java.lang.Exception?) {
+                        TODO("Not yet implemented")
+                    }
+
+                })
         } else {
 
             if (mediaType == "video") {
@@ -191,7 +210,16 @@ class ApodFragment : Fragment() {
 
             Picasso.get()
                 .load(it.url)
-                .into(imgLoad)
+                .into(imgLoad, object : Callback {
+                    override fun onSuccess() {
+                        showLoading(false)
+                    }
+
+                    override fun onError(e: java.lang.Exception?) {
+                        TODO("Not yet implemented")
+                    }
+
+                })
         }
         landScapeMode(it.url)
 

@@ -4,18 +4,24 @@ import android.content.Context
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.transition.ChangeBounds
+import android.transition.TransitionManager
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.animation.AnticipateInterpolator
+import android.view.animation.AnticipateOvershootInterpolator
 import android.widget.Button
 import android.widget.ImageButton
+import android.widget.LinearLayout
 import android.widget.Toast
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
+import br.com.softbuilder.appplus2.presentation.extension.toggleSize
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -68,7 +74,6 @@ class LoginFragment : Fragment() {
         lockDrawer(requireActivity())
         _view = view
         val facebookFakeBtn = _view.findViewById<ImageButton>(R.id.imFacebookLogin)
-
         checkUserId()
 //        Email login
         loginHandler()
@@ -84,7 +89,6 @@ class LoginFragment : Fragment() {
         }
 //        Google signup
         googleLoginHandler()
-
         forgotPassword()
     }
 
@@ -99,6 +103,7 @@ class LoginFragment : Fragment() {
         val loginBtn = _view.findViewById<MaterialButton>(R.id.mbLoginLogin)
         loginBtn.setOnClickListener {
             hideKeyboard(_view)
+            loadingStatus(true)
             navigateLogin()
         }
         initViewModel()
@@ -107,7 +112,6 @@ class LoginFragment : Fragment() {
     private fun navigateLogin() {
         val email = _view.findViewById<TextInputEditText>(R.id.tietEmailLogin).text.toString()
         val password = _view.findViewById<TextInputEditText>(R.id.tietPasswordLogin).text.toString()
-
         when {
             AuthUtil.validateEmailPassword(email, password) -> {
                 authenticatorViewModel.loginEmailPassword(requireActivity(), email, password)
@@ -118,6 +122,7 @@ class LoginFragment : Fragment() {
                     getString(R.string.campos_invalidos),
                     Snackbar.LENGTH_LONG
                 ).show()
+                loadingStatus(false)
             }
         }
     }
@@ -140,6 +145,7 @@ class LoginFragment : Fragment() {
         authenticatorViewModel.error.observe(viewLifecycleOwner, { loading ->
             loading?.let {
                 messageError(it)
+                loadingStatus(false)
             }
         })
     }
@@ -276,6 +282,26 @@ class LoginFragment : Fragment() {
         AuthUtil.saveUserImage(requireActivity(), image.toString())
         authenticatorViewModel.signInProvider()
         navController.navigate(R.id.action_loginFragment_to_explorationFragment)
+    }
+    private fun loadingStatus(loading: Boolean){
+        val loginLayout = _view.findViewById<LinearLayout>(R.id.linearID)
+
+        val changeBounds = ChangeBounds()
+
+        changeBounds.startDelay = 100
+        changeBounds.interpolator = AnticipateOvershootInterpolator()
+        changeBounds.duration = 500
+
+        TransitionManager.beginDelayedTransition(
+            loginLayout,
+            changeBounds
+        )
+
+        toggleSize(mbLoginLogin,loading)
+    }
+
+    private fun toggleSize(v: MaterialButton, loading : Boolean) {
+        v.toggleSize(loading)
     }
 
     companion object {
