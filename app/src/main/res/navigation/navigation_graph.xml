@@ -121,15 +121,12 @@
         android:name="com.nasinha.digitalspace.planetsmenu.view.PlanetsMenuFragment"
         android:label="fragment_planets_menu"
         tools:layout="@layout/fragment_planets_menu">
+
         <action
             android:id="@+id/action_planetsMenuFragment_to_bottomsheetFragment"
             app:destination="@id/bottomsheetFragment" />
     </fragment>
-    <dialog
-        android:id="@+id/bottomsheetFragment"
-        android:name="com.nasinha.digitalspace.planetsmenu.view.BottomsheetFragment"
-        android:label="fragment_bottomsheet"
-        tools:layout="@layout/fragment_bottomsheet"/>
+
     <fragment
         android:id="@+id/changePasswordFragment"
         android:name="com.nasinha.digitalspace.profile.view.PasswordFragment"
@@ -222,7 +219,11 @@
         android:name="com.nasinha.digitalspace.authentication.view.ForgotPasswordFragment"
         android:label="fragment_forgot_password"
         tools:layout="@layout/fragment_forgot_password" />
-
+    <dialog
+        android:id="@+id/bottomsheetFragment"
+        android:name="com.nasinha.digitalspace.planetsmenu.view.BottomsheetFragment"
+        android:label="fragment_bottomsheet"
+        tools:layout="@layout/fragment_bottomsheet" />
 
 
 </navigation>
