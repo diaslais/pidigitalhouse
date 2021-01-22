@@ -252,7 +252,8 @@ class LoginFragment : Fragment() {
                     .signInWithCredential(credential)
                     .addOnCompleteListener {
                         val profile = Profile.getCurrentProfile()
-                        val name = profile.name
+                        val name =
+                            if (profile.name == null) profile.name else _view.context.getString(R.string.explorador_espacial)
                         val image = profile.getProfilePictureUri(150, 150)
                         navigateToHomeFacebook(loginResult.accessToken.userId, name, image)
                     }
