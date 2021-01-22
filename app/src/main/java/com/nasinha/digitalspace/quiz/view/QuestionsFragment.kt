@@ -23,7 +23,6 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.quiz.db.QuizDatabase
-import com.nasinha.digitalspace.quiz.entity.Question
 import com.nasinha.digitalspace.quiz.entity.Score
 import com.nasinha.digitalspace.quiz.repository.QuizRepository
 import com.nasinha.digitalspace.quiz.viewmodel.QuizViewModel
@@ -222,8 +221,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         if (_currentPosition <= NUMBER_QUESTIONS) {
                 setQuestion()
         } else {
-            //aqui - passar a data e o _correctAnswer /////////////////////////////////
-            //inserir no database
+            //add to database
             val date = getCurrentDateTime()
             addScoreToDatabase(date, _correctAnswers)
 
@@ -250,13 +248,13 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         }
     }
 
-    fun addScoreToDatabase(date: String, points: Int) {
-        val score = Score(0, date, points)
+    private fun addScoreToDatabase(date: String, points: Int) {
+        val score = Score(null, date, points)
         _viewModel.addScore(score).observe(viewLifecycleOwner) {}
         Toast.makeText(_view.context, "Enviado para o database", Toast.LENGTH_LONG).show()
     }
 
-    fun getCurrentDateTime(): String {
+    private fun getCurrentDateTime(): String {
         val currentDate = Calendar.getInstance().time
         val formatter = SimpleDateFormat("dd/mm/yyyy", Locale.getDefault())
 
