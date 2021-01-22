@@ -12,16 +12,12 @@ class QuizViewModel (private val repository: QuizRepository): ViewModel() {
     val questionsList: LiveData<List<Question>> = repository.readQuestionsData().asLiveData()
 
     //quiz score
-    fun addScore(score: Score){
-        liveData(Dispatchers.IO) {
+    fun addScore(score: Score) = liveData(Dispatchers.IO) {
             repository.addScore(score)
             emit(true)
-        }
     }
 
-    fun readScoreData() = liveData(Dispatchers.IO) {
-        emit(repository.readScoreData())
-    }
+    val scoreList: LiveData<List<Score>> = repository.readScoreData().asLiveData()
 
     class QuizViewModelFactory(private val repository: QuizRepository): ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {

@@ -6,7 +6,13 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.TextView
+import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import com.nasinha.digitalspace.R
+import com.nasinha.digitalspace.quiz.db.QuizDatabase
+import com.nasinha.digitalspace.quiz.repository.QuizRepository
+import com.nasinha.digitalspace.quiz.viewmodel.QuizViewModel
 
 class ScoreFragment : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,6 +37,21 @@ class ScoreFragment : Fragment() {
             activity?.onBackPressed()
         }
 
-    }
+        val viewModel = ViewModelProvider(
+            this,
+            QuizViewModel.QuizViewModelFactory(QuizRepository(QuizDatabase.getDatabase(view.context).quizDao()))
+        ).get(QuizViewModel::class.java)
 
+        val id = view.findViewById<TextView>(R.id.testeId)
+        val date = view.findViewById<TextView>(R.id.testeDate)
+        val points = view.findViewById<TextView>(R.id.testePoints)
+
+        viewModel.scoreList.observe(viewLifecycleOwner) {
+            it.forEach {
+                id.text = it.id.toString()
+                date.text = it.date
+                points.text = it.points.toString()
+            }
+        }
+    }
 }

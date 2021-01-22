@@ -6,9 +6,10 @@ import androidx.room.Room
 import androidx.room.RoomDatabase
 import com.nasinha.digitalspace.quiz.dao.QuizDao
 import com.nasinha.digitalspace.quiz.entity.Question
+import com.nasinha.digitalspace.quiz.entity.Score
 
 @Database(
-    entities = [Question::class],
+    entities = [Question::class, Score::class],
     version = 2,
     exportSchema = false
 )
@@ -17,7 +18,6 @@ abstract class QuizDatabase: RoomDatabase() {
     abstract fun quizDao(): QuizDao
 
     companion object {
-        
         private var INSTANCE: QuizDatabase? = null
 
         fun getDatabase(context: Context): QuizDatabase {

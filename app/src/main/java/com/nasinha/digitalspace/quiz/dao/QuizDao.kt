@@ -1,5 +1,6 @@
 package com.nasinha.digitalspace.quiz.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
@@ -17,7 +18,7 @@ interface QuizDao {
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addScore(score: Score)
 
-    @Query(value = "SELECT * FROM score ORDER BY points ASC")
+    @Query(value = "SELECT * FROM score ORDER BY points ASC LIMIT 5")
     fun readScoreData(): Flow<List<Score>>
 
 }

@@ -23,9 +23,12 @@ import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.quiz.db.QuizDatabase
+import com.nasinha.digitalspace.quiz.entity.Question
+import com.nasinha.digitalspace.quiz.entity.Score
 import com.nasinha.digitalspace.quiz.repository.QuizRepository
 import com.nasinha.digitalspace.quiz.viewmodel.QuizViewModel
 import com.nasinha.digitalspace.utils.Constants.NUMBER_QUESTIONS
+import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -219,6 +222,11 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         if (_currentPosition <= NUMBER_QUESTIONS) {
                 setQuestion()
         } else {
+            //aqui - passar a data e o _correctAnswer /////////////////////////////////
+            //inserir no database
+            val date = getCurrentDateTime()
+            addScoreToDatabase(date, _correctAnswers)
+
             val astronautImage: Int
             val resultsMessage: String
 
@@ -237,9 +245,22 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                 "RESULTS_MESSAGE" to resultsMessage
             )
             navController.navigate(
-                R.id.action_questionsFragment_to_scoreFragment, bundle
+                R.id.action_questionsFragment_to_resultFragment, bundle
             )
         }
+    }
+
+    fun addScoreToDatabase(date: String, points: Int) {
+        val score = Score(0, date, points)
+        _viewModel.addScore(score).observe(viewLifecycleOwner) {}
+        Toast.makeText(_view.context, "Enviado para o database", Toast.LENGTH_LONG).show()
+    }
+
+    fun getCurrentDateTime(): String {
+        val currentDate = Calendar.getInstance().time
+        val formatter = SimpleDateFormat("dd/mm/yyyy", Locale.getDefault())
+
+        return formatter.format(currentDate)
     }
 
     private fun optionsToggle() {
