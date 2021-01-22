@@ -5,6 +5,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.google.android.material.card.MaterialCardView
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.utils.Constants.IMAGE
@@ -25,7 +26,7 @@ class FavoriteViewHolder(val view: View) : RecyclerView.ViewHolder(view) {
         _dateView.text = FavoriteUtils.dateModifier(date)
 
         when (type) {
-            IMAGE -> Picasso.get().load(thumbnail).into(imageView)
+            IMAGE -> Picasso.get().load(thumbnail).resize(150,150).into(imageView)
             VIDEO -> Picasso.get().load(R.drawable.video_placeholder).into(imageView)
         }
     }
