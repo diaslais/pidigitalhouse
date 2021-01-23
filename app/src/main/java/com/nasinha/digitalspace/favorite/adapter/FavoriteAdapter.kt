@@ -1,12 +1,10 @@
 package com.nasinha.digitalspace.favorite.adapter
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
-import com.nasinha.digitalspace.utils.Constants
 
 class FavoriteAdapter(
     private val _favorites: MutableList<FavoriteEntity>,

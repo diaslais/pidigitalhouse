@@ -8,13 +8,11 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.TextView
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
@@ -98,8 +96,18 @@ class FavoriteScreenFragment : Fragment() {
         val titleView = _view.findViewById<TextView>(R.id.tvTitleFavoriteScreen)
         val textView = _view.findViewById<TextView>(R.id.tvTextFavoriteScreen)
 
-        titleView.text = if (_translatePrefs == true) favorite.titleBr else favorite.title
-        textView.text = if (_translatePrefs == true) favorite.textBr else favorite.text
+        when (_translatePrefs) {
+            true -> {
+                titleView.text =
+                    if (favorite.titleBr.isNullOrEmpty()) favorite.title else favorite.titleBr
+                textView.text =
+                    if (favorite.textBr.isNullOrEmpty()) favorite.text else favorite.textBr
+            }
+            else -> {
+                titleView.text = favorite.title
+                textView.text = favorite.text
+            }
+        }
 
         dateView.text = FavoriteUtils.dateModifier(favorite.date)
 

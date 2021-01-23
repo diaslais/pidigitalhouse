@@ -10,7 +10,6 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.lifecycleScope
-import com.bumptech.glide.Glide
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.utils.Constants.IMAGE
 import com.nasinha.digitalspace.utils.Constants.TITLE

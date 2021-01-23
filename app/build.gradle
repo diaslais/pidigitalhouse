@@ -36,6 +36,7 @@ android {
 }
 
 dependencies {
+//    Coil
     implementation("io.coil-kt:coil:1.1.0")
 //    room
     def room_version = "2.2.5"
