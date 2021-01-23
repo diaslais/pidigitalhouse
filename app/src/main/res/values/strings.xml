@@ -140,5 +140,7 @@
     <string name="erro_obter_imagem">Não foi possivel obter imagem</string>
     <string name="erro_alterar_senha">Não foi possível alterar sua senha</string>
     <string name="erro_autenticacao">Problema de autenticação com sua senha</string>
+    <string name="excluir_conta">Excluir Conta</string>
+    <string name="tradu_o">Tradução</string>
 
 </resources>
