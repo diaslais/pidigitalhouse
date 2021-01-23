@@ -1,6 +1,7 @@
 package com.nasinha.digitalspace.settings.viewmodel
 
 import android.app.Application
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
@@ -22,19 +23,24 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         if (user != null) {
             when (AuthUtil.getUserProvider(view.context)) {
                 PASSWORD -> {
-                    if (!userEmail.isNullOrEmpty() && !userPassword.isNullOrEmpty()) {
-                        val credential = EmailAuthProvider.getCredential(userEmail, userPassword)
+                    Log.d("TAG", "email user")
+                    if (AuthUtil.validateEmailPassword(userEmail, userPassword)) {
+                        val credential =
+                            EmailAuthProvider.getCredential(userEmail!!, userPassword!!)
                         reauthenticateUser(user, credential)
                     } else {
+                        Log.d("TAG", "email user fail auth")
                         errorMessage("Preencha os campos corretamente")
                     }
                 }
                 GOOGLECOM -> {
+                    Log.d("TAG", "google user")
                     val acc = GoogleSignIn.getLastSignedInAccount(view.context)
                     val credential = GoogleAuthProvider.getCredential(acc?.idToken, null)
                     reauthenticateUser(user, credential)
                 }
                 FACEBOOKCOM -> {
+                    Log.d("TAG", "facebook user")
                     val acc = FacebookAuthProvider.PROVIDER_ID
                     val credential = FacebookAuthProvider.getCredential(acc)
                     reauthenticateUser(user, credential)
@@ -48,10 +54,12 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         user.reauthenticate(credential).addOnCompleteListener { task ->
             when {
                 task.isSuccessful -> {
+                    Log.d("TAG", "reauthenticated user")
                     deleteUser(user)
                 }
                 else -> {
-                    errorMessage("Não foi possível autenticar o usuário")
+                    Log.d("TAG", "reauthenticate fail")
+                    errorMessage("Não foi possível autenticar o usuário, faça login novamente.")
                 }
             }
         }
@@ -61,9 +69,11 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
         user.delete().addOnCompleteListener { task ->
             when {
                 task.isSuccessful -> {
+                    Log.d("TAG", "user deleted")
                     stateDelete.value = true
                 }
                 else -> {
+                    Log.d("TAG", "fail to delete user")
                     errorMessage("Não foi possível excluir a conta")
                     stateDelete.value = false
                 }

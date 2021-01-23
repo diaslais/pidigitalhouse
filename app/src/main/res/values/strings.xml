@@ -75,7 +75,8 @@
     <string name="todo">TODO</string>
     <string name="quebra_linha">\n\n</string>
     <string name="excluir_favorito">Excluir favorito</string>
-    <string name="voce_quer_mesmo">Você quer mesmo excluir o item?</string>
+    <string name="voce_quer_mesmo_item">Você quer mesmo excluir o item?</string>
+    <string name="voce_quer_mesmo_conta">Você quer mesmo excluir a sua conta?</string>
     <string name="sim">Sim</string>
     <string name="Item_removido">Item removido</string>
     <string name="nao">Não</string>

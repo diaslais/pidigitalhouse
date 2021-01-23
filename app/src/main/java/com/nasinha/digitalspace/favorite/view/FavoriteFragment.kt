@@ -20,6 +20,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
+import com.google.android.material.snackbar.Snackbar
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
@@ -209,11 +210,10 @@ class FavoriteFragment : Fragment(), IFavorite {
     ) {
         val alertDialog = AlertDialog.Builder(_view.context)
         alertDialog.setTitle(getString(R.string.excluir_favorito))
-        alertDialog.setMessage(getString(R.string.voce_quer_mesmo))
+        alertDialog.setMessage(getString(R.string.voce_quer_mesmo_item))
         alertDialog.setPositiveButton(getString(R.string.sim)) { _, _ ->
             deleteOneFavoriteDb(position, favorite)
-            Toast.makeText(_view.context, getString(R.string.Item_removido), Toast.LENGTH_SHORT)
-                .show()
+            snackBarMessage(getString(R.string.Item_removido))
         }
         alertDialog.setNegativeButton(getString(R.string.nao)) { dialog, _ ->
             dialog.dismiss()
@@ -250,4 +250,7 @@ class FavoriteFragment : Fragment(), IFavorite {
         _favoriteAdapter.notifyDataSetChanged()
     }
 
+    private fun snackBarMessage(message: String) {
+        Snackbar.make(_view, message, Snackbar.LENGTH_LONG).show()
+    }
 }

@@ -117,6 +117,18 @@ class SettingsFragment : Fragment() {
         _settingsViewModel.error.observe(viewLifecycleOwner, { e ->
             snackBarMessage(e)
         })
+
+        _settingsViewModel.stateCredential.observe(viewLifecycleOwner, {
+            if (!it && AuthUtil.getUserProvider(requireActivity()) != PASSWORD) {
+                snackBarMessage("falha de autenticação")
+            }
+        })
+
+        _settingsViewModel.stateDelete.observe(viewLifecycleOwner,{
+            if(it){
+                snackBarMessage("Sua conta será excluída.")
+            }
+        })
     }
 
     private fun snackBarMessage(message: String) {
@@ -142,20 +154,41 @@ class SettingsFragment : Fragment() {
         val deleteBtn = _view.findViewById<MaterialButton>(R.id.mbDeleteAccountSettings)
         deleteBtn.setOnClickListener {
             deleteBtn.isEnabled = false
+
             Handler(Looper.getMainLooper()).postDelayed({
                 deleteBtn.isEnabled = true
             }, 1000)
+
             val provider = AuthUtil.getUserProvider(requireActivity())
+
             when (provider) {
                 PASSWORD -> {
                     val navController = findNavController()
                     navController.navigate(R.id.action_settingsFragment_to_bottomsheetPasswordFragment)
                 }
                 FACEBOOKCOM -> {
+                    confirmDialog()
                 }
                 GOOGLECOM -> {
+                    confirmDialog()
+                }
+                else -> {
+                    snackBarMessage("Por favor faça login novamente.")
                 }
             }
         }
+    }
+
+    private fun confirmDialog() {
+        val alertDialog = AlertDialog.Builder(_view.context)
+        alertDialog.setTitle("Excluir conta")
+        alertDialog.setMessage(getString(R.string.voce_quer_mesmo_conta))
+        alertDialog.setPositiveButton(getString(R.string.sim)) { _, _ ->
+            _settingsViewModel.getUserCredential(_view, null, null)
+        }
+        alertDialog.setNegativeButton(getString(R.string.nao)) { dialog, _ ->
+            dialog.dismiss()
+        }
+        alertDialog.show()
     }
 }

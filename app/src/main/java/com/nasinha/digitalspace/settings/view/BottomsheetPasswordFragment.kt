@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.android.material.bottomsheet.BottomSheetBehavior
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.google.android.material.snackbar.Snackbar
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.settings.viewmodel.SettingsViewModel
 
@@ -57,7 +58,13 @@ class BottomsheetPasswordFragment : BottomSheetDialogFragment() {
         initViewModel()
     }
 
-    private fun initViewModel() {
+    private fun snackBarMessage(message: String) {
+        Snackbar.make(_view, message, Snackbar.LENGTH_LONG).show()
+    }
 
+    private fun initViewModel() {
+        _settingsViewModel.error.observe(viewLifecycleOwner, { s ->
+            snackBarMessage(s)
+        })
     }
 }
