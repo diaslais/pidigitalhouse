@@ -29,7 +29,7 @@
         android:id="@+id/apodFragment"
         android:name="com.nasinha.digitalspace.apod.view.ApodFragment"
         android:label="fragment_apod"
-        tools:layout="@layout/fragment_apod" >
+        tools:layout="@layout/fragment_apod">
         <action
             android:id="@+id/action_apodFragment_to_landsScapeApodFragment"
             app:destination="@id/landsScapeApodFragment" />
@@ -162,20 +162,20 @@
             android:id="@+id/action_developerFragment_to_explorationFragment"
             app:destination="@id/explorationFragment" />
     </fragment>
-    <dialog
+    <fragment
         android:id="@+id/settingsFragment"
-        android:name="com.nasinha.digitalspace.dialogs.view.SettingsFragment"
+        android:name="com.nasinha.digitalspace.settings.view.SettingsFragment"
         android:label="fragment_settings"
-        tools:layout="@layout/fragment_settings" >
+        tools:layout="@layout/fragment_settings">
         <action
-            android:id="@+id/action_settingsFragment_to_apodFragment"
-            app:destination="@id/apodFragment" />
-    </dialog>
+            android:id="@+id/action_settingsFragment_to_bottomsheetPasswordFragment"
+            app:destination="@id/bottomsheetPasswordFragment" />
+    </fragment>
     <fragment
         android:id="@+id/favoriteScreenFragment"
         android:name="com.nasinha.digitalspace.favorite.view.FavoriteScreenFragment"
         android:label="fragment_favorite_screen"
-        tools:layout="@layout/fragment_favorite_screen" >
+        tools:layout="@layout/fragment_favorite_screen">
         <action
             android:id="@+id/action_favoriteScreenFragment_to_favoriteImageFragment"
             app:destination="@id/favoriteImageFragment" />
@@ -189,7 +189,7 @@
         android:id="@+id/questionsFragment"
         android:name="com.nasinha.digitalspace.quiz.view.QuestionsFragment"
         android:label="fragment_questions"
-        tools:layout="@layout/fragment_questions" >
+        tools:layout="@layout/fragment_questions">
         <action
             android:id="@+id/action_questionsFragment_to_scoreFragment"
             app:destination="@id/scoreFragment" />
@@ -203,7 +203,7 @@
         android:id="@+id/profileFragment"
         android:name="com.nasinha.digitalspace.profile.view.ProfileFragment"
         android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <action
             android:id="@+id/action_profileFragment_to_loginFragment"
             app:destination="@id/loginFragment"
@@ -213,7 +213,7 @@
         android:id="@+id/scoreFragment"
         android:name="com.nasinha.digitalspace.quiz.view.ScoreFragment"
         android:label="fragment_score"
-        tools:layout="@layout/fragment_score"/>
+        tools:layout="@layout/fragment_score" />
     <fragment
         android:id="@+id/forgotPasswordFragment"
         android:name="com.nasinha.digitalspace.authentication.view.ForgotPasswordFragment"
@@ -224,6 +224,11 @@
         android:name="com.nasinha.digitalspace.planetsmenu.view.BottomsheetFragment"
         android:label="fragment_bottomsheet"
         tools:layout="@layout/fragment_bottomsheet" />
+    <dialog
+        android:id="@+id/bottomsheetPasswordFragment"
+        android:name="com.nasinha.digitalspace.settings.view.BottomsheetPasswordFragment"
+        android:label="fragment_bottomsheet_password"
+        tools:layout="@layout/fragment_bottomsheet_password" />
 
 
 </navigation>

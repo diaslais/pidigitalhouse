@@ -44,4 +44,9 @@
     <style name="AppTheme.ProgressBarColor">
         <item name="colorAccent">@color/colorCorrectOption</item>
     </style>
+
+    <style name="DefaultTextInputLayoutStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="boxStrokeColor">@color/colorWhite</item>
+        <item name="boxStrokeWidth">1dp</item>
+    </style>
 </resources>

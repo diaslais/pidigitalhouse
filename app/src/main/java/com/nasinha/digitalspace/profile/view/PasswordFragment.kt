@@ -115,6 +115,7 @@ class PasswordFragment : Fragment() {
     private fun backBtnHandler() {
         val backBtn = _view.findViewById<ImageButton>(R.id.ibBackPassword)
         backBtn.setOnClickListener {
+            hideKeyboard(_view)
             requireActivity().onBackPressed()
         }
     }

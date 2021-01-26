@@ -12,6 +12,8 @@ object Constants {
     const val TITLE = "title"
     const val VIDEO = "video"
     const val PASSWORD = "password"
+    const val FACEBOOKCOM = "facebook.com"
+    const val GOOGLECOM = "google.com"
     const val COMPARTILHAR = "Compartilhar"
     const val SORT_PREFS = "SORT_PREFS"
     const val SWITCH_PREFS = "SWITCH_PREFS"

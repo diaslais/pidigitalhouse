@@ -54,4 +54,5 @@
     <dimen name="dim26dp">26dp</dimen>
     <dimen name="dim280dp">280dp</dimen>
     <dimen name="dim255dp">225dp</dimen>
+    <dimen name="dim8sp">8sp</dimen>
 </resources>

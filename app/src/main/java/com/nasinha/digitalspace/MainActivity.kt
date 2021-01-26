@@ -47,34 +47,41 @@ class MainActivity : AppCompatActivity() {
         navigationView.setNavigationItemSelectedListener {
             when (it.itemId) {
                 R.id.itemFavoritosMenu -> {
-                    _drawerLayout.closeDrawer(Gravity.LEFT, false)
+                    closeDrawer()
                     _navController.navigate(R.id.action_explorationFragment_to_favoriteFragment)
                 }
                 R.id.itemBibliografiaMenu -> {
-                    _drawerLayout.closeDrawer(Gravity.LEFT, false)
+                    closeDrawer()
                     _navController.navigate(R.id.action_explorationFragment_to_bibliographyFragment)
                 }
                 R.id.itemChangeProfileMenu -> {
-                    _drawerLayout.closeDrawer(Gravity.LEFT, false)
+                    closeDrawer()
                     _navController.navigate(R.id.action_explorationFragment_to_profileFragment)
                 }
                 R.id.itemChangePasswordMenu -> {
-                    _drawerLayout.closeDrawer(Gravity.LEFT, false)
+                    closeDrawer()
                     _navController.navigate(R.id.action_explorationFragment_to_changePasswordFragment)
                 }
                 R.id.itemDevelopersMenu -> {
-                    _drawerLayout.closeDrawer(Gravity.LEFT, false)
+                    closeDrawer()
                     _navController.navigate(R.id.action_explorationFragment_to_developerFragment)
                 }
-                R.id.itemSettingsMenu -> _navController.navigate(R.id.action_explorationFragment_to_settingsFragment)
+                R.id.itemSettingsMenu -> {
+                    closeDrawer()
+                    _navController.navigate(R.id.action_explorationFragment_to_settingsFragment)
+                }
                 R.id.itemExitMenu -> {
-                    _drawerLayout.closeDrawer(Gravity.LEFT, false)
+                    closeDrawer()
                     logout()
                 }
                 else -> Toast.makeText(this, "num deu", Toast.LENGTH_LONG).show()
             }
             true
         }
+    }
+
+    private fun closeDrawer(){
+        _drawerLayout.closeDrawer(Gravity.LEFT, false)
     }
 
     private fun logout() {

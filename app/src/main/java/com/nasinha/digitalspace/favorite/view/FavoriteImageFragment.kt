@@ -56,8 +56,7 @@ class FavoriteImageFragment : Fragment() {
         val imageView = _view.findViewById<ImageView>(R.id.ivImageFavoriteImage)
         val titleView = _view.findViewById<TextView>(R.id.tvTitleFavoriteImage)
 
-        Picasso.get().load(imageArgument).into(imageView)
-
+        Picasso.get().load(imageArgument).resize(600, 600).into(imageView)
         if (!titleArgument.isNullOrEmpty()) {
             titleView.text = titleArgument
         }

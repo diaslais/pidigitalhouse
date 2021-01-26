@@ -10,7 +10,6 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.AnticipateInterpolator
 import android.view.animation.AnticipateOvershootInterpolator
 import android.widget.Button
 import android.widget.ImageButton
@@ -21,7 +20,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import br.com.softbuilder.appplus2.presentation.extension.toggleSize
+import com.nasinha.digitalspace.extension.toggleSize
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -258,7 +257,8 @@ class LoginFragment : Fragment() {
                     .signInWithCredential(credential)
                     .addOnCompleteListener {
                         val profile = Profile.getCurrentProfile()
-                        val name = profile.name
+                        val name =
+                            if (profile.name == null) profile.name else _view.context.getString(R.string.explorador_espacial)
                         val image = profile.getProfilePictureUri(150, 150)
                         navigateToHomeFacebook(loginResult.accessToken.userId, name, image)
                     }

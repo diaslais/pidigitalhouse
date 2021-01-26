@@ -1,6 +1,9 @@
 package com.nasinha.digitalspace.planetsmenu.view
 
+import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -16,6 +19,7 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
+import com.nasinha.digitalspace.MainActivity
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.planetsmenu.model.Planet
 import com.nasinha.digitalspace.planetsmenu.repository.PlanetRepository
@@ -114,8 +118,15 @@ class PlanetsMenuFragment : Fragment(), IPlanetClick {
         text: String,
         title: String
     ) {
-        _planetsView.findViewById<MaterialButton>(btnId).setOnClickListener {
+        val planeta = _planetsView.findViewById<MaterialButton>(btnId)
+        planeta.setOnClickListener {
+            planeta.isEnabled = false
+
             val bundle = bundleOf("text" to text, "title" to title)
+
+            Handler(Looper.getMainLooper()).postDelayed({
+                planeta.isEnabled = true
+            }, 1000)
 
             _navController.navigate(
                 R.id.action_planetsMenuFragment_to_bottomsheetFragment,

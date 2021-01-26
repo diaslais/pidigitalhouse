@@ -109,9 +109,9 @@ object AuthUtil {
         }
     }
 
-    fun validateEmailPassword(email: String, password: String): Boolean {
+    fun validateEmailPassword(email: String?, password: String?): Boolean {
         return when {
-            email.isEmpty() || password.isEmpty() -> {
+            email.isNullOrEmpty() || password.isNullOrEmpty() -> {
                 false
             }
             !Patterns.EMAIL_ADDRESS.matcher(email).matches() -> {
