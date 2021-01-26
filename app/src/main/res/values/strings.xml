@@ -143,5 +143,6 @@
     <string name="erro_autenticacao">Problema de autenticação com sua senha</string>
     <string name="excluir_conta">Excluir Conta</string>
     <string name="tradu_o">Tradução</string>
+    <string name="Erro_validacao_signup">Problema de validação dos dados</string>
 
 </resources>

@@ -42,10 +42,8 @@
         <action
             android:id="@+id/action_signupFragment_to_loginFragment"
             app:destination="@id/loginFragment"
-            app:enterAnim="@android:anim/slide_in_left" />
-        <action
-            android:id="@+id/action_signupFragment_to_explorationFragment"
-            app:destination="@id/explorationFragment" />
+            app:enterAnim="@android:anim/slide_in_left"
+            app:popUpTo="@id/navigation_graph" />
     </fragment>
     <fragment
         android:id="@+id/bibliographyFragment"

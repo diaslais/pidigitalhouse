@@ -41,6 +41,7 @@ import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.utils.AuthUtil
 import com.nasinha.digitalspace.utils.AuthUtil.hideKeyboard
 import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
+import com.nasinha.digitalspace.utils.Constants.EMPTY_STRING
 import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 import kotlinx.android.synthetic.main.fragment_login.*
 
@@ -84,6 +85,7 @@ class LoginFragment : Fragment() {
             facebookLoginHandler()
         }
         facebookFakeBtn.setOnClickListener {
+            clearText()
             facebookRealBtn.performClick()
         }
 //        Google signup
@@ -128,11 +130,18 @@ class LoginFragment : Fragment() {
 
     private fun emailSignupHandler() {
         val signupEmailBtn = _view.findViewById<ImageButton>(R.id.imEmailLogin)
-
         signupEmailBtn.setOnClickListener {
+            clearText()
             val navController = Navigation.findNavController(_view)
             navController.navigate(R.id.action_loginFragment_to_signupFragment)
         }
+    }
+
+    private fun clearText() {
+        val emailView = _view.findViewById<TextInputEditText>(R.id.tietEmailLogin)
+        val passwordView = _view.findViewById<TextInputEditText>(R.id.tietPasswordLogin)
+        emailView.setText(EMPTY_STRING)
+        passwordView.setText(EMPTY_STRING)
     }
 
     private fun initViewModel() {
@@ -201,6 +210,7 @@ class LoginFragment : Fragment() {
         val googleSignInBtn = _view.findViewById<ImageButton>(R.id.imGoogleLogin)
 
         googleSignInBtn.setOnClickListener {
+            clearText()
 
             val gso = GoogleSignInOptions.Builder(GoogleSignInOptions.DEFAULT_SIGN_IN)
                 .requestIdToken(getString(R.string.default_web_client_id))
