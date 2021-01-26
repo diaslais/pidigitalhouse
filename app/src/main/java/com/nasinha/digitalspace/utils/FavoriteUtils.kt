@@ -35,9 +35,10 @@ object FavoriteUtils {
 
     fun dateModifier(date: String): String {
         return if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            val localeBr = Locale("pt", "BR")
             val parsedDate =
                 LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-            parsedDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG))
+            parsedDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(localeBr))
         } else {
             date
         }
