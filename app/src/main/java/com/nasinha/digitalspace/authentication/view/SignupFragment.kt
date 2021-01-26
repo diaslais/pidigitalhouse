@@ -68,7 +68,8 @@ class SignupFragment : Fragment() {
         val btnLogin = _view.findViewById<MaterialButton>(R.id.mbLoginSignup)
 
         btnLogin.setOnClickListener {
-            requireActivity().onBackPressed()
+            val navController = findNavController()
+            navController.navigate(R.id.action_signupFragment_to_loginFragment)
         }
     }
 
@@ -81,7 +82,8 @@ class SignupFragment : Fragment() {
         when {
             validateNameEmailPassword(name, email, password) -> {
                 viewModel.registerUser(requireActivity(), name, email, password)
-            }else ->{
+            }
+            else -> {
                 messageError(getString(R.string.Erro_validacao_signup))
             }
         }

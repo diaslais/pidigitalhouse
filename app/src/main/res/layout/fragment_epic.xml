@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -7,41 +8,45 @@
     android:orientation="vertical"
     tools:context=".epic.view.EpicFragment">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+    <ImageButton
+        android:id="@+id/btnBackEpic"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/dim10dp"
+        android:layout_marginTop="10dp"
+        android:background="@color/colorTransparent"
+        android:padding="@dimen/dim10dp"
+        android:src="@drawable/ic_baseline_arrow_back_24"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <ImageButton
-            android:id="@+id/btnBackEpic"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dim10dp"
-            android:layout_marginTop="@dimen/dim10dp"
-            android:background="@color/colorTransparent"
-            android:padding="@dimen/dim10dp"
-            android:src="@drawable/ic_baseline_arrow_back_24" />
-
-        <TextView
-            android:id="@+id/txtDate"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dim20dp"
-            android:layout_marginEnd="@dimen/dim20dp"
-            android:layout_weight="1"
-            android:fontFamily="@font/ubuntu_bold"
-            android:gravity="center|end"
-            android:maxLines="2"
-            android:textSize="@dimen/dim16sp"
-            tools:text="Última atualização da imagem: 16/11/2000" />
-    </LinearLayout>
+    <TextView
+        android:id="@+id/txtDate"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_weight="1"
+        android:fontFamily="@font/ubuntu_bold"
+        android:gravity="center|end"
+        android:maxLines="2"
+        android:textSize="@dimen/dim16sp"
+        app:layout_constraintBottom_toBottomOf="@+id/btnBackEpic"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/btnBackEpic"
+        app:layout_constraintTop_toTopOf="@+id/btnBackEpic"
+        tools:text="Última atualização da imagem: 16/11/2000" />
 
     <ImageView
         android:id="@+id/imgEpic"
         android:layout_width="match_parent"
         android:layout_height="@dimen/dim300dp"
         android:layout_gravity="center"
+        android:layout_marginTop="16dp"
         android:padding="@dimen/dim20dp"
         android:scaleType="centerCrop"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/btnBackEpic"
         tools:src="@drawable/epic_gatinho" />
 
     <LinearLayout
@@ -51,6 +56,10 @@
         android:layout_gravity="center"
         android:orientation="vertical"
         android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         tools:visibility="visible">
 
         <ProgressBar
@@ -69,17 +78,24 @@
 
     </LinearLayout>
 
-    <TextView
-        android:id="@+id/textView"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom"
-        android:padding="@dimen/dim10dp"
-        android:layout_margin="@dimen/dim20dp"
-        android:text="@string/explicacaoEPIC"
-        android:fontFamily="@font/ubuntu"
-        android:justificationMode="inter_word"
-        android:textSize="@dimen/dim16sp" />
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imgEpic">
 
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/dim20dp"
+            android:fontFamily="@font/ubuntu"
+            android:justificationMode="inter_word"
+            android:text="@string/explicacaoEPIC"
+            android:textSize="@dimen/dim16sp" />
 
-</FrameLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>
