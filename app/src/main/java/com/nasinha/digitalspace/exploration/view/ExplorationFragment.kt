@@ -18,8 +18,7 @@ import com.google.android.material.card.MaterialCardView
 import com.google.android.material.navigation.NavigationView
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.utils.AuthUtil
-import com.nasinha.digitalspace.utils.Constants.DIALOG_SHOWN
-import com.nasinha.digitalspace.utils.Constants.PREFS_NAME
+import com.nasinha.digitalspace.utils.Constants
 import com.nasinha.digitalspace.utils.DrawerUtils.unlockDrawer
 import com.squareup.picasso.Picasso
 
@@ -129,6 +128,14 @@ class ExplorationFragment : Fragment() {
         val imageDrawer = headerView.findViewById<ImageView>(R.id.ivImageNavHeader)
         val nameShared = AuthUtil.getUserName(requireActivity())
         val userImage = AuthUtil.getUserImage(requireActivity())
+
+        val provider = AuthUtil.getUserProvider(requireActivity())
+        if (provider != Constants.PASSWORD) {
+            val menuView = navigationView.menu
+            val passwordItem = menuView.findItem(R.id.itemChangePasswordMenu)
+            passwordItem.isVisible = false
+        }
+
         nameDrawer.text = nameShared
         if (userImage.isNullOrEmpty() || userImage == "null") {
             Picasso.get().load(R.drawable.user_placeholder).into(imageDrawer)

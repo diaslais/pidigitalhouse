@@ -80,7 +80,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun closeDrawer(){
+    private fun closeDrawer() {
         _drawerLayout.closeDrawer(Gravity.LEFT, false)
     }
 

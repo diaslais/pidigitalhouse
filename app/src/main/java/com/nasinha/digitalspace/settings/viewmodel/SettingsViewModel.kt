@@ -59,7 +59,7 @@ class SettingsViewModel(application: Application) : AndroidViewModel(application
                 }
                 else -> {
                     Log.d("TAG", "reauthenticate fail")
-                    errorMessage("Não foi possível autenticar o usuário, faça login novamente.")
+                    errorMessage("Não foi possível autenticar o usuário")
                 }
             }
         }
