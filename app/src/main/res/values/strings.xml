@@ -143,5 +143,9 @@
     <string name="erro_autenticacao">Problema de autenticação com sua senha</string>
     <string name="excluir_conta">Excluir Conta</string>
     <string name="tradu_o">Tradução</string>
+    <string name="explicacaoEPIC">Aqui você encontrará imagens diárias coletadas pelo instrumento
+        Earth Polychromatic Imaging Camera (EPIC) do DSCOVR, Deep Space Climate Observatory
+        (Observatório Climático do Espaço Profundo). O EPIC fornece imagens completas do globo terrestre
+        e captura perspectivas únicas de certos eventos astronômicos, como trânsitos lunares.</string>
 
 </resources>
