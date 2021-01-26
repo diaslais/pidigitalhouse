@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.appcompat.view.ContextThemeWrapper
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
@@ -67,7 +68,8 @@ class SignupFragment : Fragment() {
         val btnLogin = _view.findViewById<MaterialButton>(R.id.mbLoginSignup)
 
         btnLogin.setOnClickListener {
-            requireActivity().onBackPressed()
+            val navController = findNavController()
+            navController.navigate(R.id.action_signupFragment_to_loginFragment)
         }
     }
 
@@ -80,6 +82,9 @@ class SignupFragment : Fragment() {
         when {
             validateNameEmailPassword(name, email, password) -> {
                 viewModel.registerUser(requireActivity(), name, email, password)
+            }
+            else -> {
+                messageError(getString(R.string.Erro_validacao_signup))
             }
         }
 
@@ -108,7 +113,6 @@ class SignupFragment : Fragment() {
     private fun messageError(it: String) {
         val btnRegister = _view.findViewById<MaterialButton>(R.id.btnSignup)
         Snackbar.make(btnRegister, it, Snackbar.LENGTH_LONG).show()
-
     }
 
     private fun showloading(status: Boolean) {
@@ -127,7 +131,8 @@ class SignupFragment : Fragment() {
         if (isRegistered) {
             Snackbar.make(_view, getString(R.string.email_verificacao), Snackbar.LENGTH_LONG).show()
             Handler(Looper.getMainLooper()).postDelayed({
-                requireActivity().onBackPressed()
+                val navController = findNavController()
+                navController.navigate(R.id.action_signupFragment_to_loginFragment)
             }, 500)
         }
     }
