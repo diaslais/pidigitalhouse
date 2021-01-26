@@ -66,5 +66,20 @@
             android:text="@string/stay_a_while_and_listen"
             android:textSize="@dimen/dim16sp"
             android:textStyle="bold" />
+
     </LinearLayout>
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="bottom"
+        android:padding="@dimen/dim10dp"
+        android:layout_margin="@dimen/dim20dp"
+        android:text="@string/explicacaoEPIC"
+        android:fontFamily="@font/ubuntu"
+        android:justificationMode="inter_word"
+        android:textSize="@dimen/dim16sp" />
+
+
 </FrameLayout>
