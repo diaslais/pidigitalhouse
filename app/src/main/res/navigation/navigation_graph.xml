@@ -168,6 +168,10 @@
         <action
             android:id="@+id/action_settingsFragment_to_bottomsheetPasswordFragment"
             app:destination="@id/bottomsheetPasswordFragment" />
+        <action
+            android:id="@+id/action_settingsFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/navigation_graph" />
     </fragment>
     <fragment
         android:id="@+id/favoriteScreenFragment"
@@ -226,7 +230,12 @@
         android:id="@+id/bottomsheetPasswordFragment"
         android:name="com.nasinha.digitalspace.settings.view.BottomsheetPasswordFragment"
         android:label="fragment_bottomsheet_password"
-        tools:layout="@layout/fragment_bottomsheet_password" />
+        tools:layout="@layout/fragment_bottomsheet_password" >
+        <action
+            android:id="@+id/action_bottomsheetPasswordFragment_to_loginFragment"
+            app:destination="@id/loginFragment"
+            app:popUpTo="@id/navigation_graph" />
+    </dialog>
 
 
 </navigation>

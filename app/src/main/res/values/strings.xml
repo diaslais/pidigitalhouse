@@ -144,5 +144,8 @@
     <string name="excluir_conta">Excluir Conta</string>
     <string name="tradu_o">Tradução</string>
     <string name="Erro_validacao_signup">Problema de validação dos dados</string>
+    <string name="faca_login_novamente">Por favor faça login novamente</string>
+    <string name="conta_excluida">Sua conta foi excluída</string>
+    <string name="falha_autenticacao">falha de autenticação</string>
 
 </resources>

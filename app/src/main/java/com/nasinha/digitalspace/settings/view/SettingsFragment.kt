@@ -113,6 +113,13 @@ class SettingsFragment : Fragment() {
 
     }
 
+    private fun confirmButton() {
+        val confirmButtonSetting = _view.findViewById<MaterialButton>(R.id.confirmButtonSettings)
+        confirmButtonSetting.setOnClickListener {
+            requireActivity().onBackPressed()
+        }
+    }
+
     private fun initViewModel() {
         _settingsViewModel.error.observe(viewLifecycleOwner, { e ->
             snackBarMessage(e)
@@ -120,26 +127,24 @@ class SettingsFragment : Fragment() {
 
         _settingsViewModel.stateCredential.observe(viewLifecycleOwner, {
             if (!it && AuthUtil.getUserProvider(requireActivity()) != PASSWORD) {
-                snackBarMessage("falha de autenticação")
+                snackBarMessage(getString(R.string.falha_autenticacao))
             }
         })
 
-        _settingsViewModel.stateDelete.observe(viewLifecycleOwner,{
-            if(it){
-                snackBarMessage("Sua conta será excluída.")
+        _settingsViewModel.stateDelete.observe(viewLifecycleOwner, {
+            if (it) {
+                snackBarMessage(getString(R.string.conta_excluida))
+                val navController = findNavController()
+                if (AuthUtil.getUserProvider(requireActivity()) != PASSWORD) {
+                    AuthUtil.clearUserInfo(requireActivity())
+                    navController.navigate(R.id.action_settingsFragment_to_loginFragment)
+                }
             }
         })
     }
 
     private fun snackBarMessage(message: String) {
         Snackbar.make(_view, message, Snackbar.LENGTH_LONG).show()
-    }
-
-    private fun confirmButton() {
-        val confirmButtonSetting = _view.findViewById<MaterialButton>(R.id.confirmButtonSettings)
-        confirmButtonSetting.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
     }
 
     private fun closeBtn() {
@@ -173,7 +178,7 @@ class SettingsFragment : Fragment() {
                     confirmDialog()
                 }
                 else -> {
-                    snackBarMessage("Por favor faça login novamente.")
+                    snackBarMessage(getString(R.string.faca_login_novamente))
                 }
             }
         }
@@ -181,7 +186,7 @@ class SettingsFragment : Fragment() {
 
     private fun confirmDialog() {
         val alertDialog = AlertDialog.Builder(_view.context)
-        alertDialog.setTitle("Excluir conta")
+        alertDialog.setTitle(getString(R.string.excluir_conta))
         alertDialog.setMessage(getString(R.string.voce_quer_mesmo_conta))
         alertDialog.setPositiveButton(getString(R.string.sim)) { _, _ ->
             _settingsViewModel.getUserCredential(_view, null, null)
