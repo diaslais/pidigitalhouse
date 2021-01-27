@@ -47,14 +47,15 @@
             android:text="Veja seus melhores resultados!"
             android:fontFamily="@font/ubuntu_bold"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dim20sp"/>
+            android:textSize="@dimen/dim18sp"/>
 
         <ImageView
             android:layout_width="wrap_content"
-            android:layout_height="200dp"
+            android:layout_height="190dp"
             android:src="@drawable/trophy_moon"/>
 
         <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recyclerScore"
             android:layout_marginVertical="20dp"
             android:layout_marginHorizontal="20dp"
             android:layout_width="match_parent"

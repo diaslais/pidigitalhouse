@@ -5,8 +5,12 @@ import com.nasinha.digitalspace.quiz.entity.Score
 
 class QuizRepository (private val quizDao: QuizDao) {
 
-    suspend fun addScore(score: Score) = quizDao.addScore(score)
-    fun readScoreData() = quizDao.readScoreData()
     fun readQuestionsData() = quizDao.readQuestionsData()
+
+    suspend fun addScore(score: Score) = quizDao.addScore(score)
+
+    suspend fun deleteScore(score: Score) = quizDao.deleteScore(score)
+
+    suspend fun readScoreData(userId: String) = quizDao.readScoreData(userId)
 
 }

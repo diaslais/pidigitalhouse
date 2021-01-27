@@ -11,5 +11,7 @@ data class Score (
     @ColumnInfo
     var date: String?,
     @ColumnInfo
-    var points: Int?
+    var points: Int?,
+    @ColumnInfo
+    var userId: String?
 )
