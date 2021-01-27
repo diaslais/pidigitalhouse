@@ -25,6 +25,7 @@ abstract class QuizDatabase: RoomDatabase() {
                 INSTANCE = Room
                     .databaseBuilder(context.applicationContext, QuizDatabase::class.java,"quiz")
                     .createFromAsset("database/questions.db")
+                    .fallbackToDestructiveMigration()
                     .build()
             }
             return INSTANCE!!

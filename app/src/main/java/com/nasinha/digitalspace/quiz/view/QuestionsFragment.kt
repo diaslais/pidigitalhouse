@@ -253,34 +253,11 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
         val userId = AuthUtil.getUserId(requireActivity().application)!!
 
-        //cria um score com a data e pontos do jogo atual
         val currentScore = Score(null, date, points, userId)
 
-        //adiciona esse jogo na tabela score
         _viewModel.addScore(currentScore).observe(viewLifecycleOwner) {}
-        Toast.makeText(_view.context, "Enviado para o database", Toast.LENGTH_LONG).show()
-
-        //acha o score com a menor pontuação e deleta ele
-        _viewModel.deleteMinimum(userId).observe(viewLifecycleOwner){}
 
     }
-
-    //(faz o mesmo do que a função delete minimum)
-//        _viewModel.readScoreData(userId).observe(viewLifecycleOwner) {
-//
-//            if(it.size > 5) {
-//                var minScore: Score? = null
-//                for (score in it) {
-//                    if (minScore == null) minScore = score
-//                    if (score.points!! < minScore.points!!) {
-//                        minScore = score
-//                    }
-//                }
-//                if (minScore != null) {
-//                    _viewModel.deleteScore(minScore).observe(viewLifecycleOwner){}
-//                    Toast.makeText(_view.context, "Deletou o menor score do db", Toast.LENGTH_LONG).show()
-//                }
-//            }
 
     private fun getCurrentDateTime(): String {
         val currentDate = Calendar.getInstance().time
