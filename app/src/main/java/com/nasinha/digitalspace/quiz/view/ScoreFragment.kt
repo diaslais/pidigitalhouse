@@ -7,8 +7,12 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.quiz.db.QuizDatabase
+import com.nasinha.digitalspace.quiz.entity.Score
 import com.nasinha.digitalspace.quiz.repository.QuizRepository
 import com.nasinha.digitalspace.quiz.viewmodel.QuizViewModel
 import com.nasinha.digitalspace.utils.AuthUtil
@@ -45,9 +49,9 @@ class ScoreFragment : Fragment() {
             )
         ).get(QuizViewModel::class.java)
 
-        val positions = arrayListOf<String>("#1", "#2", "#3", "#4", "#5")
+        val positions = listOf<String>("#1", "#2", "#3", "#4", "#5")
 
-        val trophies = arrayListOf<Int>(
+        val trophies = listOf<Int>(
             R.drawable.ic_baseline_emoji_events_24_gold,
             R.drawable.ic_baseline_emoji_events_24_silver,
             R.drawable.ic_baseline_emoji_events_24_bronze
@@ -55,7 +59,17 @@ class ScoreFragment : Fragment() {
 
         val userId = AuthUtil.getUserId(requireActivity().application)!!
 
+        viewModel.readScoreData(userId).observe(viewLifecycleOwner) {
+            makeScoreRecyclerview(it, positions, trophies)
+        }
     }
 
+    private fun makeScoreRecyclerview(scores: List<Score>, positions: List<String>, trophies: List<Int>) {
+        val recyclerView = _scoreView.findViewById<RecyclerView>(R.id.recyclerScore)
+
+        recyclerView.adapter = ScoreAdapter(scores, positions, trophies)
+        recyclerView.setHasFixedSize(true)
+        recyclerView.layoutManager = LinearLayoutManager(context)
+    }
 
 }

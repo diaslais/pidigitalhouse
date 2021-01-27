@@ -31,10 +31,10 @@ class QuizViewModel (private val repository: QuizRepository): ViewModel() {
     }
 
     //le a lista de jogos desse usuário
-//    fun readScoreData(userId: String) = liveData(Dispatchers.IO) {
-//        val result = repository.readScoreData(userId)
-//        emit(result)
-//    }
+    fun readScoreData(userId: String) = liveData(Dispatchers.IO) {
+        val result = repository.readScoreData(userId)
+        emit(result)
+    }
 
     //pega a lista de jogos desse usuario e deleta o jogo com a menor pontuação
     fun deleteMinimum(userId: String) = liveData(Dispatchers.IO) {
