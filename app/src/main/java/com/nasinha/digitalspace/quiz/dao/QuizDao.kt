@@ -19,6 +19,6 @@ interface QuizDao {
     @Delete
     suspend fun deleteScore(score: Score)
 
-    @Query(value = "SELECT * FROM score WHERE userId = :userId ORDER BY points ASC LIMIT 5")
+    @Query(value = "SELECT * FROM score WHERE userId = :userId ORDER BY points DESC LIMIT 5")
     suspend fun readScoreData(userId: String): List<Score>
 }
