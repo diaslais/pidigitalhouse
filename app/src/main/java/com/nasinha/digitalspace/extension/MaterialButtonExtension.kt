@@ -57,15 +57,15 @@ fun MaterialButton.toggleSize(loading : Boolean){
             }
         }
     } else {
-        params.width = ViewGroup.LayoutParams.MATCH_PARENT
-        params.height = ViewGroup.LayoutParams.MATCH_PARENT
+        params.width = ViewGroup.LayoutParams.WRAP_CONTENT
+        params.height = ViewGroup.LayoutParams.WRAP_CONTENT
 
         v.icon = null
         v.cornerRadius = dpToPx(8.0).toInt()
         v.setPadding(
-            dpToPx(64.0).toInt(),
+            dpToPx(40.0).toInt(),
             0,
-            dpToPx(64.0).toInt(),
+            dpToPx(40.0).toInt(),
             0
         )
 
