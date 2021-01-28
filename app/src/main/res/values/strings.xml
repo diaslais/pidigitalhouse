@@ -151,5 +151,7 @@
         Earth Polychromatic Imaging Camera (EPIC) do DSCOVR, Deep Space Climate Observatory
         (Observatório Climático do Espaço Profundo). O EPIC fornece imagens completas do globo terrestre
         e captura perspectivas únicas de certos eventos astronômicos, como trânsitos lunares.</string>
+    <string name="imagem_atualizada">Imagem atualizada com sucesso</string>
+    <string name="confirme_seu_email_e_senha">Confirme seu email e senha</string>
 
 </resources>

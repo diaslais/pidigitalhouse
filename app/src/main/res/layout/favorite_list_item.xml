@@ -82,8 +82,8 @@
                 android:background="@color/colorTransparent"
                 android:contentDescription="@string/icon_favorite"
                 android:paddingHorizontal="@dimen/dim10dp"
-                android:src="@drawable/ic_outline_delete_24"
-                app:tint="@color/colorRed" />
+                android:src="@drawable/ic_baseline_star_24"
+                app:tint="@color/colorGold" />
         </LinearLayout>
     </LinearLayout>
 </com.google.android.material.card.MaterialCardView>

@@ -2,16 +2,20 @@ package com.nasinha.digitalspace.profile.viewmodel
 
 import android.app.Application
 import android.net.Uri
+import android.util.Log
 import android.view.View
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.MutableLiveData
+import com.facebook.AccessToken
+import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.material.snackbar.Snackbar
-import com.google.firebase.auth.EmailAuthProvider
-import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.auth.*
 import com.google.firebase.auth.ktx.userProfileChangeRequest
 import com.google.firebase.storage.FirebaseStorage
 import com.nasinha.digitalspace.R
+import com.nasinha.digitalspace.utils.AuthUtil
 import com.nasinha.digitalspace.utils.AuthUtil.saveUserName
+import com.nasinha.digitalspace.utils.Constants
 import com.nasinha.digitalspace.utils.ProfileUtils
 
 class ProfileViewModel(application: Application) : AndroidViewModel(application) {
@@ -20,6 +24,8 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
     var stateUserImage: MutableLiveData<String> = MutableLiveData()
     var stateUserPassword: MutableLiveData<Boolean> = MutableLiveData()
     var stateLoading: MutableLiveData<Boolean> = MutableLiveData()
+    var stateDelete = MutableLiveData<Boolean>()
+    var stateDeletePassword = MutableLiveData<Boolean>()
     var error: MutableLiveData<String> = MutableLiveData()
 
     fun updateUserName(
@@ -52,28 +58,28 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
 
     fun updateUserEmail(
         view: View,
-        email: String,
+        newEmail: String,
+        oldEmail: String,
+        password: String
     ) {
         val user = FirebaseAuth.getInstance().currentUser
         stateLoading.value = true
+
         if (user != null) {
-            user.updateEmail(email).addOnCompleteListener { task ->
+            val credential = EmailAuthProvider.getCredential(oldEmail, password)
+
+            user.reauthenticate(credential).addOnCompleteListener { task ->
                 when {
                     task.isSuccessful -> {
-                        user.sendEmailVerification().addOnCompleteListener { taskVerification ->
-                            stateLoading.value = false
-
+                        user.updateEmail(newEmail).addOnCompleteListener { task ->
                             when {
-                                (taskVerification.isSuccessful) -> {
-                                    Snackbar.make(
-                                        view,
-                                        view.context.getString(R.string.email_verificacao),
-                                        Snackbar.LENGTH_LONG
-                                    ).show()
-                                    stateUserEmail.value = true
+                                task.isSuccessful -> {
+                                    emailVerification(view, user)
                                 }
                                 else -> {
-                                    errorMessage(view.context.getString(R.string.problema_email_verificacao))
+                                    errorMessage(view.context.getString(R.string.falha_email))
+                                    stateLoading.value = false
+                                    stateUserEmail.value = false
                                 }
                             }
                         }
@@ -88,7 +94,26 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
-    fun updateUserPhoto(view: View, imageUri: Uri?)  {
+    private fun emailVerification(view: View, user: FirebaseUser) {
+        user.sendEmailVerification().addOnCompleteListener { taskVerification ->
+            stateLoading.value = false
+            when {
+                (taskVerification.isSuccessful) -> {
+                    Snackbar.make(
+                        view,
+                        view.context.getString(R.string.email_verificacao),
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                    stateUserEmail.value = true
+                }
+                else -> {
+                    errorMessage(view.context.getString(R.string.problema_email_verificacao))
+                }
+            }
+        }
+    }
+
+    fun updateUserPhoto(view: View, imageUri: Uri?) {
         var imageUrl: String = ""
         val user = FirebaseAuth.getInstance().currentUser
         stateLoading.value = true
@@ -148,13 +173,12 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
                     task.isSuccessful -> {
                         user.updatePassword(newUserPassword)
                             .addOnCompleteListener { newPasswordTask ->
+                                stateLoading.value = false
                                 when {
                                     newPasswordTask.isSuccessful -> {
-                                        stateLoading.value = false
                                         stateUserPassword.value = true
                                     }
                                     else -> {
-                                        stateLoading.value = false
                                         errorMessage(view.context.getString(R.string.erro_alterar_senha))
                                     }
                                 }
@@ -169,7 +193,85 @@ class ProfileViewModel(application: Application) : AndroidViewModel(application)
         }
     }
 
+    fun getUserCredential(view: View, userEmail: String?, userPassword: String?) {
+        val user = FirebaseAuth.getInstance().currentUser
+        stateLoading.value = true
+        if (user != null) {
+            when (AuthUtil.getUserProvider(view.context)) {
+                Constants.PASSWORD -> {
+                    Log.d(TAG, "email user")
+                    if (AuthUtil.validateEmailPassword(userEmail, userPassword)) {
+                        val credential =
+                            EmailAuthProvider.getCredential(userEmail!!, userPassword!!)
+                        reauthenticateUser(user, credential)
+                    } else {
+                        stateLoading.value = false
+                        Log.d(TAG, "email user fail auth")
+                        errorMessage("Preencha os campos corretamente")
+                    }
+                }
+                Constants.GOOGLECOM -> {
+                    Log.d(TAG, "google user")
+                    val acc = GoogleSignIn.getLastSignedInAccount(view.context)
+                    val credential = GoogleAuthProvider.getCredential(acc?.idToken, null)
+                    reauthenticateUser(user, credential)
+                }
+                Constants.FACEBOOKCOM -> {
+                    Log.d(TAG, "facebook user")
+                    val acc = AccessToken.getCurrentAccessToken().token.toString()
+                    val credential = FacebookAuthProvider.getCredential(acc)
+                    reauthenticateUser(user, credential)
+                }
+            }
+
+        }
+    }
+
+    private fun reauthenticateUser(user: FirebaseUser, credential: AuthCredential) {
+        user.reauthenticate(credential).addOnCompleteListener { task ->
+            when {
+                task.isSuccessful -> {
+                    Log.d(TAG, "reauthenticated user")
+                    deleteUser(user)
+                }
+                else -> {
+                    stateLoading.value = false
+                    Log.d(TAG, "reauthenticate fail")
+                    errorMessage("Não foi possível autenticar o usuário")
+                }
+            }
+        }
+    }
+
+    fun deleteUser(user: FirebaseUser) {
+        user.delete().addOnCompleteListener { task ->
+            stateLoading.value = false
+            when {
+                task.isSuccessful -> {
+                    Log.d(TAG, "user deleted")
+                    when {
+                        (AuthUtil.getUserProvider(getApplication()) == Constants.PASSWORD) -> {
+                            stateDeletePassword.value = true
+                        }
+                        else -> {
+                            stateDelete.value = true
+                        }
+                    }
+                }
+                else -> {
+                    Log.d(TAG, "fail to delete user")
+                    errorMessage("Não foi possível excluir a conta")
+                    stateDelete.value = false
+                }
+            }
+        }
+    }
+
     private fun errorMessage(s: String) {
         error.value = s
+    }
+
+    companion object {
+        const val TAG = "settingsDelete"
     }
 }

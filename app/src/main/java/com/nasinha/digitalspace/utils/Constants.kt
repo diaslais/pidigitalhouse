@@ -20,7 +20,5 @@ object Constants {
     const val IMGAPOD = "IMGAPOD"
     const val READ_STORAGE_PERMISSION_CODE = 1
     const val PICK_IMAGE_REQUEST_CODE = 2
-    const val PREFS_NAME = "welcome_prefs"
-    const val DIALOG_SHOWN = "dialog_shown"
     const val NUMBER_QUESTIONS = 10
 }
