@@ -20,6 +20,7 @@ import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.nasinha.digitalspace.R
+import com.nasinha.digitalspace.profile.viewmodel.ProfileViewModel
 import com.nasinha.digitalspace.settings.viewmodel.SettingsViewModel
 import com.nasinha.digitalspace.utils.AuthUtil
 import com.nasinha.digitalspace.utils.Constants.APP_KEY
@@ -32,8 +33,8 @@ import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
 class SettingsFragment : Fragment() {
 
     private lateinit var _view: View
-    private val _settingsViewModel: SettingsViewModel by lazy {
-        ViewModelProvider(this).get(SettingsViewModel::class.java)
+    private val _profileViewModel: ProfileViewModel by lazy {
+        ViewModelProvider(this).get(ProfileViewModel::class.java)
     }
 
     override fun onCreateView(
@@ -121,17 +122,11 @@ class SettingsFragment : Fragment() {
     }
 
     private fun initViewModel() {
-        _settingsViewModel.error.observe(viewLifecycleOwner, { e ->
+        _profileViewModel.error.observe(viewLifecycleOwner, { e ->
             snackBarMessage(e)
         })
 
-        _settingsViewModel.stateCredential.observe(viewLifecycleOwner, {
-            if (!it && AuthUtil.getUserProvider(requireActivity()) != PASSWORD) {
-                snackBarMessage(getString(R.string.falha_autenticacao))
-            }
-        })
-
-        _settingsViewModel.stateDelete.observe(viewLifecycleOwner, {
+        _profileViewModel.stateDelete.observe(viewLifecycleOwner, {
             if (it) {
                 snackBarMessage(getString(R.string.conta_excluida))
                 val navController = findNavController()
@@ -189,7 +184,7 @@ class SettingsFragment : Fragment() {
         alertDialog.setTitle(getString(R.string.excluir_conta))
         alertDialog.setMessage(getString(R.string.voce_quer_mesmo_conta))
         alertDialog.setPositiveButton(getString(R.string.sim)) { _, _ ->
-            _settingsViewModel.getUserCredential(_view, null, null)
+            _profileViewModel.getUserCredential(_view, null, null)
         }
         alertDialog.setNegativeButton(getString(R.string.nao)) { dialog, _ ->
             dialog.dismiss()

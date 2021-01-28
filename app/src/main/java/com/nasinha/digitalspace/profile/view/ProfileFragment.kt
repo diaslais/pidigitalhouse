@@ -16,6 +16,7 @@ import android.widget.ImageButton
 import android.widget.ImageView
 import android.widget.ProgressBar
 import androidx.core.content.ContextCompat
+import androidx.core.os.bundleOf
 import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -41,6 +42,7 @@ import com.nasinha.digitalspace.utils.Constants
 import com.nasinha.digitalspace.utils.Constants.PASSWORD
 import com.nasinha.digitalspace.utils.Constants.PICK_IMAGE_REQUEST_CODE
 import com.nasinha.digitalspace.utils.Constants.READ_STORAGE_PERMISSION_CODE
+import com.nasinha.digitalspace.utils.Constants.USER_EMAIL
 import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 import com.squareup.picasso.Picasso
 
@@ -111,7 +113,7 @@ class ProfileFragment : Fragment() {
             }
         })
 
-        _profileViewModel.stateUserEmail.observe(viewLifecycleOwner, { state ->
+/*        _profileViewModel.stateUserEmail.observe(viewLifecycleOwner, { state ->
             hideKeyboard(_view)
             state?.let {
                 if (it) {
@@ -120,11 +122,11 @@ class ProfileFragment : Fragment() {
                     navigateHome(it)
                 }
             }
-        })
+        })*/
 
         _profileViewModel.stateUserImage.observe(viewLifecycleOwner, { state ->
             state?.let {
-                snackBarMessage("Imagem atualizada")
+                snackBarMessage(getString(R.string.imagem_atualizada))
                 saveUserImage(_view.context, state)
                 hideConfirmImageButton()
             }
@@ -207,8 +209,7 @@ class ProfileFragment : Fragment() {
         ) {
             showImagePicker()
         } else {
-            Snackbar.make(_view, getString(R.string.permissao_negada), Snackbar.LENGTH_SHORT)
-                .show()
+            snackBarMessage(getString(R.string.permissao_negada))
         }
     }
 
@@ -312,9 +313,15 @@ class ProfileFragment : Fragment() {
                     snackBarMessage(getString(R.string.email_confirmado))
                 }
                 else -> {
-                    _profileViewModel.updateUserEmail(
-                        _view,
-                        emailTextInputView.text.toString()
+                    confirmEmailBtn.isEnabled = false
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        confirmEmailBtn.isEnabled = true
+                    }, 1000)
+
+                    val bundle = bundleOf(USER_EMAIL to emailTextInputView.text.toString())
+                    _navController.navigate(
+                        R.id.action_profileFragment_to_bottomsheetPasswordFragment,
+                        bundle
                     )
                 }
             }
@@ -363,15 +370,6 @@ class ProfileFragment : Fragment() {
         confirmPhotoBtn.visibility = View.GONE
     }
 
-    private fun navigateHome(isUpdated: Boolean) {
-        if (isUpdated) {
-            Handler(Looper.getMainLooper()).postDelayed({
-                AuthUtil.hideKeyboard(_view)
-                _authenticatorViewModel.signOutUser(requireActivity())
-                _navController.navigate(R.id.action_profileFragment_to_loginFragment)
-            }, 2000)
-        }
-    }
 
     private fun snackBarMessage(message: String) {
         Snackbar.make(
@@ -384,6 +382,7 @@ class ProfileFragment : Fragment() {
     private fun backBtnHandler() {
         val backBtn = _view.findViewById<ImageButton>(R.id.ibBackProfile)
         backBtn.setOnClickListener {
+            hideKeyboard(_view)
             requireActivity().onBackPressed()
         }
     }

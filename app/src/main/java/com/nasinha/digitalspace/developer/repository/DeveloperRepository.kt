@@ -19,7 +19,7 @@ class DeveloperRepository(private val developerDao: DeveloperDao) {
                 "https://avatars3.githubusercontent.com/u/53455525?s=400&u=48e7cf6b27239f95a546f14b3f5284612a64d300&v=4",
                 "Lais Dias",
                 "",
-                "bio",
+                "Pessoa Desensenvolvedora Android",
                 "https://www.linkedin.com/",
                 "https://github.com/diaslais"
             ), DeveloperEntity(
@@ -27,7 +27,7 @@ class DeveloperRepository(private val developerDao: DeveloperDao) {
                 "https://avatars0.githubusercontent.com/u/67712448?s=400&u=a7e6476cdc9e1dc46599e7f89be03ec0d1f17e52&v=4",
                 "Mariana Marcelli",
                 "",
-                "bio",
+                "Pessoa Desensenvolvedora Android",
                 "https://www.linkedin.com/",
                 "https://github.com/MarianaMarcelli"
             ), DeveloperEntity(
@@ -35,7 +35,7 @@ class DeveloperRepository(private val developerDao: DeveloperDao) {
                 "https://avatars0.githubusercontent.com/u/52797828?s=460&u=b419f032286ae7d7f90f6a8a38e4b2e6510d3710&v=4",
                 "Paulo Silva",
                 "",
-                "bio",
+                "Pessoa Desensenvolvedora Android",
                 "https://www.linkedin.com/in/pauloesilva/",
                 "https://github.com/paulo4fs"
             ), DeveloperEntity(
@@ -43,7 +43,7 @@ class DeveloperRepository(private val developerDao: DeveloperDao) {
                 "https://avatars1.githubusercontent.com/u/41019069?s=400&u=a155e71b95b525e9bcce7b108afa45d2c41a755f&v=4",
                 "Renan Damasceno",
                 "",
-                "bio",
+                "Pessoa Desensenvolvedora Android",
                 "https://www.linkedin.com/",
                 "https://github.com/renandamasceno"
             )
