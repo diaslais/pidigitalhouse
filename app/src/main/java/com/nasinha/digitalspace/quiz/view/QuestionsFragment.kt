@@ -261,7 +261,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
     private fun getCurrentDateTime(): String {
         val currentDate = Calendar.getInstance().time
-        val formatter = SimpleDateFormat("dd/mm/yyyy", Locale.getDefault())
+        val formatter = SimpleDateFormat("dd/MM/yyyy", Locale.getDefault())
 
         return formatter.format(currentDate)
     }
