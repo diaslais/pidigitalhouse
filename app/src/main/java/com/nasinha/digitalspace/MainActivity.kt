@@ -50,6 +50,10 @@ class MainActivity : AppCompatActivity() {
                     closeDrawer()
                     _navController.navigate(R.id.action_explorationFragment_to_favoriteFragment)
                 }
+                R.id.itemScoreMenu -> {
+                    _drawerLayout.closeDrawer(Gravity.LEFT, false)
+                    _navController.navigate(R.id.action_explorationFragment_to_scoreFragment)
+                }
                 R.id.itemBibliografiaMenu -> {
                     closeDrawer()
                     _navController.navigate(R.id.action_explorationFragment_to_bibliographyFragment)
