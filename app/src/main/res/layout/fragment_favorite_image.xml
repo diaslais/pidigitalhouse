@@ -12,8 +12,9 @@
         android:layout_height="match_parent"
         android:layout_gravity="center"
         android:scaleType="fitCenter"
-        android:scaleX="1"
-        android:scaleY="1"
+        android:scaleX="1.6"
+        android:scaleY="1.4"
+        android:rotation="90"
         tools:src="@tools:sample/backgrounds/scenic" />
 
     <LinearLayout
