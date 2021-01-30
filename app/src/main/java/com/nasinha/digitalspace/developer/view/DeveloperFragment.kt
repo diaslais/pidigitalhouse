@@ -88,11 +88,12 @@ class DeveloperFragment : Fragment(), IDeveloper {
     }
 
     private fun initialize() {
-        _developerViewModel.getAllDeveloper().observe(viewLifecycleOwner, {
-            if (it.isEmpty()) {
+        _developerViewModel.getAllDeveloper().observe(viewLifecycleOwner, { developers ->
+            if (developers.isEmpty()) {
                 setAllDevelopersDb()
+            } else {
+                addAllDevelopers(developers)
             }
-            addAllDevelopers(it)
         })
     }
 
@@ -101,6 +102,7 @@ class DeveloperFragment : Fragment(), IDeveloper {
             it.forEach { developer ->
                 addDeveloperDb(developer)
             }
+            addAllDevelopers(it)
         })
     }
 

@@ -21,7 +21,6 @@ import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.profile.viewmodel.ProfileViewModel
-import com.nasinha.digitalspace.settings.viewmodel.SettingsViewModel
 import com.nasinha.digitalspace.utils.AuthUtil
 import com.nasinha.digitalspace.utils.Constants.APP_KEY
 import com.nasinha.digitalspace.utils.Constants.FACEBOOKCOM
