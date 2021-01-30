@@ -24,7 +24,7 @@ class FavoriteAdapter(
         val item = _favorites[position]
 
         val image = item.image
-        val title = if (_translateChecked) item.titleBr else item.title
+        val title = if (_translateChecked && !item.titleBr.isNullOrEmpty()) item.titleBr else item.title
         val date = item.date
         val type = item.type
 

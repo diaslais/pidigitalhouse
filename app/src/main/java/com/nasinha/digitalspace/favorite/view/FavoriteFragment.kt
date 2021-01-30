@@ -165,13 +165,11 @@ class FavoriteFragment : Fragment(), IFavorite {
                 val index = _favoriteList.indexOf(favorite)
 
                 if (!favorite.title.isNullOrEmpty() && favorite.titleBr.isNullOrEmpty()) {
+
                     englishPortugueseTranslator.translate(favorite.title!!)
                         .addOnSuccessListener { result ->
                             _favoriteViewModel.updateTitleBr(favorite.image, result)
-                                .observe(viewLifecycleOwner, {
-                                    favorite.titleBr = result
-                                    _favoriteAdapter.notifyItemChanged(index)
-                                })
+                                .observe(viewLifecycleOwner, { })
                         }.addOnFailureListener { _ ->
                             favorite.title = favorite.title
                         }
@@ -181,10 +179,7 @@ class FavoriteFragment : Fragment(), IFavorite {
                     englishPortugueseTranslator.translate(favorite.text!!)
                         .addOnSuccessListener { result ->
                             _favoriteViewModel.updateTextBr(favorite.image, result)
-                                .observe(viewLifecycleOwner, {
-                                    favorite.textBr = result
-                                    _favoriteAdapter.notifyItemChanged(index)
-                                })
+                                .observe(viewLifecycleOwner, { })
                         }.addOnFailureListener { _ ->
                             favorite.text = favorite.text
                         }
