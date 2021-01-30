@@ -41,7 +41,7 @@
             android:layout_height="@dimen/dim300dp"
             android:layout_marginTop="@dimen/dim10dp"
             android:layout_marginBottom="@dimen/dim9dp"
-            android:visibility="gone"/>
+            android:visibility="gone" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -64,10 +64,16 @@
                 tools:text="@tools:sample/lorem[20]" />
 
             <ImageButton
+                android:id="@+id/btnTranslateAlert"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:background="@color/colorTransparent"
+                android:src="@drawable/ic_baseline_translate_24" />
+
+            <ImageButton
                 android:id="@+id/ibShareFavoriteItem"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/dim10dp"
                 android:background="@color/colorTransparent"
                 android:padding="@dimen/dim10dp"
                 android:src="@drawable/ic_baseline_share_24"
@@ -98,10 +104,10 @@
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/dim20dp"
                 android:fontFamily="@font/ubuntu"
-                android:textSize="@dimen/dim16sp"
                 android:lineSpacingExtra="@dimen/dim2sp"
                 android:scrollbars="vertical"
                 android:textColor="@color/colorWhite"
+                android:textSize="@dimen/dim16sp"
                 tools:text="@tools:sample/lorem/random" />
         </ScrollView>
     </LinearLayout>
