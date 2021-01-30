@@ -9,6 +9,8 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.LinearLayout
+import android.widget.ProgressBar
 import android.widget.Toast
 import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
@@ -56,9 +58,7 @@ class SettingsFragment : Fragment() {
         _view = view
 
         val switchButton = _view.findViewById<SwitchCompat>(R.id.btnSwitchTranslate)
-
         val prefs = activity?.getSharedPreferences(APP_KEY, AppCompatActivity.MODE_PRIVATE)
-
         val prefsChecked = prefs?.getBoolean(SWITCH_PREFS, false)
 
         if (prefsChecked != null) {
@@ -66,7 +66,6 @@ class SettingsFragment : Fragment() {
         }
 
         closeBtn()
-        confirmButton()
         initViewModel()
         deleteAccountHandler()
 
@@ -75,30 +74,13 @@ class SettingsFragment : Fragment() {
             prefs?.edit()?.putBoolean(SWITCH_PREFS, isChecked)?.apply()
 
             if (isChecked) {
-
-                val englishPortugueseTranslator = Translation.getClient(options())
-
-                englishPortugueseTranslator.downloadModelIfNeeded(conditions())
-                    .addOnSuccessListener {
-                        // Model downloaded successfully. Okay to start translating.
-                        // (Set a flag, unhide the translation UI, etc.)
-
-
-                        Log.d("message", "concluido")
-
-                    }
-                    .addOnFailureListener {
-                        // Model couldn’t be downloaded or other internal error.
-                        // ...
-                        Log.d("message", "${it.message}")
-
-                    }
-
                 val alertDialog = AlertDialog.Builder(_view.context)
 
                 alertDialog.setTitle(getString(R.string.alerta_traducao))
                 alertDialog.setMessage(getString(R.string.message_traducao))
                 alertDialog.setPositiveButton(getString(R.string.sim)) { dialog, _ ->
+                    translateDownload()
+                    showLoading(true)
                     dialog.dismiss()
 
                 }
@@ -109,16 +91,34 @@ class SettingsFragment : Fragment() {
                 alertDialog.show()
 
 
+            } else {
+                showLoading(false)
             }
         }
 
     }
 
-    private fun confirmButton() {
-        val confirmButtonSetting = _view.findViewById<MaterialButton>(R.id.confirmButtonSettings)
-        confirmButtonSetting.setOnClickListener {
-            requireActivity().onBackPressed()
-        }
+    private fun showLoading(isLoading: Boolean) {
+        val progressBar = _view.findViewById<LinearLayout>(R.id.llProgressSettings)
+        progressBar.visibility = if (isLoading) View.VISIBLE else View.GONE
+    }
+
+    private fun translateDownload() {
+        val englishPortugueseTranslator = Translation.getClient(options())
+
+        englishPortugueseTranslator.downloadModelIfNeeded(conditions())
+            .addOnSuccessListener {
+
+                showLoading(false)
+                snackBarMessage(getString(R.string.message_install))
+
+            }
+            .addOnFailureListener {
+
+                showLoading(false)
+                snackBarMessage(getString(R.string.failed_download))
+
+            }
     }
 
     private fun initViewModel() {
