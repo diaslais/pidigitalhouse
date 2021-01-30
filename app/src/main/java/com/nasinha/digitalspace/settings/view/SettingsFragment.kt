@@ -30,6 +30,8 @@ import com.nasinha.digitalspace.utils.Constants.FACEBOOKCOM
 import com.nasinha.digitalspace.utils.Constants.GOOGLECOM
 import com.nasinha.digitalspace.utils.Constants.PASSWORD
 import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
+import com.nasinha.digitalspace.utils.TranslateUtils.conditions
+import com.nasinha.digitalspace.utils.TranslateUtils.options
 
 
 class SettingsFragment : Fragment() {
@@ -73,38 +75,23 @@ class SettingsFragment : Fragment() {
             prefs?.edit()?.putBoolean(SWITCH_PREFS, isChecked)?.apply()
 
             if (isChecked) {
-                val options = TranslatorOptions.Builder()
-                    .setSourceLanguage(TranslateLanguage.ENGLISH)
-                    .setTargetLanguage(TranslateLanguage.PORTUGUESE)
-                    .build()
 
-                val englishPortugueseTranslator = Translation.getClient(options)
-                lifecycle.addObserver(englishPortugueseTranslator)
+                val englishPortugueseTranslator = Translation.getClient(options())
 
-                val conditions = DownloadConditions.Builder()
-                    .requireWifi()
-                    .build()
-
-                englishPortugueseTranslator.downloadModelIfNeeded(conditions)
+                englishPortugueseTranslator.downloadModelIfNeeded(conditions())
                     .addOnSuccessListener {
                         // Model downloaded successfully. Okay to start translating.
                         // (Set a flag, unhide the translation UI, etc.)
-                        makeText(
-                            _view.context,
-                            getString(R.string.download_result),
-                            Toast.LENGTH_SHORT
-                        )
-                        Log.d("RENAN","deu bom")
+
+
+                        Log.d("message", "concluido")
+
                     }
-                    .addOnFailureListener { _ ->
+                    .addOnFailureListener {
                         // Model couldn’t be downloaded or other internal error.
                         // ...
-                        makeText(
-                            _view.context,
-                            "deu ruim",
-                            Toast.LENGTH_SHORT
-                        ).show()
-                        Log.d("RENAN","deu ruim")
+                        Log.d("message", "${it.message}")
+
                     }
 
                 val alertDialog = AlertDialog.Builder(_view.context)

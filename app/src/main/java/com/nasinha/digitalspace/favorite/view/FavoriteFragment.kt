@@ -39,6 +39,7 @@ import com.nasinha.digitalspace.utils.Constants.SORT_PREFS
 import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
 import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 import com.nasinha.digitalspace.utils.FavoriteUtils
+import com.nasinha.digitalspace.utils.TranslateUtils.options
 import kotlinx.coroutines.launch
 
 
@@ -55,12 +56,7 @@ class FavoriteFragment : Fragment(), IFavorite {
 
     private var _favoriteList = mutableListOf<FavoriteEntity>()
 
-    val options = TranslatorOptions.Builder()
-        .setSourceLanguage(TranslateLanguage.ENGLISH)
-        .setTargetLanguage(TranslateLanguage.PORTUGUESE)
-        .build()
-
-    private val englishPortugueseTranslator = Translation.getClient(options)
+    private val englishPortugueseTranslator = Translation.getClient(options())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

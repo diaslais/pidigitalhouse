@@ -1,6 +1,7 @@
 package com.nasinha.digitalspace.apod.view
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -12,6 +13,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
+import com.google.mlkit.common.model.DownloadConditions
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.Translator
@@ -33,6 +35,7 @@ import com.nasinha.digitalspace.utils.Constants.IMGAPOD
 import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
 import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 import com.nasinha.digitalspace.utils.FavoriteUtils
+import com.nasinha.digitalspace.utils.TranslateUtils.options
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
@@ -68,12 +71,6 @@ class ApodFragment : Fragment() {
         val txtExplanation = _view.findViewById<TextView>(R.id.txtExplanationApod)
         val txtTitle = _view.findViewById<TextView>(R.id.txtTitle)
 
-        val options = TranslatorOptions.Builder()
-            .setSourceLanguage(TranslateLanguage.ENGLISH)
-            .setTargetLanguage(TranslateLanguage.PORTUGUESE)
-            .build()
-        englishPortugueseTranslator = Translation.getClient(options)
-        lifecycle.addObserver(englishPortugueseTranslator)
 
         val viewModel = ViewModelProvider(
             this, ApodViewModel.ApodViewModelFactory(
@@ -168,20 +165,28 @@ class ApodFragment : Fragment() {
                     }
                 })
             }
-            englishPortugueseTranslator.translate(it.title).addOnSuccessListener {
-                txtTitle.text = it
-            }
+
+            englishPortugueseTranslator = Translation.getClient(options())
+
+            lifecycle.addObserver(englishPortugueseTranslator)
+            englishPortugueseTranslator.translate(it.title)
+                .addOnSuccessListener {
+                    txtTitle.text = it
+                }
                 .addOnFailureListener {
                     txtTitle.text = _apodResponse.title
                 }
 
-            englishPortugueseTranslator.translate(it.explanation).addOnSuccessListener {
+            lifecycle.addObserver(englishPortugueseTranslator)
+            englishPortugueseTranslator.translate(it.explanation)
+                .addOnSuccessListener {
 
-                txtExplanation.text = it + getText(R.string.quebra_linha)
+                    txtExplanation.text = it + getText(R.string.quebra_linha)
 
-            }.addOnFailureListener {
-                txtExplanation.text = _apodResponse.explanation + getText(R.string.quebra_linha)
-            }
+                }.addOnFailureListener {
+                    txtExplanation.text = _apodResponse.explanation + getText(R.string.quebra_linha)
+                }
+
             Picasso.get()
                 .load(it.url)
                 .into(imgLoad, object : Callback {
@@ -315,7 +320,7 @@ class ApodFragment : Fragment() {
             .setText("Opção de tradução disponível no menu configurações.")
             .setTextColor(ContextCompat.getColor(_view.context, R.color.colorBlack))
             .setBackgroundColor(ContextCompat.getColor(_view.context, R.color.colorWhite))
-            .setOnBalloonClickListener(OnBalloonClickListener {  })
+            .setOnBalloonClickListener(OnBalloonClickListener { })
             .setBalloonAnimation(BalloonAnimation.FADE)
             .setLifecycleOwner(viewLifecycleOwner)
             .build()
