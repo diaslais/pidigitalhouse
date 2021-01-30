@@ -77,6 +77,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         Log.d("LIFECYCLE", "onStop")
     }
 
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -223,7 +224,6 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun nextQuestion() {
-        stopTimer()
         countdownBar.setProgress(0)
         _currentPosition++
         _goToNextQuestion = false
