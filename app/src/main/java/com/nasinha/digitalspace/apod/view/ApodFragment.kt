@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -13,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
+import com.google.mlkit.nl.translate.Translator
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.apod.model.ApodResponseModel
@@ -34,6 +36,10 @@ import com.nasinha.digitalspace.utils.FavoriteUtils
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+import com.skydoves.balloon.ArrowOrientation
+import com.skydoves.balloon.Balloon
+import com.skydoves.balloon.BalloonAnimation
+import com.skydoves.balloon.OnBalloonClickListener
 import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
@@ -43,13 +49,8 @@ class ApodFragment : Fragment() {
     private lateinit var _view: View
     private lateinit var _apodResponse: ApodResponseModel
     private lateinit var _favoriteViewModel: FavoriteViewModel
+    private lateinit var englishPortugueseTranslator: Translator
 
-    val options = TranslatorOptions.Builder()
-        .setSourceLanguage(TranslateLanguage.ENGLISH)
-        .setTargetLanguage(TranslateLanguage.PORTUGUESE)
-        .build()
-
-    private val englishPortugueseTranslator = Translation.getClient(options)
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -67,6 +68,12 @@ class ApodFragment : Fragment() {
         val txtExplanation = _view.findViewById<TextView>(R.id.txtExplanationApod)
         val txtTitle = _view.findViewById<TextView>(R.id.txtTitle)
 
+        val options = TranslatorOptions.Builder()
+            .setSourceLanguage(TranslateLanguage.ENGLISH)
+            .setTargetLanguage(TranslateLanguage.PORTUGUESE)
+            .build()
+        englishPortugueseTranslator = Translation.getClient(options)
+        lifecycle.addObserver(englishPortugueseTranslator)
 
         val viewModel = ViewModelProvider(
             this, ApodViewModel.ApodViewModelFactory(
@@ -222,7 +229,7 @@ class ApodFragment : Fragment() {
                 })
         }
         landScapeMode(it.url)
-
+        showTranslateAlert()
     }
 
     private fun favoriteIsActive(isChecked: Boolean) {
@@ -291,5 +298,33 @@ class ApodFragment : Fragment() {
             val imageBitmap = FavoriteUtils.getBitmapFromView(_view, _apodResponse.url)
             activity?.let { FavoriteUtils.shareImageText(it, _view, imageBitmap, text) }
         }
+    }
+
+    private fun showTranslateAlert() {
+        val btnTranslate = _view.findViewById<ImageButton>(R.id.btnTranslateAlert)
+        val balloon = Balloon.Builder(_view.context)
+            .setArrowSize(10)
+            .setArrowOrientation(ArrowOrientation.BOTTOM)
+            .setArrowVisible(true)
+            .setWidthRatio(1.0f)
+            .setHeight(70)
+            .setTextSize(15f)
+            .setArrowPosition(0.73f)
+            .setCornerRadius(4f)
+            .setAlpha(0.9f)
+            .setText("Opção de tradução disponível no menu configurações.")
+            .setTextColor(ContextCompat.getColor(_view.context, R.color.colorBlack))
+            .setBackgroundColor(ContextCompat.getColor(_view.context, R.color.colorWhite))
+            .setOnBalloonClickListener(OnBalloonClickListener {  })
+            .setBalloonAnimation(BalloonAnimation.FADE)
+            .setLifecycleOwner(viewLifecycleOwner)
+            .build()
+
+        btnTranslate.setOnClickListener {
+            balloon.show(it)
+            balloon.showAlignBottom(it)
+            balloon.dismissWithDelay(1000L)
+        }
+
     }
 }

@@ -4,10 +4,13 @@ import android.app.AlertDialog
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
+import android.widget.Toast
+import android.widget.Toast.makeText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
@@ -21,7 +24,6 @@ import com.google.mlkit.nl.translate.Translation
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.profile.viewmodel.ProfileViewModel
-import com.nasinha.digitalspace.settings.viewmodel.SettingsViewModel
 import com.nasinha.digitalspace.utils.AuthUtil
 import com.nasinha.digitalspace.utils.Constants.APP_KEY
 import com.nasinha.digitalspace.utils.Constants.FACEBOOKCOM
@@ -87,11 +89,22 @@ class SettingsFragment : Fragment() {
                     .addOnSuccessListener {
                         // Model downloaded successfully. Okay to start translating.
                         // (Set a flag, unhide the translation UI, etc.)
-
+                        makeText(
+                            _view.context,
+                            getString(R.string.download_result),
+                            Toast.LENGTH_SHORT
+                        )
+                        Log.d("RENAN","deu bom")
                     }
                     .addOnFailureListener { _ ->
                         // Model couldn’t be downloaded or other internal error.
                         // ...
+                        makeText(
+                            _view.context,
+                            "deu ruim",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                        Log.d("RENAN","deu ruim")
                     }
 
                 val alertDialog = AlertDialog.Builder(_view.context)
