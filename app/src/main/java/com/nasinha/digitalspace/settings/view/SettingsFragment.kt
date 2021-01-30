@@ -1,6 +1,7 @@
 package com.nasinha.digitalspace.settings.view
 
 import android.app.AlertDialog
+import android.app.DownloadManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -111,6 +112,7 @@ class SettingsFragment : Fragment() {
 
                 showLoading(false)
                 snackBarMessage(getString(R.string.message_install))
+                englishPortugueseTranslator.close()
 
             }
             .addOnFailureListener {
@@ -119,6 +121,7 @@ class SettingsFragment : Fragment() {
                 snackBarMessage(getString(R.string.failed_download))
 
             }
+
     }
 
     private fun initViewModel() {

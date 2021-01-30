@@ -136,7 +136,7 @@ class ApodFragment : Fragment() {
         val txtExplanation = _view.findViewById<TextView>(R.id.txtExplanationApod)
         val txtTitle = _view.findViewById<TextView>(R.id.txtTitle)
         val prefs = activity?.getSharedPreferences(APP_KEY, AppCompatActivity.MODE_PRIVATE)
-
+        val btnTranlateALert = _view.findViewById<ImageButton>(R.id.btnTranslateAlert)
         val youTubePlayerView: YouTubePlayerView = _view.findViewById(R.id.youtube_player_view)
         val mediaType = it.media_type
         val checkPrefs = prefs?.getBoolean(SWITCH_PREFS, false)
@@ -148,6 +148,8 @@ class ApodFragment : Fragment() {
         })
 
         if (checkPrefs == true) {
+
+            btnTranlateALert.visibility = View.GONE
 
             if (mediaType == "video") {
 
@@ -200,6 +202,8 @@ class ApodFragment : Fragment() {
 
                 })
         } else {
+
+            btnTranlateALert.visibility = View.VISIBLE
 
             if (mediaType == "video") {
                 imgLoad.visibility = View.GONE

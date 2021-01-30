@@ -162,21 +162,24 @@ class FavoriteFragment : Fragment(), IFavorite {
 
                 if (!favorite.title.isNullOrEmpty() && favorite.titleBr.isNullOrEmpty()) {
 
+                    lifecycle.addObserver(englishPortugueseTranslator)
                     englishPortugueseTranslator.translate(favorite.title!!)
                         .addOnSuccessListener { result ->
                             _favoriteViewModel.updateTitleBr(favorite.image, result)
                                 .observe(viewLifecycleOwner, { })
-                        }.addOnFailureListener { _ ->
+                        }.addOnFailureListener {
                             favorite.title = favorite.title
                         }
                 }
 
                 if (!favorite.text.isNullOrEmpty() && favorite.textBr.isNullOrEmpty()) {
+
+                    lifecycle.addObserver(englishPortugueseTranslator)
                     englishPortugueseTranslator.translate(favorite.text!!)
                         .addOnSuccessListener { result ->
                             _favoriteViewModel.updateTextBr(favorite.image, result)
                                 .observe(viewLifecycleOwner, { })
-                        }.addOnFailureListener { _ ->
+                        }.addOnFailureListener {
                             favorite.text = favorite.text
                         }
                 }
