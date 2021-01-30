@@ -39,6 +39,7 @@ import com.nasinha.digitalspace.utils.Constants.SORT_PREFS
 import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
 import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 import com.nasinha.digitalspace.utils.FavoriteUtils
+import com.nasinha.digitalspace.utils.TranslateUtils.options
 import kotlinx.coroutines.launch
 
 
@@ -55,12 +56,7 @@ class FavoriteFragment : Fragment(), IFavorite {
 
     private var _favoriteList = mutableListOf<FavoriteEntity>()
 
-    val options = TranslatorOptions.Builder()
-        .setSourceLanguage(TranslateLanguage.ENGLISH)
-        .setTargetLanguage(TranslateLanguage.PORTUGUESE)
-        .build()
-
-    private val englishPortugueseTranslator = Translation.getClient(options)
+    private val englishPortugueseTranslator = Translation.getClient(options())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -166,21 +162,24 @@ class FavoriteFragment : Fragment(), IFavorite {
 
                 if (!favorite.title.isNullOrEmpty() && favorite.titleBr.isNullOrEmpty()) {
 
+                    lifecycle.addObserver(englishPortugueseTranslator)
                     englishPortugueseTranslator.translate(favorite.title!!)
                         .addOnSuccessListener { result ->
                             _favoriteViewModel.updateTitleBr(favorite.image, result)
                                 .observe(viewLifecycleOwner, { })
-                        }.addOnFailureListener { _ ->
+                        }.addOnFailureListener {
                             favorite.title = favorite.title
                         }
                 }
 
                 if (!favorite.text.isNullOrEmpty() && favorite.textBr.isNullOrEmpty()) {
+
+                    lifecycle.addObserver(englishPortugueseTranslator)
                     englishPortugueseTranslator.translate(favorite.text!!)
                         .addOnSuccessListener { result ->
                             _favoriteViewModel.updateTextBr(favorite.image, result)
                                 .observe(viewLifecycleOwner, { })
-                        }.addOnFailureListener { _ ->
+                        }.addOnFailureListener {
                             favorite.text = favorite.text
                         }
                 }
