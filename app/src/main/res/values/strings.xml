@@ -124,7 +124,7 @@
     <string name="erro_alterar_nome">Não foi possível fazer alteração do nome</string>
     <string name="atualizado_sucesso">Informações atualizadas com sucesso</string>
     <string name="alterar_imagem">Alterar imagem</string>
-    <string name="atencao_email_profile">Atenção! Caso não tenha feito login recentemente, pode ser necessário fazer autenticação novamente para alterar seu email.</string>
+    <string name="atencao_email_profile">Atenção! Para fazer mudança de email será necessário fazer autenticação novamente.</string>
     <string name="error_nome_igual">O nome é igual ao existente</string>
     <string name="nome_atualizado">Nome atualizado com sucesso</string>
     <string name="problema_email_verificacao">Problema ao enviar email de verificação</string>

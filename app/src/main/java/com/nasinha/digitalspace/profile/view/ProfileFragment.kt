@@ -175,6 +175,8 @@ class ProfileFragment : Fragment() {
                     )
                 }
             }
+        } else {
+            imageOverlayView.visibility = View.GONE
         }
     }
 
@@ -238,20 +240,17 @@ class ProfileFragment : Fragment() {
         nameTextInputView.setText(_userName)
         emailTextInputView.setText(_userEmail)
 
-        val editPhotoBtn = _view.findViewById<MaterialButton>(R.id.mbConfirmPhotoProfile)
         val editNameBtn = _view.findViewById<ImageButton>(R.id.ibEditNameProfile)
         val editEmailBtn = _view.findViewById<ImageButton>(R.id.ibEditEmailProfile)
+        editEmailBtn.isVisible = false
 
-        editPhotoBtn.setOnClickListener {
-
-        }
         editNameBtn.setOnClickListener {
             nameTextInputVisibilityToggle()
             nameEditBtnToggle()
         }
 
         if (getUserProvider(_view.context) == Constants.PASSWORD) {
-            editEmailBtn.isActivated = true
+            editEmailBtn.isVisible = true
 
             editEmailBtn.setOnClickListener {
                 emailTextInputVisibilityToggle()
