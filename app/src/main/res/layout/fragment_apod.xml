@@ -12,17 +12,23 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
-        <ImageButton
-            android:id="@+id/btnBackApod"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/dim10dp"
-            android:layout_marginTop="@dimen/dim10dp"
-            android:layout_marginBottom="@dimen/dim10dp"
-            android:background="@color/colorTransparent"
-            android:contentDescription="@string/todo"
-            android:padding="@dimen/dim10dp"
-            android:src="@drawable/ic_baseline_arrow_back_24" />
+        <com.google.android.material.appbar.AppBarLayout
+            android:id="@+id/appBarLayout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.appbar.MaterialToolbar
+                android:id="@+id/apodTopAppBar"
+                style="@style/Widget.App.Toolbar"
+                android:layout_width="match_parent"
+                android:layout_height="?attr/actionBarSize"
+                android:backgroundTint="@color/colorBlack"
+                app:menu="@menu/top_app_bar"
+                app:navigationIcon="@drawable/ic_baseline_arrow_back_24"
+                app:title="Fato astronômico"
+                app:titleTextColor="@color/colorWhite" />
+
+        </com.google.android.material.appbar.AppBarLayout>
 
         <ImageView
             android:id="@+id/imgApod"
@@ -68,9 +74,9 @@
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:background="@color/colorTransparent"
+                android:src="@drawable/ic_baseline_translate_24"
                 android:tint="@color/colorWhite"
-                android:visibility="gone"
-                android:src="@drawable/ic_baseline_translate_24" />
+                android:visibility="gone" />
 
             <ImageButton
                 android:id="@+id/ibShareFavoriteItem"
