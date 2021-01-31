@@ -41,6 +41,8 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private var _goToNextQuestion: Boolean = false //user already clicked on "answer"
     private var alternativeAnswers = arrayListOf(1, 2, 3, 4)
 
+    private var minimized = false
+
     private lateinit var countDownTimer: CountDownTimer
     private lateinit var timerBarAnimation: Animator
     private var timeLeftInMillis: Long = 0
@@ -69,14 +71,25 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         callback.isEnabled = true
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onStop() {
+        super.onStop()
 
         stopTimer()
-        activity?.onBackPressed()
-        Log.d("LIFECYCLE", "onStop")
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        minimized = true
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (minimized) {
+            navController.popBackStack()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
