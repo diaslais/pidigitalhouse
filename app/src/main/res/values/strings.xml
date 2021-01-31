@@ -20,7 +20,7 @@
     <string name="error_confirmacao">Confirmação diferente do Password</string>
     <string name="confirmacao">Conta criada com sucesso</string>
     <string name="sair">Sair</string>
-    <string name="explora_o_espacial">Exploração espacial</string>
+    <string name="explora_o_espacial">EXPLORAÇÃO ESPACIAL</string>
     <string name="conhe_a_nosso_sistema_solar">Conheça o Sistema Solar</string>
     <string name="via_l_ctea">Via Láctea!</string>
     <string name="galaxia_espiral">Um pontinho nessa linda galáxia espiral chamada:</string>
@@ -161,5 +161,6 @@
     <string name="message_install">Instalação Concluída.</string>
     <string name="failed_download">Falha no Download ou Instalação</string>
     <string name="fato_astronomico">Fato Astronômico</string>
+    <string name="alert_time">Este processo levará um tempo</string>
 
 </resources>

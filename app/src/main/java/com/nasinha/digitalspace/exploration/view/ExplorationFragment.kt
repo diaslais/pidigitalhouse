@@ -87,11 +87,11 @@ class ExplorationFragment : Fragment() {
     private fun drawerListener(view: View) {
         val navController = findNavController()
 
-        val explorationToolBar = view.findViewById<MaterialToolbar>(R.id.explorationTopAppBar)
+        val explorationToolBar = view.findViewById<ImageButton>(R.id.btnDrawer)
 
         val drawerLayout = requireActivity().findViewById<DrawerLayout>(R.id.drawer_layout)
 
-        explorationToolBar.setNavigationOnClickListener {
+        explorationToolBar.setOnClickListener {
             drawerLayout?.openDrawer(Gravity.LEFT)
         }
 //        Explorer

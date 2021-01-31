@@ -10,7 +10,7 @@
         android:id="@+id/tbToolbarSettings"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@color/colorBlack"
+        android:background="@color/colorTransparent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -144,6 +144,15 @@
             android:text="@string/download_text"
             android:textSize="@dimen/dim16sp"
             android:textStyle="bold" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/dim10dp"
+            android:text="@string/alert_time"
+            android:textSize="@dimen/dim16sp"
+            android:textStyle="bold" />
+
     </LinearLayout>
 
 
