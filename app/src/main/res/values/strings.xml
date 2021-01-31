@@ -161,5 +161,6 @@
     <string name="message_install">Instalação Concluída.</string>
     <string name="failed_download">Falha no Download ou Instalação</string>
     <string name="fato_astronomico">Fato Astronômico</string>
+    <string name="alert_time">Este processo levará um tempo</string>
 
 </resources>
