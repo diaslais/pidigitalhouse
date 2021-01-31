@@ -1,10 +1,18 @@
 package com.nasinha.digitalspace.utils
 
+import java.util.regex.Matcher
+import java.util.regex.Pattern
+
 object ApodUtils {
-     fun getIdVideo(urlVideo: String): String {
-        val index = urlVideo.indexOf("=")
-        val url = urlVideo.subSequence(index + 1, urlVideo.length)
-        val idVideo = url.subSequence(0, 11)
-        return idVideo.toString()
+    fun getIdVideo(urlVideo: String): String {
+
+        val pattern = "(?<=youtu.be/|watch\\?v=|/videos/|embed\\/)[^#\\&\\?]*"
+        val compiledPattern: Pattern = Pattern.compile(pattern)
+        val matcher: Matcher = compiledPattern.matcher(urlVideo)
+        return if (matcher.find()) {
+            matcher.group()
+        } else {
+            "error"
+        }
     }
 }
