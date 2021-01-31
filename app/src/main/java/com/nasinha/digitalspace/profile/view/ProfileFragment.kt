@@ -28,7 +28,6 @@ import com.google.android.material.textfield.TextInputEditText
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
 import com.nasinha.digitalspace.profile.viewmodel.ProfileViewModel
-import com.nasinha.digitalspace.utils.AuthUtil
 import com.nasinha.digitalspace.utils.AuthUtil.getUserEmail
 import com.nasinha.digitalspace.utils.AuthUtil.getUserId
 import com.nasinha.digitalspace.utils.AuthUtil.getUserImage
@@ -45,6 +44,7 @@ import com.nasinha.digitalspace.utils.Constants.READ_STORAGE_PERMISSION_CODE
 import com.nasinha.digitalspace.utils.Constants.USER_EMAIL
 import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 import com.squareup.picasso.Picasso
+import de.hdodenhof.circleimageview.CircleImageView
 
 class ProfileFragment : Fragment() {
     private lateinit var _view: View
@@ -152,7 +152,7 @@ class ProfileFragment : Fragment() {
     }
 
     private fun imageListener() {
-        val imageView = _view.findViewById<ImageView>(R.id.ivImageProfile)
+        val imageView = _view.findViewById<CircleImageView>(R.id.cvImageProfile)
         val imageOverlayView = _view.findViewById<ImageView>(R.id.ivImageOverlayProfile)
         if (_userImageUrl.isNullOrEmpty() || _userImageUrl == "null") {
             Picasso.get().load(R.drawable.user_placeholder).into(imageView)
@@ -220,7 +220,7 @@ class ProfileFragment : Fragment() {
         if (resultCode == Activity.RESULT_OK && requestCode == PICK_IMAGE_REQUEST_CODE && data!!.data != null) {
             _selectedImageUri = data.data
 
-            val profileImageView = _view.findViewById<ImageView>(R.id.ivImageProfile)
+            val profileImageView = _view.findViewById<CircleImageView>(R.id.cvImageProfile)
             Picasso.get().load(_selectedImageUri).fit().centerCrop().into(profileImageView)
 
             val confirmPhotoBtn = _view.findViewById<MaterialButton>(R.id.mbConfirmPhotoProfile)
