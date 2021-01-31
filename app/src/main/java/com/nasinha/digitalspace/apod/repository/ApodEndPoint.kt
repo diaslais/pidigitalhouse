@@ -10,11 +10,7 @@ import java.util.*
 interface ApodEndPoint {
 
     @GET("planetary/apod")
-    suspend fun getAstronomicalFact(
-        @Query("date") date: String = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(
-            Calendar.getInstance().time
-        )
-    ): ApodResponseModel
+    suspend fun getAstronomicalFact(): ApodResponseModel
 
     companion object {
         val endpoint: ApodEndPoint by lazy {

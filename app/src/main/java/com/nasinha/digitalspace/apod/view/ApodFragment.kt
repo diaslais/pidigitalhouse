@@ -40,6 +40,7 @@ import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
 import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 import com.nasinha.digitalspace.utils.FavoriteUtils
 import com.nasinha.digitalspace.utils.TranslateUtils.options
+import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.PlayerConstants
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
@@ -196,7 +197,7 @@ class ApodFragment : Fragment() {
                     }
 
                     override fun onError(e: java.lang.Exception?) {
-                        TODO("Not yet implemented")
+                        Log.e("error", "${e?.message}")
                     }
 
                 })
@@ -231,7 +232,7 @@ class ApodFragment : Fragment() {
                     }
 
                     override fun onError(e: java.lang.Exception?) {
-                        TODO("Not yet implemented")
+                        Log.e("error", "${e?.message}")
                     }
 
                 })
