@@ -16,7 +16,6 @@
             android:id="@+id/quizQuestionsToolbar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@color/colorBlack"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent">
 
@@ -36,6 +35,35 @@
                 android:fontFamily="@font/ubuntu_bold"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/dim20sp"/>
+
+            <LinearLayout
+                android:id="@+id/linearLayoutHearts"
+                android:layout_width="match_parent"
+                android:gravity="end"
+                android:layout_height="24dp"
+                android:layout_marginHorizontal="@dimen/dim20dp"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <ImageView
+                    android:id="@+id/imgHeart1"
+                    android:layout_width="28dp"
+                    android:layout_height="24dp"
+                    tools:src="@drawable/heart_grey" />
+
+                <ImageView
+                    android:id="@+id/imgHeart2"
+                    android:layout_width="28dp"
+                    android:layout_height="24dp"
+                    tools:src="@drawable/heart_blue" />
+
+                <ImageView
+                    android:id="@+id/imgHeart3"
+                    android:layout_width="28dp"
+                    android:layout_height="24dp"
+                    tools:src="@drawable/heart_blue" />
+
+            </LinearLayout>
         </androidx.appcompat.widget.Toolbar>
 
         <ImageView
@@ -73,7 +101,7 @@
             app:layout_constraintTop_toBottomOf="@+id/quizQuestionsToolbar" />
 
         <LinearLayout
-            android:id="@+id/LinearLayoutOptions"
+            android:id="@+id/linearLayoutOptions"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"

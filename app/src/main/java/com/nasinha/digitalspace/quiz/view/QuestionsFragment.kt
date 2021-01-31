@@ -40,6 +40,9 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private var _isAnswered: Boolean = false //user selected an option
     private var _goToNextQuestion: Boolean = false //user already clicked on "answer"
     private var alternativeAnswers = arrayListOf(1, 2, 3, 4)
+    private var minimized = false
+    private var mistakes = 0
+    private var gameOver = false
 
     private lateinit var countDownTimer: CountDownTimer
     private lateinit var timerBarAnimation: Animator
@@ -59,6 +62,9 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     lateinit var imageClock: ImageView
     lateinit var countdownBar: ProgressBar
     lateinit var navController: NavController
+    lateinit var heartOne: ImageView
+    lateinit var heartTwo: ImageView
+    lateinit var heartThree: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,14 +75,25 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         callback.isEnabled = true
     }
 
-    override fun onPause() {
-        super.onPause()
+    override fun onStop() {
+        super.onStop()
 
         stopTimer()
-        activity?.onBackPressed()
-        Log.d("LIFECYCLE", "onStop")
     }
 
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+
+        minimized = true
+    }
+
+    override fun onResume() {
+        super.onResume()
+
+        if (minimized) {
+            navController.popBackStack()
+        }
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -104,6 +121,9 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         txtChronometer = view.findViewById(R.id.txtChronometer)
         imageClock = view.findViewById(R.id.imgClock)
         countdownBar = view.findViewById(R.id.pbCountDown)
+        heartOne = view.findViewById(R.id.imgHeart1)
+        heartTwo = view.findViewById(R.id.imgHeart2)
+        heartThree = view.findViewById(R.id.imgHeart3)
         navController = findNavController()
         val btnBack = view.findViewById<ImageButton>(R.id.btnBackQuizQuestions)
 
@@ -123,6 +143,8 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private fun setQuestion() {
         alternativeAnswers.shuffle()
         btnAnswer.isEnabled = true
+
+        setHearts()
 
         _viewModel.questionsList.observe(viewLifecycleOwner) {
             val question = it[_currentPosition - 1]
@@ -145,6 +167,30 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
             txtOptionTwo.text = optionsList[alternativeAnswers[1] - 1]
             txtOptionThree.text = optionsList[alternativeAnswers[2] - 1]
             txtOptionFour.text = optionsList[alternativeAnswers[3] - 1]
+        }
+    }
+
+    private fun setHearts() {
+        when (mistakes) {
+            0 -> {
+                heartOne.setImageResource(R.drawable.heart_blue)
+                heartTwo.setImageResource(R.drawable.heart_blue)
+                heartThree.setImageResource(R.drawable.heart_blue)
+            }
+            1 -> {
+                heartOne.setImageResource(R.drawable.heart_grey)
+                heartTwo.setImageResource(R.drawable.heart_blue)
+                heartThree.setImageResource(R.drawable.heart_blue)
+            }
+            2 -> {
+                heartOne.setImageResource(R.drawable.heart_grey)
+                heartTwo.setImageResource(R.drawable.heart_grey)
+                heartThree.setImageResource(R.drawable.heart_blue)
+            }
+            3 -> {
+                gameOver = true
+                goToResultScreen()
+            }
         }
     }
 
@@ -205,6 +251,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                         stopTimer()
                         _goToNextQuestion = true
                         if (question.correctAnswer != alternativeAnswers[_selectedOptionPosition - 1]) {
+                            mistakes++
                             answerView(_selectedOptionPosition, R.drawable.incorrect_question)
                         } else {
                             _correctAnswers++
@@ -232,31 +279,38 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         if (_currentPosition <= NUMBER_QUESTIONS) {
                 setQuestion()
         } else {
-            //add to database
-            val date = getCurrentDateTime()
-            addScoreToDatabase(date, _correctAnswers)
+            goToResultScreen()
+        }
+    }
 
-            val astronautImage: Int
-            val resultsMessage: String
+    private fun goToResultScreen() {
+        //add to database
+        val date = getCurrentDateTime()
+        addScoreToDatabase(date, _correctAnswers)
 
-            if (_correctAnswers >= 5) {
-                astronautImage = R.drawable.astronauta_quiz
-                resultsMessage = getString(R.string.parab_ns)
-            } else {
-                astronautImage = R.drawable.astronauta_perdido_branco
-                resultsMessage = getString(R.string.perdido_no_espaco)
-            }
+        val astronautImage: Int
+        val resultsMessage: String
 
-            val bundle = bundleOf(
+        if (_correctAnswers >= 5) {
+            astronautImage = R.drawable.astronauta_quiz
+            resultsMessage = getString(R.string.parab_ns)
+        } else if (gameOver) {
+            astronautImage = R.drawable.astronauta_perdido_branco
+            resultsMessage = getString(R.string.game_over)
+        } else {
+            astronautImage = R.drawable.astronauta_perdido_branco
+            resultsMessage = getString(R.string.perdido_no_espaco)
+        }
+
+        val bundle = bundleOf(
                 "CORRECT_ANSWERS" to _correctAnswers,
                 "TOTAL_QUESTIONS" to NUMBER_QUESTIONS,
                 "ASTRONAUT_IMAGE" to astronautImage,
                 "RESULTS_MESSAGE" to resultsMessage
-            )
-            navController.navigate(
+        )
+        navController.navigate(
                 R.id.action_questionsFragment_to_resultFragment, bundle
-            )
-        }
+        )
     }
 
     private fun addScoreToDatabase(date: String, points: Int) {
@@ -318,6 +372,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun timeIsOverDialog() {
+        mistakes++
         val dialog = AlertDialog.Builder(_view.context)
         val view: View =
             requireActivity().layoutInflater.inflate(R.layout.time_over_alert, null)
