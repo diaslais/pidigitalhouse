@@ -28,7 +28,7 @@
             android:layout_marginStart="@dimen/dim30dp"
             android:text="@string/desenvolvedores"
             android:textColor="@color/colorWhite"
-            android:fontFamily="@font/ubuntu_bold"
+            android:fontFamily="@font/ubuntu"
             android:textSize="@dimen/dim20sp"/>
     </androidx.appcompat.widget.Toolbar>
 

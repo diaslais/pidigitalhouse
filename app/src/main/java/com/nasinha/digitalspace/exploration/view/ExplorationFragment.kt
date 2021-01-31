@@ -12,8 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.bumptech.glide.Glide
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.navigation.NavigationView
@@ -140,11 +138,9 @@ class ExplorationFragment : Fragment() {
 
         nameDrawer.text = nameShared
         if (userImage.isNullOrEmpty() || userImage == "null") {
-//            Picasso.get().load(R.drawable.user_placeholder).into(imageDrawer)
-            Glide.with(_view).load(R.drawable.user_placeholder).into(imageDrawer)
+            Picasso.get().load(R.drawable.user_placeholder).into(imageDrawer)
         } else {
-//            Picasso.get().load(userImage).placeholder(R.drawable.user_placeholder).into(imageDrawer)
-            Glide.with(_view).load(userImage).placeholder(R.drawable.user_placeholder).into(imageDrawer)
+            Picasso.get().load(userImage).placeholder(R.drawable.user_placeholder).into(imageDrawer)
         }
     }
 
