@@ -54,43 +54,35 @@
                 android:gravity="center"
                 android:orientation="vertical">
 
-                <com.google.android.material.card.MaterialCardView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="@dimen/dim20dp"
-                    app:cardCornerRadius="@dimen/dim80dp"
-                    app:strokeColor="@color/colorWhite"
-                    app:strokeWidth="2dp">
+                <FrameLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
 
-                    <FrameLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent">
+                    <de.hdodenhof.circleimageview.CircleImageView
+                        android:id="@+id/cvImageProfile"
+                        android:layout_width="@dimen/dim140dp"
+                        android:layout_height="@dimen/dim140dp"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/dim20dp"
+                        android:src="@drawable/user_placeholder"
+                        app:civ_border_color="@color/colorWhite"
+                        app:civ_border_width="@dimen/dim2dp"/>
 
-                        <ImageView
-                            android:id="@+id/ivImageProfile"
-                            android:layout_width="@dimen/dim140dp"
-                            android:layout_height="@dimen/dim140dp"
-                            android:layout_gravity="center"
-                            android:scaleType="centerCrop"
-                            android:src="@drawable/user_placeholder" />
-                        <ImageView
-                            android:id="@+id/ivImageOverlayProfile"
-                            android:layout_width="80dp"
-                            android:layout_height="80dp"
-                            android:layout_gravity="center"
-                            android:src="@drawable/ic_outline_image_24"
-                            app:tint="@color/colorBlack35pct" />
-                    </FrameLayout>
-
-                </com.google.android.material.card.MaterialCardView>
-
+                    <ImageView
+                        android:id="@+id/ivImageOverlayProfile"
+                        android:layout_width="80dp"
+                        android:layout_height="80dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_outline_image_24"
+                        app:tint="@color/colorBlack35pct" />
+                </FrameLayout>
 
                 <com.google.android.material.button.MaterialButton
                     android:id="@+id/mbConfirmPhotoProfile"
                     style="?attr/materialButtonOutlinedStyle"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginVertical="@dimen/dim20dp"
+                    android:layout_marginBottom="@dimen/dim10dp"
                     android:fontFamily="@font/ubuntu_bold"
                     android:paddingHorizontal="@dimen/dim40dp"
                     android:paddingVertical="@dimen/dim14dp"
