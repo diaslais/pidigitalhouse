@@ -18,8 +18,8 @@ class PlanetRepository {
                 "Sol",
                 "O Sol é a estrela mais próxima da Terra e a energia fornecida por ele é o que possibilita a vida em nosso planeta. É uma bola quente de gases no centro de nosso sistema solar e sua gravidade mantém tudo em sua órbita, desde os maiores planetas até pequenos fragmentos.",
                 "•\tRaio: aproximadamente 696.000 km.\n\n" +
-                        "•\tMassa: 1.989 x 1030kg.\n\n" +
-                        "•\tVolume: 1.40927 x 1018km3.\n\n" +
+                        "•\tMassa: 1.989 x 10³⁰kg.\n\n" +
+                        "•\tVolume: 1.40927 x 10¹⁸km³.\n\n" +
                         "•\tO Sol é composto de gases: sua composição é de cerca de 70,6% de hidrogênio e 27,4% de hélio.\n\n" +
                         "•\tO Sol está a 150 milhões de km de distância da Terra.\n\n" +
                         "•\tEm sua fotosfera (a superfície visível) a temperatura é de aproximadamente 6.000 graus Celsius. Perto de seu centro, onde ocorrem reações de fusão nuclear que geram a luz e calor, atinge cerca de 15 milhões de graus Celsius.\n\n" +
@@ -49,7 +49,7 @@ class PlanetRepository {
                         "•\tLuas: Mercúrio não possui nenhuma lua.\n\n" +
                         "•\tAnéis: Mercúrio não possui nenhum anel ao seu redor.\n\n" +
                         "•\tDiâmetro:  4879 km\n\n" +
-                        "•\tMassa: 3,30 x 1023 kg (5,5% da massa da Terra)\n\n" +
+                        "•\tMassa: 3,30 x 10²³ kg (5,5% da massa da Terra)\n\n" +
                         "•\tTemperatura da superfície: podem chegar a 430 °C de dia e cair para –180 °C à noite.\n\n" +
                         "•\tPrimeiro registro: Mercúrio é conhecido pelo menos desde o tempo dos Sumérios, por volta de 5000 anos atrás.\n\n",
                 "•\tO planeta recebeu esse nome em homenagem a Mercúrio, deus romano dos viajantes e do comércio e dos ladrões, sendo também o mensageiro de Zeus e a personificação da inteligência, esperteza.\n\n" +
@@ -77,8 +77,8 @@ class PlanetRepository {
                 "Vênus",
                 "Semelhante em tamanho e estrutura à Terra, Vênus foi chamado de gêmeo da Terra. No entanto, existem diferenças radicais entre os dois planetas. É um planeta conhecido desde tempos muito antigos pois pode ser visto facilmente a olho nu.",
                 "•\tRaio: 6.052 km.\n\n" +
-                        "•\tMassa: 4.8673 x 1024kg.\n\n" +
-                        "•\tVolume: 9.28415 x 1011km3.\n\n" +
+                        "•\tMassa: 4.8673 x 10²⁴kg.\n\n" +
+                        "•\tVolume: 9.28415 x 10¹¹km³.\n\n" +
                         "•\tA atmosfera de Vênus consiste principalmente de dióxido de carbono, com nuvens de gotículas de ácido sulfúrico.\n\n" +
                         "•\tEstá a aproximadamente 108 milhões de km de distância do Sol.\n\n" +
                         "•\tA paisagem é empoeirada e as temperaturas da superfície chegam a escaldantes 880 graus Fahrenheit (471 graus Celsius).\n\n" +
@@ -101,8 +101,8 @@ class PlanetRepository {
                 "Terra",
                 "A Terra é o terceiro planeta mais próximo do Sol. É nosso planeta natal e o único lugar que conhecemos até então habitado por seres vivos. Embora a Terra seja apenas o quinto maior planeta do sistema solar, é o único com a presença de água líquida na superfície.",
                 "•\tRaio: 6.371 km.\n\n" +
-                        "•\tMassa: 5.972 x 1024 kg.\n\n" +
-                        "•\tVolume: 1.083 x 1012 km3.\n\n" +
+                        "•\tMassa: 5.972 x 10²⁴ kg.\n\n" +
+                        "•\tVolume: 1.083 x 10¹² km³.\n\n" +
                         "•\tPerto da superfície, a Terra tem uma atmosfera que consiste em 78% de nitrogênio, 21% de oxigênio e 1% de outros gases, como dióxido de carbono.\n\n" +
                         "•\tA Terra está aproximadamente a 150 milhões de km de distância do Sol.\n\n" +
                         "•\tO núcleo interno da Terra é uma esfera sólida feita de metais de ferro e níquel com cerca de 1.221 km de raio. Lá, a temperatura chega a 9.800 graus Fahrenheit (5.400 graus Celsius).\n\n" +
@@ -127,7 +127,7 @@ class PlanetRepository {
                         "•\tTempo para incidência da luz solar: aproximadamente 12 minutos.\n\n" +
                         "•\tLuas: Marte possui 2 luas, Fobos e Deimos.\n\n" +
                         "•\tDiâmetro:  6.792 km\n\n" +
-                        "•\tMassa: 6,417 x 1023 kg (10,7% da massa da Terra)\n\n" +
+                        "•\tMassa: 6,417 x 10²³ kg (10,7% da massa da Terra)\n\n" +
                         "•\tTemperatura da superfície:  20°C a -153°C\n\n" +
                         "•\tPrimeiro registro:  Já era conhecido pelos antigos. Registros egípcios já citavam Marte, há mais de 4.000 anos.\n\n" +
                         "•\tIdade: 4,6 bilhôes de anos\n\n",
@@ -162,8 +162,8 @@ class PlanetRepository {
                 "Júpiter",
                 "Júpiter é o maior planeta do nosso sistema solar. É um gigante gasoso e não tem uma superfície sólida, mas pode ter um núcleo interno sólido do tamanho da Terra. Possui vários anéis, mas são feitos de poeira e muito fracos, dificultando sua visibilidade.",
                 "•\tRaio: 69.911 km.\n\n" +
-                        "•\tMassa: 1.8981 x 1027kg.\n\n" +
-                        "•\tVolume: 1.43128 x 1015km3.\n\n" +
+                        "•\tMassa: 1.8981 x 10²⁷kg.\n\n" +
+                        "•\tVolume: 1.43128 x 10¹⁵km³.\n\n" +
                         "•\tA atmosfera de Júpiter é composta principalmente de hidrogênio (H2) e hélio (He).\n\n" +
                         "•\tJúpiter está a 778 milhões de km de distância do Sol.\n\n" +
                         "•\tPossui um núcleo central de material sólido ou, pode-se dizer, de uma sopa espessa, superquente e densa, podendo atingir até 90.032 graus Fahrenheit (50.000 graus Celsius) lá embaixo.\n\n" +
@@ -191,8 +191,8 @@ class PlanetRepository {
                 "Saturno",
                 "Saturno não é o único planeta a ter anéis, mas definitivamente tem os mais bonitos. É o sexto planeta a partir do Sol e o segundo maior do nosso sistema solar.  É um planeta visível a olho nu a partir da Terra.",
                 "•\tRaio: 58.232km.\n\n" +
-                        "•\tMassa: 5.6832 x 1026kg.\n\n" +
-                        "•\tVolume: 8.2713 x 1014km3.\n\n" +
+                        "•\tMassa: 5.6832 x 10²⁶kg.\n\n" +
+                        "•\tVolume: 8.2713 x 10¹⁴km³.\n\n" +
                         "•\tComo o gigante gasoso Júpiter, Saturno é uma bola enorme feita principalmente de hidrogênio e hélio.\n\n" +
                         "•\tSaturno está aproximadamente a 1,4 bilhões de km de distância do Sol.\n\n" +
                         "•\tSaturno leva cerca de 10,7 horas para girar em seu eixo uma vez (um “dia” de Saturno) e 29 anos terrestres para orbitar o Sol.\n\n",
@@ -220,11 +220,11 @@ class PlanetRepository {
                         "•\tDistância orbital média: 2.870.658,186 km. (19 vezes a da terra).\n\n" +
                         "•\tInclinação equatorial: 97.8º.\n\n" +
                         "•\tGravidade no equador: 8.87m/s².\n\n" +
-                        "•\tMassa: 86,813 x 1024 kg (14,54 vezes a da terra).\n\n" +
+                        "•\tMassa: 86,813 x 10²⁴ kg (14,54 vezes a da terra).\n\n" +
                         "•\tRaio equatorial: 25.362 km (4 vezes a da terra).\n\n" +
                         "•\tTemperatura em 1 bar: 76K ( -197 ºC).\n\n" +
                         "•\tVelocidade de órbita: 6,80 km/s. (0,228 vezes a da terra).\n\n" +
-                        "•\tVolume: 6.833x1010 km3 (63 vezes a da terra).",
+                        "•\tVolume: 6.833x10¹⁰ km³ (63 vezes a da terra).",
                 "•\tConhecido como planeta “de lado”, por conta da sua rotação\n\n" +
                         "•\tFoi descoberto em 1781 por William Herschel.\n\n" +
                         "•\tFoi o primeiro planeta descoberto com uso de telescópio.\n\n" +
@@ -253,11 +253,11 @@ class PlanetRepository {
                         "•\tDescoberto em 23 de setembro de 1846.\n\n" +
                         "•\tDistância orbital média: 2.870.658,186 km. (19 vezes a da terra)\n\n" +
                         "•\tGravidade no equador: 11.15 m/s²\n\n" +
-                        "•\tMassa: 102,413 x 1024 kg (17.15 vezes a da terra).\n\n" +
+                        "•\tMassa: 102,413 x 10²⁴ kg (17.15 vezes a da terra).\n\n" +
                         "•\tRaio no equador: 24.764 (3,83 vezes a da terra).\n\n" +
                         "•\tTemperatura em 1 bar: 72 K (-201 ºC)\n\n" +
                         "•\tVelocidade de órbita: 5,43 km/s. (0,182 vezes a da terra).\n\n" +
-                        "•\tVolume: 6.254 x 1010 km³ (57,74 vezes a da terra).\n\n",
+                        "•\tVolume: 6.254 x 10¹⁰ km³ (57,74 vezes a da terra).\n\n",
                 "•\tMais de 80% da sua massa é formada por fluídos densos de água, metano e amônia\n\n" +
                         "•\tNetuno possui 6 anéis.\n\n" +
                         "•\tUm dia em Netuno equivale a 16 horas na terra.\n\n" +
