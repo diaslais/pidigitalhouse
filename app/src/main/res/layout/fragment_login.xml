@@ -174,12 +174,12 @@
                         android:scaleType="centerCrop"
                         android:src="@drawable/ic_facebookicon" />
 
-                    <com.facebook.login.widget.LoginButton
+<!--                    <com.facebook.login.widget.LoginButton
                         android:id="@+id/imFacebookRealLogin"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
-                        android:visibility="gone" />
+                        android:visibility="gone" />-->
 
 
                     <ImageButton

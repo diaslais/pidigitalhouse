@@ -98,23 +98,14 @@ class DeveloperFragment : Fragment(), IDeveloper {
     }
 
     private fun setAllDevelopersDb() {
-        _developerViewModel.setAllDevelopers().observe(viewLifecycleOwner, {
-            it.forEach { developer ->
-                addDeveloperDb(developer)
-            }
-            addAllDevelopers(it)
-        })
-    }
-
-    private fun addDeveloperDb(developer: DeveloperEntity) {
-        _developerViewModel.addDeveloper(developer).observe(viewLifecycleOwner, {
-            _developerList.add(developer)
-            _developerAdapter.notifyDataSetChanged()
+        _developerViewModel.setAllDevelopers().observe(viewLifecycleOwner, { developers ->
+            addAllDevelopers(developers)
         })
     }
 
     private fun addAllDevelopers(list: List<DeveloperEntity>) {
         _developerList.addAll(list)
+        _developerList.sortBy { developer -> developer.name }
         _developerAdapter.notifyDataSetChanged()
     }
 

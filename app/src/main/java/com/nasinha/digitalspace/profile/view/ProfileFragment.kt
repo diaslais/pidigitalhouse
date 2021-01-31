@@ -113,17 +113,6 @@ class ProfileFragment : Fragment() {
             }
         })
 
-/*        _profileViewModel.stateUserEmail.observe(viewLifecycleOwner, { state ->
-            hideKeyboard(_view)
-            state?.let {
-                if (it) {
-                    snackBarMessage(getString(R.string.email_atualizado_verificar))
-                    emailTextInputVisibilityToggle()
-                    navigateHome(it)
-                }
-            }
-        })*/
-
         _profileViewModel.stateUserImage.observe(viewLifecycleOwner, { state ->
             state?.let {
                 snackBarMessage(getString(R.string.imagem_atualizada))

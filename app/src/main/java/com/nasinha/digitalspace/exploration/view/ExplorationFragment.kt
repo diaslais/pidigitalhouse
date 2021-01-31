@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
-import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.navigation.NavigationView
@@ -23,10 +22,11 @@ import com.nasinha.digitalspace.utils.DrawerUtils.unlockDrawer
 import com.squareup.picasso.Picasso
 
 class ExplorationFragment : Fragment() {
+    private lateinit var _view: View
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_exploration, container, false)
     }
@@ -34,7 +34,7 @@ class ExplorationFragment : Fragment() {
     @SuppressLint("RtlHardcoded")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        _view = view
         if (isFirstTime()) {
             welcomeDialog(view)
         }
@@ -47,7 +47,7 @@ class ExplorationFragment : Fragment() {
     private fun welcomeDialog(explorationView: View) {
         val dialog = AlertDialog.Builder(explorationView.context)
         val view: View =
-            requireActivity().layoutInflater.inflate(R.layout.welcome_alert, null)
+                requireActivity().layoutInflater.inflate(R.layout.welcome_alert, null)
         dialog.setView(view)
 
         val btnLetsGo = view.findViewById<Button>(R.id.btnLetsGo)

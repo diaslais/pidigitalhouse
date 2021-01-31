@@ -49,7 +49,6 @@ import kotlinx.android.synthetic.main.fragment_login.*
 class LoginFragment : Fragment() {
     private lateinit var _view: View
     private lateinit var callbackManager: CallbackManager
-    private val facebookRealBtn: Button by lazy { _view.findViewById(R.id.imFacebookRealLogin) }
     private val authenticatorViewModel: AuthenticatorViewModel by lazy {
         ViewModelProvider(this).get(AuthenticatorViewModel::class.java)
     }
@@ -73,7 +72,7 @@ class LoginFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lockDrawer(requireActivity())
         _view = view
-        val facebookFakeBtn = _view.findViewById<ImageButton>(R.id.imFacebookLogin)
+        val facebookBtn = _view.findViewById<ImageButton>(R.id.imFacebookLogin)
         checkUserId()
 //        Email login
         loginHandler()
@@ -81,12 +80,9 @@ class LoginFragment : Fragment() {
         emailSignupHandler()
 //        Facebook signup
         callbackManager = CallbackManager.Factory.create()
-        facebookRealBtn.setOnClickListener {
-            facebookLoginHandler()
-        }
-        facebookFakeBtn.setOnClickListener {
+        facebookBtn.setOnClickListener {
             clearText()
-            facebookRealBtn.performClick()
+            facebookLoginHandler()
         }
 //        Google signup
         googleLoginHandler()
