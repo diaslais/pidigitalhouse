@@ -33,6 +33,7 @@ import com.nasinha.digitalspace.utils.Constants.FACEBOOKCOM
 import com.nasinha.digitalspace.utils.Constants.GOOGLECOM
 import com.nasinha.digitalspace.utils.Constants.PASSWORD
 import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
+import com.nasinha.digitalspace.utils.NetworkUtils.connectivityWifi
 import com.nasinha.digitalspace.utils.TranslateUtils.conditions
 import com.nasinha.digitalspace.utils.TranslateUtils.getCheckPrefs
 import com.nasinha.digitalspace.utils.TranslateUtils.options
@@ -63,6 +64,7 @@ class SettingsFragment : Fragment() {
         initViewModel()
         deleteAccountHandler()
         switchTranslateListener()
+        Log.d("Paulinho", "${connectivityWifi(_view.context)}")
 
     }
 
@@ -81,8 +83,8 @@ class SettingsFragment : Fragment() {
                 alertDialog.setTitle(getString(R.string.alerta_traducao))
                 alertDialog.setMessage(getString(R.string.message_traducao))
                 alertDialog.setPositiveButton(getString(R.string.sim)) { dialog, _ ->
-                    translateDownload()
                     showLoading(true)
+                    translateDownload()
                     dialog.dismiss()
                 }
                 alertDialog.setNegativeButton(getString(R.string.nao)) { dialog, _ ->
@@ -105,20 +107,26 @@ class SettingsFragment : Fragment() {
     private fun translateDownload() {
         val englishPortugueseTranslator = Translation.getClient(options())
 
-        englishPortugueseTranslator.downloadModelIfNeeded(conditions())
-            .addOnSuccessListener {
+        if (!connectivityWifi(_view.context)) {
+            englishPortugueseTranslator.downloadModelIfNeeded(conditions())
+                .addOnSuccessListener {
 
-                showLoading(false)
-                snackBarMessage(getString(R.string.message_install))
-                englishPortugueseTranslator.close()
+                    showLoading(false)
+                    snackBarMessage(getString(R.string.message_install))
+                    englishPortugueseTranslator.close()
 
-            }
-            .addOnFailureListener {
+                }
+                .addOnFailureListener {
 
-                showLoading(false)
-                snackBarMessage(getString(R.string.failed_download))
+                    showLoading(false)
+                    snackBarMessage(getString(R.string.failed_download))
 
-            }
+                }
+        } else {
+            showLoading(false)
+            snackBarMessage("Download permitido somente via WIFI.")
+        }
+
 
     }
 
