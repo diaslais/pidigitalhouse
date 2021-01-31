@@ -32,7 +32,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="@dimen/dim30dp"
                 android:text="@string/quiz"
-                android:fontFamily="@font/ubuntu_bold"
+                android:fontFamily="@font/ubuntu"
                 android:textColor="@color/colorWhite"
                 android:textSize="@dimen/dim20sp"/>
 
