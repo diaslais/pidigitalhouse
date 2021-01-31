@@ -10,6 +10,7 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
@@ -336,8 +337,8 @@ class ApodFragment : Fragment() {
     }
 
     private fun backPressed() {
-        val btnToolbar = _view.findViewById<MaterialToolbar>(R.id.apodTopAppBar)
-        btnToolbar.setNavigationOnClickListener {
+        val btnBackPressed = _view.findViewById<ImageButton>(R.id.ibBackFavorite)
+        btnBackPressed.setOnClickListener {
             activity?.onBackPressed()
         }
     }

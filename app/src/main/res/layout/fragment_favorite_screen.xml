@@ -33,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="@dimen/dim300dp"
         android:layout_marginTop="@dimen/dim10dp"
+        android:padding="@dimen/dim20dp"
         android:scaleType="centerCrop"
         tools:src="@tools:sample/backgrounds/scenic" />
 
