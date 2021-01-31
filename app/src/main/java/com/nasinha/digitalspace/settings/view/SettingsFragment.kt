@@ -34,7 +34,9 @@ import com.nasinha.digitalspace.utils.Constants.GOOGLECOM
 import com.nasinha.digitalspace.utils.Constants.PASSWORD
 import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
 import com.nasinha.digitalspace.utils.TranslateUtils.conditions
+import com.nasinha.digitalspace.utils.TranslateUtils.getCheckPrefs
 import com.nasinha.digitalspace.utils.TranslateUtils.options
+import com.nasinha.digitalspace.utils.TranslateUtils.saveCheckPrefs
 
 
 class SettingsFragment : Fragment() {
@@ -57,22 +59,21 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         _view = view
-
-        val switchButton = _view.findViewById<SwitchCompat>(R.id.btnSwitchTranslate)
-        val prefs = activity?.getSharedPreferences(APP_KEY, AppCompatActivity.MODE_PRIVATE)
-        val prefsChecked = prefs?.getBoolean(SWITCH_PREFS, false)
-
-        if (prefsChecked != null) {
-            switchButton.isChecked = prefsChecked
-        }
-
         closeBtn()
         initViewModel()
         deleteAccountHandler()
+        switchTranslateListener()
+
+    }
+
+    private fun switchTranslateListener() {
+        val switchButton = _view.findViewById<SwitchCompat>(R.id.btnSwitchTranslate)
+
+        switchButton.isChecked = getCheckPrefs(_view.context)
 
         switchButton.setOnCheckedChangeListener { _, isChecked ->
 
-            prefs?.edit()?.putBoolean(SWITCH_PREFS, isChecked)?.apply()
+            saveCheckPrefs(_view.context, isChecked)
 
             if (isChecked) {
                 val alertDialog = AlertDialog.Builder(_view.context)
@@ -83,7 +84,6 @@ class SettingsFragment : Fragment() {
                     translateDownload()
                     showLoading(true)
                     dialog.dismiss()
-
                 }
                 alertDialog.setNegativeButton(getString(R.string.nao)) { dialog, _ ->
                     switchButton.isChecked = false
@@ -91,12 +91,10 @@ class SettingsFragment : Fragment() {
                 }
                 alertDialog.show()
 
-
             } else {
                 showLoading(false)
             }
         }
-
     }
 
     private fun showLoading(isLoading: Boolean) {
