@@ -7,6 +7,7 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.CountDownTimer
+import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -67,6 +68,15 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         }
         callback.isEnabled = true
     }
+
+    override fun onPause() {
+        super.onPause()
+
+        stopTimer()
+        activity?.onBackPressed()
+        Log.d("LIFECYCLE", "onStop")
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -250,9 +260,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     }
 
     private fun addScoreToDatabase(date: String, points: Int) {
-
         val userId = AuthUtil.getUserId(requireActivity().application)!!
-
         val currentScore = Score(null, date, points, userId)
 
         _viewModel.addScore(currentScore).observe(viewLifecycleOwner) {}
