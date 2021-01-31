@@ -22,6 +22,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
@@ -113,17 +114,6 @@ class ProfileFragment : Fragment() {
             }
         })
 
-/*        _profileViewModel.stateUserEmail.observe(viewLifecycleOwner, { state ->
-            hideKeyboard(_view)
-            state?.let {
-                if (it) {
-                    snackBarMessage(getString(R.string.email_atualizado_verificar))
-                    emailTextInputVisibilityToggle()
-                    navigateHome(it)
-                }
-            }
-        })*/
-
         _profileViewModel.stateUserImage.observe(viewLifecycleOwner, { state ->
             state?.let {
                 snackBarMessage(getString(R.string.imagem_atualizada))
@@ -155,9 +145,11 @@ class ProfileFragment : Fragment() {
         val imageView = _view.findViewById<CircleImageView>(R.id.cvImageProfile)
         val imageOverlayView = _view.findViewById<ImageView>(R.id.ivImageOverlayProfile)
         if (_userImageUrl.isNullOrEmpty() || _userImageUrl == "null") {
-            Picasso.get().load(R.drawable.user_placeholder).into(imageView)
+//            Picasso.get().load(R.drawable.user_placeholder).into(imageView)
+            Glide.with(_view).load(R.drawable.user_placeholder).into(imageView)
         } else {
-            Picasso.get().load(_userImageUrl).into(imageView)
+//            Picasso.get().load(_userImageUrl).into(imageView)
+            Glide.with(_view).load(_userImageUrl).into(imageView)
         }
 
         if (getUserProvider(requireActivity()) == PASSWORD) {
@@ -221,7 +213,8 @@ class ProfileFragment : Fragment() {
             _selectedImageUri = data.data
 
             val profileImageView = _view.findViewById<CircleImageView>(R.id.cvImageProfile)
-            Picasso.get().load(_selectedImageUri).fit().centerCrop().into(profileImageView)
+//            Picasso.get().load(_selectedImageUri).fit().centerCrop().into(profileImageView)
+            Glide.with(_view).load(_selectedImageUri).centerCrop().into(profileImageView)
 
             val confirmPhotoBtn = _view.findViewById<MaterialButton>(R.id.mbConfirmPhotoProfile)
 

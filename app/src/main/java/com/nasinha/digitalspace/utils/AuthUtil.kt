@@ -20,13 +20,13 @@ object AuthUtil {
 
     fun saveUserId(context: Context, uiid: String?) {
         val preferences: SharedPreferences =
-            context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
+                context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
         preferences.edit().putString(UIID_KEY, uiid).apply()
     }
 
     fun saveUserName(context: Context, name: String?) {
         val preferences: SharedPreferences =
-            context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
+                context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
 
         if (!name.isNullOrEmpty()) {
             val newString = name.split(" ").joinToString(" ") { it.capitalize() }
@@ -38,13 +38,13 @@ object AuthUtil {
 
     fun saveUserEmail(context: Context, email: String?) {
         val preferences: SharedPreferences =
-            context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
+                context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
         preferences.edit().putString(USER_EMAIL, email).apply()
     }
 
     fun saveSignInMethod(context: Context, method: String?) {
         val preferences: SharedPreferences =
-            context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
+                context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
         if (!method.isNullOrEmpty()) {
             preferences.edit().putString(USER_SIGN_IN_METHOD, method).apply()
         } else {
@@ -54,7 +54,7 @@ object AuthUtil {
 
     fun saveUserImage(context: Context, photoUrl: String?) {
         val preferences: SharedPreferences =
-            context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
+                context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
         preferences.edit().putString(USER_PHOTO_URL, photoUrl).apply()
     }
 
@@ -75,13 +75,13 @@ object AuthUtil {
 
     fun getUserProvider(context: Context): String? {
         val preferences: SharedPreferences =
-            context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
+                context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
         return preferences.getString(USER_SIGN_IN_METHOD, EMPTY_STRING)
     }
 
     fun getUserImage(context: Context): String? {
         val preferences: SharedPreferences =
-            context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
+                context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
         return preferences.getString(USER_PHOTO_URL, EMPTY_STRING)
     }
 
@@ -142,7 +142,7 @@ object AuthUtil {
 
     fun hideKeyboard(view: View) {
         val imm: InputMethodManager =
-            view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
+                view.context.getSystemService(Activity.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
 }

@@ -12,6 +12,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.drawerlayout.widget.DrawerLayout
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.bumptech.glide.Glide
 import com.google.android.material.appbar.MaterialToolbar
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.card.MaterialCardView
@@ -23,10 +24,11 @@ import com.nasinha.digitalspace.utils.DrawerUtils.unlockDrawer
 import com.squareup.picasso.Picasso
 
 class ExplorationFragment : Fragment() {
+    private lateinit var _view: View
 
     override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
+            inflater: LayoutInflater, container: ViewGroup?,
+            savedInstanceState: Bundle?
     ): View? {
         return inflater.inflate(R.layout.fragment_exploration, container, false)
     }
@@ -34,7 +36,7 @@ class ExplorationFragment : Fragment() {
     @SuppressLint("RtlHardcoded")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        _view = view
         if (isFirstTime()) {
             welcomeDialog(view)
         }
@@ -47,7 +49,7 @@ class ExplorationFragment : Fragment() {
     private fun welcomeDialog(explorationView: View) {
         val dialog = AlertDialog.Builder(explorationView.context)
         val view: View =
-            requireActivity().layoutInflater.inflate(R.layout.welcome_alert, null)
+                requireActivity().layoutInflater.inflate(R.layout.welcome_alert, null)
         dialog.setView(view)
 
         val btnLetsGo = view.findViewById<Button>(R.id.btnLetsGo)
@@ -138,9 +140,11 @@ class ExplorationFragment : Fragment() {
 
         nameDrawer.text = nameShared
         if (userImage.isNullOrEmpty() || userImage == "null") {
-            Picasso.get().load(R.drawable.user_placeholder).into(imageDrawer)
+//            Picasso.get().load(R.drawable.user_placeholder).into(imageDrawer)
+            Glide.with(_view).load(R.drawable.user_placeholder).into(imageDrawer)
         } else {
-            Picasso.get().load(userImage).placeholder(R.drawable.user_placeholder).into(imageDrawer)
+//            Picasso.get().load(userImage).placeholder(R.drawable.user_placeholder).into(imageDrawer)
+            Glide.with(_view).load(userImage).placeholder(R.drawable.user_placeholder).into(imageDrawer)
         }
     }
 

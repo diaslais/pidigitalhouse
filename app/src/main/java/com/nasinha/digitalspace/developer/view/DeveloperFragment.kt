@@ -102,7 +102,6 @@ class DeveloperFragment : Fragment(), IDeveloper {
             it.forEach { developer ->
                 addDeveloperDb(developer)
             }
-            addAllDevelopers(it)
         })
     }
 
