@@ -3,6 +3,7 @@ package com.nasinha.digitalspace.epic.view
 
 import android.annotation.SuppressLint
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -67,7 +68,6 @@ class EpicFragment : Fragment() {
             }
         })
 
-
         val navController = findNavController()
 
         view.findViewById<ImageButton>(R.id.btnBackEpic).setOnClickListener {
@@ -105,7 +105,6 @@ class EpicFragment : Fragment() {
                 txtEpic.text =
                     getString(R.string.updateMessage) + "${dayId}/${monthId}/${yearId}"
 
-
                 picasso
                     .load("https://epic.gsfc.nasa.gov/archive/natural/${yearId}/${monthId}/${dayId}/png/${imageId}")
                     .resize(600,600)
@@ -115,21 +114,17 @@ class EpicFragment : Fragment() {
                         }
 
                         override fun onError(e: java.lang.Exception?) {
-                            TODO("Not yet implemented")
+                            Log.e("error","${e?.message}")
                         }
 
                     })
 
             }
 
-
         } catch (exception: Exception) {
             txtEpic.text = getString(R.string.epic_message)
             picasso.load(R.drawable.epic_gatinho).into(imgEpic)
-
         }
-
-
     }
 
     private fun showLoading(isLoading: Boolean) {
