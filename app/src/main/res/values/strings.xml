@@ -160,5 +160,6 @@
     <string name="download_text">Aguarde o download e instalação da tradução</string>
     <string name="message_install">Instalação Concluída.</string>
     <string name="failed_download">Falha no Download ou Instalação</string>
+    <string name="fato_astronomico">Fato Astronômico</string>
 
 </resources>

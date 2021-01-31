@@ -2,6 +2,7 @@ package com.nasinha.digitalspace.apod.view
 
 import android.os.Bundle
 import android.util.Log
+import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,10 +10,13 @@ import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.core.os.bundleOf
+import androidx.core.view.size
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.NavHostFragment
+import com.google.android.material.appbar.MaterialToolbar
+import com.google.android.material.button.MaterialButton
 import com.google.mlkit.common.model.DownloadConditions
 import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
@@ -54,7 +58,6 @@ class ApodFragment : Fragment() {
     private lateinit var _favoriteViewModel: FavoriteViewModel
     private lateinit var englishPortugueseTranslator: Translator
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -70,7 +73,6 @@ class ApodFragment : Fragment() {
         val imgLoad = _view.findViewById<ImageView>(R.id.imgApod)
         val txtExplanation = _view.findViewById<TextView>(R.id.txtExplanationApod)
         val txtTitle = _view.findViewById<TextView>(R.id.txtTitle)
-
 
         val viewModel = ViewModelProvider(
             this, ApodViewModel.ApodViewModelFactory(
@@ -108,10 +110,7 @@ class ApodFragment : Fragment() {
 
         })
 
-        view.findViewById<ImageButton>(R.id.btnBackApod).setOnClickListener {
-            activity?.onBackPressed()
-        }
-
+        backPressed()
         showLoading(true)
         showShareFavorite(false)
     }
@@ -335,5 +334,12 @@ class ApodFragment : Fragment() {
             balloon.dismissWithDelay(1000L)
         }
 
+    }
+
+    private fun backPressed() {
+        val btnBackPressed = _view.findViewById<ImageButton>(R.id.ibBackFavorite)
+        btnBackPressed.setOnClickListener {
+            activity?.onBackPressed()
+        }
     }
 }

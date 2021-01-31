@@ -33,8 +33,11 @@ import com.nasinha.digitalspace.utils.Constants.FACEBOOKCOM
 import com.nasinha.digitalspace.utils.Constants.GOOGLECOM
 import com.nasinha.digitalspace.utils.Constants.PASSWORD
 import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
+import com.nasinha.digitalspace.utils.NetworkUtils.connectivityWifi
 import com.nasinha.digitalspace.utils.TranslateUtils.conditions
+import com.nasinha.digitalspace.utils.TranslateUtils.getCheckPrefs
 import com.nasinha.digitalspace.utils.TranslateUtils.options
+import com.nasinha.digitalspace.utils.TranslateUtils.saveCheckPrefs
 
 
 class SettingsFragment : Fragment() {
@@ -57,22 +60,22 @@ class SettingsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         _view = view
-
-        val switchButton = _view.findViewById<SwitchCompat>(R.id.btnSwitchTranslate)
-        val prefs = activity?.getSharedPreferences(APP_KEY, AppCompatActivity.MODE_PRIVATE)
-        val prefsChecked = prefs?.getBoolean(SWITCH_PREFS, false)
-
-        if (prefsChecked != null) {
-            switchButton.isChecked = prefsChecked
-        }
-
         closeBtn()
         initViewModel()
         deleteAccountHandler()
+        switchTranslateListener()
+        Log.d("Paulinho", "${connectivityWifi(_view.context)}")
+
+    }
+
+    private fun switchTranslateListener() {
+        val switchButton = _view.findViewById<SwitchCompat>(R.id.btnSwitchTranslate)
+
+        switchButton.isChecked = getCheckPrefs(_view.context)
 
         switchButton.setOnCheckedChangeListener { _, isChecked ->
 
-            prefs?.edit()?.putBoolean(SWITCH_PREFS, isChecked)?.apply()
+            saveCheckPrefs(_view.context, isChecked)
 
             if (isChecked) {
                 val alertDialog = AlertDialog.Builder(_view.context)
@@ -80,10 +83,9 @@ class SettingsFragment : Fragment() {
                 alertDialog.setTitle(getString(R.string.alerta_traducao))
                 alertDialog.setMessage(getString(R.string.message_traducao))
                 alertDialog.setPositiveButton(getString(R.string.sim)) { dialog, _ ->
-                    translateDownload()
                     showLoading(true)
+                    translateDownload()
                     dialog.dismiss()
-
                 }
                 alertDialog.setNegativeButton(getString(R.string.nao)) { dialog, _ ->
                     switchButton.isChecked = false
@@ -91,12 +93,10 @@ class SettingsFragment : Fragment() {
                 }
                 alertDialog.show()
 
-
             } else {
                 showLoading(false)
             }
         }
-
     }
 
     private fun showLoading(isLoading: Boolean) {
@@ -107,20 +107,26 @@ class SettingsFragment : Fragment() {
     private fun translateDownload() {
         val englishPortugueseTranslator = Translation.getClient(options())
 
-        englishPortugueseTranslator.downloadModelIfNeeded(conditions())
-            .addOnSuccessListener {
+        if (!connectivityWifi(_view.context)) {
+            englishPortugueseTranslator.downloadModelIfNeeded(conditions())
+                .addOnSuccessListener {
 
-                showLoading(false)
-                snackBarMessage(getString(R.string.message_install))
-                englishPortugueseTranslator.close()
+                    showLoading(false)
+                    snackBarMessage(getString(R.string.message_install))
+                    englishPortugueseTranslator.close()
 
-            }
-            .addOnFailureListener {
+                }
+                .addOnFailureListener {
 
-                showLoading(false)
-                snackBarMessage(getString(R.string.failed_download))
+                    showLoading(false)
+                    snackBarMessage(getString(R.string.failed_download))
 
-            }
+                }
+        } else {
+            showLoading(false)
+            snackBarMessage("Download permitido somente via WIFI.")
+        }
+
 
     }
 
