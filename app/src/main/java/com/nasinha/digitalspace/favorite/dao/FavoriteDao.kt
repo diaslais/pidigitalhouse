@@ -26,14 +26,6 @@ interface FavoriteDao {
     suspend fun getFavorite(image: String): FavoriteEntity
 
     @Transaction
-    @Query("UPDATE Favorite SET titleBr = :titleBr WHERE image=:image")
-    suspend fun updateTitleBr(image: String, titleBr: String)
-
-    @Transaction
-    @Query("UPDATE Favorite SET textBr = :textBr WHERE image=:image")
-    suspend fun updateTextBr(image: String, textBr: String)
-
-    @Transaction
     @Query("DELETE FROM User WHERE userId=:userId AND image=:image")
     suspend fun deleteFavoriteItem(image: String, userId: String)
 

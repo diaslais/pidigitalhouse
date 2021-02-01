@@ -9,7 +9,6 @@
     android:padding="@dimen/dim20dp"
     tools:context=".planetsmenu.view.BottomsheetFragment">
 
-    <!-- TODO: Update blank fragment layout -->
     <ImageView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
