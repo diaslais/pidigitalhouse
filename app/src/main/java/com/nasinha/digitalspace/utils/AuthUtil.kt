@@ -3,7 +3,6 @@ package com.nasinha.digitalspace.utils
 import android.app.Activity
 import android.content.Context
 import android.content.SharedPreferences
-import android.net.Uri
 import android.util.Patterns
 import android.view.View
 import android.view.inputmethod.InputMethodManager

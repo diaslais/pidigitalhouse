@@ -11,7 +11,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnticipateOvershootInterpolator
-import android.widget.Button
 import android.widget.ImageButton
 import android.widget.LinearLayout
 import android.widget.Toast
@@ -20,7 +19,6 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
-import com.nasinha.digitalspace.extension.toggleSize
 import com.facebook.CallbackManager
 import com.facebook.FacebookCallback
 import com.facebook.FacebookException
@@ -38,9 +36,10 @@ import com.google.firebase.auth.FacebookAuthProvider
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.nasinha.digitalspace.R
+import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
+import com.nasinha.digitalspace.extension.toggleSize
 import com.nasinha.digitalspace.utils.AuthUtil
 import com.nasinha.digitalspace.utils.AuthUtil.hideKeyboard
-import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
 import com.nasinha.digitalspace.utils.Constants.EMPTY_STRING
 import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 import kotlinx.android.synthetic.main.fragment_login.*

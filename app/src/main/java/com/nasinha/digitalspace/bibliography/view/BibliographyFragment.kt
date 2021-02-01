@@ -11,10 +11,10 @@ import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.nasinha.digitalspace.R
-import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 import com.nasinha.digitalspace.planetsmenu.model.Planet
 import com.nasinha.digitalspace.planetsmenu.repository.PlanetRepository
 import com.nasinha.digitalspace.planetsmenu.viewmodel.PlanetViewModel
+import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 
 class BibliographyFragment : Fragment() {
     private lateinit var _biblioView: View

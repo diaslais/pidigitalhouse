@@ -17,10 +17,10 @@ class DeveloperRepository(private val developerDao: DeveloperDao) {
             DeveloperEntity(
                 1,
                 "https://avatars3.githubusercontent.com/u/53455525?s=400&u=48e7cf6b27239f95a546f14b3f5284612a64d300&v=4",
-                "Lais Dias",
+                "Laís Dias",
                 "",
                 "Pessoa Desensenvolvedora Android",
-                "https://www.linkedin.com/",
+                "https://www.linkedin.com/in/diaslais/",
                 "https://github.com/diaslais"
             ), DeveloperEntity(
                 2,
@@ -44,7 +44,7 @@ class DeveloperRepository(private val developerDao: DeveloperDao) {
                 "Renan Damasceno",
                 "",
                 "Pessoa Desensenvolvedora Android",
-                "https://www.linkedin.com/",
+                "https://www.linkedin.com/in/jrenandamasceno/",
                 "https://github.com/renandamasceno"
             )
         )

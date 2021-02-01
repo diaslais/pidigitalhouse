@@ -1,6 +1,5 @@
 package com.nasinha.digitalspace.planetsmenu.view
 
-import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -19,7 +18,6 @@ import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.button.MaterialButton
-import com.nasinha.digitalspace.MainActivity
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.planetsmenu.model.Planet
 import com.nasinha.digitalspace.planetsmenu.repository.PlanetRepository

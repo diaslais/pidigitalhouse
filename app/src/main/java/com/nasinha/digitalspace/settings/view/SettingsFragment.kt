@@ -1,7 +1,6 @@
 package com.nasinha.digitalspace.settings.view
 
 import android.app.AlertDialog
-import android.app.DownloadManager
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -11,28 +10,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.LinearLayout
-import android.widget.ProgressBar
-import android.widget.Toast
-import android.widget.Toast.makeText
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SwitchCompat
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
-import com.google.mlkit.common.model.DownloadConditions
-import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
-import com.google.mlkit.nl.translate.TranslatorOptions
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.profile.viewmodel.ProfileViewModel
 import com.nasinha.digitalspace.utils.AuthUtil
-import com.nasinha.digitalspace.utils.Constants.APP_KEY
 import com.nasinha.digitalspace.utils.Constants.FACEBOOKCOM
 import com.nasinha.digitalspace.utils.Constants.GOOGLECOM
 import com.nasinha.digitalspace.utils.Constants.PASSWORD
-import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
 import com.nasinha.digitalspace.utils.NetworkUtils.connectivityWifi
 import com.nasinha.digitalspace.utils.TranslateUtils.conditions
 import com.nasinha.digitalspace.utils.TranslateUtils.getCheckPrefs

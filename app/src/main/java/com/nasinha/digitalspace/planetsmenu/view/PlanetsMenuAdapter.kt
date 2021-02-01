@@ -16,7 +16,7 @@ class PlanetsMenuAdapter (
     private val clickListener: IPlanetClick
 ): RecyclerView.Adapter<PlanetsMenuAdapter.PlanetsMenuViewHolder>(){
     lateinit var view: View
-    var checkedPosition = 0
+    private var checkedPosition = 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PlanetsMenuViewHolder {
         view = LayoutInflater.from(parent.context).inflate(R.layout.item_planets_menu, parent, false)
