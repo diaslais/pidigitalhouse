@@ -15,8 +15,8 @@
         android:orientation="horizontal">
 
         <ImageView
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="@dimen/dim32dp"
+            android:layout_height="@dimen/dim32dp"
             android:layout_marginEnd="@dimen/dim10dp"
             android:src="@drawable/ic_clock"/>
 
@@ -26,10 +26,10 @@
             android:layout_height="wrap_content"
             android:text="@string/tempo_esgotado"
             android:fontFamily="@font/ubuntu_bold"
-            android:textSize="20sp"
+            android:textSize="@dimen/dim20sp"
             android:gravity="center"
-            android:layout_marginTop="10dp"
-            android:layout_marginBottom="10dp"/>
+            android:layout_marginTop="@dimen/dim10dp"
+            android:layout_marginBottom="@dimen/dim10dp"/>
     </LinearLayout>
 
     <Button
@@ -42,6 +42,6 @@
         android:textColor="@color/colorWhite"
         app:backgroundTint="@color/colorTransparent"
         app:strokeColor="@color/colorWhite"
-        app:strokeWidth="1dp"
+        app:strokeWidth="@dimen/dim1dp"
         android:textAllCaps="true"/>
 </LinearLayout>

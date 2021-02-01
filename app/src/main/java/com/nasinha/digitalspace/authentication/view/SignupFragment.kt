@@ -15,9 +15,9 @@ import com.google.android.material.button.MaterialButton
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.nasinha.digitalspace.R
+import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
 import com.nasinha.digitalspace.utils.AuthUtil.hideKeyboard
 import com.nasinha.digitalspace.utils.AuthUtil.validateNameEmailPassword
-import com.nasinha.digitalspace.authentication.viewmodel.AuthenticatorViewModel
 import kotlinx.android.synthetic.main.fragment_signup.*
 
 class SignupFragment : Fragment() {

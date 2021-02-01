@@ -67,7 +67,7 @@
               android:id="@+id/txtViaLactea"
               android:layout_width="0dp"
               android:layout_height="wrap_content"
-              android:layout_marginBottom="16dp"
+              android:layout_marginBottom="@dimen/dim16dp"
               android:fontFamily="@font/ubuntu"
               android:text="@string/via_l_ctea"
               android:textAllCaps="true"

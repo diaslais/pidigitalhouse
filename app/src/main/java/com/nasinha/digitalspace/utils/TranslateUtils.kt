@@ -8,7 +8,6 @@ import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.TranslatorOptions
 import com.nasinha.digitalspace.utils.Constants.APP_KEY
 import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
-import java.util.prefs.Preferences
 
 object TranslateUtils {
 

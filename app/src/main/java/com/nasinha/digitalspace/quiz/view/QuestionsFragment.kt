@@ -7,7 +7,6 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.KeyEvent
 import android.view.LayoutInflater
 import android.view.View
@@ -46,24 +45,26 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private lateinit var countDownTimer: CountDownTimer
     private lateinit var timerBarAnimation: Animator
     private var timeLeftInMillis: Long = 0
+    private lateinit var dialog: AlertDialog.Builder
+    private lateinit var alert: AlertDialog
 
     private lateinit var _view: View
     private lateinit var _viewModel: QuizViewModel
 
-    lateinit var txtQuestion: TextView
-    lateinit var txtQuestionNumber: TextView
-    lateinit var txtOptionOne: TextView
-    lateinit var txtOptionTwo: TextView
-    lateinit var txtOptionThree: TextView
-    lateinit var txtOptionFour: TextView
-    lateinit var btnAnswer: MaterialButton
-    lateinit var txtChronometer: TextView
-    lateinit var imageClock: ImageView
-    lateinit var countdownBar: ProgressBar
-    lateinit var navController: NavController
-    lateinit var heartOne: ImageView
-    lateinit var heartTwo: ImageView
-    lateinit var heartThree: ImageView
+    private lateinit var txtQuestion: TextView
+    private lateinit var txtQuestionNumber: TextView
+    private lateinit var txtOptionOne: TextView
+    private lateinit var txtOptionTwo: TextView
+    private lateinit var txtOptionThree: TextView
+    private lateinit var txtOptionFour: TextView
+    private lateinit var btnAnswer: MaterialButton
+    private lateinit var txtChronometer: TextView
+    private lateinit var imageClock: ImageView
+    private lateinit var countdownBar: ProgressBar
+    private lateinit var navController: NavController
+    private lateinit var heartOne: ImageView
+    private lateinit var heartTwo: ImageView
+    private lateinit var heartThree: ImageView
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -84,6 +85,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         super.onSaveInstanceState(outState)
 
         minimized = true
+        alert.dismiss()
     }
 
     override fun onResume() {
@@ -110,6 +112,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
             QuizViewModel.QuizViewModelFactory(QuizRepository(QuizDatabase.getDatabase(view.context).quizDao()))
         ).get(QuizViewModel::class.java)
 
+        dialog = AlertDialog.Builder(_view.context)
         txtQuestion = view.findViewById(R.id.txtQuestion)
         txtQuestionNumber = view.findViewById(R.id.txtQuestionNumber)
         txtOptionOne = view.findViewById(R.id.txtAnswer1)
@@ -372,14 +375,14 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
     private fun timeIsOverDialog() {
         mistakes++
-        val dialog = AlertDialog.Builder(_view.context)
+
         val view: View =
             requireActivity().layoutInflater.inflate(R.layout.time_over_alert, null)
         dialog.setView(view)
         val btnTimeNextQuestion = view.findViewById<Button>(R.id.btnTimeNextQuestion)
         if (_currentPosition == NUMBER_QUESTIONS) btnTimeNextQuestion.text = getString(R.string.fim)
 
-        val alert = dialog.create()
+        alert = dialog.create()
 
         btnTimeNextQuestion.setOnClickListener {
             nextQuestion()

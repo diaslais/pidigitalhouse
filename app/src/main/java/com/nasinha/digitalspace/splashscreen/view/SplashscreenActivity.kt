@@ -2,15 +2,14 @@ package com.nasinha.digitalspace.splashscreen.view
 
 import android.content.Intent
 import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
-import android.view.View
 import android.view.WindowInsets
 import android.view.WindowManager
-import com.nasinha.digitalspace.R
+import androidx.appcompat.app.AppCompatActivity
 import com.nasinha.digitalspace.MainActivity
+import com.nasinha.digitalspace.R
 
 class SplashscreenActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

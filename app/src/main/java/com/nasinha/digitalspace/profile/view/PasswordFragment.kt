@@ -15,7 +15,6 @@ import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.profile.viewmodel.ProfileViewModel
-import com.nasinha.digitalspace.utils.AuthUtil
 import com.nasinha.digitalspace.utils.AuthUtil.getUserEmail
 import com.nasinha.digitalspace.utils.AuthUtil.getUserProvider
 import com.nasinha.digitalspace.utils.AuthUtil.hideKeyboard

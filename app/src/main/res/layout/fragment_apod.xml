@@ -27,7 +27,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="47dp"
+                android:layout_marginStart="@dimen/dim47dp"
                 android:fontFamily="@font/ubuntu"
                 android:text="@string/fato_astronomico"
                 android:textColor="@color/colorWhite"
@@ -41,7 +41,6 @@
             android:layout_height="@dimen/dim300dp"
             android:layout_marginTop="@dimen/dim10dp"
             android:layout_marginBottom="@dimen/dim9dp"
-            android:contentDescription="@string/todo"
             android:padding="@dimen/dim20dp"
             android:scaleType="centerCrop"
             tools:srcCompat="@tools:sample/avatars[3]" />

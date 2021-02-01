@@ -7,7 +7,7 @@
     <ImageView
         android:id="@+id/imgPlanetRecycler"
         android:layout_width="wrap_content"
-        android:layout_height="@dimen/dim130dp"
+        android:layout_height="@dimen/dim125dp"
         android:adjustViewBounds="true"
         android:src="@drawable/sol"/>
 

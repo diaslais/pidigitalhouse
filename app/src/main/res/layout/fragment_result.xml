@@ -29,7 +29,7 @@
 
         <TextView
             android:id="@+id/txtTitleResults"
-            android:layout_width="300dp"
+            android:layout_width="@dimen/dim300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginBottom="@dimen/dim30dp"
@@ -79,7 +79,7 @@
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_marginBottom="@dimen/dim30dp"
-            android:layout_height="250dp"
+            android:layout_height="@dimen/dim250dp"
             tools:src="@drawable/img_win2" />
 
     </LinearLayout>

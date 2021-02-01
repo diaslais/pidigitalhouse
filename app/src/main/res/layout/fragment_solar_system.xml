@@ -44,7 +44,7 @@
 
             <TextView
                 android:id="@+id/txtSistemaSolar"
-                android:layout_width="177dp"
+                android:layout_width="@dimen/dim177dp"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="@dimen/dim50dp"
                 android:fontFamily="@font/ubuntu_bold"
@@ -57,7 +57,7 @@
 
             <TextView
                 android:id="@+id/txtIntroSistemaSolar"
-                android:layout_width="177dp"
+                android:layout_width="@dimen/dim177dp"
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/ubuntu"
                 android:lineSpacingExtra="@dimen/dim2sp"
