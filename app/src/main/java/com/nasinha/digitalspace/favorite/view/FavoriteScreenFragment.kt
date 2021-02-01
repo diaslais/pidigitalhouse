@@ -1,6 +1,5 @@
 package com.nasinha.digitalspace.favorite.view
 
-import android.content.Context.MODE_PRIVATE
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +12,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.mlkit.nl.translate.Translation
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
@@ -20,12 +20,11 @@ import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
 import com.nasinha.digitalspace.utils.ApodUtils
-import com.nasinha.digitalspace.utils.Constants.APP_KEY
 import com.nasinha.digitalspace.utils.Constants.IMAGE
-import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
 import com.nasinha.digitalspace.utils.Constants.TITLE
 import com.nasinha.digitalspace.utils.Constants.VIDEO
 import com.nasinha.digitalspace.utils.FavoriteUtils
+import com.nasinha.digitalspace.utils.TranslateUtils
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
@@ -36,8 +35,8 @@ import kotlinx.coroutines.launch
 class FavoriteScreenFragment : Fragment() {
     private lateinit var _view: View
     private lateinit var _favoriteViewModel: FavoriteViewModel
-    private lateinit var _favorite: FavoriteEntity
     private var _translatePrefs: Boolean? = false
+    private val englishPortugueseTranslator = Translation.getClient(TranslateUtils.options())
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -53,7 +52,7 @@ class FavoriteScreenFragment : Fragment() {
         _view = view
         addViewModel()
         translatePrefHandler()
-        backBtnHandler()
+        backBtnListener()
         argumentsHandler()
     }
 
@@ -69,12 +68,10 @@ class FavoriteScreenFragment : Fragment() {
     }
 
     private fun translatePrefHandler() {
-        val prefs =
-            requireActivity().getSharedPreferences(APP_KEY, MODE_PRIVATE)
-        _translatePrefs = prefs?.getBoolean(SWITCH_PREFS, false)
+        _translatePrefs = TranslateUtils.getCheckPrefs(requireActivity())
     }
 
-    private fun backBtnHandler() {
+    private fun backBtnListener() {
         val backBtn = _view.findViewById<ImageButton>(R.id.ibBackFavoriteScreen)
         backBtn.setOnClickListener {
             requireActivity().onBackPressed()
@@ -84,8 +81,8 @@ class FavoriteScreenFragment : Fragment() {
     private fun argumentsHandler() {
         val imageArgument = arguments?.getString(IMAGE)!!
 
-        _favoriteViewModel.getFavorite(imageArgument).observe(viewLifecycleOwner, {
-            addInfoToFavorite(it)
+        _favoriteViewModel.getFavorite(imageArgument).observe(viewLifecycleOwner, { favorite ->
+            addInfoToFavorite(favorite)
         })
     }
 
@@ -96,16 +93,27 @@ class FavoriteScreenFragment : Fragment() {
         val titleView = _view.findViewById<TextView>(R.id.tvTitleFavoriteScreen)
         val textView = _view.findViewById<TextView>(R.id.tvTextFavoriteScreen)
 
-        when (_translatePrefs) {
-            true -> {
-                titleView.text =
-                    if (favorite.titleBr.isNullOrEmpty()) favorite.title else favorite.titleBr
-                textView.text =
-                    if (favorite.textBr.isNullOrEmpty()) favorite.text else favorite.textBr
+        favorite.title?.let {
+            titleView.text = it
+        }
+        favorite.text?.let {
+            textView.text = it
+        }
+
+        if (_translatePrefs == true) {
+            favorite.title?.let {
+                lifecycle.addObserver(englishPortugueseTranslator)
+                englishPortugueseTranslator.translate(it)
+                    .addOnSuccessListener { result ->
+                        titleView.text = result
+                    }.addOnFailureListener { }
             }
-            else -> {
-                titleView.text = favorite.title
-                textView.text = favorite.text
+            favorite.text?.let {
+                lifecycle.addObserver(englishPortugueseTranslator)
+                englishPortugueseTranslator.translate(it)
+                    .addOnSuccessListener { result ->
+                        textView.text = result
+                    }.addOnFailureListener {}
             }
         }
 

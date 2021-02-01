@@ -10,7 +10,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
-import android.widget.Toast
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -21,14 +20,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.card.MaterialCardView
 import com.google.android.material.snackbar.Snackbar
-import com.google.mlkit.nl.translate.TranslateLanguage
 import com.google.mlkit.nl.translate.Translation
-import com.google.mlkit.nl.translate.TranslatorOptions
 import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.favorite.adapter.FavoriteAdapter
 import com.nasinha.digitalspace.favorite.adapter.IFavorite
 import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
+import com.nasinha.digitalspace.favorite.entity.UserEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
@@ -39,6 +37,7 @@ import com.nasinha.digitalspace.utils.Constants.SORT_PREFS
 import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
 import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 import com.nasinha.digitalspace.utils.FavoriteUtils
+import com.nasinha.digitalspace.utils.TranslateUtils
 import com.nasinha.digitalspace.utils.TranslateUtils.options
 import kotlinx.coroutines.launch
 
@@ -135,53 +134,33 @@ class FavoriteFragment : Fragment(), IFavorite {
 
             _favoriteViewModel.getUserWithFavorites(userId).observe(viewLifecycleOwner, {
                 val favorites = it.map { userWithFavorites -> userWithFavorites.favorites[0] }
-                addAllFavorites(favorites)
                 sortBtnHandler(sortBtn, _sortChecked)
+                addAllFavorites(favorites)
             })
         }
-        sortBtnHandler(sortBtn, _sortChecked)
     }
 
-    private fun addAllFavorites(list: List<FavoriteEntity>) {
-        _favoriteList.addAll(list)
-        Log.d("favorito", list.size.toString())
+    private fun addAllFavorites(favoriteList: List<FavoriteEntity>) {
+        _favoriteList.addAll(favoriteList)
+        Log.d("favorito", favoriteList.size.toString())
         _favoriteAdapter.notifyDataSetChanged()
-        checkTranslationPrefs()
+        checkTranslationPrefs(favoriteList)
     }
 
-    private fun checkTranslationPrefs() {
-        val prefs = requireActivity().getSharedPreferences(
-            APP_KEY,
-            MODE_PRIVATE
-        )
-        val checkPrefs = prefs?.getBoolean(SWITCH_PREFS, false)
+    private fun checkTranslationPrefs(favoriteList: List<FavoriteEntity>) {
+        val checkPrefs = TranslateUtils.getCheckPrefs(requireActivity())
 
-        if (checkPrefs == true) {
-            _favoriteList.map { favorite ->
-                val index = _favoriteList.indexOf(favorite)
+        if (checkPrefs) {
+            favoriteList.map { favorite ->
+                val index = favoriteList.indexOf(favorite)
 
                 if (!favorite.title.isNullOrEmpty() && favorite.titleBr.isNullOrEmpty()) {
-
                     lifecycle.addObserver(englishPortugueseTranslator)
                     englishPortugueseTranslator.translate(favorite.title!!)
                         .addOnSuccessListener { result ->
-                            _favoriteViewModel.updateTitleBr(favorite.image, result)
-                                .observe(viewLifecycleOwner, { })
-                        }.addOnFailureListener {
-                            favorite.title = favorite.title
-                        }
-                }
-
-                if (!favorite.text.isNullOrEmpty() && favorite.textBr.isNullOrEmpty()) {
-
-                    lifecycle.addObserver(englishPortugueseTranslator)
-                    englishPortugueseTranslator.translate(favorite.text!!)
-                        .addOnSuccessListener { result ->
-                            _favoriteViewModel.updateTextBr(favorite.image, result)
-                                .observe(viewLifecycleOwner, { })
-                        }.addOnFailureListener {
-                            favorite.text = favorite.text
-                        }
+                            favorite.titleBr = result
+                            _favoriteAdapter.notifyItemChanged(index)
+                        }.addOnFailureListener {}
                 }
             }
         }

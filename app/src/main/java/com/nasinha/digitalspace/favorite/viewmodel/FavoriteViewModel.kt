@@ -3,10 +3,10 @@ package com.nasinha.digitalspace.favorite.viewmodel
 import android.app.Activity
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.liveData
-import com.nasinha.digitalspace.utils.AuthUtil
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
 import com.nasinha.digitalspace.favorite.entity.UserEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
+import com.nasinha.digitalspace.utils.AuthUtil
 import kotlinx.coroutines.Dispatchers
 
 class FavoriteViewModel(
@@ -26,16 +26,6 @@ class FavoriteViewModel(
     fun getUserWithFavorites(userId: String) = liveData(Dispatchers.IO) {
         val result = repository.getUserWithFavorites(userId)
         emit(result)
-    }
-
-    fun updateTitleBr(image: String, title: String) = liveData(Dispatchers.IO) {
-        repository.updateTitleBr(image, title)
-        emit(Unit)
-    }
-
-    fun updateTextBr(image: String, text: String) = liveData(Dispatchers.IO) {
-        repository.updateTextBr(image, text)
-        emit(Unit)
     }
 
     fun checkFavorite(activity: Activity, image: String) = liveData(Dispatchers.IO) {
