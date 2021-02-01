@@ -413,7 +413,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
     private fun changeCountDownColor() {
         if (timeLeftInMillis <= 6000) {
-            txtChronometer.setTextColor(Color.parseColor("#FF3034"))
+            txtChronometer.setTextColor(Color.parseColor("#FF4D51"))
         } else {
             txtChronometer.setTextColor(Color.parseColor("#FFFFFF"))
         }
