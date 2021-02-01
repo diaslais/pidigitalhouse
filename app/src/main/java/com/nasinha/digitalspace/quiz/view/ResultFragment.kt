@@ -30,14 +30,17 @@ class ResultFragment : Fragment() {
         val correctAnswers = requireArguments().getInt("CORRECT_ANSWERS")
         val imageAstronaut = requireArguments().getInt("ASTRONAUT_IMAGE")
         val messageResult = requireArguments().getString("RESULTS_MESSAGE")
+        val titleResult = requireArguments().getString("RESULTS_TITLE")
 
         val txtResults = view.findViewById<TextView>(R.id.txtResults)
+        val txtTitleResult = view.findViewById<TextView>(R.id.txtTitleResults)
         val imgAstronautResults = view.findViewById<ImageView>(R.id.imgAstronautResults)
         val txtScore = view.findViewById<TextView>(R.id.txtScore)
         val btnPlayAgain = view.findViewById<Button>(R.id.btnPlayAgain)
         val btnBackToHome = view.findViewById<ImageButton>(R.id.btnBackScore)
         val navController = findNavController()
 
+        txtTitleResult.text = titleResult
         txtResults.text = messageResult
         imgAstronautResults.setImageResource(imageAstronaut)
         txtScore.text = getString(R.string.contagem_questoes, correctAnswers, totalQuestions)

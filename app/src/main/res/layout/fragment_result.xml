@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:background="@drawable/bg_planetas2"
+    android:background="@drawable/splshbg"
     tools:context=".quiz.view.ResultFragment">
 
     <ImageButton
@@ -28,23 +28,30 @@
         app:layout_constraintBottom_toBottomOf="@+id/btnPlayAgain">
 
         <TextView
-            android:id="@+id/txtResults"
+            android:id="@+id/txtTitleResults"
             android:layout_width="300dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
+            android:layout_marginBottom="@dimen/dim30dp"
+            android:fontFamily="@font/press_start_2p"
             android:gravity="center"
-            android:layout_marginBottom="@dimen/dim30dp"
-            android:fontFamily="@font/ubuntu_bold"
-            android:textColor="@color/colorWhite"
+            android:textColor="@color/colorAppName"
             android:textSize="@dimen/dim20sp"
-            tools:text="Parabéns explorador!" />
+            tools:text="@string/muito_bem"
+            android:textAllCaps="true"/>
 
-        <ImageView
-            android:id="@+id/imgAstronautResults"
+        <TextView
+            android:id="@+id/txtResults"
             android:layout_width="wrap_content"
-            android:layout_marginBottom="@dimen/dim30dp"
-            android:layout_height="240dp"
-            tools:src="@drawable/astronauta_quiz" />
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_marginBottom="@dimen/dim20dp"
+            android:layout_marginHorizontal="@dimen/dim20dp"
+            android:fontFamily="@font/ubuntu"
+            tools:text="@string/parab_ns"
+            android:textColor="@color/colorWhite"
+            android:textSize="@dimen/dim18sp" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -54,7 +61,7 @@
             android:fontFamily="@font/ubuntu"
             android:text="@string/sua_pontua_o"
             android:textColor="@color/colorWhite"
-            android:textSize="@dimen/dim18sp" />
+            android:textSize="@dimen/dim16sp" />
 
         <TextView
             android:id="@+id/txtScore"
@@ -63,8 +70,18 @@
             android:layout_gravity="center"
             android:fontFamily="@font/ubuntu_bold"
             android:textColor="@color/colorWhite"
+            android:layout_marginBottom="@dimen/dim20dp"
             android:textSize="@dimen/dim24dp"
             tools:text="8/10" />
+
+        <ImageView
+            android:id="@+id/imgAstronautResults"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_marginBottom="@dimen/dim30dp"
+            android:layout_height="250dp"
+            tools:src="@drawable/img_win2" />
+
     </LinearLayout>
 
         <Button
