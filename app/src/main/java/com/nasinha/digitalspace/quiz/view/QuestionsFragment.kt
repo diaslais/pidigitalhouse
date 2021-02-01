@@ -46,6 +46,8 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private lateinit var countDownTimer: CountDownTimer
     private lateinit var timerBarAnimation: Animator
     private var timeLeftInMillis: Long = 0
+    lateinit var dialog: AlertDialog.Builder
+    lateinit var alert: AlertDialog
 
     private lateinit var _view: View
     private lateinit var _viewModel: QuizViewModel
@@ -84,6 +86,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         super.onSaveInstanceState(outState)
 
         minimized = true
+        alert.dismiss()
     }
 
     override fun onResume() {
@@ -110,6 +113,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
             QuizViewModel.QuizViewModelFactory(QuizRepository(QuizDatabase.getDatabase(view.context).quizDao()))
         ).get(QuizViewModel::class.java)
 
+        dialog = AlertDialog.Builder(_view.context)
         txtQuestion = view.findViewById(R.id.txtQuestion)
         txtQuestionNumber = view.findViewById(R.id.txtQuestionNumber)
         txtOptionOne = view.findViewById(R.id.txtAnswer1)
@@ -372,14 +376,14 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
 
     private fun timeIsOverDialog() {
         mistakes++
-        val dialog = AlertDialog.Builder(_view.context)
+
         val view: View =
             requireActivity().layoutInflater.inflate(R.layout.time_over_alert, null)
         dialog.setView(view)
         val btnTimeNextQuestion = view.findViewById<Button>(R.id.btnTimeNextQuestion)
         if (_currentPosition == NUMBER_QUESTIONS) btnTimeNextQuestion.text = getString(R.string.fim)
 
-        val alert = dialog.create()
+        alert = dialog.create()
 
         btnTimeNextQuestion.setOnClickListener {
             nextQuestion()
