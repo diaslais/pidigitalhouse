@@ -24,7 +24,7 @@
 
             <ImageView
                 android:id="@+id/imgTrophy"
-                android:layout_width="24dp"
+                android:layout_width="@dimen/dim24dp"
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="@dimen/dim10dp"
                 tools:src="@drawable/ic_baseline_emoji_events_24_gold"/>

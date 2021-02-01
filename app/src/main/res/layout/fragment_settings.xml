@@ -38,16 +38,16 @@
         android:layout_width="350dp"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="20dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginStart="@dimen/dim20dp"
+        android:layout_marginTop="@dimen/dim20dp"
+        android:layout_marginEnd="@dimen/dim20dp"
         app:cardBackgroundColor="@color/colorBlack"
         app:cardCornerRadius="@dimen/dim10dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tbToolbarSettings"
         app:strokeColor="@color/colorWhite"
-        app:strokeWidth="1dp">
+        app:strokeWidth="@dimen/dim1dp">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -105,7 +105,7 @@
         android:text="@string/excluir_conta"
         android:textAllCaps="false"
         android:textColor="@color/colorWhite"
-        android:textSize="@dimen/dim8sp"
+        android:textSize="@dimen/dim12sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
@@ -116,10 +116,10 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginStart="103dp"
+        android:layout_marginStart="@dimen/dim103dp"
         android:layout_marginTop="@dimen/dim30dp"
-        android:layout_marginEnd="103dp"
-        android:layout_marginBottom="298dp"
+        android:layout_marginEnd="@dimen/dim103dp"
+        android:layout_marginBottom="@dimen/dim298dp"
         android:gravity="center"
         android:orientation="vertical"
         android:visibility="gone"
@@ -134,6 +134,7 @@
             style="@android:style/Widget.DeviceDefault.Light.ProgressBar.Horizontal"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dim10dp"
+            android:layout_marginTop="@dimen/dim20dp"
             android:layout_gravity="center"
             android:indeterminate="true" />
 

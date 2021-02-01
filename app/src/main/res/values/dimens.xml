@@ -55,4 +55,11 @@
     <dimen name="dim280dp">280dp</dimen>
     <dimen name="dim255dp">225dp</dimen>
     <dimen name="dim8sp">8sp</dimen>
+    <dimen name="dim125dp">125dp</dimen>
+    <dimen name="dim250dp">250dp</dimen>
+    <dimen name="dim24dp">24dp</dimen>
+    <dimen name="dim28dp">28dp</dimen>
+    <dimen name="dim177dp">177dp</dimen>
+    <dimen name="dim103dp">103dp</dimen>
+    <dimen name="dim298dp">298dp</dimen>
 </resources>

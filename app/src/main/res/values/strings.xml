@@ -162,5 +162,7 @@
     <string name="alert_time">Este processo levará um tempo</string>
     <string name="fim_jogo">Fim de jogo</string>
     <string name="muito_bem">Muito bem!</string>
+    <string name="pontua_es_do_quiz">Pontuações do Quiz</string>
+    <string name="veja_seus_melhores_resultados">Veja seus melhores resultados!</string>
 
 </resources>

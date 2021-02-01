@@ -70,8 +70,8 @@
 
                     <ImageView
                         android:id="@+id/ivImageOverlayProfile"
-                        android:layout_width="80dp"
-                        android:layout_height="80dp"
+                        android:layout_width="@dimen/dim80dp"
+                        android:layout_height="@dimen/dim80dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_outline_image_24"
                         app:tint="@color/colorBlack35pct" />

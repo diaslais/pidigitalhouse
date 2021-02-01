@@ -10,7 +10,7 @@
     android:padding="@dimen/dim10dp"
     app:cardBackgroundColor="@color/colorBlack"
     app:strokeColor="@color/colorWhite"
-    app:strokeWidth="2dp"
+    app:strokeWidth="@dimen/dim2dp"
     tools:showIn="@layout/fragment_favorite">
 
     <LinearLayout
