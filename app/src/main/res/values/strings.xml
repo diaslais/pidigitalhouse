@@ -68,7 +68,7 @@
     <string name="milkyway_imgdescription">Foto da Via Láctea</string>
     <string name="solareclipse_imgdescription">Foto de um eclipse solar</string>
     <string name="earth_imgdescription">Foto do planeta Terra</string>
-    <string name="parab_ns">Parabéns explorador!</string>
+    <string name="parab_ns">Você conhece o espaço como a\npalma da mão...</string>
     <string name="item_removido">Item removido dos favoritos.</string>
     <string name="desfazer">Desfazer</string>
     <string name="botao_de_favoritos">Botao de favoritos</string>
@@ -162,6 +162,7 @@
     <string name="failed_download">Falha no Download ou Instalação</string>
     <string name="fato_astronomico">Fato Astronômico</string>
     <string name="alert_time">Este processo levará um tempo</string>
-    <string name="game_over">Game over!\nSuas chances se esgotaram...</string>
+    <string name="fim_jogo">Fim de jogo</string>
+    <string name="muito_bem">Muito bem!</string>
 
 </resources>

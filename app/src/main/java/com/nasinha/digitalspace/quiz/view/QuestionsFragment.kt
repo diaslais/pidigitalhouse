@@ -42,7 +42,6 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private var alternativeAnswers = arrayListOf(1, 2, 3, 4)
     private var minimized = false
     private var mistakes = 0
-    private var gameOver = false
 
     private lateinit var countDownTimer: CountDownTimer
     private lateinit var timerBarAnimation: Animator
@@ -188,7 +187,6 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
                 heartThree.setImageResource(R.drawable.heart_blue)
             }
             3 -> {
-                gameOver = true
                 goToResultScreen()
             }
         }
@@ -277,7 +275,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         _isAnswered = false
 
         if (_currentPosition <= NUMBER_QUESTIONS) {
-                setQuestion()
+            setQuestion()
         } else {
             goToResultScreen()
         }
@@ -289,22 +287,23 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         addScoreToDatabase(date, _correctAnswers)
 
         val astronautImage: Int
+        val resultsTitle: String
         val resultsMessage: String
 
-        if (_correctAnswers >= 5) {
-            astronautImage = R.drawable.astronauta_quiz
-            resultsMessage = getString(R.string.parab_ns)
-        } else if (gameOver) {
-            astronautImage = R.drawable.astronauta_perdido_branco
-            resultsMessage = getString(R.string.game_over)
-        } else {
-            astronautImage = R.drawable.astronauta_perdido_branco
+        if (mistakes >= 3) {
+            astronautImage = R.drawable.img_lost
             resultsMessage = getString(R.string.perdido_no_espaco)
+            resultsTitle = getString(R.string.fim_jogo)
+        } else{
+            astronautImage = R.drawable.img_win2
+            resultsMessage = getString(R.string.parab_ns)
+            resultsTitle = getString(R.string.muito_bem)
         }
 
         val bundle = bundleOf(
                 "CORRECT_ANSWERS" to _correctAnswers,
                 "TOTAL_QUESTIONS" to NUMBER_QUESTIONS,
+                "RESULTS_TITLE" to resultsTitle,
                 "ASTRONAUT_IMAGE" to astronautImage,
                 "RESULTS_MESSAGE" to resultsMessage
         )

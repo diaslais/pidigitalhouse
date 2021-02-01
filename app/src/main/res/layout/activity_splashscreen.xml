@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:fontFamily="@font/rajdhani_medium"
             android:text="@string/digital"
-            android:textColor="#91AAE1"
+            android:textColor="@color/colorAppName"
             android:textSize="@dimen/dim40sp" />
 
         <TextView
