@@ -13,7 +13,7 @@ import com.nasinha.digitalspace.favorite.entity.UserEntity
         FavoriteEntity::class,
         UserEntity::class
     ],
-    version = 5,
+    version = 6,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
@@ -29,7 +29,7 @@ abstract class AppDatabase : RoomDatabase() {
                     context.applicationContext,
                     AppDatabase::class.java,
                     "Favorite"
-                ).fallbackToDestructiveMigration().build()
+                ).build()
             }
             return INSTANCE!!
         }
