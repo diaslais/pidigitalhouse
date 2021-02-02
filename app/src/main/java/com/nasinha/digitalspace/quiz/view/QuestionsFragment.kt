@@ -47,6 +47,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
     private var timeLeftInMillis: Long = 0
     private lateinit var dialog: AlertDialog.Builder
     private lateinit var alert: AlertDialog
+    private var dialogIsInitialized = false
 
     private lateinit var _view: View
     private lateinit var _viewModel: QuizViewModel
@@ -85,7 +86,9 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         super.onSaveInstanceState(outState)
 
         minimized = true
-        alert.dismiss()
+        if (dialogIsInitialized) {
+            alert.dismiss()
+        }
     }
 
     override fun onResume() {
@@ -383,6 +386,7 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         if (_currentPosition == NUMBER_QUESTIONS) btnTimeNextQuestion.text = getString(R.string.fim)
 
         alert = dialog.create()
+        dialogIsInitialized = true
 
         btnTimeNextQuestion.setOnClickListener {
             nextQuestion()
