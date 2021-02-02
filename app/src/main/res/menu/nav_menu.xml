@@ -31,6 +31,7 @@
     <group>
         <item
             android:id="@+id/itemDevelopersMenu"
+            android:visible="false"
             android:icon="@drawable/ic_outline_local_cafe_24"
             android:title="@string/desenvolvedores" />
         <item
