@@ -1,7 +1,9 @@
 package com.nasinha.digitalspace.utils
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.os.Build
@@ -11,6 +13,7 @@ import android.widget.ImageView
 import androidx.core.content.ContextCompat.startActivity
 import androidx.core.content.FileProvider
 import com.nasinha.digitalspace.BuildConfig
+import com.nasinha.digitalspace.utils.Constants.APP_KEY
 import com.nasinha.digitalspace.utils.Constants.COMPARTILHAR
 import java.io.File
 import java.io.FileNotFoundException
@@ -104,5 +107,20 @@ object FavoriteUtils {
         val canvas = Canvas(bitmap)
         view.draw(canvas)
         return bitmap
+    }
+
+    fun saveOrderPrefs(context: Context, check: Boolean?) {
+        val preferences: SharedPreferences =
+            context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
+        if (check == null) {
+            preferences.edit().putBoolean(APP_KEY, false).apply()
+        } else {
+            preferences.edit().putBoolean(APP_KEY, check).apply()
+        }
+    }
+
+    fun getOrderPrefs(context: Context): Boolean {
+        val preferences = context.getSharedPreferences(APP_KEY, Context.MODE_PRIVATE)
+        return preferences.getBoolean(APP_KEY, false)
     }
 }
