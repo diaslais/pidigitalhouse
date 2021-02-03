@@ -28,10 +28,14 @@ import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
 import com.nasinha.digitalspace.utils.ApodUtils.getIdVideo
 import com.nasinha.digitalspace.utils.AuthUtil
 import com.nasinha.digitalspace.utils.Constants.APP_KEY
+import com.nasinha.digitalspace.utils.Constants.IMAGE
 import com.nasinha.digitalspace.utils.Constants.IMGAPOD
 import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
+import com.nasinha.digitalspace.utils.Constants.VIDEO
 import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 import com.nasinha.digitalspace.utils.FavoriteUtils
+import com.nasinha.digitalspace.utils.FavoriteUtils.shareImageText
+import com.nasinha.digitalspace.utils.FavoriteUtils.shareVideo
 import com.nasinha.digitalspace.utils.TranslateUtils.options
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -63,7 +67,7 @@ class ApodFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         lockDrawer(requireActivity())
         _view = view
-        val imgLoad = _view.findViewById<ImageView>(R.id.imgApod)
+        val imgLoad = _view.findViewById<ImageView>(R.id.ivImageApod)
         val txtExplanation = _view.findViewById<TextView>(R.id.txtExplanationApod)
         val txtTitle = _view.findViewById<TextView>(R.id.txtTitle)
 
@@ -124,7 +128,7 @@ class ApodFragment : Fragment() {
         showLoading(false)
         showShareFavorite(true)
 
-        val imgLoad = _view.findViewById<ImageView>(R.id.imgApod)
+        val imgLoad = _view.findViewById<ImageView>(R.id.ivImageApod)
         val txtExplanation = _view.findViewById<TextView>(R.id.txtExplanationApod)
         val txtTitle = _view.findViewById<TextView>(R.id.txtTitle)
         val prefs = activity?.getSharedPreferences(APP_KEY, AppCompatActivity.MODE_PRIVATE)
@@ -226,7 +230,6 @@ class ApodFragment : Fragment() {
                     override fun onError(e: java.lang.Exception?) {
                         Log.e("error", "${e?.message}")
                     }
-
                 })
         }
         landScapeMode(it.url)
@@ -239,7 +242,7 @@ class ApodFragment : Fragment() {
     }
 
     private fun landScapeMode(urlImg: String) {
-        val imgLoad = _view.findViewById<ImageView>(R.id.imgApod)
+        val imgLoad = _view.findViewById<ImageView>(R.id.ivImageApod)
         val navController = NavHostFragment.findNavController(this)
 
         imgLoad.setOnClickListener {
@@ -288,16 +291,26 @@ class ApodFragment : Fragment() {
         val shareButton = _view.findViewById<ImageButton>(R.id.ibShareFavoriteItem)
         checkBoxFavorite.visibility = if (isShown) View.VISIBLE else View.GONE
         shareButton.visibility = if (isShown) View.VISIBLE else View.GONE
-        shareButton.setOnClickListener {
-            val text = _view.findViewById<TextView>(R.id.txtExplanationApod).text.toString()
-            shareHandler(text)
-        }
-    }
 
-    private fun shareHandler(text: String) {
-        lifecycleScope.launch {
-            val imageBitmap = FavoriteUtils.getBitmapFromView(_view, _apodResponse.url)
-            activity?.let { FavoriteUtils.shareImageText(it, _view, imageBitmap, text) }
+        shareButton.setOnClickListener {
+            when (_apodResponse.media_type) {
+                IMAGE -> {
+                    val imageView = _view.findViewById<ImageView>(R.id.ivImageApod)
+                    val text = _view.findViewById<TextView>(R.id.txtExplanationApod).text.toString()
+                    shareImageText(
+                        requireActivity(),
+                        _view,
+                        imageView,
+                        text
+                    )
+                }
+                VIDEO -> {
+                    shareVideo(
+                        _view,
+                        _apodResponse.url
+                    )
+                }
+            }
         }
     }
 

@@ -1,30 +1,25 @@
 package com.nasinha.digitalspace.utils
 
-import android.Manifest
 import android.app.Activity
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
-import android.graphics.drawable.BitmapDrawable
-import android.net.Uri
+import android.graphics.Canvas
 import android.os.Build
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.View
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
+import android.widget.ImageView
 import androidx.core.content.ContextCompat.startActivity
-import coil.ImageLoader
-import coil.request.SuccessResult
+import androidx.core.content.FileProvider
+import com.nasinha.digitalspace.BuildConfig
 import com.nasinha.digitalspace.utils.Constants.COMPARTILHAR
-import com.nasinha.digitalspace.utils.Constants.TITLE
-import java.io.ByteArrayOutputStream
+import java.io.File
+import java.io.FileNotFoundException
+import java.io.FileOutputStream
 import java.text.SimpleDateFormat
 import java.time.LocalDate
 import java.time.format.DateTimeFormatter
 import java.time.format.FormatStyle
 import java.util.*
-import kotlin.collections.ArrayList
 
 object FavoriteUtils {
 
@@ -38,26 +33,37 @@ object FavoriteUtils {
             val localeBr = Locale("pt", "BR")
             val parsedDate =
                 LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd"))
-            parsedDate.format(DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(localeBr))
+            parsedDate.format(
+                DateTimeFormatter.ofLocalizedDate(FormatStyle.LONG).withLocale(localeBr)
+            )
         } else {
             date
         }
     }
 
-    fun shareImageText(activity: Activity, view: View, image: Bitmap?, text: String?) {
+    fun shareImageText(
+        activity: Activity,
+        view: View,
+        imageView: ImageView,
+        text: String?
+    ) {
+        val bitmap = getBitmapFromView(imageView)
 
-        val permissions = arrayOf(
-            Manifest.permission.READ_EXTERNAL_STORAGE,
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        )
+        try {
+            val imagePath = File(activity.cacheDir, "images")
+            val newFile = File(imagePath, "image.png")
 
-        val listPermissionsNeeded: MutableList<String> = permissionCheck(view, permissions)
+            bitmap?.compress(Bitmap.CompressFormat.PNG, 100, FileOutputStream(newFile))
 
-        if (listPermissionsNeeded.isNotEmpty()) {
-            permissionResquest(activity, listPermissionsNeeded)
-        } else {
+            val uri = FileProvider.getUriForFile(
+                activity,
+                BuildConfig.APPLICATION_ID + ".fileprovider",
+                newFile
+            )
+
             val shareIntent = Intent(Intent.ACTION_SEND)
-            shareIntent.putExtra(Intent.EXTRA_STREAM, getImageUri(activity, view, image!!))
+            shareIntent.putExtra(Intent.EXTRA_STREAM, uri)
+
             if (text.isNullOrEmpty()) {
                 shareIntent.type = "image/PNG"
                 startActivity(
@@ -73,53 +79,30 @@ object FavoriteUtils {
                     Intent.createChooser(shareIntent, COMPARTILHAR),
                     Bundle()
                 )
-
             }
+        } catch (e: FileNotFoundException) {
+            e.printStackTrace()
         }
     }
 
-    private fun permissionCheck(view: View, permissions: Array<String>): MutableList<String> {
-        val listPermissionsNeeded: MutableList<String> = ArrayList()
-
-        for (p in permissions) {
-            val result = ContextCompat.checkSelfPermission(view.context, p)
-            if (result != PackageManager.PERMISSION_GRANTED) {
-                listPermissionsNeeded.add(p)
-            }
-        }
-        return listPermissionsNeeded
+    fun shareVideo(
+        view: View,
+        text: String
+    ) {
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        shareIntent.putExtra(Intent.EXTRA_TEXT, text)
+        shareIntent.type = "text/html"
+        startActivity(
+            view.context,
+            Intent.createChooser(shareIntent, COMPARTILHAR), Bundle()
+        )
     }
 
-    private fun permissionResquest(activity: Activity, listPermissionsNeeded: MutableList<String>) {
-        activity.let {
-            ActivityCompat.requestPermissions(
-                it,
-                listPermissionsNeeded.toTypedArray(),
-                100
-            )
-        }
-    }
-
-    suspend fun getBitmapFromView(view: View, imageUri: String): Bitmap? {
-        val loading = ImageLoader(view.context)
-        val request = coil.request.ImageRequest.Builder(view.context).data(imageUri).build()
-        val result = (loading.execute(request) as SuccessResult).drawable
-        return (result as BitmapDrawable).bitmap
-    }
-
-    fun getImageUri(activity: Activity, view: View, imageBitmap: Bitmap): Uri? {
-        val bytes = ByteArrayOutputStream()
-
-        imageBitmap.compress(Bitmap.CompressFormat.PNG, 100, bytes)
-
-        val path =
-            MediaStore.Images.Media.insertImage(
-                view.context.contentResolver,
-                imageBitmap,
-                TITLE,
-                null
-            )
-
-        return Uri.parse(path)
+    fun getBitmapFromView(view: ImageView): Bitmap? {
+        val bitmap =
+            Bitmap.createBitmap(view.width, view.height, Bitmap.Config.ARGB_8888)
+        val canvas = Canvas(bitmap)
+        view.draw(canvas)
+        return bitmap
     }
 }

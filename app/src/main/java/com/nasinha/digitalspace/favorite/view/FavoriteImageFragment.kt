@@ -14,6 +14,7 @@ import com.nasinha.digitalspace.R
 import com.nasinha.digitalspace.utils.Constants.IMAGE
 import com.nasinha.digitalspace.utils.Constants.TITLE
 import com.nasinha.digitalspace.utils.FavoriteUtils
+import com.nasinha.digitalspace.utils.FavoriteUtils.shareImageText
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.launch
 
@@ -38,6 +39,7 @@ class FavoriteImageFragment : Fragment() {
         _view = view
         argumentsHandler()
         closeBtnHandler()
+        shareBtnHandler()
     }
 
     private fun argumentsHandler() {
@@ -52,8 +54,6 @@ class FavoriteImageFragment : Fragment() {
             titleView.text = titleArgument
         }
 
-        shareBtnHandler(imageArgument)
-
         imageView.setOnClickListener {
             when (toolbar.visibility) {
                 View.VISIBLE -> toolbar.visibility = View.GONE
@@ -62,14 +62,11 @@ class FavoriteImageFragment : Fragment() {
         }
     }
 
-    private fun shareBtnHandler(imageArgument: String) {
+    private fun shareBtnHandler() {
+        val imageView = _view.findViewById<ImageView>(R.id.ivImageFavoriteImage)
         val shareBtn = _view.findViewById<ImageButton>(R.id.ibShareFavoriteImage)
-
         shareBtn.setOnClickListener {
-            lifecycleScope.launch {
-                val imageBitmap = FavoriteUtils.getBitmapFromView(_view, imageArgument)
-                FavoriteUtils.shareImageText(requireActivity(), _view, imageBitmap, null)
-            }
+            shareImageText(requireActivity(), _view, imageView, null)
         }
     }
 

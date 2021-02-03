@@ -36,7 +36,7 @@
         </androidx.appcompat.widget.Toolbar>
 
         <ImageView
-            android:id="@+id/imgApod"
+            android:id="@+id/ivImageApod"
             android:layout_width="match_parent"
             android:layout_height="@dimen/dim300dp"
             android:layout_marginTop="@dimen/dim10dp"
