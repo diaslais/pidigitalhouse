@@ -24,6 +24,8 @@ import com.nasinha.digitalspace.utils.Constants.IMAGE
 import com.nasinha.digitalspace.utils.Constants.TITLE
 import com.nasinha.digitalspace.utils.Constants.VIDEO
 import com.nasinha.digitalspace.utils.FavoriteUtils
+import com.nasinha.digitalspace.utils.FavoriteUtils.shareImageText
+import com.nasinha.digitalspace.utils.FavoriteUtils.shareVideo
 import com.nasinha.digitalspace.utils.TranslateUtils
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.YouTubePlayer
 import com.pierfrancescosoffritti.androidyoutubeplayer.core.player.listeners.AbstractYouTubePlayerListener
@@ -119,11 +121,11 @@ class FavoriteScreenFragment : Fragment() {
 
         dateView.text = FavoriteUtils.dateModifier(favorite.date)
 
+        shareButton(favorite.image, favorite.type)
         when (favorite.type) {
             IMAGE -> {
                 Picasso.get().load(favorite.image).into(imageView)
                 imageClickHandler(imageView, favorite.image, titleView)
-                shareButton(favorite.image)
             }
             VIDEO -> {
                 imageView.visibility = View.GONE
@@ -148,16 +150,29 @@ class FavoriteScreenFragment : Fragment() {
         }
     }
 
-    private fun shareButton(imageArgument: String) {
+    private fun shareButton(imageArgument: String, type: String) {
         val shareBtn = _view.findViewById<ImageButton>(R.id.ibShareFavoriteScreen)
+
         shareBtn.setOnClickListener {
-
-            lifecycleScope.launch {
-                val imageBitmap = FavoriteUtils.getBitmapFromView(_view, imageArgument)
-                val text = _view.findViewById<TextView>(R.id.tvTextFavoriteScreen).text.toString()
-                activity?.let { FavoriteUtils.shareImageText(it, _view, imageBitmap, text) }
+            when (type) {
+                IMAGE -> {
+                    val imageView = _view.findViewById<ImageView>(R.id.ivImageFavoriteScreen)
+                    val text =
+                        _view.findViewById<TextView>(R.id.tvTextFavoriteScreen).text.toString()
+                    shareImageText(
+                        requireActivity(),
+                        _view,
+                        imageView,
+                        text
+                    )
+                }
+                VIDEO -> {
+                    shareVideo(
+                        _view,
+                        imageArgument,
+                    )
+                }
             }
-
         }
     }
 

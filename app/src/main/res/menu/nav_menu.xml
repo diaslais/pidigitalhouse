@@ -31,10 +31,9 @@
     <group>
         <item
             android:id="@+id/itemDevelopersMenu"
-            android:visible="false"
             android:icon="@drawable/ic_outline_local_cafe_24"
             android:title="@string/desenvolvedores"
-            android:visible="false"/>
+            android:visible="false" />
         <item
             android:id="@+id/itemExitMenu"
             android:icon="@drawable/ic_outline_exit_to_app_24"

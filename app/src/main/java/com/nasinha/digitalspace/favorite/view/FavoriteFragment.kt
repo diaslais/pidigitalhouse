@@ -10,10 +10,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.CheckBox
 import android.widget.ImageButton
+import android.widget.ImageView
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.NavController
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -26,7 +26,6 @@ import com.nasinha.digitalspace.favorite.adapter.FavoriteAdapter
 import com.nasinha.digitalspace.favorite.adapter.IFavorite
 import com.nasinha.digitalspace.favorite.db.AppDatabase
 import com.nasinha.digitalspace.favorite.entity.FavoriteEntity
-import com.nasinha.digitalspace.favorite.entity.UserEntity
 import com.nasinha.digitalspace.favorite.repository.FavoriteRepository
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModel
 import com.nasinha.digitalspace.favorite.viewmodel.FavoriteViewModelFactory
@@ -35,11 +34,13 @@ import com.nasinha.digitalspace.utils.Constants.APP_KEY
 import com.nasinha.digitalspace.utils.Constants.IMAGE
 import com.nasinha.digitalspace.utils.Constants.SORT_PREFS
 import com.nasinha.digitalspace.utils.Constants.SWITCH_PREFS
+import com.nasinha.digitalspace.utils.Constants.VIDEO
 import com.nasinha.digitalspace.utils.DrawerUtils.lockDrawer
 import com.nasinha.digitalspace.utils.FavoriteUtils
+import com.nasinha.digitalspace.utils.FavoriteUtils.shareImageText
+import com.nasinha.digitalspace.utils.FavoriteUtils.shareVideo
 import com.nasinha.digitalspace.utils.TranslateUtils
 import com.nasinha.digitalspace.utils.TranslateUtils.options
-import kotlinx.coroutines.launch
 
 
 class FavoriteFragment : Fragment(), IFavorite {
@@ -194,11 +195,10 @@ class FavoriteFragment : Fragment(), IFavorite {
         alertDialog.show()
     }
 
-    override fun iFavoriteShare(favorite: FavoriteEntity) {
-        lifecycleScope.launch {
-            val imageBitmap = FavoriteUtils.getBitmapFromView(_view, favorite.image)
-            val text = favorite.text.toString()
-            activity?.let { FavoriteUtils.shareImageText(it, _view, imageBitmap, text) }
+    override fun iFavoriteShare(favorite: FavoriteEntity, imageView: ImageView) {
+        when (favorite.type) {
+            IMAGE -> shareImageText(requireActivity(), _view, imageView, null)
+            VIDEO -> shareVideo(_view, favorite.image)
         }
     }
 

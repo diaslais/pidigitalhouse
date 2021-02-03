@@ -41,7 +41,8 @@ class FavoriteAdapter(
         }
         holder.shareBtn.setOnClickListener {
             _iFavorite.iFavoriteShare(
-                _favorites[holder.adapterPosition]
+                _favorites[holder.adapterPosition],
+                holder.imageView
             )
         }
     }

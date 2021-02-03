@@ -60,4 +60,5 @@
     <dimen name="dim177dp">177dp</dimen>
     <dimen name="dim103dp">103dp</dimen>
     <dimen name="dim298dp">298dp</dimen>
+    <dimen name="dim24dp">24dp</dimen>
 </resources>
