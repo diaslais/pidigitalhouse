@@ -54,6 +54,7 @@ object FavoriteUtils {
 
         try {
             val imagePath = File(activity.cacheDir, "images")
+            imagePath.mkdirs()
             val newFile = File(imagePath, "image.png")
 
             bitmap?.compress(Bitmap.CompressFormat.PNG, 100, FileOutputStream(newFile))

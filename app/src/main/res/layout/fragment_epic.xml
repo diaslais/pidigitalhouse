@@ -93,7 +93,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/dim20dp"
             android:fontFamily="@font/ubuntu"
-            android:justificationMode="inter_word"
+            android:justificationMode="none"
             android:text="@string/explicacaoEPIC"
             android:textSize="@dimen/dim16sp" />
 
