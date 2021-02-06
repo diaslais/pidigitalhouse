@@ -139,12 +139,5 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center" />
 
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/dim10dp"
-            android:text="@string/stay_a_while_and_listen"
-            android:textSize="@dimen/dim16sp"
-            android:textStyle="bold" />
     </LinearLayout>
 </FrameLayout>
