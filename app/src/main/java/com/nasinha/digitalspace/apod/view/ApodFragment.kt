@@ -337,7 +337,7 @@ class ApodFragment : Fragment() {
         btnTranslate.setOnClickListener {
             balloon.show(it)
             balloon.showAlignBottom(it)
-            balloon.dismissWithDelay(1000L)
+            balloon.dismissWithDelay(3000L)
         }
 
     }
