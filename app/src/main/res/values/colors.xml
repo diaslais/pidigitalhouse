@@ -15,7 +15,7 @@
     <color name="colorGold">#FFE60E</color>
     <color name="blue">#004C8C</color>
     <color name="colorBlackQuiz">#161616</color>
-    <color name="colorSelectedOption">#6C6B6B</color>
+    <color name="colorSelectedOption">#4C4C4C</color>
     <color name="colorCorrectOption">#4FFF4F</color>
     <color name="colorIncorrectOption">#FF4D51</color>
     <color name="mtrl_textinput_default_box_stroke_color" tools:override="true">#fff</color>

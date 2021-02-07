@@ -345,8 +345,6 @@ class QuestionsFragment : Fragment(), View.OnClickListener {
         defaultOptionsView()
         _selectedOptionPosition = selectedOptionNumber
 
-        tv.setTextColor(Color.parseColor("#FFFFFF"))
-        tv.setTypeface(tv.typeface, Typeface.BOLD)
         tv.background = ContextCompat.getDrawable(_view.context, R.drawable.selected_question)
     }
 
