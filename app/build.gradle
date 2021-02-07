@@ -6,6 +6,17 @@ apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
 
 android {
+    signingConfigs {
+        release {
+            storeFile file('C:\\Users\\joser\\Documents\\digitalspacekey\\keystore.jks')
+            storePassword 'nasinha171'
+            keyPassword 'nasinha171'
+            keyAlias 'key0'
+
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+    }
     compileSdkVersion 30
     buildToolsVersion "30.0.2"
     compileOptions {
@@ -32,13 +43,12 @@ android {
             minifyEnabled true
             shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.release
         }
     }
 }
 
 dependencies {
-//    Coil
-    implementation("io.coil-kt:coil:1.1.0")
 //    room
     def room_version = "2.2.5"
     implementation "androidx.room:room-runtime:$room_version"
