@@ -10,7 +10,7 @@ import com.nasinha.digitalspace.quiz.entity.Score
 
 @Database(
     entities = [Question::class, Score::class],
-    version = 5,
+    version = 6,
     exportSchema = false
 )
 abstract class QuizDatabase: RoomDatabase() {

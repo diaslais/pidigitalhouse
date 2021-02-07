@@ -13,7 +13,7 @@ import com.nasinha.digitalspace.favorite.entity.UserEntity
         FavoriteEntity::class,
         UserEntity::class
     ],
-    version = 7,
+    version = 8,
     exportSchema = false
 )
 abstract class AppDatabase : RoomDatabase() {
